@@ -10,7 +10,7 @@ class User:
                  user_image_data: str = "Null",
                  bookmarked_posts: list[int] = None,
                  user_groups: list[str] = None,
-                 user_friends: list[str] = None,
+                 user_followed: list[str] = None,
                  user_events: list[str] = None,
                  user_see_first: list[str] = None
                  ):
@@ -25,7 +25,7 @@ class User:
         self.user_image_data = user_image_data
         self.bookmarked_posts = bookmarked_posts
         self.user_groups = user_groups
-        self.user_friends = user_friends
+        self.user_followed = user_followed
         self.user_events = user_events
         self.user_see_first = user_see_first
 
@@ -41,7 +41,7 @@ class User:
             "user_image_data": self.user_image_data,
             "bookmarked_posts": self.bookmarked_posts,
             "user_groups": self.user_groups,
-            "user_friends": self.user_friends,
+            "user_followed": self.user_followed,
             "user_events": self.user_events,
             "user_see_first": self.user_see_first
             }
