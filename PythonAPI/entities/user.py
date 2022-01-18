@@ -8,8 +8,11 @@ class User:
                  user_about: str = "Null",
                  user_birth_date: str = "Null",
                  user_image_data: str = "Null",
+                 bookmarked_posts: list[int] = None,
                  user_groups: list[str] = None,
-                 user_friends: list[str] = None
+                 user_friends: list[str] = None,
+                 user_events: list[str] = None,
+                 user_see_first: list[str] = None
                  ):
 
         self.user_id = user_id
@@ -20,8 +23,11 @@ class User:
         self.user_about = user_about
         self.user_birth_date = user_birth_date
         self.user_image_data = user_image_data
+        self.bookmarked_posts = bookmarked_posts
         self.user_groups = user_groups
         self.user_friends = user_friends
+        self.user_events = user_events
+        self.user_see_first = user_see_first
 
     def make_dictionary(self):
         dictionary = {
@@ -33,7 +39,10 @@ class User:
             "user_about": self.user_about,
             "user_birth_date": self.user_birth_date,
             "user_image_data": self.user_image_data,
+            "bookmarked_posts": self.bookmarked_posts,
             "user_groups": self.user_groups,
-            "user_friends": self.user_friends
+            "user_friends": self.user_friends,
+            "user_events": self.user_events,
+            "user_see_first": self.user_see_first
             }
         return dictionary
