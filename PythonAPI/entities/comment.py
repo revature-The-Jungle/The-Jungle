@@ -6,7 +6,8 @@ class Comment:
                  username: str = "Null",
                  reply_username: str = "Null",
                  comment_text: str = "Null",
-                 date_time_of_creation: str = "Null"
+                 date_time_of_creation: str = "Null",
+                 viewed: bool = False
                  ):
 
         self.comment_id = comment_id
@@ -16,6 +17,7 @@ class Comment:
         self.reply_username = reply_username
         self.comment_text = comment_text
         self.date_time_of_creation = date_time_of_creation
+        self.viewed = viewed
 
     def make_dictionary(self):
         dictionary = {
@@ -25,6 +27,7 @@ class Comment:
             "username": self.username,
             "reply_username": self.reply_username,
             "comment_text": self.comment_text,
-            "date_time_of_creation": self.date_time_of_creation
+            "date_time_of_creation": self.date_time_of_creation,
+            "viewed": self.viewed
             }
         return dictionary
