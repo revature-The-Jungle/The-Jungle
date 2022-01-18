@@ -13,7 +13,7 @@ class Reaction:
 
     def make_dictionary(self):
         dictionary = {
-            "likes": self.likes,
+            "reaction_id": self.reaction_id,
             "dislikes": self.dislikes,
             }
         return dictionary
