@@ -6,11 +6,8 @@ class Post:
                  post_text: str = None,
                  youtube_url: str = None,
                  image_data: str = None,
-                 likes: int = None,
-                 dislikes: int = None,
                  date_time_of_creation: str = None
                  ):
-
         self.post_id = post_id
         self.user_id = user_id
         self.username = username
@@ -32,5 +29,5 @@ class Post:
             "likes": self.likes,
             "dislikes": self.dislikes,
             "date_time_of_creation": self.date_time_of_creation
-            }
+        }
         return dictionary
