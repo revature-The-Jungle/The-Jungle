@@ -1,13 +1,13 @@
 class User:
     def __init__(self,
-                 user_id: int = 0,  # primary key
-                 first_name: str = "Null",
-                 last_name: str = "Null",
-                 username: str = "Null",  # must be unique
-                 password: str = "Null",
-                 user_about: str = "Null",
-                 user_birth_date: str = "Null",
-                 user_image_data: str = "Null",
+                 user_id: int = None,  # primary key
+                 first_name: str = None,
+                 last_name: str = None,
+                 username: str = None,  # must be unique
+                 password: str = None,
+                 user_about: str = None,
+                 user_birth_date: str = None,
+                 user_image_data: str = None,
                  bookmarked_posts: list[int] = None,
                  user_groups: list[str] = None,
                  user_followed: list[str] = None,

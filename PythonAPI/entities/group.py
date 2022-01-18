@@ -1,10 +1,10 @@
 class Group:
     def __init__(self,
-                 group_id: int = 0,  # primary key
-                 user_id: int = 0,  # the original user that created the group
-                 group_name: str = "Null",  # must be unique
-                 group_about: str = "Null",
-                 group_image_data: str = "Null",
+                 group_id: int = None,  # primary key
+                 user_id: int = None,  # the original user that created the group
+                 group_name: str = None,  # must be unique
+                 group_about: str = None,
+                 group_image_data: str = None,
                  group_members: list[str] = None
                  ):
 

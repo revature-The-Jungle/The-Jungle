@@ -1,15 +1,15 @@
 class Post:
     def __init__(self,
-                 post_id: int = 0,  # primary key
-                 user_id: int = 0,  # foreign key
-                 group_id: int = 0,  # foreign key
-                 username: str = "Null",
-                 post_text: str = "Null",
-                 youtube_url: str = "Null",
-                 image_data: str = "Null",
-                 likes: int = 0,
-                 dislikes: int = 0,
-                 date_time_of_creation: str = "Null"
+                 post_id: int = None,  # primary key
+                 user_id: int = None,  # foreign key
+                 group_id: int = None,  # foreign key
+                 username: str = None,
+                 post_text: str = None,
+                 youtube_url: str = None,
+                 image_data: str = None,
+                 likes: int = None,
+                 dislikes: int = None,
+                 date_time_of_creation: str = None
                  ):
 
         self.post_id = post_id

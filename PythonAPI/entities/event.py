@@ -1,12 +1,12 @@
 class Group:
     def __init__(self,
-                 event_id: int = 0,  # primary key
-                 user_id: int = 0,  # the original user that created the group
-                 event_name: str = "Null",  # must be unique
-                 event_about: str = "Null",
-                 event_image_data: str = "Null",
+                 event_id: int = None,  # primary key
+                 user_id: int = None,  # the original user that created the group
+                 event_name: str = None,  # must be unique
+                 event_about: str = None,
+                 event_image_data: str = None,
                  event_members: list[str] = None,
-                 event_datetime: str = "Null"
+                 event_datetime: str = None
                  ):
 
         self.event_id = event_id

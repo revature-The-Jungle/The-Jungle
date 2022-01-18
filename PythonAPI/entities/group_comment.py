@@ -1,13 +1,13 @@
 class GroupComment:
     def __init__(self,
-                 comment_id: int = 0,  # primary key
-                 post_id: int = 0,  # foreign key
-                 user_id: int = 0,  # foreign key
-                 group_id: int = 0,  # foreign key
-                 username: str = "Null",
-                 reply_username: str = "Null",
-                 comment_text: str = "Null",
-                 date_time_of_creation: str = "Null",
+                 comment_id: int = None,  # primary key
+                 post_id: int = None,  # foreign key
+                 user_id: int = None,  # foreign key
+                 group_id: int = None,  # foreign key
+                 username: str = None,
+                 reply_username: str = None,
+                 comment_text: str = None,
+                 date_time_of_creation: str = None,
                  viewed: bool = False
                  ):
 
