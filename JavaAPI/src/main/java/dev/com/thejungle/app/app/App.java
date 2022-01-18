@@ -13,9 +13,6 @@ public class App {
 
         AppController appController = new AppController();
 
-
-
-
         app.start();
     }
 }
