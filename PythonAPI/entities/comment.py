@@ -3,6 +3,7 @@ class Comment:
                  comment_id: int = None,  # primary key
                  post_id: int = None,  # foreign key
                  user_id: int = None,  # foreign key
+                 group_id: int = None,
                  username: str = None,
                  reply_username: str = None,
                  comment_text: str = None,

@@ -1,19 +1,18 @@
 class Reaction:
     def __init__(self,
-                 reaction_id: int = None,
-                 post_id: int = None,
-                 reactor_id: int = None,
-                 reaction_status: str = None,
+                 reaction_id: int = None,  # primary key
+                 post_id: int = None,  # foreign key
+                 reactions: dict[str:str] = None  # dictionary key username: reaction
                  ):
 
         self.reaction_id = reaction_id
         self.post_id = post_id
-        self.reactor_id = reactor_id
-        self.reaction_status = reaction_status
+        self.reactions = reactions
 
     def make_dictionary(self):
         dictionary = {
             "reaction_id": self.reaction_id,
-            "dislikes": self.dislikes,
+            "post_id": self.post_id,
+            "reactions": self.reactions,
             }
         return dictionary
