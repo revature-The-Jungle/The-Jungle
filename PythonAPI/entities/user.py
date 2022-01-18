@@ -8,11 +8,11 @@ class User:
                  user_about: str = None,
                  user_birth_date: str = None,
                  user_image_data: str = None,
-                 bookmarked_posts: list[int] = None,
+                 bookmarked_posts: list[int] = None,  # stretch
                  user_groups: list[str] = None,
-                 user_followed: list[str] = None,
-                 user_events: list[str] = None,
-                 user_see_first: list[str] = None
+                 user_events: list[str] = None,  # stretch
+                 user_followed: list[str] = None,  # stretch
+                 user_see_first: list[str] = None  # stretch
                  ):
 
         self.user_id = user_id
@@ -25,8 +25,8 @@ class User:
         self.user_image_data = user_image_data
         self.bookmarked_posts = bookmarked_posts
         self.user_groups = user_groups
-        self.user_followed = user_followed
         self.user_events = user_events
+        self.user_followed = user_followed
         self.user_see_first = user_see_first
 
     def make_dictionary(self):
@@ -41,8 +41,8 @@ class User:
             "user_image_data": self.user_image_data,
             "bookmarked_posts": self.bookmarked_posts,
             "user_groups": self.user_groups,
-            "user_followed": self.user_followed,
             "user_events": self.user_events,
+            "user_followed": self.user_followed,
             "user_see_first": self.user_see_first
             }
         return dictionary

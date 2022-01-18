@@ -5,10 +5,9 @@ class Post:
                  group_id: int = None,  # foreign key
                  username: str = None,
                  post_text: str = None,
-                 youtube_url: str = None,
+                 youtube_url: str = None,  # stretch
                  image_data: str = None,
                  likes: int = None,
-                 dislikes: int = None,
                  date_time_of_creation: str = None
                  ):
 
@@ -20,7 +19,6 @@ class Post:
         self.youtube_url = youtube_url
         self.image_data = image_data
         self.likes = likes
-        self.dislikes = dislikes
         self.date_time_of_creation = date_time_of_creation
 
     @property
@@ -34,7 +32,6 @@ class Post:
             "youtube_url": self.youtube_url,
             "image_data": self.image_data,
             "likes": self.likes,
-            "dislikes": self.dislikes,
             "date_time_of_creation": self.date_time_of_creation
             }
         return dictionary

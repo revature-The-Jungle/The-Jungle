@@ -1,3 +1,4 @@
+# Not in use
 class Reaction:
     def __init__(self,
                  reaction_id: int = None,  # primary key

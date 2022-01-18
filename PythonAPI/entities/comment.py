@@ -14,6 +14,7 @@ class Comment:
         self.comment_id = comment_id
         self.post_id = post_id
         self.user_id = user_id
+        self.group_id = group_id
         self.username = username
         self.reply_username = reply_username
         self.comment_text = comment_text
@@ -25,6 +26,7 @@ class Comment:
             "comment_id": self.comment_id,
             "post_id": self.post_id,
             "user_id": self.user_id,
+            "group_id": self.group_id,
             "username": self.username,
             "reply_username": self.reply_username,
             "comment_text": self.comment_text,
