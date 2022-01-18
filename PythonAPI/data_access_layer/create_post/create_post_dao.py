@@ -10,5 +10,5 @@ class CreatePost(ABC):
         pass
 
     @abstractmethod
-    def create_post_image(self, image:str) -> bool:
+    def create_post_image(self, image: str) -> bool:
         pass
