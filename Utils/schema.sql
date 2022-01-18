@@ -9,8 +9,13 @@ create table jungle_user (
 	user_birth_date varchar(10) not null,
 	user_image_data varchar(300),
 	status varchar (100) default 'Pending',
-	email varchar(100) default 'Pending',
+	email varchar(100) default 'Pending'
 );
 
 -- Properties for posts, user groups, user followers, user events, user see first
 -- These will need to be added to the user table.
+
+-- need to create seed file
+-- need to write tests
+-- need to write dao
+-- need to write service
