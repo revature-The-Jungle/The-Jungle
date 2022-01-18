@@ -1,7 +1,7 @@
 class Group:
     def __init__(self,
                  event_id: int = None,  # primary key
-                 user_id: int = None,  # the original user that created the group
+                 user_id: int = None,  # the original user that created the event
                  event_name: str = None,  # must be unique
                  event_about: str = None,
                  event_image_data: str = None,
