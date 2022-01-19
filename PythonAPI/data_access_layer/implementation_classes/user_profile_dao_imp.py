@@ -1,4 +1,4 @@
-from data_access_layer.user_profile.user_profile_dao import UserProfileDAO
+from data_access_layer.abstract_classes.user_profile_dao import UserProfileDAO
 from entities.user import User
 
 
