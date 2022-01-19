@@ -1,4 +1,4 @@
-from data_access_layer.create_post.create_post_dao import CreatePostDAO
+from data_access_layer.abstract_classes.create_post_dao import CreatePostDAO
 from entities.post import Post
 
 
