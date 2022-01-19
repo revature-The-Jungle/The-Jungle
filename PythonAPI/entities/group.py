@@ -5,7 +5,7 @@ class Group:
                  group_name: str = None,  # must be unique
                  group_about: str = None,
                  group_image_data: str = None,
-                 pending: list[str] = None
+                 pending_members: list[str] = None
                  ):
 
         self.group_id = group_id
@@ -13,7 +13,7 @@ class Group:
         self.group_name = group_name
         self.group_about = group_about
         self.group_image_data = group_image_data
-        self.pending = pending
+        self.pending_members = pending_members
 
     def make_dictionary(self):
         dictionary = {
@@ -22,5 +22,6 @@ class Group:
             "group_name": self.group_name,
             "group_about": self.group_about,
             "group_image_data": self.group_image_data,
+            "pending_members": self.pending_members
             }
         return dictionary

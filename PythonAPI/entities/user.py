@@ -4,7 +4,7 @@ class User:
                  first_name: str = None,
                  last_name: str = None,
                  username: str = None,  # must be unique
-                 password: str = None,
+                 passcode: str = None,
                  user_about: str = None,
                  user_birth_date: str = None,
                  user_image_data: str = None,
@@ -19,7 +19,7 @@ class User:
         self.first_name = first_name
         self.last_name = last_name
         self.username = username
-        self.password = password
+        self.passcode = passcode
         self.user_about = user_about
         self.user_birth_date = user_birth_date
         self.user_image_data = user_image_data
@@ -35,7 +35,7 @@ class User:
             "first_name": self.first_name,
             "last_name": self.last_name,
             "username": self.username,
-            "password": self.password,
+            "passcode": self.passcode,
             "user_about": self.user_about,
             "user_birth_date": self.user_birth_date,
             "user_image_data": self.user_image_data,
