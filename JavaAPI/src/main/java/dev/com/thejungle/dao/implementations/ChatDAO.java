@@ -6,6 +6,7 @@ import dev.com.thejungle.utility.ConnectionDB;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ChatDAO implements ChatDAOInt {
@@ -21,7 +22,13 @@ public class ChatDAO implements ChatDAOInt {
     }
 
     @Override
-    public ArrayList<ChatMessage> getMessageHistory(String currentTime) {
+    public ArrayList<ChatMessage> getMessageHistory() {
+        try (Connection connection = ConnectionDB.createConnection()) {
+            String sql = "select * from chat_log_table where chat_date >= now() - interval '5 minutes'";
+            Statement statement;
+        } catch (SQLException e) {
+            return null;
+        }
         return null;
     }
 

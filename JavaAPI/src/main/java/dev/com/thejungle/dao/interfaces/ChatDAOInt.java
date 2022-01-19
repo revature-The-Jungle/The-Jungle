@@ -8,5 +8,5 @@ public interface ChatDAOInt {
 
     ChatMessage createMessage(int chatId, int userId, String chatDate, String chatContent);
 
-    ArrayList<ChatMessage> getMessageHistory(String currentTime);
+    ArrayList<ChatMessage> getMessageHistory();
 }

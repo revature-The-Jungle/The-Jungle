@@ -20,7 +20,7 @@ public class ChatService implements ChatServiceInt {
     }
 
     @Override
-    public ArrayList<ChatMessage> serviceGetMessageHistory(String currentTime) {
-        return chatDAO.getMessageHistory(currentTime);
+    public ArrayList<ChatMessage> serviceGetMessageHistory() {
+        return chatDAO.getMessageHistory();
     }
 }
