@@ -18,8 +18,8 @@ class UserProfileDAO(ABC):
         pass
 
     @abstractmethod
-    def update_image_data(self, user_id: int, image_data: str) -> User:
-
+    def update_image_format(self, user_id: int, image_data: str) -> User:
+        pass
 
     @abstractmethod
     def update_first_name(self, user_id: int, first_name: str) -> User:
@@ -44,5 +44,3 @@ class UserProfileDAO(ABC):
     @abstractmethod
     def update_birthdate(self, user_id: int, birthdate: str) -> User:
         pass
-
-
