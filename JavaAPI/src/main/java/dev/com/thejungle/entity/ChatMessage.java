@@ -36,7 +36,7 @@ public class ChatMessage {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-
+  
     public int getGroupId() {
         return groupId;
     }
