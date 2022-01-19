@@ -15,8 +15,8 @@ public class ChatService implements ChatServiceInt {
     }
 
     @Override
-    public ChatMessage serviceCreateMessage(int chatId, int userId, String chatDate, String chatContent) {
-        return chatDAO.createMessage(chatId, userId, chatDate, chatContent);
+    public ChatMessage serviceCreateMessage(int chatId, int userId, String chatDate, int group_id, String chatContent) {
+        return chatDAO.createMessage(chatId, userId, chatDate, group_id, chatContent);
     }
 
     @Override
