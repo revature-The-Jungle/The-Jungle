@@ -4,9 +4,9 @@ import dev.com.thejungle.entity.User;
 
 public interface UserDAO {
 
-    User createNewUser();
+    User createNewUser(User user);
 
-    User searchForUser();
+    User searchForUser(String username);
 
     User login();
 }

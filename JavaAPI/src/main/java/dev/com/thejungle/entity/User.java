@@ -4,43 +4,48 @@ import java.util.Objects;
 
 public class User {
 
+    // PRIVATE VARIABLES
     private int userId;
     private String firstName;
     private String lastName;
+    private String email;
     private String username;
-    private String password;
+    private String passcode;
     private String userAbout;
     private String userBirthdate;
-    private String email;
-    private String status;
+    private String imageFormat;
 
+
+    // CONSTRUCTORS
     public User(){}
 
-    public User(int userId, String firstName, String lastName,  String username,
-                      String password, String userAbout, String userBirthdate, String email, String status) {
+    public User(int userId, String firstName, String lastName, String email, String username, String passcode,
+                String userAbout, String userBirthdate, String imageFormat) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
         this.username = username;
-        this.password = password;
+        this.passcode = passcode;
         this.userAbout = userAbout;
         this.userBirthdate = userBirthdate;
-        this.email = email;
-        this.status = status;
+        this.imageFormat = imageFormat;
     }
 
+
+    // TOSTRING, HASHCODE, AND EQUALS
     @Override
     public String toString() {
-        return "JungleUser{" +
+        return "User{" +
                 "userId=" + userId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                ", passcode='" + passcode + '\'' +
                 ", userAbout='" + userAbout + '\'' +
                 ", userBirthdate='" + userBirthdate + '\'' +
-                ", email='" + email + '\'' +
-                ", status='" + status + '\'' +
+                ", imageFormat='" + imageFormat + '\'' +
                 '}';
     }
 
@@ -48,15 +53,21 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User that = (User) o;
-        return userId == that.userId && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(userAbout, that.userAbout) && Objects.equals(userBirthdate, that.userBirthdate) && Objects.equals(email, that.email) && Objects.equals(status, that.status);
+        User user = (User) o;
+        return userId == user.userId && Objects.equals(firstName, user.firstName) && Objects.equals(lastName,
+                user.lastName) && Objects.equals(email, user.email) && Objects.equals(username, user.username) &&
+                Objects.equals(passcode, user.passcode) && Objects.equals(userAbout, user.userAbout) &&
+                Objects.equals(userBirthdate, user.userBirthdate) && Objects.equals(imageFormat, user.imageFormat);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, firstName, lastName, username, password, userAbout, userBirthdate, email, status);
+        return Objects.hash(userId, firstName, lastName, email, username, passcode, userAbout, userBirthdate, imageFormat);
     }
 
+
+
+    // GETTERS AND SETTERS
     public int getUserId() {
         return userId;
     }
@@ -81,6 +92,14 @@ public class User {
         this.lastName = lastName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -89,12 +108,12 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasscode() {
+        return passcode;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasscode(String passcode) {
+        this.passcode = passcode;
     }
 
     public String getUserAbout() {
@@ -113,19 +132,11 @@ public class User {
         this.userBirthdate = userBirthdate;
     }
 
-    public String getEmail() {
-        return email;
+    public String getImageFormat() {
+        return imageFormat;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setImageFormat(String imageFormat) {
+        this.imageFormat = imageFormat;
     }
 }
