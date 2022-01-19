@@ -6,6 +6,7 @@ import dev.com.thejungle.utility.ConnectionDB;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ChatDAO implements ChatDAOInt {
 
@@ -18,4 +19,10 @@ public class ChatDAO implements ChatDAOInt {
 //        }
     return null;
     }
+
+    @Override
+    public ArrayList<ChatMessage> getMessageHistory(String currentTime) {
+        return null;
+    }
+
 }
