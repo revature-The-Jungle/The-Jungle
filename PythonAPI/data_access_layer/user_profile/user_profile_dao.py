@@ -14,8 +14,12 @@ class UserProfileDAO(ABC):
         pass
 
     @abstractmethod
-    def update_user_image(self, user_id: int, image_data: str) -> bool:
+    def update_user_image(self, user_id: int, image: str) -> bool:
         pass
+
+    @abstractmethod
+    def update_image_data(self, user_id: int, image_data: str) -> User:
+
 
     @abstractmethod
     def update_first_name(self, user_id: int, first_name: str) -> User:

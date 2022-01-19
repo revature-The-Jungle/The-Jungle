@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from entities.post import Post
 
 
-class CreatePost(ABC):
+class CreatePostDAO(ABC):
 
     @abstractmethod
     def create_post(self, post: Post) -> Post:
