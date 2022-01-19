@@ -14,6 +14,18 @@ public class userDAOTests {
 
 
 
+    // TEST FOR USER CREATION/REGISTRATION
+    @Test
+    void testCreateNewUser() {
+        User newJungleUser = new User(0, 'Test', 'Tester', 'testingemail@gmail.com',
+                'username', 'passcode', 'I like social media. I sign up for everything.',
+                '1980-01-01', 'imagesourcefile');
+        User createdUser = userDAO.createNewUser(newJungleUser);
+        Assert.assertTrue(createdUser.getUserId() > 0);
+    }
+
+
+
     @Test
     void testGetUserByUsername() {
         User newJungleUser = userDAO.searchForUser("");
@@ -21,15 +33,4 @@ public class userDAOTests {
         Assert.assertEquals(newJungleUser.getUsername(), "");
     }
 
-
-
-    // TESTS FOR USER CREATION/REGISTRATION
-    @Test
-    void testCreateNewUser() {
-        User newJungleUser = new User();
-    }
-
 }
-
-
-
