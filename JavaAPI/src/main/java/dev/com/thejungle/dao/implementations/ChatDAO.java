@@ -30,6 +30,7 @@ public class ChatDAO implements ChatDAOInt {
                     resultSet.getString("chatContent")
             );
         } catch (SQLException e) {
+            e.printStackTrace();
             return null;
         }
     }
