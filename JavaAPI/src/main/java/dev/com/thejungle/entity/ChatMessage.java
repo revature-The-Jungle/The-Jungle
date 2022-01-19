@@ -6,6 +6,7 @@ public class ChatMessage {
 
     private int chatId;
     private int userId;
+    private int groupId;
     private String chatDate;
     private String chatContent;
 
@@ -13,9 +14,10 @@ public class ChatMessage {
 
     }
 
-    public ChatMessage(int userId, int chatId, String chatDate, String chatContent) {
+    public ChatMessage(int userId, int chatId, int groupId, String chatDate, String chatContent) {
         this.setUserId(userId);
         this.setChatId(chatId);
+        this.setGroupId(groupId);
         this.setChatDate(chatDate);
         this.setChatContent(chatContent);
     }
@@ -33,6 +35,14 @@ public class ChatMessage {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+  
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public String getChatDate() {
@@ -56,6 +66,7 @@ public class ChatMessage {
         return "ChatMessage{" +
                 "userId=" + getUserId() +
                 ", chatId=" + getChatId() +
+                ", groupId=" + getGroupId() +
                 ", chatDate='" + getChatDate() + '\'' +
                 ", chatContent='" + getChatContent() + '\'' +
                 '}';
@@ -66,12 +77,12 @@ public class ChatMessage {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ChatMessage that = (ChatMessage) o;
-        return getChatId() == that.getChatId() && getUserId() == that.getUserId() && Objects.equals(getChatDate(), that.getChatDate()) && Objects.equals(getChatContent(), that.getChatContent());
+        return getChatId() == that.getChatId() && getUserId() == that.getUserId() && getGroupId() == that.getGroupId() &&Objects.equals(getChatDate(), that.getChatDate()) && Objects.equals(getChatContent(), that.getChatContent());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getChatId(), getUserId(), getChatDate(), getChatContent());
+        return Objects.hash(getChatId(), getUserId(), getGroupId(), getChatDate(), getChatContent());
     }
 
 }
