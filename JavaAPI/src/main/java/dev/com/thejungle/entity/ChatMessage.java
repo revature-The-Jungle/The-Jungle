@@ -5,20 +5,20 @@ import java.util.Objects;
 public class ChatMessage {
 
     private int chatId;
+    private String chatDate;
     private int userId;
     private int groupId;
-    private String chatDate;
     private String chatContent;
 
     public ChatMessage() {
 
     }
 
-    public ChatMessage(int userId, int chatId, int groupId, String chatDate, String chatContent) {
-        this.setUserId(userId);
+    public ChatMessage(int chatId, String chatDate, int userId,int groupId, String chatContent) {
         this.setChatId(chatId);
-        this.setGroupId(groupId);
         this.setChatDate(chatDate);
+        this.setUserId(userId);
+        this.setGroupId(groupId);
         this.setChatContent(chatContent);
     }
     public int getChatId() {

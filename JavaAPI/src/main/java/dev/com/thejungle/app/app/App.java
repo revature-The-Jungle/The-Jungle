@@ -4,6 +4,7 @@ import dev.com.thejungle.app.appcontroller.appcontroller.AppController;
 import io.javalin.Javalin;
 
 public class App {
+
     public static void main(String[] args) {
 
         Javalin app = Javalin.create(config -> {
@@ -14,5 +15,8 @@ public class App {
         AppController appController = new AppController();
 
         app.start();
+
+
     }
+
 }
