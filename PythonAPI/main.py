@@ -28,8 +28,7 @@ def post_a_post_image(post_id):
     """Needs a lot more work. Proof of concept regarding creating images in the database."""
     image = request.data
     image_decoded = image.decode('utf-8')
-    create_post_service.create_post_image_service(post_id, image_decoded)
-    return "success"
+    return create_post_service.create_post_image_service(post_id, image_decoded)
 
 
 app.run()

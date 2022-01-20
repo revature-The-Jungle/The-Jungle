@@ -22,7 +22,7 @@ class UserProfileDAO(ABC):
         pass
 
     @abstractmethod
-    def update_image_format(self, user_id: int, image_data: str) -> User:
+    def update_user_image_format(self, user_id: int, image_data: str) -> User:
         pass
 
     @abstractmethod
