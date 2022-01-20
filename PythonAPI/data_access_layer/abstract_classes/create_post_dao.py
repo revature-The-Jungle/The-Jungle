@@ -10,5 +10,5 @@ class CreatePostDAO(ABC):
         pass
 
     @abstractmethod
-    def create_post_image(self, user_id: int, image: str) -> bool:
+    def create_post_image(self, post_id: int, image: str) -> bool:
         pass

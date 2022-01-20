@@ -3,6 +3,7 @@ from entities.user import User
 
 
 class UserProfileDAOImp(UserProfileDAO):
+
     def get_user_profile(self, user_id: int) -> User:
         pass
 

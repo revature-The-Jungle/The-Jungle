@@ -1,6 +1,5 @@
-import base64
-
 from data_access_layer.abstract_classes.create_post_dao import CreatePostDAO
+from util.database_connection import connection
 from entities.post import Post
 
 
@@ -10,8 +9,13 @@ class CreatePostDAOImp(CreatePostDAO):
         """a method to create a post in the database"""
         pass
 
-    def create_post_image(self, user_id: int, image: str) -> bool:
+    def create_post_image(self, post_id: int, image: str) -> bool:
         """a method to place an image into the database"""
-        blob = base64.standard_b64encode(image)
-        sql = "INSERT INTO employee_picture_table VALUES (default, ?, ?)"
+        # will need to add extra tests
+        sql = f"INSERT INTO post_picture_table VALUES (default, {post_id}, '{image}')"
+        cursor = connection.cursor()
+        cursor.execute(sql)
+        connection.commit()
+        return True
+
 
