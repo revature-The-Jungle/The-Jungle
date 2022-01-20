@@ -11,3 +11,8 @@ def test_get_all_users_in_a_group():
 def test_leave_group():
     result = group_member_junction_dao.leave_group()
     assert result
+
+
+def test_no_list_was_generated():
+    result = group_member_junction_dao.get_all_users_in_a_group()
+    assert result == "no list was generated"
