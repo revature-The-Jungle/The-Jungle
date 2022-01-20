@@ -3,7 +3,6 @@ package dev.com.thejungle.dao.implementations;
 import dev.com.thejungle.dao.interfaces.ChatDAOInt;
 import dev.com.thejungle.entity.ChatMessage;
 import dev.com.thejungle.utility.ConnectionDB;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
