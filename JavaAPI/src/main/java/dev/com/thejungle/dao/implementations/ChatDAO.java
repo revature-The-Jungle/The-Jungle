@@ -15,7 +15,7 @@ public class ChatDAO implements ChatDAOInt {
     @Override
     public ChatMessage createMessage(int chatId, int userId, String chatDate, int group_id, String chatContent) {
         try (Connection connection = ConnectionDB.createConnection()) {
-            String sql = "insert into chat_log_table values(?, ?, ?, ?)";
+            String sql = "insert into chat_log_table values(?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, chatId);
             preparedStatement.setString(2,chatDate);
@@ -39,7 +39,6 @@ public class ChatDAO implements ChatDAOInt {
 
     @Override
     public ArrayList<ChatMessage> getMessageHistory(String currentTime) {
-        return null;
+    return null;
     }
-
 }
