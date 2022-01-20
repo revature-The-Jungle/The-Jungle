@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Group:
     def __init__(self,
                  group_id: int = None,  # primary key
@@ -5,7 +8,7 @@ class Group:
                  group_name: str = None,  # must be unique
                  group_about: str = None,
                  group_image_data: str = None,
-                 group_members: list[str] = None
+                 group_members: List[str] = None
                  ):
 
         self.group_id = group_id
