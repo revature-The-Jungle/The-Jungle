@@ -8,6 +8,9 @@ import org.testng.annotations.Test;
 public class ChatServiceTests {
 
     ChatService chatService = new ChatService(new ChatDAO());
+//
+//    @Test(expectedExceptions = InvalidInputException.class, expectedExceptionsMessageRegExp = "Invalid Input Exception")
+//    public void serviceCreateMessageFailInvalidChatId(){ chatService.serviceCreateMessage(4, "", 10000, 10000, "Hi");}
 
     /**
      * serviceGetMessageHistory with 0 as groupId
