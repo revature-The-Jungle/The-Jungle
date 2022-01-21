@@ -1,4 +1,4 @@
-package dev.com.thejungle.dao;
+package dev.com.thejungle.dao.interfaces;
 
 import dev.com.thejungle.entity.User;
 
@@ -8,5 +8,4 @@ public interface UserDAO {
 
     User searchForUser(String username);
 
-    User login();
 }
