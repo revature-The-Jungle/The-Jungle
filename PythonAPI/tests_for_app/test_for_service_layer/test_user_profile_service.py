@@ -86,7 +86,10 @@ def test_update_user_image_service_failure_not_string():
         assert str(e) == "The image must be a string format."
 
 
-def test_update_user_image_format_service():
+def test_update_user_image_format_service_success():
+    pass
+
+def test_update_user_image_format_service_failure_():
     pass
 
 
