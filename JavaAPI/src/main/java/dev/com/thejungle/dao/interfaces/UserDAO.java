@@ -8,4 +8,6 @@ public interface UserDAO {
 
     User searchForUser(String username);
 
+    User getAllUsers();
+
 }

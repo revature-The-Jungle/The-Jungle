@@ -22,11 +22,15 @@ public class UserServiceImp implements UserService {
     @Override
     public User createNewUserService(User user) {
         try {
-            return this.userDAO.createNewUser(user);
+            if (user.getUsername().matches(".*\\s+.*")) {
+                throw new UnallowedSpaces("No spaces allowed in username or password");
+            } else if (user.getPasscode().matches(".*\\s+.*")) {
+                throw new UnallowedSpaces("No spaces allowed in username or password");
+            } else {
+                return this.userDAO.createNewUser(user);
+            }
         } catch (DuplicateUsername d) {
-            throw new DuplicateUsername("This username is already taken.");
-        } catch (UnallowedSpaces s) {
-            throw new UnallowedSpaces("No spaces allowed in username or password.");
+            throw new DuplicateUsername("This username is already taken");
         }
     }
 

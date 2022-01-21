@@ -1,6 +1,7 @@
 package service;
 
 import dev.com.thejungle.customexception.DuplicateUsername;
+import dev.com.thejungle.customexception.UnallowedSpaces;
 import dev.com.thejungle.customexception.UsernameOrPasscodeException;
 import dev.com.thejungle.dao.implementations.UserDAOImp;
 import dev.com.thejungle.entity.User;
@@ -20,17 +21,23 @@ public class UserServiceTests {
     static User userProfile2;
     static User returnedProfile;
     static User badUsername;
+    static User duplicateUsername;
+    static User usernameSpaces;
+    static User passwordSpaces;
 
 
     @BeforeClass
     public void setup(){
         userDAOImp = Mockito.mock(UserDAOImp.class);
         userServiceImp = new UserServiceImp(userDAOImp);
-        userProfile = new User(0, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILoveToWrestle", "MySimplePasscode", "I enjoy the wrestling life", "1980-01-01","image");
-        userProfile2 = new User(1, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILoveToWrestle", "MySimplePasscode", "I enjoy the wrestling life", "1980-01-01","image");
-        returnedProfile = new User(2, "Solomon", "Grundy", "solomon@gmail.com", "BornOnMonday", "Tuesday", "I have a poem", "1980-02-01","image");
-        badUsername = new User(0, "Solomon", "Grundy", "solomon@gmail.com", "IAmSolomonGrundy", "Tuesday", "I have a poem", "1980-02-01","image");
-
+        Date date = new Date(742892400000L);
+        userProfile = new User(0, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILoveToWrestle", "MySimplePasscode", "I enjoy the wrestling life", date,"image");
+        userProfile2 = new User(1, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILoveToWrestle", "MySimplePasscode", "I enjoy the wrestling life", date,"image");
+        returnedProfile = new User(2, "Solomon", "Grundy", "solomon@gmail.com", "BornOnMonday", "Tuesday", "I have a poem", date,"image");
+        badUsername = new User(0, "Solomon", "Grundy", "solomon@gmail.com", "IAmSolomonGrundy", "Tuesday", "I have a poem", date,"image");
+        duplicateUsername = new User(0, "Dup", "Testing", "dup@email.com", "username", "password", "I like social media.", date, "imagesrc");
+        usernameSpaces = new User(0, "User", "Testing", "space@email.com", "user name", "password", "I like social media.", date, "imagesrc");
+        passwordSpaces = new User(0, "User", "Testing", "space2@email.com", "username", "password space", "I like social media.", date, "imagesrc");
     }
 
 
@@ -38,15 +45,26 @@ public class UserServiceTests {
 //  ------------------------------------ MOCK TESTS ----------------------------------------
 
 
-    @Test(expectedExceptions = DuplicateUsername.class, expectedExceptionsMessageRegExp = "This username is already taken.")
-    void cannotHaveDuplicateUsername(){
-        Date date = new Date(742892400000L);
-        User newJungleUser = new User(0, "Test", "Tester", "testingemail2@gmail.com",
-                "username5", "passcode", "I like social media.", date,
-                "imagesourcefile");
-        Mockito.when(userDAOImp.createNewUser(newJungleUser.getUsername()).thenThrow(new DuplicateUsername
-                ("This username is already taken.")));
+    // DUPLICATE USERNAME
+    @Test(expectedExceptions = DuplicateUsername.class, expectedExceptionsMessageRegExp = "This username is already taken")
+    public void cannotHaveDuplicateUsername(){
+        Mockito.when(userDAOImp.createNewUser(duplicateUsername)).thenThrow(new DuplicateUsername("This username is already taken"));
+        userServiceImp.createNewUserService(duplicateUsername);
+    }
 
+    // SPACES IN USERNAME
+    @Test(expectedExceptions = UnallowedSpaces.class, expectedExceptionsMessageRegExp = "No spaces allowed in username or password")
+    public void cannotHaveSpacesInUsername(){
+        Mockito.when(userDAOImp.createNewUser(usernameSpaces)).thenThrow(new UnallowedSpaces("No spaces allowed in username or password"));
+        userServiceImp.createNewUserService(usernameSpaces);
+    }
+
+    // SPACES IN PASSWORD
+    @Test(expectedExceptions = UnallowedSpaces.class, expectedExceptionsMessageRegExp = "No spaces allowed in username or password")
+    public void cannotHaveSpacesInPassword(){
+        Mockito.when(userDAOImp.createNewUser(passwordSpaces)).thenThrow(new UnallowedSpaces("No spaces allowed in username or password"));
+        userServiceImp.createNewUserService(passwordSpaces);
+    }
 
     //  NOT FOUND USER
     @Test(expectedExceptions = UsernameOrPasscodeException.class)
