@@ -6,6 +6,8 @@ import dev.com.thejungle.entity.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.sql.Date;
+
 public class userDAOTests {
 
     UserDAO userDAO = new UserDAOImp();

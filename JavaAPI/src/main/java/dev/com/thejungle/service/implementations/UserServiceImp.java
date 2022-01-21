@@ -18,7 +18,7 @@ public class UserServiceImp implements UserService {
     @Override
     public User createNewUserService(User user) {
         try {
-            return null;
+            return this.userDAO.createNewUser(user);
         } catch (DuplicateUsername d) {
             throw new DuplicateUsername("This username is already taken.");
         } catch (UnallowedSpaces s) {

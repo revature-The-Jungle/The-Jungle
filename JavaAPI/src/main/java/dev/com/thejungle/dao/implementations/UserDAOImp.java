@@ -1,5 +1,6 @@
 package dev.com.thejungle.dao.implementations;
 
+import dev.com.thejungle.customexception.DuplicateUsername;
 import dev.com.thejungle.dao.UserDAO;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.utility.ConnectionDB;
@@ -8,17 +9,6 @@ import java.sql.*;
 
 public class UserDAOImp implements UserDAO {
 
-    //    create table user_table(
-//    user_id serial primary key,
-//    first_name varchar(20) not null,
-//    last_name varchar(20) not null,
-//    email varchar(50) unique not null,
-//    username varchar(50) unique not null,
-//    passcode varchar(50) not null,
-//    user_about varchar(500),
-//    user_birth_date DATE not null,
-//    image_format varchar(50)
-//);
 
     @Override
     public User createNewUser(User user) {
@@ -35,9 +25,15 @@ public class UserDAOImp implements UserDAO {
             preparedStatement.setString(8, user.getImageFormat());
             preparedStatement.execute();
             ResultSet rs = preparedStatement.getGeneratedKeys();
-            rs.next();
-            user.setUserId(rs.getInt("user_id"));
-            return user;
+            if(rs.next()) {
+                String username = String.valueOf(this.searchForUser(user.getUsername()));
+                if(user.getUsername().equals(username)){
+                    throw new DuplicateUsername("This username is already taken.");
+                } else {
+                    user.setUserId(rs.getInt("user_id"));
+                    return user;
+                }
+            }
         } catch (SQLException q) {
             q.printStackTrace();
             return null;
