@@ -12,6 +12,26 @@ public class ChatDAOTests {
     ChatDAO chatDAO = new ChatDAO();
 
     /**
+     * createMessage with user_id
+     * Success
+     */
+    @Test
+    public void createMessageSuccessChatId(){
+        ChatMessage testCreateMessage = chatDAO.createMessage(10000, "", 10000, 10000, "Hi");
+        Assert.assertTrue(testCreateMessage.getChatId()!= 0);
+    }
+    /**
+     * createMessage with user_id
+     * Fail
+     */
+    @Test
+    public void createMessageFailChatId(){
+        ChatMessage testCreateMessage = chatDAO.createMessage(99999, "", 99999, 99999, "Nine Thousand");
+        Assert.assertNull(testCreateMessage); //The user/data was entering incorrect information into the system, hence giving an error.
+
+    }
+
+    /**
      * getMessageHistory with no groupId
      * Success
      */
