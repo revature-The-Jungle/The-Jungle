@@ -5,18 +5,20 @@ import java.util.Objects;
 public class ChatMessage {
 
     private int chatId;
-    private int userId;
     private String chatDate;
+    private int userId;
+    private int groupId;
     private String chatContent;
 
     public ChatMessage() {
 
     }
 
-    public ChatMessage(int userId, int chatId, String chatDate, String chatContent) {
-        this.setUserId(userId);
+    public ChatMessage(int chatId, String chatDate, int userId,int groupId, String chatContent) {
         this.setChatId(chatId);
         this.setChatDate(chatDate);
+        this.setUserId(userId);
+        this.setGroupId(groupId);
         this.setChatContent(chatContent);
     }
     public int getChatId() {
@@ -33,6 +35,14 @@ public class ChatMessage {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+  
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public String getChatDate() {
@@ -56,6 +66,7 @@ public class ChatMessage {
         return "ChatMessage{" +
                 "userId=" + getUserId() +
                 ", chatId=" + getChatId() +
+                ", groupId=" + getGroupId() +
                 ", chatDate='" + getChatDate() + '\'' +
                 ", chatContent='" + getChatContent() + '\'' +
                 '}';
@@ -66,12 +77,12 @@ public class ChatMessage {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ChatMessage that = (ChatMessage) o;
-        return getChatId() == that.getChatId() && getUserId() == that.getUserId() && Objects.equals(getChatDate(), that.getChatDate()) && Objects.equals(getChatContent(), that.getChatContent());
+        return getChatId() == that.getChatId() && getUserId() == that.getUserId() && getGroupId() == that.getGroupId() &&Objects.equals(getChatDate(), that.getChatDate()) && Objects.equals(getChatContent(), that.getChatContent());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getChatId(), getUserId(), getChatDate(), getChatContent());
+        return Objects.hash(getChatId(), getUserId(), getGroupId(), getChatDate(), getChatContent());
     }
 
 }
