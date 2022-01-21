@@ -1,6 +1,7 @@
 from custom_exceptions.user_image_not_found import UserImageNotFound
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.implementation_classes.user_profile_dao_imp import UserProfileDAOImp, UserProfileDAO
+from entities.user import User
 
 user_profile_dao: UserProfileDAO = UserProfileDAOImp()
 
@@ -10,7 +11,11 @@ def test_get_user_profile():
 
 
 def test_update_user_profile():
-    pass
+    """Happy test to see if user is updated correctly"""
+    updated_user = User(10000, "test_first_name", "test_last_name", "test@email.com", "test_username", "test_passcode", "Updating Profile About me", "2022-01-21", "test_image")
+    updated_profile: User = UserProfileDAOImp.update_user_profile(updated_user)
+    assert updated_profile.user_about == "Updating Profile About me"
+
 
 
 def test_get_user_image_success():
