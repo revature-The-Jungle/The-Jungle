@@ -31,6 +31,16 @@ def test_update_user_profile_failure_no_user():
         assert str(e) == 'The user could not be found.'
 
 
+def test_update_user_profile_failure_sql_injection():
+    updated_user_fail_sql_injection: User = User(10000, "test_first_name", "test_last_name", "test@test.com",
+                                                 "test_username",
+                                                 "test_passcode", "'; update user_table set passcode = 'sqlinjection' where user_id = 10000; --", "2016-01-01", "Test image")
+    if user_profile_dao.update_user_profile(updated_user_fail_sql_injection):
+        assert True
+    else:
+        assert False
+
+
 def test_get_user_image_success():
     image = user_profile_dao.get_user_image(10000)
     assert image
