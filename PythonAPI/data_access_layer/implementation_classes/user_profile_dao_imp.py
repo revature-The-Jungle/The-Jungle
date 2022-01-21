@@ -65,6 +65,7 @@ class UserProfileDAOImp(UserProfileDAO):
         return image_decoded
 
     def update_user_image_format(self, user_id: int, image_data: str) -> User:
+        """Method to put the picture format into the database."""
         pass
 
     def update_password(self, user_id: int, password: str) -> User:
