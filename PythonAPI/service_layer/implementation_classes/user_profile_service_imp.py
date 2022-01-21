@@ -28,7 +28,7 @@ class UserProfileServiceImp(UserProfileService):
             raise UserIdMustBeAnInteger("The user id must be an integer.")
 
         # Check to make sure that the image is a string
-        if not type(image) == str:
+        if not type(image) == str or not image:
             raise ImageMustBeAString("The image must be a string format.")
 
         return self.user_profile_dao.update_user_image(user_id, image)

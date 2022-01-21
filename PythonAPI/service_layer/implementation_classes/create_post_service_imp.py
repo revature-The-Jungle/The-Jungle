@@ -22,7 +22,7 @@ class CreatePostServiceImp(CreatePostService):
             raise PostIdMustBeAnInteger("The post id must be an integer.")
 
         # Check to make sure that the image is a string
-        if not type(image) == str:
+        if not type(image) == str or not image:
             raise ImageMustBeAString("The image must be a string format.")
 
         return self.create_post_dao.create_post_image(post_id, image)

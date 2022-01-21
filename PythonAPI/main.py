@@ -45,8 +45,6 @@ def create_a_post_image(post_id):
     except PostIdMustBeAnInteger as e:
         return str(e), 400
     except ImageMustBeAString as e:
-        # Low priority. Can't seem to cause this error from postman. Acts as a get method when there is bad data.
-        # I wonder if the image.decode('utf-8') is always turning faulty data into nothing.
         return str(e), 400
     except PostNotFound as e:
         return str(e), 400
