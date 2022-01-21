@@ -69,10 +69,10 @@ def test_get_all_posts_by_group_id():
     assert len(get_posts) >= 1
 
 
-# Test get all posts failed
-def test_get_all_posts_fails():
+# Test get all posts by group ID failed
+def test_get_all_posts_by_group_id_fails():
     try:
-        post_dao.get_all_posts()
+        post_dao.get_all_posts_by_group_id(90000)
     except PostNotFound as e:
         assert str(e) == "Post Not Found!"
 
@@ -80,8 +80,13 @@ def test_get_all_posts_fails():
 # ------------------------------ TEST DELETE POST BY ID ------------------------------
 # Test delete post
 def test_delete_post_by_id():
+    delete_post = post_dao.delete_post_by_post_id(9004)
+    assert delete_post
+
+
+# Test delete post failed
+def test_delete_post_by_id_fail_post_not_found():
     try:
-        delete_post = post_dao.delete_post_by_post_id(9004)
-        assert delete_post
+        post_dao.delete_post_by_post_id(90000)
     except PostNotFound as e:
         assert str(e) == "Post Not Found!"
