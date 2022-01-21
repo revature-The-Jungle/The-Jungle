@@ -15,10 +15,14 @@ class Group:
 
     def make_dictionary(self):
         dictionary = {
-            "group_id": self.group_id,
-            "user_id": self.user_id,
-            "group_name": self.group_name,
-            "group_about": self.group_about,
-            "image_format": self.image_format,
+            "groupId": self.group_id,
+            "userId": self.user_id,
+            "groupName": self.group_name,
+            "groupAbout": self.group_about,
+            "imageFormat": self.image_format,
             }
         return dictionary
+
+    def __str__(self):
+        return f"groupId {self.group_id}, userId {self.user_id}, groupName {self.group_name}, groupAbout{self.group_about}, " \
+               f"imageFormat {self.image_format}"
