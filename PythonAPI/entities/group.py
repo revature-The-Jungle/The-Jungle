@@ -22,3 +22,7 @@ class Group:
             "imageFormat": self.image_format,
             }
         return dictionary
+
+    def __str__(self):
+        return f"groupId {self.group_id}, userId {self.user_id}, groupName {self.group_name}, groupAbout{self.group_about}, " \
+               f"imageFormat {self.image_format}"
