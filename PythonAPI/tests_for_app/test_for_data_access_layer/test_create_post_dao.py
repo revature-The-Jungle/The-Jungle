@@ -1,4 +1,4 @@
-from PythonAPI.data_access_layer.implementation_classes.create_post_dao_imp import CreatePostDAOImp
+from PythonAPI.data_access_layer.implementation_classes.create_post_dao import CreatePostDAOImp
 from PythonAPI.entities.post import Post
 
 post_dao = CreatePostDAOImp()

@@ -15,7 +15,6 @@ class CreatePostDAOImp(CreatePostDAO):
         post.post_id = generated_id
         return post
 
-
     def create_post_image(self, image: str) -> bool:
         """a method to place an image into the database"""
         pass
