@@ -7,9 +7,6 @@ from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
 from custom_exceptions.post_not_found import PostNotFound
 from custom_exceptions.user_id_must_be_an_integer import UserIdMustBeAnInteger
 from custom_exceptions.user_image_not_found import UserImageNotFound
-from custom_exceptions.user_not_found import UserNotFound
-from data_access_layer.implementation_classes.create_post_dao_imp import CreatePostDAOImp
-from data_access_layer.implementation_classes.user_profile_dao_imp import UserProfileDAOImp
 from custom_exceptions.birth_date_is_null import BirthDateIsNull
 from custom_exceptions.too_many_characters import TooManyCharacters
 from custom_exceptions.user_not_found import UserNotFound
@@ -17,7 +14,6 @@ from data_access_layer.implementation_classes.create_post_dao_imp import CreateP
 from data_access_layer.implementation_classes.user_profile_dao_imp import UserProfileDAOImp
 from entities.user import User
 from service_layer.implementation_classes.create_post_service_imp import CreatePostServiceImp
-from service_layer.implementation_classes.user_profile_service_imp import UserProfileServiceImp
 
 # Setup logging
 import logging
@@ -96,9 +92,7 @@ def post_the_user_image_format(user_id):
         return str(e), 400
     except UserNotFound as e:
         return str(e), 400
-# @app.get("/user/<user_id>")
-# def get_user_by_id(user_id: int):
-#     user_as_id =
+
 
 @app.patch("/user/profile/update/<user_id>")
 def update_profile_info(user_id):

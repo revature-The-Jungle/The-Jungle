@@ -56,4 +56,5 @@ def test_update_image_format_failure_no_user():
 
 
 def test_update_password():
+    """stretch"""
     pass
