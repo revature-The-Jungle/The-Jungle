@@ -8,6 +8,6 @@ public interface UserService {
 
     User searchForUserService(String username);
 
-    User loginService();
+    User loginService(String username, String passcode);
 
 }

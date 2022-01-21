@@ -1,13 +1,8 @@
 package dev.com.thejungle.app.appcontroller.controllers;
 
-import dev.com.thejungle.dao.implementations.ChatDAO;
 import dev.com.thejungle.service.implementations.ChatService;
-import io.javalin.http.Handler;
 import io.javalin.websocket.WsContext;
-import org.asynchttpclient.netty.handler.WebSocketHandler;
-import org.eclipse.jetty.websocket.server.WebSocketHandshake;
 
-import java.net.http.WebSocket;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

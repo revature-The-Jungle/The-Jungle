@@ -2,9 +2,13 @@ package dev.com.thejungle.service.implementations;
 
 import dev.com.thejungle.customexception.DuplicateUsername;
 import dev.com.thejungle.customexception.UnallowedSpaces;
-import dev.com.thejungle.dao.UserDAO;
+import dev.com.thejungle.customexception.UserNotFound;
+import dev.com.thejungle.customexception.UsernameOrPasscodeException;
+import dev.com.thejungle.dao.interfaces.UserDAO;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.interfaces.UserService;
+
+import java.util.Objects;
 
 public class UserServiceImp implements UserService {
 
@@ -26,17 +30,20 @@ public class UserServiceImp implements UserService {
         }
     }
 
-
-
-
-
     @Override
     public User searchForUserService(String username) {
-        return null;
+        try {
+            return this.userDAO.searchForUser(username);
+        } catch (UserNotFound e) {
+            throw new UserNotFound("User not found");
+        }
     }
 
     @Override
-    public User loginService() {
-        return null;
+    public User loginService(String username, String passcode){
+        User newUser = this.userDAO.searchForUser(username);
+        if (!Objects.equals(newUser.getUsername(), username) || !Objects.equals(newUser.getPasscode(), passcode))
+            throw new UsernameOrPasscodeException("Username or Passcode are incorrect");
+        return newUser;
     }
 }
