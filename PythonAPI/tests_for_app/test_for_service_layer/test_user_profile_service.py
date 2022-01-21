@@ -19,9 +19,11 @@ def test_get_user_profile_service():
 
 
 def test_update_user_profile_service_success():
-    user_profile_dao.update_user_profile = MagicMock(return_value="return")
     updated_user_service: User = User(1, "test_first_name", "test_last_name", "test@test.com", "test_username",
                                       "test_passcode", "About me test", "2022-01-22", "Test image")
+
+    user_profile_dao.update_user_profile = MagicMock(return_value=updated_user_service)
+
     assert user_profile_service.update_user_profile_service(updated_user_service)
 
 
