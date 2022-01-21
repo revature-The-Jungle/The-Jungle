@@ -36,7 +36,7 @@ def test_update_user_profile_service_failure_too_many_chars():
         assert str(e) == "Too many characters."
 
 
-def test_update_user_profile_service_failure_birth_date_not_null():
+def test_update_user_profile_service_failure_birth_date_is_null():
     updated_user_fail_birth_date: User = User(1, "test_first_name", "test_last_name", "test@test.com", "test_username",
                                       "test_passcode", "About me test", None, "Test image")
     try:
