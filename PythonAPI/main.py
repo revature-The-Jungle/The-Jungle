@@ -22,6 +22,10 @@ create_post_service = CreatePostServiceImp(create_post_dao)
 def on():
     return "python is running"
 
+# @app.get("/user/<user_id>")
+# def get_user_by_id(user_id: int):
+#     user_as_id =
+
 
 @app.post("/post/image/<post_id>")
 def post_a_post_image(post_id):

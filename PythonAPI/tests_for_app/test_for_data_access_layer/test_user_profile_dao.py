@@ -5,8 +5,9 @@ from data_access_layer.implementation_classes.user_profile_dao_imp import UserPr
 user_profile_dao: UserProfileDAO = UserProfileDAOImp()
 
 
-def get_user_profile():
-    pass
+def test_get_user_profile():
+    show_user = user_profile_dao.get_user_profile(10000)
+    assert show_user.user_id == 10000
 
 
 def test_get_user_image_success():

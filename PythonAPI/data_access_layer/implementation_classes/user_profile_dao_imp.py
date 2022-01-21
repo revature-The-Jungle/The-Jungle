@@ -6,7 +6,13 @@ from util.database_connection import connection
 class UserProfileDAOImp(UserProfileDAO):
 
     def get_user_profile(self, user_id: int) -> User:
-        pass
+        """Grabs the information from the user profile"""
+        sql = 'select * from user_table where user_id = %s'
+        cursor = connection.cursor()
+        cursor.execute(sql, [user_id])
+        profile_record = cursor.fetchone()
+        user = User(*profile_record)
+        return user
 
     def update_user_profile(self, user: User) -> User:
         pass
