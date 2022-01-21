@@ -4,9 +4,14 @@ from data_access_layer.implementation_classes.create_post_dao_imp import CreateP
 create_post_dao: CreatePostDAO = CreatePostDAOImp()
 
 
-def test_create_post_image_success():
+def test_create_post_image_success_1():
     """tests by using an existing"""
     assert create_post_dao.create_post_image(9000, "thisisahappytest")
+
+
+def test_create_post_image_success_2():
+    """tests by using an existing"""
+    assert create_post_dao.create_post_image(9000, "thisIsAlsoAHappyTest")
 
 
 def test_create_post_image_failure_no_post():

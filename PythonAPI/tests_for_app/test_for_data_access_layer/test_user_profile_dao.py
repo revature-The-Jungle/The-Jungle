@@ -40,8 +40,13 @@ def test_update_user_profile_failure_sql_injection():
         assert updated_user_fail_sql_injection.passcode != "test_passcode"
 
 
-def test_get_user_image_success():
+def test_get_user_image_success_1():
     image = user_profile_dao.get_user_image(10000)
+    assert image
+
+
+def test_get_user_image_success_2():
+    image = user_profile_dao.get_user_image(9000)
     assert image
 
 
@@ -53,8 +58,12 @@ def test_get_user_image_failure_no_image():
         assert str(e) == 'The user image could not be found.'
 
 
-def test_update_user_image_success():
+def test_update_user_image_success_1():
     assert user_profile_dao.update_user_image(10000, "thisisahappytest")
+
+
+def test_update_user_image_success_2():
+    assert user_profile_dao.update_user_image(9000, "thisisahappytest")
 
 
 def test_update_user_image_failure_no_user():
@@ -65,8 +74,12 @@ def test_update_user_image_failure_no_user():
         assert str(e) == 'The user could not be found.'
 
 
-def test_update_image_format_success():
+def test_update_image_format_success_1():
     assert user_profile_dao.update_user_image_format(10000, "testing")
+
+
+def test_update_image_format_success_2():
+    assert user_profile_dao.update_user_image_format(9000, "testing")
 
 
 def test_update_image_format_failure_no_user():
