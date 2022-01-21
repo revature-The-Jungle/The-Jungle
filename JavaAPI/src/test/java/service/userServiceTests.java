@@ -29,7 +29,7 @@ public class userServiceTests {
         Mockito.when(userDAOImp.createNewUser(newJungleUser.getUsername()).thenThrow(new DuplicateUsername
                 ("This username is already taken.")));
     }
-    
+
 
 
 }
