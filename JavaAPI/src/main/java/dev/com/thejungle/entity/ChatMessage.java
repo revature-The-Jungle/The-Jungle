@@ -27,6 +27,12 @@ public class ChatMessage {
         this.setGroupId(groupId);
         this.setChatContent(chatContent);
     }
+    public ChatMessage(int userId,int groupId, String chatContent) {
+        this.setUserId(userId);
+        this.setGroupId(groupId);
+        this.setChatContent(chatContent);
+    }
+
     public int getChatId() {
         return chatId;
     }
