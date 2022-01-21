@@ -23,6 +23,7 @@ public class ChatDAO implements ChatDAOInt {
                     resultSet.getInt("chat_id"),
                     resultSet.getString("chat_date"),
                     chatMessage.getUserId(),
+                    chatMessage.getUserName(),
                     chatMessage.getGroupId(),
                     chatMessage.getChatContent()
             );
@@ -41,7 +42,9 @@ public class ChatDAO implements ChatDAOInt {
     @Override
     public ArrayList<ChatMessage> getMessageHistory(int groupId) {
         try (Connection connection = ConnectionDB.createConnection()) {
-                String sql = "select * from chat_log_table where chat_date >= now() - interval '5 minutes' and group_id = ?";
+                String sql = "select chat_id, chat_date, clt.user_id, ut.username, group_id, chat_content from chat_log_table clt " +
+            "inner join user_table ut on ut.user_id = clt.user_id " +
+            "where clt.chat_date >= now() - interval '5 minutes' and group_id = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, groupId);
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -51,6 +54,7 @@ public class ChatDAO implements ChatDAOInt {
                         resultSet.getInt("chat_id"),
                         resultSet.getString("chat_date"),
                         resultSet.getInt("user_id"),
+                        resultSet.getString("username"),
                         resultSet.getInt("group_id"),
                         resultSet.getString("chat_content")
                 ));
@@ -70,7 +74,9 @@ public class ChatDAO implements ChatDAOInt {
     @Override
     public ArrayList<ChatMessage> getMessageHistory() {
         try (Connection connection = ConnectionDB.createConnection()) {
-            String sql = "select * from chat_log_table where chat_date >= now() - interval '5 minutes' and group_id = null";
+            String sql = "select chat_id, chat_date, clt.user_id, ut.username, group_id, chat_content from chat_log_table clt " +
+                    "inner join user_table ut on ut.user_id = clt.user_id " +
+                    "where clt.chat_date >= now() - interval '5 minutes' and group_id = null";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             ArrayList<ChatMessage> chatMessages = new ArrayList<>();
@@ -79,6 +85,7 @@ public class ChatDAO implements ChatDAOInt {
                         resultSet.getInt("chat_id"),
                         resultSet.getString("chat_date"),
                         resultSet.getInt("user_id"),
+                        resultSet.getString("username"),
                         resultSet.getInt("group_id"),
                         resultSet.getString("chat_content")
                 ));
