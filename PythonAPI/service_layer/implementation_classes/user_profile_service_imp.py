@@ -19,7 +19,7 @@ class UserProfileServiceImp(UserProfileService):
 
         if user.user_birth_date:
             if len(user.user_about) < 500:
-                self.user_profile_dao.update_user_profile(user)
+                return self.user_profile_dao.update_user_profile(user)
             else:
                 raise TooManyCharacters("Too many characters.")
         else:
