@@ -17,7 +17,7 @@ public class ChatDAOTests {
      */
     @Test
     public void createMessageSuccessChatId(){
-        ChatMessage chatMessage = new ChatMessage(1000, 1000, "Hi");
+        ChatMessage chatMessage = new ChatMessage(10000, 10000, "Hi");
         ChatMessage testCreateMessage = chatDAO.createMessage(chatMessage);
         Assert.assertTrue(testCreateMessage.getChatId()!= 0);
     }
