@@ -1,0 +1,46 @@
+from custom_exceptions.user_image_not_found import UserImageNotFound
+from custom_exceptions.user_not_found import UserNotFound
+from data_access_layer.implementation_classes.user_profile_dao_imp import UserProfileDAOImp, UserProfileDAO
+
+user_profile_dao: UserProfileDAO = UserProfileDAOImp()
+
+
+def test_get_user_profile():
+    pass
+
+
+def test_update_user_profile():
+    pass
+
+
+def test_get_user_image_success():
+    image = user_profile_dao.get_user_image(10000)
+    assert image
+
+
+def test_get_user_image_failure_no_image():
+    try:
+        user_profile_dao.get_user_image(-5)
+        assert False
+    except UserImageNotFound as e:
+        assert str(e) == 'The user image could not be found.'
+
+
+def test_update_user_image_success():
+    assert user_profile_dao.update_user_image(10000, "thisisahappytest")
+
+
+def test_update_user_image_failure_no_user():
+    try:
+        user_profile_dao.update_user_image(-5, "this is a sad test")
+        assert False
+    except UserNotFound as e:
+        assert str(e) == 'The user could not be found.'
+
+
+def test_update_image_format():
+    pass
+
+
+def test_update_password():
+    pass
