@@ -25,7 +25,6 @@ class UserProfileServiceImp(UserProfileService):
         else:
             raise BirthDateIsNull("Birthdate cannot be null.")
 
-
     def get_user_image_service(self, user_id: int) -> str:
         # Check to make sure the user_id is an integer
         if not str(user_id).isnumeric():
