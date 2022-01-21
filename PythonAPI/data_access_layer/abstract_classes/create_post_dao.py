@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from PythonAPI.entities.post import Post
+from entities.post import Post
 
 
 class CreatePostDAO(ABC):

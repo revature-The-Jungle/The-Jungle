@@ -1,5 +1,5 @@
-from PythonAPI.data_access_layer.implementation_classes.group_dao import GroupDAOImp
-from PythonAPI.entities.group import Group
+from data_access_layer.implementation_classes.group_dao_imp import GroupDAOImp
+from entities.group import Group
 
 group_dao = GroupDAOImp()
 

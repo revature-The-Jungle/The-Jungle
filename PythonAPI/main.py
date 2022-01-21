@@ -19,7 +19,7 @@ from service_layer.implementation_classes.create_post_service_imp import CreateP
 import logging
 
 from service_layer.implementation_classes.user_profile_service_imp import UserProfileServiceImp
-from data_access_layer.implementation_classes.group_view_postgres_dao import GroupViewPostgresDao
+from data_access_layer.implementation_classes.group_view_postgres_dao_imp import GroupViewPostgresDao
 from service_layer.implementation.group_service_imp.group_postgres_service import GroupPostgresService
 
 logging.basicConfig(filename="records.log", level=logging.DEBUG,

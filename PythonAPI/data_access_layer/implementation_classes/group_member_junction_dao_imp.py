@@ -1,10 +1,10 @@
 import traceback
 from typing import List
 
-from PythonAPI.data_access_layer.abstract_classes.group_member_junction_abs import GroupMemberJunctionAbs
-from PythonAPI.entities import group_member_junction
-from PythonAPI.entities.group_member_junction import GroupMemberJunction
-from PythonAPI.util.database_connection import connection
+from data_access_layer.abstract_classes.group_member_junction_abs import GroupMemberJunctionAbs
+from entities import group_member_junction
+from entities.group_member_junction import GroupMemberJunction
+from util.database_connection import connection
 from custom_exceptions.group_member_junction_exceptions import *
 
 

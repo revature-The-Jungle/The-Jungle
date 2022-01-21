@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 from typing import List
 
-from PythonAPI.entities.group_member_junction import GroupMemberJunction
+from entities.group_member_junction import GroupMemberJunction
 
 
 class GroupMemberJunctionAbs(ABC):

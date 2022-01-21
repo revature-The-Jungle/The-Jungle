@@ -1,6 +1,6 @@
-from PythonAPI.data_access_layer.abstract_classes.group_dao_abs import GroupDAO
-from PythonAPI.entities.group import Group
-from PythonAPI.util.database_connection import connection
+from data_access_layer.abstract_classes.group_dao_abs import GroupDAO
+from entities.group import Group
+from util.database_connection import connection
 from custom_exceptions.GroupIdNonExistent import GroupIdNonExistent
 from custom_exceptions.InputTooLong import InputTooLong
 

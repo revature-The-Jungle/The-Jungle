@@ -1,6 +1,6 @@
 from typing import List
 
-from data_access_layer.implementation_classes.group_view_postgres_dao import GroupViewPostgresDao
+from data_access_layer.implementation_classes.group_view_postgres_dao_imp import GroupViewPostgresDao
 from entities.group import Group
 from service_layer.abstract.group_service import GroupService
 

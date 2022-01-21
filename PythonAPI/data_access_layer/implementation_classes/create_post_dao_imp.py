@@ -8,7 +8,13 @@ class CreatePostDAOImp(CreatePostDAO):
 
     def create_post(self, post: Post) -> Post:
         """a method to create a post in the database"""
-        pass
+        sql = "insert into post_table values(default, %s, %s, %s, %s, %s, default) returning post_id"
+        cursor = connection.cursor()
+        cursor.execute(sql, (post.user_id, post.group_id, post.post_text, post.image_format, post.likes))
+        connection.commit()
+        generated_id = cursor.fetchone()[0]
+        post.post_id = generated_id
+        return post
 
     def create_post_image(self, post_id: int, image: str) -> str:
         """a method to place a post image into the database"""

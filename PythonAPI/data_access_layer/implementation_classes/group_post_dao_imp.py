@@ -1,7 +1,7 @@
-from PythonAPI.custom_exceptions.post_exceptions import PostNotFound
-from PythonAPI.data_access_layer.abstract_classes.group_post_dao_abs import GroupPostDAOAbs
-from PythonAPI.entities.group_post import GroupPost
-from PythonAPI.util.database_connection import connection
+from custom_exceptions.post_exceptions import PostNotFound
+from data_access_layer.abstract_classes.group_post_dao_abs import GroupPostDAOAbs
+from entities.group_post import GroupPost
+from util.database_connection import connection
 
 
 class GroupPostDAO(GroupPostDAOAbs):
