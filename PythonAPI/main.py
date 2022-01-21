@@ -41,9 +41,12 @@ def on():
 
 @app.get("/user/<user_id>")
 def get_a_user_id(user_id: int):
-    user = user_profile_service.service_get_user_profile_service(int(user_id))
-    user_as_dictionary = user.make_dictionary()
-    return jsonify(user_as_dictionary), 200
+    try:
+        user = user_profile_service.service_get_user_profile_service(int(user_id))
+        user_as_dictionary = user.make_dictionary()
+        return jsonify(user_as_dictionary), 200
+    except UserNotFound as e:
+        return str(e), 400
 
 
 @app.post("/post/image/<post_id>")
@@ -120,19 +123,19 @@ def update_profile_info(user_id):
             new_user_profile)
         user_profile_as_dictionary = returned_user_profile.make_dictionary()
         user_profile_as_json = jsonify(user_profile_as_dictionary)
-        return user_profile_as_json
+        return user_profile_as_json, 200
     except UserNotFound as e:
         exception_dictionary = {"message": str(e)}
         exception_json = jsonify(exception_dictionary)
-        return exception_json
+        return exception_json, 400
     except TooManyCharacters as e:
         exception_dictionary = {"message": str(e)}
         exception_json = jsonify(exception_dictionary)
-        return exception_json
+        return exception_json, 400
     except BirthDateIsNull as e:
         exception_dictionary = {"message": str(e)}
         exception_json = jsonify(exception_dictionary)
-        return exception_json
+        return exception_json, 400
 
 
 app.run()

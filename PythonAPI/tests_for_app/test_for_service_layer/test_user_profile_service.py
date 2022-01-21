@@ -20,6 +20,14 @@ def test_get_user_profile_service():
     assert user_profile_service.service_get_user_profile_service(1)
 
 
+def test_get_user_profile_failure_not_int():
+    try:
+        user_profile_service.service_get_user_profile_service(1.0)
+        assert False
+    except UserIdMustBeAnInteger as e:
+        assert str(e) == "The user id must be an integer."
+
+
 def test_update_user_profile_service_success():
     updated_user_service: User = User(1, "test_first_name", "test_last_name", "test@test.com", "test_username",
                                       "test_passcode", "About me test", "2022-01-22", "Test image")

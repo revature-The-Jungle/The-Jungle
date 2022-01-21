@@ -6,6 +6,8 @@ from entities.user import User
 
 user_profile_dao: UserProfileDAO = UserProfileDAOImp()
 
+user_about_me_for_tests = "Updating Profile About me"
+
 
 def test_get_user_profile_success():
     show_user = user_profile_dao.get_user_profile(10)
