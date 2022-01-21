@@ -10,23 +10,21 @@ import java.util.ArrayList;
 public class ChatDAO implements ChatDAOInt {
 
     @Override
-    public ChatMessage createMessage(int chatId, String chatDate, int userId, int group_id, String chatContent) {
+    public ChatMessage createMessage(ChatMessage chatMessage) {
         try (Connection connection = ConnectionDB.createConnection()) {
-            String sql = "insert into chat_log_table values(?, ?, ?, ?, ?)";
+            String sql = "insert into chat_log_table values(default, default, ?, ?, ?) returning chat_id, chat_date";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, chatId);
-            preparedStatement.setString(2, chatDate);
-            preparedStatement.setInt(3, userId);
-            preparedStatement.setInt(4, group_id);
-            preparedStatement.setString(5, chatContent);
+            preparedStatement.setInt(1, chatMessage.getUserId());
+            preparedStatement.setInt(2, chatMessage.getGroupId());
+            preparedStatement.setString(3, chatMessage.getChatContent());
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             return new ChatMessage(
                     resultSet.getInt("chat_id"),
                     resultSet.getString("chat_date"),
-                    resultSet.getInt("userId"),
-                    resultSet.getInt("group_id"),
-                    resultSet.getString("chatContent")
+                    chatMessage.getUserId(),
+                    chatMessage.getGroupId(),
+                    chatMessage.getChatContent()
             );
         } catch (SQLException e) {
             e.printStackTrace();
