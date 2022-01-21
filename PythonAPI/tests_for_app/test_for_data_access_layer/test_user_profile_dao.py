@@ -12,10 +12,19 @@ def test_get_user_profile():
     assert show_user.user_id == 10000
 
 
-def test_update_user_profile_success():
-    """Happy test to see if user is updated correctly"""
+def test_update_user_profile_about_me_success():
+    """Happy test to see if user about me is updated correctly"""
     updated_user = User(10000, "test_first_name", "test_last_name", "test@email.com", "test_username", "test_passcode",
                         user_about_me_for_tests, "2022-01-21", "test_image")
+    updated_profile: User = user_profile_dao.update_user_profile(updated_user)
+    assert updated_profile.user_about == user_about_me_for_tests
+
+
+def test_update_user_profile_birth_date_success():
+    """Happy test to see if user birth date is updated correctly"""
+    updated_user = User(10000, "test_first_name", "test_last_name", "test@email.com", "test_username",
+                        "test_passcode",
+                        user_about_me_for_tests, "2022-01-05", "test_image")
     updated_profile: User = user_profile_dao.update_user_profile(updated_user)
     assert updated_profile.user_about == user_about_me_for_tests
 
