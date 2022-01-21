@@ -21,7 +21,7 @@ class UserProfileDAOImp(UserProfileDAO):
 
         sql = f"update user_table set user_about = %s, user_birth_date = %s where user_id = %s"
         cursor = connection.cursor()
-        cursor.execute(sql, user.user_about, user.user_birth_date, user.user_id)
+        cursor.execute(sql, (user.user_about, user.user_birth_date, user.user_id))
         connection.commit()
         return user
 
