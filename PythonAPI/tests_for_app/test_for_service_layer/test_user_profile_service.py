@@ -1,6 +1,7 @@
 from unittest.mock import MagicMock, patch, Mock
 
 from custom_exceptions.birth_date_is_null import BirthDateIsNull
+from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.too_many_characters import TooManyCharacters
 from custom_exceptions.user_id_must_be_an_integer import UserIdMustBeAnInteger
@@ -87,10 +88,16 @@ def test_update_user_image_service_failure_not_string():
 
 
 def test_update_user_image_format_service_success():
-    pass
+    user_profile_dao.update_user_image_format = MagicMock(return_value="gif")
+    assert user_profile_service.update_user_image_format_service(1, "gif")
+
 
 def test_update_user_image_format_service_failure_():
-    pass
+    try:
+        user_profile_service.update_user_image_format_service(1, b"thisisasketch")
+        assert False
+    except ImageFormatMustBeAString as e:
+        assert str(e) == "The image format must be a string."
 
 
 def test_update_password_service_failure():

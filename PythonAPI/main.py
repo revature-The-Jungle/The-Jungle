@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
 from custom_exceptions.post_not_found import PostNotFound
@@ -54,7 +55,7 @@ def create_a_post_image(post_id):
 def get_the_user_image(user_id):
     """Method to grab a user image from the database by the user id."""
     try:
-        return user_profile_service.get_user_image_service(user_id)
+        return user_profile_service.get_user_image_service(user_id), 200
     except UserIdMustBeAnInteger as e:
         return str(e), 400
     except UserImageNotFound as e:
@@ -66,10 +67,25 @@ def post_the_user_image(user_id):
     try:
         image = request.data
         image_decoded = image.decode('utf-8')
-        return user_profile_service.update_user_image_service(user_id, image_decoded)
+        return user_profile_service.update_user_image_service(user_id, image_decoded), 201
     except UserIdMustBeAnInteger as e:
         return str(e), 400
     except ImageMustBeAString as e:
+        return str(e), 400
+    except UserNotFound as e:
+        return str(e), 400
+
+
+@app.post("/user/imageFormat/<user_id>")
+def post_the_user_image_format(user_id):
+    try:
+        image_data = request.get_json()
+        returned_user = user_profile_service.update_user_image_format_service(user_id, image_data["image_format"])
+        user_as_json = jsonify(returned_user.make_dictionary())
+        return user_as_json, 201
+    except UserIdMustBeAnInteger as e:
+        return str(e), 400
+    except ImageFormatMustBeAString as e:
         return str(e), 400
     except UserNotFound as e:
         return str(e), 400

@@ -44,7 +44,7 @@ def test_update_user_image_failure_no_user():
 
 
 def test_update_image_format_success():
-    assert user_profile_dao.update_user_image_format(10000, "gif")
+    assert user_profile_dao.update_user_image_format(10000, "testing")
 
 
 def test_update_image_format_failure_no_user():
