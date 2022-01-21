@@ -18,7 +18,7 @@ def test_create_post_image_service_success():
 
 def test_create_post_image_service_failure_not_int():
     try:
-        create_post_service.create_post_image_service("hello", "thisisaforwardvalue")
+        create_post_service.create_post_image_service(1.0, "thisisaforwardvalue")
         assert False
     except PostIdMustBeAnInteger as e:
         assert str(e) == "The post id must be an integer."
