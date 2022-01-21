@@ -1,5 +1,6 @@
 package dev.com.thejungle.app.app;
-import dev.com.thejungle.app.appcontroller.controllers.ChatController;
+
+import dev.com.thejungle.app.appcontroller.appcontroller.AppController;
 import io.javalin.Javalin;
 
 public class App {
@@ -10,8 +11,9 @@ public class App {
             config.enableDevLogging();
         });
 
+        AppController appController = new AppController();
 
-        app.ws("/chat/{id}", ChatController::connectToWebSocket);
+        app.ws("/chat/{id}", appController.chatController::connectToWebSocket);
 
         app.start();
 

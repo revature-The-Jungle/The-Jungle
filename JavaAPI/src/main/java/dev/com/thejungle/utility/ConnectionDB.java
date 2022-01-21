@@ -16,6 +16,7 @@ public class ConnectionDB {
                     System.getenv("USER"),
                     System.getenv("PASSWORD")
             );
+            System.out.println(System.getenv("PASSWORD"));
             return DriverManager.getConnection(dbURL);
         } catch (SQLException e) {
             e.printStackTrace();
