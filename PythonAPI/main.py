@@ -22,6 +22,19 @@ create_post_service = CreatePostServiceImp(create_post_dao)
 def on():
     return "python is running"
 
+# @app.get("/user/<user_id>")
+# def get_user_by_id(user_id: int):
+#     user_as_id =
+
+
+@app.post("/post/image/<post_id>")
+def post_a_post_image(post_id):
+    """Needs a lot more work. Proof of concept regarding creating images in the database."""
+    image = request.data
+    image_decoded = image.decode('utf-8')
+    create_post_service.create_post_image_service(post_id, image_decoded)
+    return "success"
+
 
 @app.post("/post/image/<post_id>")
 def post_a_post_image(post_id):
