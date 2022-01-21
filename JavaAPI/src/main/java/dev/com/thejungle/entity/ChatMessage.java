@@ -14,6 +14,12 @@ public class ChatMessage {
 
     }
 
+    public ChatMessage(int userId, int groupId, String chatContent) {
+        this.setUserId(userId);
+        this.setGroupId(groupId);
+        this.setChatContent(chatContent);
+    }
+
     public ChatMessage(int chatId, String chatDate, int userId,int groupId, String chatContent) {
         this.setChatId(chatId);
         this.setChatDate(chatDate);
