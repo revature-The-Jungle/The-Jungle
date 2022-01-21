@@ -6,8 +6,18 @@ PostfeedDao = PostfeedDaoimpl()
 def test_get_all_posts():
     list = PostfeedDao.get_all_posts()
     assert len(list)>0
+    
+    
+def test_get_all_posts():
+    list = PostfeedDao.get_all_posts()
+    assert len(list)< 10000
 
 
 def test_delete_a_post():
     boolean = PostfeedDao.delete_a_post(1)
+    assert boolean == True
+
+
+def test_delete_a_post_1():
+    boolean = PostfeedDao.delete_a_post(4)
     assert boolean == True
