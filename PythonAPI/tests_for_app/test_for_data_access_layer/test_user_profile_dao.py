@@ -7,7 +7,8 @@ user_profile_dao: UserProfileDAO = UserProfileDAOImp()
 
 
 def test_get_user_profile():
-    pass
+    show_user = user_profile_dao.get_user_profile(10000)
+    assert show_user.user_id == 10000
 
 
 def test_update_user_profile():
