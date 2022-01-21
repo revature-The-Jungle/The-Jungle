@@ -48,7 +48,7 @@ class UserProfileDAOImp(UserProfileDAO):
         """a method to place a user image into the database"""
 
         # Check to see if the user id is in the database, raise an error otherwise.
-        sql = "select user_id from user_table where user_id = %(user_id)s;"
+        sql = "select * from user_table where user_id = %(user_id)s;"
         cursor = connection.cursor()
         cursor.execute(sql, {"user_id": user_id})
         if not cursor.fetchone():
@@ -67,6 +67,7 @@ class UserProfileDAOImp(UserProfileDAO):
         # get the new image and send it back up to the service layer
         sql = f"select picture from user_picture_table where user_id = %(user_id)s;"
         cursor.execute(sql, {"user_id": user_id})
+        connection.commit()
         image = cursor.fetchone()[0]
         image_decoded = image.decode('utf-8')
         return image_decoded
@@ -75,7 +76,7 @@ class UserProfileDAOImp(UserProfileDAO):
         """Method to put the picture format into the database."""
 
         # Check to see if the user id is in the database, raise an error otherwise.
-        sql = f"select user_id from user_table where user_id = %(user_id)s;"
+        sql = f"select * from user_table where user_id = %(user_id)s;"
         cursor = connection.cursor()
         cursor.execute(sql, {"user_id": user_id})
         if not cursor.fetchone():
@@ -91,6 +92,7 @@ class UserProfileDAOImp(UserProfileDAO):
         sql = f"select * from user_table where user_id = %(user_id)s"
         cursor = connection.cursor()
         cursor.execute(sql, {"user_id": user_id})
+        connection.commit()
         profile_record = cursor.fetchone()
         user = User(*profile_record)
         return user
