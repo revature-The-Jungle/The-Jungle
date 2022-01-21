@@ -35,7 +35,7 @@ public class ChatController {
                 messages = chatService.serviceGetMessageHistory(Integer.parseInt(ctx.pathParam("id")));}
 
             for(ChatMessage message : messages){
-                broadcastMessage();
+                broadcastMessage(message.getChatId(),message.getUserId(),message.getChatContent(),message.getUserName(),message.getChatDate(),message.getGroupId());
             }
 
         });
