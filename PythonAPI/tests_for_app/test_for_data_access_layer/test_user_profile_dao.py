@@ -7,15 +7,16 @@ user_profile_dao: UserProfileDAO = UserProfileDAOImp()
 
 
 def test_get_user_profile():
-    pass
+    show_user = user_profile_dao.get_user_profile(10000)
+    assert show_user.user_id == 10000
 
 
 def test_update_user_profile():
     """Happy test to see if user is updated correctly"""
-    updated_user = User(10000, "test_first_name", "test_last_name", "test@email.com", "test_username", "test_passcode", "Updating Profile About me", "2022-01-21", "test_image")
+    updated_user = User(10000, "test_first_name", "test_last_name", "test@email.com", "test_username", "test_passcode",
+                        "Updating Profile About me", "2022-01-21", "test_image")
     updated_profile: User = UserProfileDAOImp.update_user_profile(updated_user)
     assert updated_profile.user_about == "Updating Profile About me"
-
 
 
 def test_get_user_image_success():
