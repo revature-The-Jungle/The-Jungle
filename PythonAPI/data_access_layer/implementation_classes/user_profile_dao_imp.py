@@ -19,9 +19,14 @@ class UserProfileDAOImp(UserProfileDAO):
     def update_user_profile(self, user: User) -> User:
         """ a method used to update information for the profile besides the image"""
 
-        sql = f"update user_table set user_about = %s, user_birth_date = %s where user_id = %s"
+        sql = "select * from user_table where user_id = %s"
         cursor = connection.cursor()
-        cursor.execute(sql, user.user_about, user.user_birth_date, user.user_id)
+        cursor.execute(sql, [user.user_id])
+        if not cursor.fetchone():
+            raise UserNotFound('The user could not be found.')
+
+        sql = "update user_table set user_about = %s, user_birth_date = %s where user_id = %s"
+        cursor.execute(sql, (user.user_about, user.user_birth_date, user.user_id))
         connection.commit()
         return user
 
@@ -71,3 +76,4 @@ class UserProfileDAOImp(UserProfileDAO):
     def update_password(self, user_id: int, password: str) -> User:
         """Stretch"""
         pass
+
