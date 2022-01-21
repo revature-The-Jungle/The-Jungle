@@ -1,10 +1,12 @@
 package dev.com.thejungle.dao;
 
+import dev.com.thejungle.entity.User;
+
 public interface UserDAO {
 
-    UserDAO createNewUser();
+    User createNewUser();
 
-    UserDAO searchForUser();
+    User searchForUser(String username);
 
-    UserDAO login();
+    User login();
 }
