@@ -64,9 +64,29 @@ class UserProfileDAOImp(UserProfileDAO):
         image_decoded = image.decode('utf-8')
         return image_decoded
 
-    def update_user_image_format(self, user_id: int, image_data: str) -> User:
+    def update_user_image_format(self, user_id: int, image_format: str) -> User:
         """Method to put the picture format into the database."""
-        pass
+
+        # Check to see if the user id is in the database, raise an error otherwise.
+        sql = f"select user_id from user_table where user_id = {user_id};"
+        cursor = connection.cursor()
+        cursor.execute(sql)
+        if not cursor.fetchone():
+            raise UserNotFound('The user could not be found.')
+
+        # Update the user image format.
+        sql = f"update user_table set image_format = '{image_format}' where user_id = '{user_id}';"
+        cursor = connection.cursor()
+        cursor.execute(sql)
+        connection.commit()
+
+        # Grab the user from the database and send it back.
+        sql = f"select * from user_table where user_id = '{user_id}'"
+        cursor = connection.cursor()
+        cursor.execute(sql)
+        profile_record = cursor.fetchone()
+        user = User(*profile_record)
+        return user
 
     def update_password(self, user_id: int, password: str) -> User:
         """Stretch"""

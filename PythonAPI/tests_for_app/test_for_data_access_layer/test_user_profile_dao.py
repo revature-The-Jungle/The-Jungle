@@ -43,8 +43,16 @@ def test_update_user_image_failure_no_user():
         assert str(e) == 'The user could not be found.'
 
 
-def test_update_image_format():
-    pass
+def test_update_image_format_success():
+    assert user_profile_dao.update_user_image_format(10000, "gif")
+
+
+def test_update_image_format_failure_no_user():
+    try:
+        user_profile_dao.update_user_image_format(-5, "gif")
+        assert False
+    except UserNotFound as e:
+        assert str(e) == 'The user could not be found.'
 
 
 def test_update_password():

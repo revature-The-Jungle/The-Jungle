@@ -41,7 +41,7 @@ def create_a_post_image(post_id):
     try:
         image = request.data
         image_decoded = image.decode('utf-8')
-        return create_post_service.create_post_image_service(post_id, image_decoded)
+        return create_post_service.create_post_image_service(post_id, image_decoded), 201
     except PostIdMustBeAnInteger as e:
         return str(e), 400
     except ImageMustBeAString as e:
