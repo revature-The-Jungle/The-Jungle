@@ -31,7 +31,7 @@ public class UserDAOImp implements UserDAO {
             preparedStatement.setString(4, user.getUsername());
             preparedStatement.setString(5, user.getPasscode());
             preparedStatement.setString(6, user.getUserAbout());
-            preparedStatement.setString(7, user.getUserBirthdate());
+            preparedStatement.setDate(7, user.getUserBirthdate());
             preparedStatement.setString(8, user.getImageFormat());
             preparedStatement.execute();
             ResultSet rs = preparedStatement.getGeneratedKeys();
