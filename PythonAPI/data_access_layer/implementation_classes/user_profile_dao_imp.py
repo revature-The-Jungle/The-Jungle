@@ -1,4 +1,3 @@
-from custom_exceptions.User_Id_Not_Found import UserIdNotFoundException
 from custom_exceptions.user_image_not_found import UserImageNotFound
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.abstract_classes.user_profile_dao import UserProfileDAO
