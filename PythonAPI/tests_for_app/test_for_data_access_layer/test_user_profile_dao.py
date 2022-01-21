@@ -1,3 +1,4 @@
+from custom_exceptions.User_Id_Not_Found import UserIdNotFoundException
 from custom_exceptions.user_image_not_found import UserImageNotFound
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.implementation_classes.user_profile_dao_imp import UserProfileDAOImp, UserProfileDAO
@@ -10,6 +11,12 @@ def test_get_user_profile_success():
     show_user = user_profile_dao.get_user_profile(10)
     print(show_user)
     assert show_user.user_id == 10
+
+
+def test_get_user_profile_success_2():
+    show_user = user_profile_dao.get_user_profile(10000)
+    print(show_user)
+    assert show_user.user_id == 10000
 
 
 def test_get_user_profile_fail():
