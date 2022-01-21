@@ -35,6 +35,13 @@ def on():
     return "python is running"
 
 
+@app.get("/user/<user_id>")
+def get_a_user_id(user_id: int):
+    user = user_profile_service.service_get_user_profile_service(int(user_id))
+    user_as_dictionary = user.make_dictionary()
+    return jsonify(user_as_dictionary), 200
+
+
 @app.post("/post/image/<post_id>")
 def create_a_post_image(post_id):
     """Method to insert an image into the database. Returns the same image back from the database."""

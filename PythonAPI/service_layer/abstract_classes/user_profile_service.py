@@ -6,7 +6,7 @@ from entities.user import User
 class UserProfileService(ABC):
 
     @abstractmethod
-    def get_user_profile_service(self, user_id: int) -> User:
+    def service_get_user_profile_service(self, user_id: int) -> User:
         pass
 
     @abstractmethod

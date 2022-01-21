@@ -1,5 +1,6 @@
 from unittest.mock import MagicMock, patch, Mock
 
+from custom_exceptions.User_Id_Not_Found import UserIdNotFoundException
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.user_id_must_be_an_integer import UserIdMustBeAnInteger
 from data_access_layer.abstract_classes.user_profile_dao import UserProfileDAO
@@ -12,7 +13,8 @@ user_profile_service: UserProfileService = UserProfileServiceImp(user_profile_da
 
 
 def test_get_user_profile_service():
-    pass
+    user_profile_dao.get_user_profile = MagicMock(user_id='test purpose')
+    assert user_profile_service.service_get_user_profile_service(1)
 
 
 def test_update_user_profile_service():
