@@ -21,7 +21,7 @@ public class User {
     public User(){}
 
     public User(int userId, String firstName, String lastName, String email, String username, String passcode,
-                String userAbout, String userBirthdate, String imageFormat) {
+                String userAbout, Date userBirthdate, String imageFormat) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -125,11 +125,11 @@ public class User {
         this.userAbout = userAbout;
     }
 
-    public String getUserBirthdate() {
+    public Date getUserBirthdate() {
         return userBirthdate;
     }
 
-    public void setUserBirthdate(String userBirthdate) {
+    public void setUserBirthdate(Date userBirthdate) {
         this.userBirthdate = userBirthdate;
     }
 
