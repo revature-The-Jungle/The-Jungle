@@ -9,7 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class userServiceTests {
+public class UserServiceTests {
 
     public static UserDAOImp userDAOImp = new UserDAOImp();
     public static UserServiceImp userServiceImp = new UserServiceImp(userDAOImp);

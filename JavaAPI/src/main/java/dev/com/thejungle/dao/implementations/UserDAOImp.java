@@ -49,7 +49,7 @@ public class UserDAOImp implements UserDAO {
                         resultSet.getString("username"),
                         resultSet.getString("passcode"),
                         resultSet.getString("user_about"),
-                        resultSet.getString("user_birth_date"),
+                        resultSet.getDate("user_birth_date"),
                         resultSet.getString("image_format")
                 );
                 return newUser;
@@ -60,5 +60,10 @@ public class UserDAOImp implements UserDAO {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public User getAllUsers() {
+        return null;
     }
 }

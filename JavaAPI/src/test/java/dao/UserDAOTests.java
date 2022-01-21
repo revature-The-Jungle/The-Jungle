@@ -6,7 +6,7 @@ import dev.com.thejungle.entity.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class userDAOTests {
+public class UserDAOTests {
 
     UserDAO userDAO = new UserDAOImp();
 
