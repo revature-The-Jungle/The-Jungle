@@ -1,9 +1,12 @@
 from unittest.mock import MagicMock, patch, Mock
 
+from custom_exceptions.birth_date_is_null import BirthDateIsNull
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
+from custom_exceptions.too_many_characters import TooManyCharacters
 from custom_exceptions.user_id_must_be_an_integer import UserIdMustBeAnInteger
 from data_access_layer.abstract_classes.user_profile_dao import UserProfileDAO
 from data_access_layer.implementation_classes.user_profile_dao_imp import UserProfileDAOImp
+from entities.user import User
 from service_layer.abstract_classes.user_profile_service import UserProfileService
 from service_layer.implementation_classes.user_profile_service_imp import UserProfileServiceImp
 
@@ -15,7 +18,37 @@ def test_get_user_profile_service():
     pass
 
 
-def test_update_user_profile_service():
+def test_update_user_profile_service_success():
+    updated_user_service: User = User(1, "test_first_name", "test_last_name", "test@test.com", "test_username",
+                                      "test_passcode", "About me test", "2022-01-22", "Test image")
+
+    user_profile_dao.update_user_profile = MagicMock(return_value=updated_user_service)
+
+    assert user_profile_service.update_user_profile_service(updated_user_service)
+
+
+def test_update_user_profile_service_failure_too_many_chars():
+    updated_user_fail_about_me: User = User(1, "test_first_name", "test_last_name", "test@test.com", "test_username",
+                                            "test_passcode",                                   "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901",
+                                            "2022-01-22", "Test image")
+    try:
+        user_profile_service.update_user_profile_service(updated_user_fail_about_me)
+        assert False
+    except TooManyCharacters as e:
+        assert str(e) == "Too many characters."
+
+
+def test_update_user_profile_service_failure_birth_date_not_null():
+    updated_user_fail_birth_date: User = User(1, "test_first_name", "test_last_name", "test@test.com", "test_username",
+                                      "test_passcode", "About me test", None, "Test image")
+    try:
+        user_profile_service.update_user_profile_service(updated_user_fail_birth_date)
+        assert False
+    except BirthDateIsNull as e:
+        assert str(e) == "Birthdate cannot be null."
+
+
+def test_update_user_profile_service_failure_sql_injection():
     pass
 
 

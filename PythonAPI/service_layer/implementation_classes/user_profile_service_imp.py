@@ -1,4 +1,6 @@
+from custom_exceptions.birth_date_is_null import BirthDateIsNull
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
+from custom_exceptions.too_many_characters import TooManyCharacters
 from custom_exceptions.user_id_must_be_an_integer import UserIdMustBeAnInteger
 from data_access_layer.implementation_classes.user_profile_dao_imp import UserProfileDAOImp
 from entities.user import User
@@ -13,7 +15,16 @@ class UserProfileServiceImp(UserProfileService):
         pass
 
     def update_user_profile_service(self, user: User) -> User:
-        pass
+        """ Checks if the birthdate is null, and if the about me is too long"""
+
+        if user.user_birth_date:
+            if len(user.user_about) < 500:
+                self.user_profile_dao.update_user_profile(user)
+            else:
+                raise TooManyCharacters("Too many characters.")
+        else:
+            raise BirthDateIsNull("Birthdate cannot be null.")
+
 
     def get_user_image_service(self, user_id: int) -> str:
         # Check to make sure the user_id is an integer
