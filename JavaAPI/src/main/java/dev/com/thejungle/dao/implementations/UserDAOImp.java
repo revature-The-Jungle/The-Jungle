@@ -1,6 +1,7 @@
 package dev.com.thejungle.dao.implementations;
 
 import dev.com.thejungle.customexception.DuplicateUsername;
+import dev.com.thejungle.customexception.UnallowedSpaces;
 import dev.com.thejungle.dao.UserDAO;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.utility.ConnectionDB;
@@ -8,7 +9,6 @@ import dev.com.thejungle.utility.ConnectionDB;
 import java.sql.*;
 
 public class UserDAOImp implements UserDAO {
-
 
     @Override
     public User createNewUser(User user) {
@@ -25,14 +25,17 @@ public class UserDAOImp implements UserDAO {
             preparedStatement.setString(8, user.getImageFormat());
             preparedStatement.execute();
             ResultSet rs = preparedStatement.getGeneratedKeys();
-            if(rs.next()) {
-                String username = String.valueOf(this.searchForUser(user.getUsername()));
-                if(user.getUsername().equals(username)){
-                    throw new DuplicateUsername("This username is already taken.");
-                } else {
-                    user.setUserId(rs.getInt("user_id"));
-                    return user;
-                }
+            rs.next();
+            String username = String.valueOf(this.searchForUser(user.getUsername()));
+            if (user.getUsername().equals(username)) {
+                throw new DuplicateUsername("This username is already taken.");
+            } else if (user.getUsername().matches(".*\\s+.*")) {
+                throw new UnallowedSpaces("No spaces allowed in username or password.");
+            } else if (user.getPasscode().matches(".*\\s+.*")) {
+                throw new UnallowedSpaces("No spaces allowed in username or password.");
+            } else {
+                user.setUserId(rs.getInt("user_id"));
+                return user;
             }
         } catch (SQLException q) {
             q.printStackTrace();
@@ -51,4 +54,5 @@ public class UserDAOImp implements UserDAO {
     public User login() {
         return null;
     }
+
 }

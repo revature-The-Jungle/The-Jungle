@@ -8,6 +8,8 @@ import org.mockito.Mockito;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.sql.Date;
+
 public class userServiceTests {
 
     public static UserDAOImp userDAOImp;
@@ -21,14 +23,15 @@ public class userServiceTests {
     }
 
 
-//    @Test(expectedExceptions = DuplicateUsername.class, expectedExceptionsMessageRegExp = "This username is already taken.")
-//    void cannotHaveDuplicateUsername(){
-//        User newJungleUser = new User(0, 'Test', 'Tester', 'testingemail@gmail.com',
-//                'username', 'passcode', 'I like social media. I sign up for everything.',
-//                '1980-01-01', 'imagesourcefile');
-//        Mockito.when(userDAOImp.createNewUser(newJungleUser.getUsername()).thenThrow(new DuplicateUsername
-//                ("This username is already taken.")));
-//    }
+    @Test(expectedExceptions = DuplicateUsername.class, expectedExceptionsMessageRegExp = "This username is already taken.")
+    void cannotHaveDuplicateUsername(){
+        Date date = new Date(742892400000L);
+        User newJungleUser = new User(0, "Test", "Tester", "testingemail2@gmail.com",
+                "username5", "passcode", "I like social media.", date,
+                "imagesourcefile");
+        Mockito.when(userDAOImp.createNewUser(newJungleUser.getUsername()).thenThrow(new DuplicateUsername
+                ("This username is already taken.")));
+    }
 
 
 
