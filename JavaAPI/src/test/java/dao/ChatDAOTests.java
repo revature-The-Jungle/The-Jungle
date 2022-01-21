@@ -1,6 +1,5 @@
 package dao;
 
-import dev.com.thejungle.dao.interfaces.ChatDAOInt;
 import dev.com.thejungle.dao.implementations.ChatDAO;
 import dev.com.thejungle.entity.ChatMessage;
 import org.junit.Assert;
@@ -19,7 +18,6 @@ public class ChatDAOTests {
     @Test
     public void createMessageSuccessChatId(){
         ChatMessage testCreateMessage = chatDAO.createMessage(10000, "", 10000, 10000, "Hi");
-//        Assert.assertNotNull(testCreateMessage.getChatId());
         Assert.assertTrue(testCreateMessage.getChatId()!= 0);
     }
     /**
