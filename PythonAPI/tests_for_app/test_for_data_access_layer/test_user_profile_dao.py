@@ -4,18 +4,29 @@ from data_access_layer.implementation_classes.user_profile_dao_imp import UserPr
 from entities.user import User
 
 user_profile_dao: UserProfileDAO = UserProfileDAOImp()
-
+user_about_me_for_tests = "Updating Profile About me"
 
 def test_get_user_profile():
     pass
 
 
-def test_update_user_profile():
+def test_update_user_profile_success():
     """Happy test to see if user is updated correctly"""
-    updated_user = User(10000, "test_first_name", "test_last_name", "test@email.com", "test_username", "test_passcode", "Updating Profile About me", "2022-01-21", "test_image")
+    updated_user = User(10000, "test_first_name", "test_last_name", "test@email.com", "test_username", "test_passcode",
+                        user_about_me_for_tests, "2022-01-21", "test_image")
     updated_profile: User = user_profile_dao.update_user_profile(updated_user)
-    assert updated_profile.user_about == "Updating Profile About me"
+    assert updated_profile.user_about == user_about_me_for_tests
 
+
+def test_update_user_profile_failure_no_user():
+    """Sad test to see if there is no user found by the ID"""
+    updated_user_fail = User(1000000000, "test_first_name", "test_last_name", "test@email.com", "test_username",
+                             "test_passcode", user_about_me_for_tests, "2022-01-21", "test_image")
+    try:
+        user_profile_dao.update_user_profile(updated_user_fail)
+        assert False
+    except UserNotFound as e:
+        assert str(e) == 'The user could not be found.'
 
 
 def test_get_user_image_success():
