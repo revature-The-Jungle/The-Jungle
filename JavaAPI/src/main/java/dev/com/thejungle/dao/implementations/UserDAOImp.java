@@ -1,13 +1,10 @@
 package dev.com.thejungle.dao.implementations;
 
-<<<<<<< HEAD:JavaAPI/src/main/java/dev/com/thejungle/dao/implementations/UserDAOImp.java
 import dev.com.thejungle.customexception.DuplicateUsername;
 import dev.com.thejungle.customexception.UnallowedSpaces;
-import dev.com.thejungle.dao.UserDAO;
-=======
+//import dev.com.thejungle.dao.UserDAO;
 import dev.com.thejungle.customexception.UserNotFound;
 import dev.com.thejungle.dao.interfaces.UserDAO;
->>>>>>> 563d27e8c79d9bee43ba9dfb8ff1573b0ef4c7dd:JavaAPI/src/main/java/dev/com/thejungle/dao/UserDAOImp.java
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.utility.ConnectionDB;
 
@@ -64,7 +61,7 @@ public class UserDAOImp implements UserDAO {
                         resultSet.getString("username"),
                         resultSet.getString("passcode"),
                         resultSet.getString("user_about"),
-                        resultSet.getString("user_birth_date"),
+                        resultSet.getDate("user_birth_date"),
                         resultSet.getString("image_format")
                 );
                 return newUser;
