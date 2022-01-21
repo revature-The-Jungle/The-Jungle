@@ -1,3 +1,4 @@
+from custom_exceptions.User_Id_Not_Found import UserIdNotFoundException
 from custom_exceptions.user_image_not_found import UserImageNotFound
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.abstract_classes.user_profile_dao import UserProfileDAO
@@ -8,7 +9,7 @@ from util.database_connection import connection
 class UserProfileDAOImp(UserProfileDAO):
 
     def get_user_profile(self, user_id: int) -> User:
-        """Grabs the information from the user profile"""
+        """Grabs data from the user profile by user id"""
         sql = 'select * from user_table where user_id = %(user_id)s'
         cursor = connection.cursor()
         cursor.execute(sql, {"user_id": user_id})

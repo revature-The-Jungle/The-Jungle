@@ -16,7 +16,8 @@ user_profile_service: UserProfileService = UserProfileServiceImp(user_profile_da
 
 
 def test_get_user_profile_service():
-    pass
+    user_profile_dao.get_user_profile = MagicMock(user_id='test purpose')
+    assert user_profile_service.service_get_user_profile_service(1)
 
 
 def test_update_user_profile_service_success():
