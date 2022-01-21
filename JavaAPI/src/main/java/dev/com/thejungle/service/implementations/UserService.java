@@ -4,18 +4,18 @@ import dev.com.thejungle.customexception.DuplicateUsername;
 import dev.com.thejungle.customexception.UnallowedSpaces;
 import dev.com.thejungle.customexception.UserNotFound;
 import dev.com.thejungle.customexception.UsernameOrPasscodeException;
-import dev.com.thejungle.dao.interfaces.UserDAO;
+import dev.com.thejungle.dao.interfaces.UserDAOInt;
 import dev.com.thejungle.entity.User;
-import dev.com.thejungle.service.interfaces.UserService;
-
+import dev.com.thejungle.service.interfaces.UserServiceInt;
+import java.util.List;
 import java.util.Objects;
 
-public class UserServiceImp implements UserService {
+public class UserService implements UserServiceInt {
 
-    UserDAO userDAO;
+    UserDAOInt userDAOInt;
 
-    public UserServiceImp (UserDAO userDAO) {
-        this.userDAO = userDAO;
+    public UserService (UserDAOInt userDAOInt) {
+        this.userDAOInt = userDAOInt;
     }
 
 
@@ -27,7 +27,7 @@ public class UserServiceImp implements UserService {
             } else if (user.getPasscode().matches(".*\\s+.*")) {
                 throw new UnallowedSpaces("No spaces allowed in username or password");
             } else {
-                return this.userDAO.createNewUser(user);
+                return this.userDAOInt.createNewUser(user);
             }
         } catch (DuplicateUsername d) {
             throw new DuplicateUsername("This username is already taken");
@@ -37,7 +37,7 @@ public class UserServiceImp implements UserService {
     @Override
     public User searchForUserService(String username) {
         try {
-            return this.userDAO.searchForUser(username);
+            return this.userDAOInt.searchForUser(username);
         } catch (UserNotFound e) {
             throw new UserNotFound("User not found");
         }
@@ -45,9 +45,17 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User loginService(String username, String passcode){
-        User newUser = this.userDAO.searchForUser(username);
+        User newUser = this.userDAOInt.searchForUser(username);
         if (!Objects.equals(newUser.getUsername(), username) || !Objects.equals(newUser.getPasscode(), passcode))
             throw new UsernameOrPasscodeException("Username or Passcode are incorrect");
         return newUser;
     }
+
+
+    @Override
+    public List<User> getAllUsersService() {
+        return this.userDAOInt.getAllUsers();
+    }
+
 }
+

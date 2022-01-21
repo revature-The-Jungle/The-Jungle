@@ -1,15 +1,15 @@
 package dao;
 
-import dev.com.thejungle.dao.interfaces.UserDAO;
-import dev.com.thejungle.dao.implementations.UserDAOImp;
+import dev.com.thejungle.dao.implementations.UserDAO;
 import dev.com.thejungle.entity.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.sql.Date;
+import java.util.List;
 
-public class UserDAOTests {
+public class UserDAOIntTests {
 
-    UserDAO userDAO = new UserDAOImp();
+    UserDAO userDAOInt = new UserDAO();
 
     // TEST FOR USER CREATION/REGISTRATION
     @Test
@@ -18,7 +18,7 @@ public class UserDAOTests {
         User newJungleUser = new User(0, "Test", "Tester", "testingemail77@gmail.com",
                 "userna", "passcode", "I like social media.", date,
                 "imagesourcefile");
-        User createdUser = userDAO.createNewUser(newJungleUser);
+        User createdUser = userDAOInt.createNewUser(newJungleUser);
         Assert.assertEquals(createdUser.getFirstName(), "Test");
     }
 
@@ -26,9 +26,18 @@ public class UserDAOTests {
     // TEST TO SEARCH BY USERNAME
     @Test
     void testGetUserByUsername() {
-        User newJungleUser = userDAO.searchForUser("username");
+        User newJungleUser = userDAOInt.searchForUser("username");
         System.out.println("new user is " + newJungleUser);
         Assert.assertEquals(newJungleUser.getUsername(), "username");
+    }
+
+
+    @Test
+    void testGetAllUsers() {
+        List<User> users = userDAOInt.getAllUsers();
+        for (User u : users)
+            System.out.println(u);
+        Assert.assertTrue(users.size() >= 1);
     }
 
 }

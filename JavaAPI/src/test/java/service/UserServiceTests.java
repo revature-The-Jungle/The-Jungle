@@ -3,19 +3,21 @@ package service;
 import dev.com.thejungle.customexception.DuplicateUsername;
 import dev.com.thejungle.customexception.UnallowedSpaces;
 import dev.com.thejungle.customexception.UsernameOrPasscodeException;
-import dev.com.thejungle.dao.implementations.UserDAOImp;
+import dev.com.thejungle.dao.implementations.UserDAO;
 import dev.com.thejungle.entity.User;
-import dev.com.thejungle.service.implementations.UserServiceImp;
+import dev.com.thejungle.service.implementations.UserService;
+import dev.com.thejungle.service.interfaces.UserServiceInt;
 import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.sql.Date;
+import java.util.List;
 
 public class UserServiceTests {
 
-    public static UserDAOImp userDAOImp = new UserDAOImp();
-    public static UserServiceImp userServiceImp = new UserServiceImp(userDAOImp);
+    public static UserDAO userDAOImp = new UserDAO();
+    public static UserServiceInt userServiceImp = new UserService(userDAOImp);
 
     static User userProfile;
     static User userProfile2;
@@ -24,12 +26,13 @@ public class UserServiceTests {
     static User duplicateUsername;
     static User usernameSpaces;
     static User passwordSpaces;
+    static List<User> newList;
 
 
     @BeforeClass
     public void setup(){
-        userDAOImp = Mockito.mock(UserDAOImp.class);
-        userServiceImp = new UserServiceImp(userDAOImp);
+        userDAOImp = Mockito.mock(UserDAO.class);
+        userServiceImp = new UserService(userDAOImp);
         Date date = new Date(742892400000L);
         userProfile = new User(0, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILoveToWrestle", "MySimplePasscode", "I enjoy the wrestling life", date,"image");
         userProfile2 = new User(1, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILoveToWrestle", "MySimplePasscode", "I enjoy the wrestling life", date,"image");
@@ -86,6 +89,13 @@ public class UserServiceTests {
 //        Mockito.when(userDAOImp)
 //    }
 
+
+    @Test
+    public void getAllUsersMockito() {
+        Mockito.when(userDAOImp.getAllUsers()).thenReturn(newList);
+        List<User> result = userServiceImp.getAllUsersService();
+        Assert.assertEquals(result, newList);
+    }
 
 
 

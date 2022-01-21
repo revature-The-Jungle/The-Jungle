@@ -1,15 +1,15 @@
 package dev.com.thejungle.dao.implementations;
 
-import dev.com.thejungle.customexception.DuplicateUsername;
-import dev.com.thejungle.customexception.UnallowedSpaces;
 import dev.com.thejungle.customexception.UserNotFound;
-import dev.com.thejungle.dao.interfaces.UserDAO;
+import dev.com.thejungle.dao.interfaces.UserDAOInt;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.utility.ConnectionDB;
-
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class UserDAOImp implements UserDAO {
+
+public class UserDAO implements UserDAOInt {
 
     @Override
     public User createNewUser(User user) {
@@ -67,7 +67,30 @@ public class UserDAOImp implements UserDAO {
 
 
     @Override
-    public User getAllUsers() {
-        return null;
+    public List<User> getAllUsers() {
+        try (Connection connection = ConnectionDB.createConnection()) {
+            String sql = "select * from user_table";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            List<User> users = new ArrayList<>();
+            while (resultSet.next()) {
+                User user = new User(
+                        resultSet.getInt("user_Id"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("username"),
+                        resultSet.getString("passcode"),
+                        resultSet.getString("user_about"),
+                        resultSet.getDate("user_birth_date"),
+                        resultSet.getString("image_format")
+                );
+                users.add(user);
+            }
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
