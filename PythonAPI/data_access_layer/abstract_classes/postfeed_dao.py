@@ -3,12 +3,13 @@ from abc import ABC, abstractmethod
 from entities.post import Post
 
 
-class CreatePostDAO(ABC):
+class PostfeedDao(ABC):
 
     @abstractmethod
-    def create_post(self, post: Post) -> Post:
+    def get_all_posts(self)->list[Post]:
         pass
 
     @abstractmethod
-    def create_post_image(self, image: str) -> bool:
+    def delete_a_post(self, postid : int) -> bool:
         pass
+
