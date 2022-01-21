@@ -11,7 +11,13 @@ class UserProfileDAOImp(UserProfileDAO):
         pass
 
     def update_user_profile(self, user: User) -> User:
-        pass
+        """ a method used to update information for the profile besides the image"""
+
+        sql = f"update user_table set user_about = %s, user_birth_date = %s where user_id = %s"
+        cursor = connection.cursor()
+        cursor.execute(sql, user.user_about, user.user_birth_date, user.user_id)
+        connection.commit()
+        return user
 
     def get_user_image(self, user_id: int) -> str:
         """a method to get a user image from the database"""  # need to create a custom exception and database checker
