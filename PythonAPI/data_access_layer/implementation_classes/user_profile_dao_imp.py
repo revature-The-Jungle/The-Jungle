@@ -64,3 +64,4 @@ class UserProfileDAOImp(UserProfileDAO):
     def update_password(self, user_id: int, password: str) -> User:
         """Stretch"""
         pass
+

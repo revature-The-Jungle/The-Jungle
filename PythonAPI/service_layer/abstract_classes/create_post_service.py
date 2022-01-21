@@ -10,5 +10,5 @@ class CreatePostService(ABC):
         pass
 
     @abstractmethod
-    def create_post_image_service(self, post_id: int, image: str) -> str:
+    def create_post_image_service(self, post_id: int, image: str) -> bool:
         pass
