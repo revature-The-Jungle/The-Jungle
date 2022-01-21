@@ -13,7 +13,7 @@ def test_get_user_profile():
 def test_update_user_profile():
     """Happy test to see if user is updated correctly"""
     updated_user = User(10000, "test_first_name", "test_last_name", "test@email.com", "test_username", "test_passcode", "Updating Profile About me", "2022-01-21", "test_image")
-    updated_profile: User = UserProfileDAOImp.update_user_profile(updated_user)
+    updated_profile: User = user_profile_dao.update_user_profile(updated_user)
     assert updated_profile.user_about == "Updating Profile About me"
 
 

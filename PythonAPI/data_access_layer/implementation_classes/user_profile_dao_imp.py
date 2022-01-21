@@ -13,9 +13,9 @@ class UserProfileDAOImp(UserProfileDAO):
     def update_user_profile(self, user: User) -> User:
         """ a method used to update information for the profile besides the image"""
 
-        sql = f"update user_table set user_about = %s, user_birth_date = %s where user_id = %s"
+        sql = "update user_table set user_about = %s, user_birth_date = %s where user_id = %s"
         cursor = connection.cursor()
-        cursor.execute(sql, user.user_about, user.user_birth_date, user.user_id)
+        cursor.execute(sql, (user.user_about, user.user_birth_date, user.user_id))
         connection.commit()
         return user
 
