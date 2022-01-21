@@ -31,6 +31,18 @@ def test_update_user_profile_success():
     assert updated_profile.user_about == "Updating Profile About me"
 
 
+def test_update_user_profile_failure_sql_injection():
+    updated_user_fail_sql_injection: User = User(10000, "test_first_name", "test_last_name", "test@test.com",
+                                                 "test_username",
+                                                 "test_passcode",
+                                                 "'; update user_table set passcode = 'sqlinjection' where user_id = 10000; --",
+                                                 "2016-01-01", "Test image")
+    if user_profile_dao.update_user_profile(updated_user_fail_sql_injection):
+        assert updated_user_fail_sql_injection.user_about == "'; update user_table set passcode = 'sqlinjection' where user_id = 10000; --"
+    else:
+        assert updated_user_fail_sql_injection.passcode != "test_passcode"
+
+
 def test_get_user_image_success():
     image = user_profile_dao.get_user_image(10000)
     assert image

@@ -48,10 +48,6 @@ def test_update_user_profile_service_failure_birth_date_is_null():
         assert str(e) == "Birthdate cannot be null."
 
 
-def test_update_user_profile_service_failure_sql_injection():
-    pass
-
-
 def test_get_user_image_service_success():
     user_profile_dao.get_user_image = MagicMock(return_value="thisisareturnvalue")
     assert user_profile_service.get_user_image_service(1)
