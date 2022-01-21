@@ -1,7 +1,7 @@
 package service;
 
 import dev.com.thejungle.customexception.DuplicateUsername;
-import dev.com.thejungle.dao.UserDAOImp;
+import dev.com.thejungle.dao.implementations.UserDAOImp;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.implementations.UserServiceImp;
 import org.mockito.Mockito;
@@ -21,14 +21,14 @@ public class userServiceTests {
     }
 
 
-    @Test(expectedExceptions = DuplicateUsername.class, expectedExceptionsMessageRegExp = "This username is already taken.")
-    void cannotHaveDuplicateUsername(){
-        User newJungleUser = new User(0, 'Test', 'Tester', 'testingemail@gmail.com',
-                'username', 'passcode', 'I like social media. I sign up for everything.',
-                '1980-01-01', 'imagesourcefile');
-        Mockito.when(userDAOImp.createNewUser(newJungleUser.getUsername()).thenThrow(new DuplicateUsername
-                ("This username is already taken.")));
-    }
+//    @Test(expectedExceptions = DuplicateUsername.class, expectedExceptionsMessageRegExp = "This username is already taken.")
+//    void cannotHaveDuplicateUsername(){
+//        User newJungleUser = new User(0, 'Test', 'Tester', 'testingemail@gmail.com',
+//                'username', 'passcode', 'I like social media. I sign up for everything.',
+//                '1980-01-01', 'imagesourcefile');
+//        Mockito.when(userDAOImp.createNewUser(newJungleUser.getUsername()).thenThrow(new DuplicateUsername
+//                ("This username is already taken.")));
+//    }
 
 
 

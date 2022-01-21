@@ -1,5 +1,6 @@
 package dev.com.thejungle.entity;
 
+import java.sql.Date;
 import java.util.Objects;
 
 public class User {
