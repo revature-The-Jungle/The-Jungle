@@ -7,6 +7,7 @@ public class ChatMessage {
     private int chatId;
     private String chatDate;
     private int userId;
+    private String userName;
     private int groupId;
     private String chatContent;
 
@@ -14,13 +15,21 @@ public class ChatMessage {
 
     }
 
-    public ChatMessage(int chatId, String chatDate, int userId,int groupId, String chatContent) {
-        this.setChatId(chatId);
-        this.setChatDate(chatDate);
+    public ChatMessage(int userId, int groupId, String chatContent) {
         this.setUserId(userId);
         this.setGroupId(groupId);
         this.setChatContent(chatContent);
     }
+
+    public ChatMessage(int chatId, String chatDate, int userId, String userName, int groupId, String chatContent) {
+        this.setChatId(chatId);
+        this.setChatDate(chatDate);
+        this.setUserId(userId);
+        this.setUserName(userName);
+        this.setGroupId(groupId);
+        this.setChatContent(chatContent);
+    }
+
     public int getChatId() {
         return chatId;
     }
@@ -36,7 +45,15 @@ public class ChatMessage {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-  
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public int getGroupId() {
         return groupId;
     }
@@ -64,11 +81,12 @@ public class ChatMessage {
     @Override
     public String toString() {
         return "ChatMessage{" +
-                "userId=" + getUserId() +
-                ", chatId=" + getChatId() +
-                ", groupId=" + getGroupId() +
-                ", chatDate='" + getChatDate() + '\'' +
-                ", chatContent='" + getChatContent() + '\'' +
+                "chatId=" + chatId +
+                ", chatDate='" + chatDate + '\'' +
+                ", userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", groupId=" + groupId +
+                ", chatContent='" + chatContent + '\'' +
                 '}';
     }
 
@@ -77,12 +95,11 @@ public class ChatMessage {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ChatMessage that = (ChatMessage) o;
-        return getChatId() == that.getChatId() && getUserId() == that.getUserId() && getGroupId() == that.getGroupId() &&Objects.equals(getChatDate(), that.getChatDate()) && Objects.equals(getChatContent(), that.getChatContent());
+        return chatId == that.chatId && userId == that.userId && groupId == that.groupId && Objects.equals(chatDate, that.chatDate) && Objects.equals(userName, that.userName) && Objects.equals(chatContent, that.chatContent);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getChatId(), getUserId(), getGroupId(), getChatDate(), getChatContent());
+        return Objects.hash(chatId, chatDate, userId, userName, groupId, chatContent);
     }
-
 }

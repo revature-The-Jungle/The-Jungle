@@ -9,13 +9,14 @@ import io.javalin.Javalin;
 public class App {
 
     public static void main(String[] args) {
-
         Javalin app = Javalin.create(config -> {
             config.enableCorsForAllOrigins();
             config.enableDevLogging();
         });
 
         AppController appController = new AppController();
+
+        app.ws("/chat/{id}", appController.chatController::connectToWebSocket);
 
         // Dependency injection for DAO and service layer
         UserDAO userDAOInt = new UserDAO();

@@ -15,11 +15,19 @@ public class ChatService implements ChatServiceInt {
         this.chatDAO = chatDAO;
     }
 
+    /**
+     * calls createMessage in ChatDao
+     * @param chatMessage
+     * @return creating Message for the user using three parameters and looks through if they're less than zero or not.
+     * If it is less than it will throw an exception
+     */
     @Override
-    public ChatMessage serviceCreateMessage(int chatId, String chatDate, int userId, int group_id, String chatContent) {
-        return chatDAO.createMessage(chatId, chatDate, userId, group_id, chatContent);
+    public ChatMessage serviceCreateMessageObject(ChatMessage chatMessage){
+        if(chatMessage.getUserId() <= 0 || chatMessage.getGroupId() <= 0 || chatMessage.getChatContent().isEmpty()){
+            throw new InvalidInputException();
+        }
+        return chatDAO.createMessage(chatMessage);
     }
-
 
     /**
      * calls getMessageHistory in ChatDAO
