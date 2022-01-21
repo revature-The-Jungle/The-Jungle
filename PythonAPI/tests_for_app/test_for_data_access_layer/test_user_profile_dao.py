@@ -14,6 +14,13 @@ def test_get_user_profile_success():
     assert show_user.user_id == 10
 
 
+def test_get_user_profile_success_2():
+    # assert user_profile_dao.get_user_profile(10000)
+    show_user = user_profile_dao.get_user_profile(10000)
+    print(show_user)
+    assert show_user.user_id == 10000
+
+
 def test_get_user_profile_fail():
     try:
         user_profile_dao.get_user_profile(1)
