@@ -13,21 +13,21 @@ class CreatePostDAOImp(CreatePostDAO):
     def create_post_image(self, post_id: int, image: str) -> str:
         """a method to place a post image into the database"""
         # Check to see if the post id is in the database, raise an error otherwise.
-        sql = f"select post_id from post_table where post_id = {post_id};"
+        sql = f"select post_id from post_table where post_id = %(post_id)s;"
         cursor = connection.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql, {"post_id": post_id})
         if not cursor.fetchone():
             raise PostNotFound('The post could not be found.')
 
         # insert the image into the database
-        sql = f"INSERT INTO post_picture_table VALUES (default, {post_id}, '{image}')"
+        sql = f"INSERT INTO post_picture_table VALUES (default, %(post_id)s, %(image)s)"
         cursor = connection.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql, {"post_id": post_id, "image": image})
         connection.commit()
 
         # get the new image from the database and send it back
-        sql = f"select picture from post_picture_table where post_id = {post_id};"
-        cursor.execute(sql)
+        sql = f"select picture from post_picture_table where post_id = %(post_id)s;"
+        cursor.execute(sql, {"post_id": post_id})
         image = cursor.fetchone()[0]
         image_decoded = image.decode('utf-8')
         return image_decoded

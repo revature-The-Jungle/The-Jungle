@@ -9,12 +9,15 @@ class UserProfileDAOImp(UserProfileDAO):
 
     def get_user_profile(self, user_id: int) -> User:
         """Grabs the information from the user profile"""
-        sql = 'select * from user_table where user_id = %s'
+        sql = 'select * from user_table where user_id = %(user_id)s'
         cursor = connection.cursor()
-        cursor.execute(sql, [user_id])
+        cursor.execute(sql, {"user_id": user_id})
         profile_record = cursor.fetchone()
-        user = User(*profile_record)
-        return user
+        if profile_record:
+            user = User(*profile_record)
+            return user
+        else:
+            raise UserNotFound('The user could not be found.')
 
     def update_user_profile(self, user: User) -> User:
         """ A method used to update information for the profile besides the image"""
@@ -29,14 +32,14 @@ class UserProfileDAOImp(UserProfileDAO):
         """a method to get a user image from the database"""  # need to create a custom exception and database checker
 
         # Check to see if the post id is in the database, raise an error otherwise.
-        sql = f"select user_id from user_picture_table where user_id = {user_id};"
+        sql = f"select user_id from user_picture_table where user_id = %(user_id)s;"
         cursor = connection.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql, {"user_id": user_id})
         if not cursor.fetchone():
             raise UserImageNotFound('The user image could not be found.')
 
-        sql = f"select picture from user_picture_table where user_id = {user_id};"
-        cursor.execute(sql)
+        sql = f"select picture from user_picture_table where user_id = %(user_id)s;"
+        cursor.execute(sql, {"user_id": user_id})
         image = cursor.fetchone()[0]
         image_decoded = image.decode('utf-8')
         return image_decoded
@@ -45,21 +48,25 @@ class UserProfileDAOImp(UserProfileDAO):
         """a method to place a user image into the database"""
 
         # Check to see if the user id is in the database, raise an error otherwise.
-        sql = f"select user_id from user_table where user_id = {user_id};"
+        sql = "select user_id from user_table where user_id = %(user_id)s;"
         cursor = connection.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql, {"user_id": user_id})
         if not cursor.fetchone():
             raise UserNotFound('The user could not be found.')
 
         # delete any existing image from the database and place the image in the database
-        sql = f"DELETE FROM user_picture_table where user_id = {user_id}; " \
-              f"INSERT INTO user_picture_table VALUES (default, {user_id}, '{image}');"
-        cursor.execute(sql)
+        sql = "DELETE FROM user_picture_table where user_id = %(user_id)s; "
+        cursor.execute(sql, {"user_id": user_id})
+        connection.commit()
+
+        # do the thing
+        sql = "INSERT INTO user_picture_table VALUES (default, %(user_id)s, %(image)s);"
+        cursor.execute(sql, {"user_id": user_id, "image": image})
         connection.commit()
 
         # get the new image and send it back up to the service layer
-        sql = f"select picture from user_picture_table where user_id = {user_id};"
-        cursor.execute(sql)
+        sql = f"select picture from user_picture_table where user_id = %(user_id)s;"
+        cursor.execute(sql, {"user_id": user_id})
         image = cursor.fetchone()[0]
         image_decoded = image.decode('utf-8')
         return image_decoded
@@ -68,22 +75,22 @@ class UserProfileDAOImp(UserProfileDAO):
         """Method to put the picture format into the database."""
 
         # Check to see if the user id is in the database, raise an error otherwise.
-        sql = f"select user_id from user_table where user_id = {user_id};"
+        sql = f"select user_id from user_table where user_id = %(user_id)s;"
         cursor = connection.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql, {"user_id": user_id})
         if not cursor.fetchone():
             raise UserNotFound('The user could not be found.')
 
         # Update the user image format.
-        sql = f"update user_table set image_format = '{image_format}' where user_id = '{user_id}';"
+        sql = f"update user_table set image_format = %(image_format)s where user_id = %(user_id)s;"
         cursor = connection.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql, {"image_format": image_format, "user_id": user_id})
         connection.commit()
 
         # Grab the user from the database and send it back.
-        sql = f"select * from user_table where user_id = '{user_id}'"
+        sql = f"select * from user_table where user_id = %(user_id)s"
         cursor = connection.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql, {"user_id": user_id})
         profile_record = cursor.fetchone()
         user = User(*profile_record)
         return user
