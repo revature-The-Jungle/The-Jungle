@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface ChatDAOInt {
 
-    ChatMessage createMessage(int chatId, String chatDate, int userId, int groupId, String chatContent);
+    ChatMessage createMessage(ChatMessage chatMessage);
 
     ArrayList<ChatMessage> getMessageHistory(int groupId);
 
