@@ -1,8 +1,8 @@
 from data_access_layer.abstract_classes.group_dao_abs import GroupDAO
 from entities.group import Group
 from util.database_connection import connection
-from custom_exceptions.GroupIdNonExistent import GroupIdNonExistent
-from custom_exceptions.InputTooLong import InputTooLong
+from custom_exceptions.group_id_nonexistent import GroupIdNonExistent
+from custom_exceptions.input_too_long import InputTooLong
 
 
 class GroupDAOImp(GroupDAO):
