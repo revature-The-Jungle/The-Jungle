@@ -77,7 +77,6 @@ user_profile_service = UserProfileServiceImp(user_profile_dao)
 group_view_dao = GroupViewPostgresDao()
 group_service = GroupPostgresService(group_view_dao)
 
-
 @app.get("/")  # basic check for app running
 def on():
     return "python is running"
