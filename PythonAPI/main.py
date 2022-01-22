@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-#from flask_cors import CORS
+from flask_cors import CORS
 
 from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
@@ -20,7 +20,7 @@ import logging
 
 from service_layer.implementation_classes.user_profile_service_imp import UserProfileServiceImp
 from data_access_layer.implementation_classes.group_view_postgres_dao_imp import GroupViewPostgresDao
-from service_layer.implementation.group_service_imp.group_postgres_service import GroupPostgresService
+from service_layer.implementation_classes.group_postgres_service import GroupPostgresService
 
 logging.basicConfig(filename="records.log", level=logging.DEBUG,
                     format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
@@ -34,7 +34,7 @@ from data_access_layer.implementation_classes.like_post_dao_imp import LikePostD
 from service_layer.implementation_classes.like_post_service_imp import LikePostServiceImp
 
 app: Flask = Flask(__name__)
-#CORS(app)
+CORS(app)
 
 like_post_dao=LikePostDaoImp()
 like_post_service=LikePostServiceImp(like_post_dao)
