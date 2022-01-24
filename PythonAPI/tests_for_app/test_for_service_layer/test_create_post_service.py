@@ -73,3 +73,17 @@ def test_create_post_image_service_failure_not_str():
     except ImageMustBeAString as e:
         assert str(e) == "The image must be a string format."
 
+
+def test_get_post_image_service_success():
+    create_post_dao.get_post_image = MagicMock(return_value="thisisareturnvalue")
+    assert create_post_service.get_post_image_service(12345)
+
+
+def test_get_post_image_service_failure_post_id_no_int():
+    create_post_dao.get_post_image = MagicMock(return_value="thisisareturnvalue")
+    try:
+        create_post_service.get_post_image_service(b"12345")
+        assert False
+    except PostIdMustBeAnInteger as e:
+        assert str(e) == "The post id must be an integer."
+

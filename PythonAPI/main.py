@@ -4,6 +4,7 @@ from flask_cors import CORS
 from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
+from custom_exceptions.post_image_not_found import PostImageNotFound
 from custom_exceptions.post_not_found import PostNotFound
 from custom_exceptions.post_text_must_be_a_string import PostTextMustBeAString
 from custom_exceptions.user_id_must_be_an_integer import UserIdMustBeAnInteger
@@ -22,7 +23,7 @@ import logging
 
 from service_layer.implementation_classes.user_profile_service_imp import UserProfileServiceImp
 from data_access_layer.implementation_classes.group_view_postgres_dao_imp import GroupViewPostgresDao
-from service_layer.implementation_classes.group_postgres_service import GroupPostgresService
+from service_layer.implementation_classes.group_postgres_service_imp import GroupPostgresService
 from data_access_layer.implementation_classes.like_post_dao_imp import LikePostDaoImp
 from service_layer.implementation_classes.like_post_service_imp import LikePostServiceImp
 
@@ -34,13 +35,14 @@ logging.basicConfig(filename="records.log", level=logging.DEBUG,
 app: Flask = Flask(__name__)
 CORS(app)
 
+
 @app.get("/")  # basic check for app running
 def on():
     return "python is running"
 
 
-like_post_dao=LikePostDaoImp()
-like_post_service= LikePostServiceImp(like_post_dao)
+like_post_dao = LikePostDaoImp()
+like_post_service = LikePostServiceImp(like_post_dao)
 create_post_dao = CreatePostDAOImp()
 create_post_service = CreatePostServiceImp(create_post_dao)
 
@@ -108,6 +110,17 @@ def create_a_post_image(post_id):
     except ImageMustBeAString as e:
         return str(e), 400
     except PostNotFound as e:
+        return str(e), 400
+
+
+@app.get("/post/image/<post_id>")
+def get_the_post_image(post_id):
+    """Method to grab the post image from the database by the post id."""
+    try:
+        return create_post_service.get_post_image_service(post_id), 200
+    except PostIdMustBeAnInteger as e:
+        return str(e), 400
+    except PostImageNotFound as e:
         return str(e), 400
 
 
