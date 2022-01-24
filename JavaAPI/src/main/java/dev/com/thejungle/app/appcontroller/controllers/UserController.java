@@ -56,4 +56,21 @@ public class UserController {
             ctx.status(404);
         }
     };
+
+
+
+
+    // REGISTER USER ROUTE HANDLER
+    public Handler registerUser = ctx -> {
+        Gson gson = new Gson();
+        User newUser = gson.fromJson(ctx.body(), User.class);
+        newUser.getUserBirthdate().toString();
+        User createdUser = this.userService.createNewUserService(newUser);
+        String createdUserJson = gson.toJson(createdUser);
+        ctx.result(createdUserJson);
+        ctx.status(201);
+    };
+
+
+
 }
