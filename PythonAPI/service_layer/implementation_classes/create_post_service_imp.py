@@ -14,9 +14,7 @@ class CreatePostServiceImp(CreatePostService):
         self.create_post_dao: CreatePostDAOImp = create_post_dao
 
     def create_post_service(self, post: Post) -> Post:
-        """not created yet"""
-        # set the post_id is default
-        post.post_id = 'default'
+        """Method to check the input then send the post to the data access layer."""
 
         # Check to make sure the user_id is an integer
         if not str(post.user_id).isnumeric():

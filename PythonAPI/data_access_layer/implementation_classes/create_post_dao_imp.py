@@ -17,9 +17,7 @@ class CreatePostDAOImp(CreatePostDAO):
             raise UserNotFound('The user could not be found.')
 
         # Create the post.
-        # Special case for the formatted string. The post_id must always be default except for testing.
-        # post_id is set to default in the service layer
-        sql = f"insert into post_table values('{post.post_id}', %s, NULL, %s, %s, 0, default) returning post_id"
+        sql = "insert into post_table values(default, %s, NULL, %s, %s, 0, default) returning post_id"
         cursor = connection.cursor()
         cursor.execute(sql, (post.user_id, post.post_text, post.image_format))
         connection.commit()

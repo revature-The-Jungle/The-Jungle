@@ -37,17 +37,17 @@ def create_fake_post(create_fake_user):  # notice that the other fixture has bee
 
 
 def test_create_post_success(create_fake_user):
-    post_to_be_created: Post = Post(post_id=100_000_000, user_id=100_000_000, post_text="success")
+    post_to_be_created: Post = Post(user_id=100_000_000, post_text="success")
     assert create_post_dao.create_post(post_to_be_created)
 
 
 def test_create_post_success_2(create_fake_user):
-    post_to_be_created: Post = Post(post_id=100_000_001, user_id=100_000_000, post_text="success")
+    post_to_be_created: Post = Post(user_id=100_000_000, post_text="success")
     assert create_post_dao.create_post(post_to_be_created)
 
 
 def test_create_post_failure():
-    post_to_be_created: Post = Post(post_id=100_000_000, user_id=100_000_000, post_text="failure")
+    post_to_be_created: Post = Post(user_id=100_000_000, post_text="failure")
     try:
         create_post_dao.create_post(post_to_be_created)
         assert False
