@@ -14,6 +14,9 @@ from data_access_layer.implementation_classes.create_post_dao_imp import CreateP
 from data_access_layer.implementation_classes.user_profile_dao_imp import UserProfileDAOImp
 from entities.user import User
 from service_layer.implementation_classes.create_post_service_imp import CreatePostServiceImp
+from service_layer.implementation_classes.group_member_junction_service import GroupMemberJunctionService
+from data_access_layer.implementation_classes.group_member_junction_dao_imp import GroupMemberJunctionDao
+from custom_exceptions.group_member_junction_exceptions import *
 
 # Setup logging
 import logging
@@ -26,9 +29,8 @@ logging.basicConfig(filename="records.log", level=logging.DEBUG,
                     format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
 from data_access_layer.implementation_classes.like_post_dao_imp import LikePostDaoImp
 
-
-#logging.basicConfig(filename="records.log", level=logging.DEBUG,
-                    #format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
+# logging.basicConfig(filename="records.log", level=logging.DEBUG,
+# format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
 
 # Setup flask
 from service_layer.implementation_classes.like_post_service_imp import LikePostServiceImp
@@ -36,10 +38,8 @@ from service_layer.implementation_classes.like_post_service_imp import LikePostS
 app: Flask = Flask(__name__)
 CORS(app)
 
-like_post_dao=LikePostDaoImp()
-like_post_service=LikePostServiceImp(like_post_dao)
-
-
+like_post_dao = LikePostDaoImp()
+like_post_service = LikePostServiceImp(like_post_dao)
 
 
 @app.post("/postfeed")
@@ -47,26 +47,13 @@ def add_likes_to_post():
     data = request.get_json()
     postid = data["postid"],
     return jsonify(like_post_service.service_like_post(postid))
-    
-    
-    
-    
-    
-    
-    
-    
+
     """post_likes = like_post_service.like_post_service(likes)
     reimbursements_as_dictionaries= []
     for reimbursement in employee_reimbursements:
         dictionary_reimbursement =reimbursement.make_reimbursement_dictionary()
         reimbursements_as_dictionaries.append(dictionary_reimbursement)
     return jsonify(reimbursements_as_dictionaries), 200"""
-
-
-
-
-
-
 
 
 create_post_dao = CreatePostDAOImp()
@@ -76,6 +63,7 @@ user_profile_dao = UserProfileDAOImp()
 user_profile_service = UserProfileServiceImp(user_profile_dao)
 group_view_dao = GroupViewPostgresDao()
 group_service = GroupPostgresService(group_view_dao)
+
 
 @app.get("/")  # basic check for app running
 def on():
@@ -180,7 +168,7 @@ def update_profile_info(user_id):
         exception_json = jsonify(exception_dictionary)
         return exception_json, 400
 
-    
+
 @app.get("/group/<group_id>")
 def get_group_by_id(group_id: str):
     result = group_service.service_get_group_by_id(int(group_id))
@@ -199,6 +187,33 @@ def get_all_groups():
         dictionary_group = groups.make_dictionary()
         groups_as_dictionary.append(dictionary_group)
     return jsonify(groups_as_dictionary)
+
+
+"""Group Junction API"""
+group_junction_dao = GroupMemberJunctionDao()
+group_junction_service = GroupMemberJunctionService(group_junction_dao)
+
+
+@app.get("/GroupJunction/UserList")
+def get_users_in_group_api():
+    group_list = group_junction_service.get_all_users_in_a_group()
+    group_dict = []
+    for mem in group_list:
+        dictionary_mem = mem.make_dictionary()
+        group_dict.append(dictionary_mem)
+    return jsonify(group_dict)
+
+
+@app.delete("/group/leave/<user_id>/<group_id>")
+def leave_group(user_id: str, group_id: str):
+    try:
+        group_junction_service.leave_group(int(user_id), int(group_id))
+        message = "you have left the group"
+        return jsonify(message)
+    except TypeError as e:
+        return jsonify(str(e))
+    except WrongId as e:
+        return jsonify(str(e))
 
 
 app.run()
