@@ -83,7 +83,7 @@ def test_update_user_profile_failure_no_user():
 
 def test_update_user_profile_failure_sql_injection(create_fake_user):
     """Tests to see if an sql injection will occur when updating the about me"""
-    
+
     updated_user_fail_sql_injection: User = User(100000000, "test_first_name", "test_last_name", user_email_for_tests,
                                                  "test_username",
                                                  "test_passcode",
