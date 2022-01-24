@@ -19,6 +19,7 @@ class CreatePostServiceImp(CreatePostService):
         # Check to make sure the user_id is an integer
         if not str(post.user_id).isnumeric():
             raise UserIdMustBeAnInteger('The user id must be an integer.')
+        post.user_id = int(post.user_id)
 
         # Check to make sure that the image format is a string
         if not type(post.image_format) == str:
@@ -40,4 +41,12 @@ class CreatePostServiceImp(CreatePostService):
         if not type(image) == str or not image:
             raise ImageMustBeAString("The image must be a string format.")
 
-        return self.create_post_dao.create_post_image(post_id, image)
+        return self.create_post_dao.create_post_image(int(post_id), image)
+
+    def get_post_image_service(self, post_id: int) -> str:
+        """Service layer checks post_id to make sure it is an integer then sends to the database layer."""
+        # Check to make sure that the post_id is an integer
+        if not str(post_id).isnumeric():
+            raise PostIdMustBeAnInteger("The post id must be an integer.")
+
+        return self.create_post_dao.get_post_image(int(post_id))

@@ -4,6 +4,7 @@ from flask_cors import CORS
 from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
+from custom_exceptions.post_image_not_found import PostImageNotFound
 from custom_exceptions.post_not_found import PostNotFound
 from custom_exceptions.post_text_must_be_a_string import PostTextMustBeAString
 from custom_exceptions.user_id_must_be_an_integer import UserIdMustBeAnInteger
@@ -33,6 +34,7 @@ logging.basicConfig(filename="records.log", level=logging.DEBUG,
 # Setup flask
 app: Flask = Flask(__name__)
 CORS(app)
+
 
 @app.get("/")  # basic check for app running
 def on():
@@ -108,6 +110,17 @@ def create_a_post_image(post_id):
     except ImageMustBeAString as e:
         return str(e), 400
     except PostNotFound as e:
+        return str(e), 400
+
+
+@app.get("/post/image/<post_id>")
+def get_the_post_image(post_id):
+    """Method to grab the post image from the database by the post id."""
+    try:
+        return create_post_service.get_post_image_service(post_id), 200
+    except PostIdMustBeAnInteger as e:
+        return str(e), 400
+    except PostImageNotFound as e:
         return str(e), 400
 
 
