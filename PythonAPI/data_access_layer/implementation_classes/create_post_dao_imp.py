@@ -34,6 +34,12 @@ class CreatePostDAOImp(CreatePostDAO):
         if not cursor.fetchone():
             raise PostNotFound('The post could not be found.')
 
+        # Make certain there is no other image
+        sql = f"delete from post_picture_table where post_id = %(post_id)s;"
+        cursor = connection.cursor()
+        cursor.execute(sql, {"post_id": post_id})
+        connection.commit()
+
         # insert the image into the database
         sql = f"INSERT INTO post_picture_table VALUES (default, %(post_id)s, %(image)s)"
         cursor = connection.cursor()
