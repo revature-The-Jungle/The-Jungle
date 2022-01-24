@@ -75,3 +75,4 @@ def test_create_post_image_failure_no_post():
 
 
 def test_get_post_image_success():
+    pass
