@@ -1,11 +1,15 @@
 package dao;
 
+import dev.com.thejungle.customexception.BlankInputs;
 import dev.com.thejungle.dao.implementations.UserDAO;
 import dev.com.thejungle.entity.User;
+import org.asynchttpclient.util.Assertions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.sql.Date;
 import java.util.List;
+
+import static org.testng.AssertJUnit.fail;
 
 public class UserDAOIntTests {
 
@@ -21,6 +25,23 @@ public class UserDAOIntTests {
         User createdUser = userDAOInt.createNewUser(newJungleUser);
         Assert.assertEquals(createdUser.getFirstName(), "Test");
     }
+
+
+    // SAD PATH, FOUND BLANK INPUTS
+    @Test
+    void testCreateNewUserBlankInputsSad(){
+        try {
+            Date date = new Date(742892400000L);
+            User newJungleUser = new User(0, "Test", "Tester", "testingel77@gmail.com",
+                    "usernam", "", "", date,
+                    "imagesourcefile");
+            User badUserInfo = userDAOInt.createNewUser(newJungleUser);
+            fail();
+        } catch (BlankInputs b) {
+            Assert.assertEquals("Please fill in the blanks", b.getMessage());
+        }
+    }
+
 
 
     // TEST TO SEARCH BY USERNAME

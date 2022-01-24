@@ -1,5 +1,6 @@
 package dev.com.thejungle.dao.implementations;
 
+import dev.com.thejungle.customexception.BlankInputs;
 import dev.com.thejungle.customexception.UserNotFound;
 import dev.com.thejungle.dao.interfaces.UserDAOInt;
 import dev.com.thejungle.entity.User;
@@ -36,11 +37,12 @@ public class UserDAO implements UserDAOInt {
             rs.next();
             boolean emptyStrings = areStringsEmpty(user.getFirstName(), user.getLastName(), user.getEmail(), user.getUsername(),
                     user.getPasscode(), user.getUserAbout(), user.getImageFormat());
-            user.setUserId(rs.getInt("user_id"));
-            if(emptyStrings == true){
-                return false;
+            if(emptyStrings == false){
+                user.setUserId(rs.getInt("user_id"));
+                return user;
+            } else {
+                throw new BlankInputs("Please fill in the blanks");
             }
-            return user;
         } catch (SQLException q) {
             q.printStackTrace();
             return null;

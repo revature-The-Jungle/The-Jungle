@@ -1,9 +1,6 @@
 package dev.com.thejungle.service.implementations;
 
-import dev.com.thejungle.customexception.DuplicateUsername;
-import dev.com.thejungle.customexception.UnallowedSpaces;
-import dev.com.thejungle.customexception.UserNotFound;
-import dev.com.thejungle.customexception.UsernameOrPasscodeException;
+import dev.com.thejungle.customexception.*;
 import dev.com.thejungle.dao.interfaces.UserDAOInt;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.interfaces.UserServiceInt;
@@ -31,6 +28,8 @@ public class UserService implements UserServiceInt {
             }
         } catch (DuplicateUsername d) {
             throw new DuplicateUsername("This username is already taken");
+        } catch (BlankInputs b) {
+            throw new BlankInputs("Please fill in the blanks");
         }
     }
 
