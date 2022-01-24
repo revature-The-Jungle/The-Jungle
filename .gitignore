@@ -8,7 +8,7 @@
 */test-output/**
 
 .apt_generated
-.classpath
+.classpaths
 .factorypath
 .project
 .settings
@@ -27,3 +27,6 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+
+#pycharm
+.pyc
