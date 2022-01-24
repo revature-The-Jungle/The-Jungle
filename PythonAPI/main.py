@@ -29,18 +29,18 @@ from service_layer.implementation_classes.like_post_service_imp import LikePostS
 logging.basicConfig(filename="records.log", level=logging.DEBUG,
                     format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
 
-
 # Setup flask
 app: Flask = Flask(__name__)
 CORS(app)
+
 
 @app.get("/")  # basic check for app running
 def on():
     return "python is running"
 
 
-like_post_dao=LikePostDaoImp()
-like_post_service= LikePostServiceImp(like_post_dao)
+like_post_dao = LikePostDaoImp()
+like_post_service = LikePostServiceImp(like_post_dao)
 create_post_dao = CreatePostDAOImp()
 create_post_service = CreatePostServiceImp(create_post_dao)
 
@@ -56,7 +56,6 @@ def add_likes_to_post():
     postid = data["postid"],
     return jsonify(like_post_service.service_like_post(postid))
 
-    
     """post_likes = like_post_service.like_post_service(likes)
     reimbursements_as_dictionaries= []
     for reimbursement in employee_reimbursements:
@@ -68,9 +67,11 @@ def add_likes_to_post():
 @app.get("/user/<user_id>")
 def get_a_user_id(user_id: int):
     try:
-        user = user_profile_service.service_get_user_profile_service(int(user_id))
+        user = user_profile_service.service_get_user_profile_service(user_id)
         user_as_dictionary = user.make_dictionary()
         return jsonify(user_as_dictionary), 200
+    except UserIdMustBeAnInteger as e:
+        return str(e), 400
     except UserNotFound as e:
         return str(e), 400
 
@@ -184,7 +185,7 @@ def update_profile_info(user_id):
         exception_json = jsonify(exception_dictionary)
         return exception_json, 400
 
-    
+
 @app.get("/group/<group_id>")
 def get_group_by_id(group_id: str):
     result = group_service.service_get_group_by_id(int(group_id))
