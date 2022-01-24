@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+from custom_exceptions.group_member_junction_exceptions import WrongId
 from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
@@ -17,6 +18,8 @@ from data_access_layer.implementation_classes.user_profile_dao_imp import UserPr
 from entities.post import Post
 from entities.user import User
 from service_layer.implementation_classes.create_post_service_imp import CreatePostServiceImp
+from service_layer.implementation_classes.group_member_junction_service_imp import GroupMemberJunctionService
+from data_access_layer.implementation_classes.group_member_junction_dao_imp import GroupMemberJunctionDao
 
 # Setup logging
 import logging
@@ -216,6 +219,32 @@ def get_all_groups():
         dictionary_group = groups.make_dictionary()
         groups_as_dictionary.append(dictionary_group)
     return jsonify(groups_as_dictionary)
+
+"""Group Junction API"""
+group_mem_dao = GroupMemberJunctionDao()
+group_junction_service = GroupMemberJunctionService(group_mem_dao)
+
+
+@app.get("/GroupJunction/UserList")
+def get_users_in_group_api():
+    group_list = group_junction_service.get_all_users_in_a_group()
+    group_dict = []
+    for mem in group_list:
+        dictionary_mem = mem.make_dictionary()
+        group_dict.append(dictionary_mem)
+    return jsonify(group_dict)
+
+
+@app.delete("/group/leave/<user_id>/<group_id>")
+def leave_group(user_id: str, group_id: str):
+    try:
+        group_junction_service.leave_group(int(user_id), int(group_id))
+        message = "you have left the group"
+        return jsonify(message)
+    except TypeError as e:
+        return jsonify(str(e))
+    except WrongId as e:
+        return jsonify(str(e))
 
 
 app.run()
