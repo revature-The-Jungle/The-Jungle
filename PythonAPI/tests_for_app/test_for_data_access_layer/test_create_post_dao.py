@@ -1,3 +1,4 @@
+from custom_exceptions.post_image_not_found import PostImageNotFound
 from custom_exceptions.post_not_found import PostNotFound
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.implementation_classes.create_post_dao_imp import CreatePostDAOImp, CreatePostDAO
@@ -28,12 +29,23 @@ def create_fake_user():
 @fixture
 def create_fake_post(create_fake_user):  # notice that the other fixture has been injected into this one.
     """For putting a fake post into the database for testing then removing the fake user."""
-    sql = "Insert into post_table values(100000000, 100000000);"
+    sql = "Insert into post_table values(100000000, 100000000); " \
+          "Insert into post_table values(100000001, 100000000);"
     cursor = connection.cursor()
     cursor.execute(sql)
     connection.commit()
     # no yield necessary because of the database cascade delete,
     # deleting the user will also delete the post from the user in the database
+
+
+@fixture
+def create_fake_post_image(create_fake_post):
+    """For putting a fake post image into the database for testing and then removing."""
+    sql = "Insert into post_picture_table values(100000000, 100000000, 'fixture image');" \
+          "Insert into post_picture_table values(100000001, 100000001, 'fixture image');"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    connection.commit()
 
 
 def test_create_post_success(create_fake_user):
@@ -74,5 +86,17 @@ def test_create_post_image_failure_no_post():
         assert str(e) == 'The post could not be found.'
 
 
-def test_get_post_image_success():
-    pass
+def test_get_post_image_success_1(create_fake_post_image):
+    assert create_post_dao.get_post_image(100000000)
+
+
+def test_get_post_image_success_2(create_fake_post_image):
+    assert create_post_dao.get_post_image(100000001)
+
+
+def test_get_post_image_failure():
+    try:
+        create_post_dao.get_post_image(100000000)
+        assert False
+    except PostImageNotFound as e:
+        assert str(e) == 'The post image could not be found.'
