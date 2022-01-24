@@ -1,5 +1,7 @@
-from custom_exceptions.User_Id_Not_Found import UserIdNotFoundException
+from custom_exceptions.birth_date_is_null import BirthDateIsNull
+from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
+from custom_exceptions.too_many_characters import TooManyCharacters
 from custom_exceptions.user_id_must_be_an_integer import UserIdMustBeAnInteger
 from data_access_layer.implementation_classes.user_profile_dao_imp import UserProfileDAOImp
 from entities.user import User
@@ -10,35 +12,33 @@ class UserProfileServiceImp(UserProfileService):
     def __init__(self, user_profile_dao):
         self.user_profile_dao: UserProfileDAOImp = user_profile_dao
 
-    # Needs more work
     def service_get_user_profile_service(self, user_id: int) -> User:
-        try:
-            if user_id == user_id:
-                return self.user_profile_dao.get_user_profile(user_id)
-        except UserIdNotFoundException:
-            raise UserIdNotFoundException("User Id Does Not Exist")
-            # print("raise UserIdNotFoundException")
-
-        # user_list = self.user_profile_dao.get_user_profile(10000)
-        # for existing_user in user_list:
-        #     if existing_user.user_id == user_id:
-        #         return self.user_profile_dao.get_user_profile(user_id)
-        # raise UserIdNotFoundException("User Id Does Not Exist")
+        if not str(user_id).isnumeric():
+            raise UserIdMustBeAnInteger('The user id must be an integer.')
+        return self.user_profile_dao.get_user_profile(user_id)
 
     def update_user_profile_service(self, user: User) -> User:
-        pass
+        """ Checks if the birthdate is null, and if the about me is too long"""
+
+        if user.user_birth_date:
+            if len(user.user_about) < 500:
+                return self.user_profile_dao.update_user_profile(user)
+            else:
+                raise TooManyCharacters("Too many characters.")
+        else:
+            raise BirthDateIsNull("Birthdate cannot be null.")
 
     def get_user_image_service(self, user_id: int) -> str:
         # Check to make sure the user_id is an integer
         if not str(user_id).isnumeric():
-            raise UserIdMustBeAnInteger("The user id must be an integer.")
+            raise UserIdMustBeAnInteger('The user id must be an integer.')
 
         return self.user_profile_dao.get_user_image(user_id)
 
     def update_user_image_service(self, user_id: int, image: str) -> str:
         # Check to make sure the user_id is an integer
         if not str(user_id).isnumeric():
-            raise UserIdMustBeAnInteger("The user id must be an integer.")
+            raise UserIdMustBeAnInteger('The user id must be an integer.')
 
         # Check to make sure that the image is a string
         if not type(image) == str or not image:
@@ -46,8 +46,18 @@ class UserProfileServiceImp(UserProfileService):
 
         return self.user_profile_dao.update_user_image(user_id, image)
 
-    def update_user_image_format_service(self, user_id: int, image_data: str) -> User:
-        pass
+    def update_user_image_format_service(self, user_id: int, image_format: str) -> User:
+        """Service layer method to check user_id and image_date then send to data access layer."""
+        # Check to make sure the user_id is an integer
+        if not str(user_id).isnumeric():
+            raise UserIdMustBeAnInteger('The user id must be an integer.')
+
+        # Check to make sure that the image format is a string
+        if not type(image_format) == str or not image_format:
+            raise ImageFormatMustBeAString('The image format must be a string.')
+
+        return self.user_profile_dao.update_user_image_format(user_id, image_format)
 
     def update_password_service(self, user_id: int, password: str) -> User:
+        """Stretch"""
         pass

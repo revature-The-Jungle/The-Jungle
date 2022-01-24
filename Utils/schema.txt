@@ -23,8 +23,9 @@ image_format varchar(40)
 create table chat_log_table (
 chat_id serial primary key,
 chat_date timestamp not null default clock_timestamp(),
-user_id int references user_table(user_id) on delete cascade,
-chat_content varchar(300)
+user_id int references user_table(user_id) on delete cascade not null,
+group_id int references group_table(group_id) on delete cascade,
+chat_content varchar(300) not null
 );
 
 
@@ -64,14 +65,14 @@ user_follow_id int references user_table(user_id) on delete cascade
 
 
 create table user_picture_table(
-picture_id serial primary KEY , 
+picture_id serial primary KEY ,
 user_id int references user_table(user_id) on delete cascade,
-picture bytea 
+picture bytea
 );
 
 
 create table post_picture_table(
-picture_id serial primary KEY , 
+picture_id serial primary KEY ,
 post_id int references post_table(post_id) on delete cascade,
-picture bytea 
+picture bytea
 );
