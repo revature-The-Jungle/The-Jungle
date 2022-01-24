@@ -1,5 +1,5 @@
 from typing import List
-from data_access_layer.abstract_classes.group_view_dao_abs import GroupViewDao
+from data_access_layer.abstract_classes.group_view_dao import GroupViewDao
 from entities.group import Group
 from util.database_connection import connection
 

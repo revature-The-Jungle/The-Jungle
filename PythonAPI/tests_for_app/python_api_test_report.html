@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Test Report</title>
+    <style>body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  /* do not increase min-width as some may use split screens */
+  min-width: 800px;
+  color: #999;
+}
+
+h1 {
+  font-size: 24px;
+  color: black;
+}
+
+h2 {
+  font-size: 16px;
+  color: black;
+}
+
+p {
+  color: black;
+}
+
+a {
+  color: #999;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+#environment td {
+  padding: 5px;
+  border: 1px solid #E6E6E6;
+}
+#environment tr:nth-child(odd) {
+  background-color: #f6f6f6;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed,
+.passed .col-result {
+  color: green;
+}
+
+span.skipped,
+span.xfailed,
+span.rerun,
+.skipped .col-result,
+.xfailed .col-result,
+.rerun .col-result {
+  color: orange;
+}
+
+span.error,
+span.failed,
+span.xpassed,
+.error .col-result,
+.failed .col-result,
+.xpassed .col-result {
+  color: red;
+}
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+#results-table {
+  border: 1px solid #e6e6e6;
+  color: #999;
+  font-size: 12px;
+  width: 100%;
+}
+#results-table th,
+#results-table td {
+  padding: 5px;
+  border: 1px solid #E6E6E6;
+  text-align: left;
+}
+#results-table th {
+  font-weight: bold;
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+.log {
+  background-color: #e6e6e6;
+  border: 1px solid #e6e6e6;
+  color: black;
+  display: block;
+  font-family: "Courier New", Courier, monospace;
+  height: 230px;
+  overflow-y: scroll;
+  padding: 5px;
+  white-space: pre-wrap;
+}
+.log:only-child {
+  height: inherit;
+}
+
+div.image {
+  border: 1px solid #e6e6e6;
+  float: right;
+  height: 240px;
+  margin-left: 5px;
+  overflow: hidden;
+  width: 320px;
+}
+div.image img {
+  width: 320px;
+}
+
+div.video {
+  border: 1px solid #e6e6e6;
+  float: right;
+  height: 240px;
+  margin-left: 5px;
+  overflow: hidden;
+  width: 320px;
+}
+div.video video {
+  overflow: hidden;
+  width: 320px;
+  height: 240px;
+}
+
+.collapsed {
+  display: none;
+}
+
+.expander::after {
+  content: " (show details)";
+  color: #BBB;
+  font-style: italic;
+  cursor: pointer;
+}
+
+.collapser::after {
+  content: " (hide details)";
+  color: #BBB;
+  font-style: italic;
+  cursor: pointer;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+  cursor: pointer;
+}
+
+.sort-icon {
+  font-size: 0px;
+  float: left;
+  margin-right: 5px;
+  margin-top: 5px;
+  /*triangle*/
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}
+.inactive .sort-icon {
+  /*finish triangle*/
+  border-top: 8px solid #E6E6E6;
+}
+.asc.active .sort-icon {
+  /*finish triangle*/
+  border-bottom: 8px solid #999;
+}
+.desc.active .sort-icon {
+  /*finish triangle*/
+  border-top: 8px solid #999;
+}
+
+/******************************
+ * CUSTOM CSS
+ * report.css
+ ******************************/
+
+body {
+	font-family: sans-serif;
+	line-height: 1.75em;
+	font-size: 16px;
+	background-color: #222;
+	color: #aaa;
+}
+
+.log{
+  background-color: #222;
+  color:white;
+}
+
+p {
+  color: white;
+	font-size: 16px;
+}
+
+h1 {
+  color: white;
+	font-size: 30px;
+	line-height: 34px;
+}
+
+h2 {
+  color: white;
+	font-size: 20px;
+	line-height: 25px;
+}
+
+a[href] {
+	color: #1e8ad6;
+}</style></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) { // eslint-disable-line no-redeclare
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function findAll(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sortColumn(elem) {
+    toggleSortStates(elem);
+    const colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    let key;
+    if (elem.classList.contains('result')) {
+        key = keyResult;
+    } else if (elem.classList.contains('links')) {
+        key = keyLink;
+    } else {
+        key = keyAlpha;
+    }
+    sortTable(elem, key(colIndex));
+}
+
+function showAllExtras() { // eslint-disable-line no-unused-vars
+    findAll('.col-result').forEach(showExtras);
+}
+
+function hideAllExtras() { // eslint-disable-line no-unused-vars
+    findAll('.col-result').forEach(hideExtras);
+}
+
+function showExtras(colresultElem) {
+    const extras = colresultElem.parentNode.nextElementSibling;
+    const expandcollapse = colresultElem.firstElementChild;
+    extras.classList.remove('collapsed');
+    expandcollapse.classList.remove('expander');
+    expandcollapse.classList.add('collapser');
+}
+
+function hideExtras(colresultElem) {
+    const extras = colresultElem.parentNode.nextElementSibling;
+    const expandcollapse = colresultElem.firstElementChild;
+    extras.classList.add('collapsed');
+    expandcollapse.classList.remove('collapser');
+    expandcollapse.classList.add('expander');
+}
+
+function showFilters() {
+    const filterItems = document.getElementsByClassName('filter');
+    for (let i = 0; i < filterItems.length; i++)
+        filterItems[i].hidden = false;
+}
+
+function addCollapse() {
+    // Add links for show/hide all
+    const resulttable = find('table#results-table');
+    const showhideall = document.createElement('p');
+    showhideall.innerHTML = '<a href="javascript:showAllExtras()">Show all details</a> / ' +
+                            '<a href="javascript:hideAllExtras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+
+    // Add show/hide link to each result
+    findAll('.col-result').forEach(function(elem) {
+        const collapsed = getQueryParameter('collapsed') || 'Passed';
+        const extras = elem.parentNode.nextElementSibling;
+        const expandcollapse = document.createElement('span');
+        if (extras.classList.contains('collapsed')) {
+            expandcollapse.classList.add('expander');
+        } else if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add('collapsed');
+            expandcollapse.classList.add('expander');
+        } else {
+            expandcollapse.classList.add('collapser');
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener('click', function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains('collapsed')) {
+                showExtras(event.currentTarget);
+            } else {
+                hideExtras(event.currentTarget);
+            }
+        });
+    });
+}
+
+function getQueryParameter(name) {
+    const match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () { // eslint-disable-line no-unused-vars
+    resetSortHeaders();
+
+    addCollapse();
+
+    showFilters();
+
+    sortColumn(find('.initial-sort'));
+
+    findAll('.sortable').forEach(function(elem) {
+        elem.addEventListener('click',
+            function() {
+                sortColumn(elem);
+            }, false);
+    });
+}
+
+function sortTable(clicked, keyFunc) {
+    const rows = findAll('.results-table-row');
+    const reversed = !clicked.classList.contains('asc');
+    const sortedRows = sort(rows, keyFunc, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    const thead = document.getElementById('results-table-head');
+    document.getElementById('results-table').remove();
+    const parent = document.createElement('table');
+    parent.id = 'results-table';
+    parent.appendChild(thead);
+    sortedRows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName('BODY')[0].appendChild(parent);
+}
+
+function sort(items, keyFunc, reversed) {
+    const sortArray = items.map(function(item, i) {
+        return [keyFunc(item), i];
+    });
+
+    sortArray.sort(function(a, b) {
+        const keyA = a[0];
+        const keyB = b[0];
+
+        if (keyA == keyB) return 0;
+
+        if (reversed) {
+            return keyA < keyB ? 1 : -1;
+        } else {
+            return keyA > keyB ? 1 : -1;
+        }
+    });
+
+    return sortArray.map(function(item) {
+        const index = item[1];
+        return items[index];
+    });
+}
+
+function keyAlpha(colIndex) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[colIndex].firstChild.data.toLowerCase();
+    };
+}
+
+function keyLink(colIndex) {
+    return function(elem) {
+        const dataCell = elem.childNodes[1].childNodes[colIndex].firstChild;
+        return dataCell == null ? '' : dataCell.innerText.toLowerCase();
+    };
+}
+
+function keyResult(colIndex) {
+    return function(elem) {
+        const strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+            'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[colIndex].firstChild.data);
+    };
+}
+
+function resetSortHeaders() {
+    findAll('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    findAll('.sortable').forEach(function(elem) {
+        const icon = document.createElement('div');
+        icon.className = 'sort-icon';
+        icon.textContent = 'vvv';
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove('desc', 'active');
+        elem.classList.add('asc', 'inactive');
+    });
+}
+
+function toggleSortStates(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        resetSortHeaders();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function isAllRowsHidden(value) {
+    return value.hidden == false;
+}
+
+function filterTable(elem) { // eslint-disable-line no-unused-vars
+    const outcomeAtt = 'data-test-result';
+    const outcome = elem.getAttribute(outcomeAtt);
+    const classOutcome = outcome + ' results-table-row';
+    const outcomeRows = document.getElementsByClassName(classOutcome);
+
+    for(let i = 0; i < outcomeRows.length; i++){
+        outcomeRows[i].hidden = !elem.checked;
+    }
+
+    const rows = findAll('.results-table-row').filter(isAllRowsHidden);
+    const allRowsHidden = rows.length == 0 ? true : false;
+    const notFoundMessage = document.getElementById('not-found-message');
+    notFoundMessage.hidden = !allRowsHidden;
+}
+</script>
+    <h1>python_api_test_report.html</h1>
+    <p>Report generated on 24-Jan-2022 at 00:14:18 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <h2>Environment</h2>
+    <table id="environment">
+      <tr>
+        <td>Packages</td>
+        <td>{"pluggy": "1.0.0", "py": "1.11.0", "pytest": "6.2.5"}</td></tr>
+      <tr>
+        <td>Platform</td>
+        <td>Windows-10-10.0.19042-SP0</td></tr>
+      <tr>
+        <td>Plugins</td>
+        <td>{"env": "0.6.2", "html": "3.1.1", "metadata": "1.11.0", "postgresql": "4.0.0"}</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>3.10.0</td></tr></table>
+    <h2>Summary</h2>
+    <p>76 tests ran in 5.70 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">39 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">37 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <h2>Results</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">Result</th>
+          <th class="sortable" col="name">Test</th>
+          <th class="sortable" col="duration">Duration</th>
+          <th class="sortable links" col="links">Links</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">No results found. Try to check the filters</th></tr></thead>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_create_group_happy_1</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;data_access_layer.implementation_classes.group_dao_imp.GroupDAOImp object at 0x00000167CF5962C0&gt;<br/>group = &lt;entities.group.Group object at 0x00000167CF596140&gt;<br/><br/>    def create_group(self, group: Group):<br/>        try:<br/>            sql = &quot;insert into group_table values(default, %s, %s, %s, %s) returning group_id&quot;<br/>            cursor = connection.cursor()<br/>&gt;           cursor.execute(sql, (group.user_id, group.group_name, group.group_about, group.image_format))<br/><br/>..\data_access_layer\implementation_classes\group_dao_imp.py:13: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cf56db10&gt;<br/>query = &#x27;insert into group_table values(default, %s, %s, %s, %s) returning group_id&#x27;<br/>params = (9000, &#x27;Smashing Pumpkins&#x27;, &#x27;This group is for all Smashing Pumpkins fans!&#x27;, &#x27;image format&#x27;)<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.UniqueViolation: duplicate key value violates unique constraint &quot;group_table_group_name_key&quot;</span><br/><span class="error">E           DETAIL:  Key (group_name)=(Smashing Pumpkins) already exists.</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: UniqueViolation<br/><br/>During handling of the above exception, another exception occurred:<br/><br/>    def test_create_group_happy_1():<br/>&gt;       created_group = group_dao.create_group(group_happy_1)<br/><br/>test_for_data_access_layer\test_group_dao.py:19: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_dao_imp.GroupDAOImp object at 0x00000167CF5962C0&gt;<br/>group = &lt;entities.group.Group object at 0x00000167CF596140&gt;<br/><br/>    def create_group(self, group: Group):<br/>        try:<br/>            sql = &quot;insert into group_table values(default, %s, %s, %s, %s) returning group_id&quot;<br/>            cursor = connection.cursor()<br/>            cursor.execute(sql, (group.user_id, group.group_name, group.group_about, group.image_format))<br/>            connection.commit()<br/>            group_id = cursor.fetchone()[0]<br/>            group.group_id = group_id<br/>            return group<br/>        except Exception:<br/>&gt;           raise InputTooLong<br/><span class="error">E           TypeError: InputTooLong.__init__() missing 1 required positional argument: &#x27;message&#x27;</span><br/><br/>..\data_access_layer\implementation_classes\group_dao_imp.py:19: TypeError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_create_group_happy_2</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;data_access_layer.implementation_classes.group_dao_imp.GroupDAOImp object at 0x00000167CF5962C0&gt;<br/>group = &lt;entities.group.Group object at 0x00000167CF596980&gt;<br/><br/>    def create_group(self, group: Group):<br/>        try:<br/>            sql = &quot;insert into group_table values(default, %s, %s, %s, %s) returning group_id&quot;<br/>            cursor = connection.cursor()<br/>&gt;           cursor.execute(sql, (group.user_id, group.group_name, group.group_about, group.image_format))<br/><br/>..\data_access_layer\implementation_classes\group_dao_imp.py:13: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cfee1e80&gt;<br/>query = &#x27;insert into group_table values(default, %s, %s, %s, %s) returning group_id&#x27;<br/>params = (9000, &#x27;ZZe Top&#x27;, &#x27;This group is for all ZZ Top fans!&#x27;, &#x27;image format&#x27;)<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/><br/>During handling of the above exception, another exception occurred:<br/><br/>    def test_create_group_happy_2():<br/>&gt;       created_group = group_dao.create_group(group_happy_2)<br/><br/>test_for_data_access_layer\test_group_dao.py:24: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_dao_imp.GroupDAOImp object at 0x00000167CF5962C0&gt;<br/>group = &lt;entities.group.Group object at 0x00000167CF596980&gt;<br/><br/>    def create_group(self, group: Group):<br/>        try:<br/>            sql = &quot;insert into group_table values(default, %s, %s, %s, %s) returning group_id&quot;<br/>            cursor = connection.cursor()<br/>            cursor.execute(sql, (group.user_id, group.group_name, group.group_about, group.image_format))<br/>            connection.commit()<br/>            group_id = cursor.fetchone()[0]<br/>            group.group_id = group_id<br/>            return group<br/>        except Exception:<br/>&gt;           raise InputTooLong<br/><span class="error">E           TypeError: InputTooLong.__init__() missing 1 required positional argument: &#x27;message&#x27;</span><br/><br/>..\data_access_layer\implementation_classes\group_dao_imp.py:19: TypeError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_join_group_happy_1</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;data_access_layer.implementation_classes.group_dao_imp.GroupDAOImp object at 0x00000167CF5962C0&gt;<br/>group_id = 14, user_id = 9000<br/><br/>    def join_group(self, group_id: int, user_id: int):<br/>        try:<br/>            sql = &quot;insert into group_member_junction_table values(%s, %s) returning group_id, user_id&quot;<br/>            cursor = connection.cursor()<br/>&gt;           cursor.execute(sql, (group_id, user_id))<br/><br/>..\data_access_layer\implementation_classes\group_dao_imp.py:25: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cfeb8670&gt;<br/>query = &#x27;insert into group_member_junction_table values(%s, %s) returning group_id, user_id&#x27;<br/>params = (14, 9000)<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/><br/>During handling of the above exception, another exception occurred:<br/><br/>    def test_join_group_happy_1():<br/>&gt;       group_joined = group_dao.join_group(14, 9000)<br/><br/>test_for_data_access_layer\test_group_dao.py:40: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_dao_imp.GroupDAOImp object at 0x00000167CF5962C0&gt;<br/>group_id = 14, user_id = 9000<br/><br/>    def join_group(self, group_id: int, user_id: int):<br/>        try:<br/>            sql = &quot;insert into group_member_junction_table values(%s, %s) returning group_id, user_id&quot;<br/>            cursor = connection.cursor()<br/>            cursor.execute(sql, (group_id, user_id))<br/>            connection.commit()<br/>            group_joined = cursor.fetchone()<br/>            return group_joined<br/>        except Exception:<br/>&gt;           raise GroupIdNonExistent<br/><span class="error">E           TypeError: GroupIdNonExistent.__init__() missing 1 required positional argument: &#x27;message&#x27;</span><br/><br/>..\data_access_layer\implementation_classes\group_dao_imp.py:30: TypeError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_join_group_happy_2</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;data_access_layer.implementation_classes.group_dao_imp.GroupDAOImp object at 0x00000167CF5962C0&gt;<br/>group_id = 16, user_id = 10<br/><br/>    def join_group(self, group_id: int, user_id: int):<br/>        try:<br/>            sql = &quot;insert into group_member_junction_table values(%s, %s) returning group_id, user_id&quot;<br/>            cursor = connection.cursor()<br/>&gt;           cursor.execute(sql, (group_id, user_id))<br/><br/>..\data_access_layer\implementation_classes\group_dao_imp.py:25: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cfee3270&gt;<br/>query = &#x27;insert into group_member_junction_table values(%s, %s) returning group_id, user_id&#x27;<br/>params = (16, 10)<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/><br/>During handling of the above exception, another exception occurred:<br/><br/>    def test_join_group_happy_2():<br/>&gt;       group_joined = group_dao.join_group(16, 10)<br/><br/>test_for_data_access_layer\test_group_dao.py:45: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_dao_imp.GroupDAOImp object at 0x00000167CF5962C0&gt;<br/>group_id = 16, user_id = 10<br/><br/>    def join_group(self, group_id: int, user_id: int):<br/>        try:<br/>            sql = &quot;insert into group_member_junction_table values(%s, %s) returning group_id, user_id&quot;<br/>            cursor = connection.cursor()<br/>            cursor.execute(sql, (group_id, user_id))<br/>            connection.commit()<br/>            group_joined = cursor.fetchone()<br/>            return group_joined<br/>        except Exception:<br/>&gt;           raise GroupIdNonExistent<br/><span class="error">E           TypeError: GroupIdNonExistent.__init__() missing 1 required positional argument: &#x27;message&#x27;</span><br/><br/>..\data_access_layer\implementation_classes\group_dao_imp.py:30: TypeError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_get_all_users_in_a_group</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_get_all_users_in_a_group():<br/>&gt;       result = group_member_junction_dao.get_all_users_in_a_group()<br/><br/>test_for_data_access_layer\test_group_member_junction_dao.py:11: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_member_junction_dao_imp.GroupMemberJunctionDao object at 0x00000167CEDDCB80&gt;<br/><br/>    def get_all_users_in_a_group(self) -&gt; list[GroupMemberJunction] | str:<br/>        try:<br/>            sql = &quot;select first_name, last_name, user_table.user_id, group_member_junction_table.group_id from &quot; \<br/>                  &quot;user_table inner join group_member_junction_table on group_member_junction_table.user_id = &quot; \<br/>                  &quot;user_table.user_id order by user_table.user_id&quot;<br/>            cursor = connection.cursor()<br/>&gt;           cursor.execute(sql)<br/><br/>..\data_access_layer\implementation_classes\group_member_junction_dao_imp.py:19: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167ccb99430&gt;<br/>query = &#x27;select first_name, last_name, user_table.user_id, group_member_junction_table.group_id from user_table inner join group_member_junction_table on group_member_junction_table.user_id = user_table.user_id order by user_table.user_id&#x27;<br/>params = None<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_list_contains_correct_info</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_list_contains_correct_info():<br/>&gt;       result = group_member_junction_dao.get_all_users_in_a_group()<br/><br/>test_for_data_access_layer\test_group_member_junction_dao.py:16: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_member_junction_dao_imp.GroupMemberJunctionDao object at 0x00000167CEDDCB80&gt;<br/><br/>    def get_all_users_in_a_group(self) -&gt; list[GroupMemberJunction] | str:<br/>        try:<br/>            sql = &quot;select first_name, last_name, user_table.user_id, group_member_junction_table.group_id from &quot; \<br/>                  &quot;user_table inner join group_member_junction_table on group_member_junction_table.user_id = &quot; \<br/>                  &quot;user_table.user_id order by user_table.user_id&quot;<br/>            cursor = connection.cursor()<br/>&gt;           cursor.execute(sql)<br/><br/>..\data_access_layer\implementation_classes\group_member_junction_dao_imp.py:19: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffa4d50&gt;<br/>query = &#x27;select first_name, last_name, user_table.user_id, group_member_junction_table.group_id from user_table inner join group_member_junction_table on group_member_junction_table.user_id = user_table.user_id order by user_table.user_id&#x27;<br/>params = None<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_leave_group</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_leave_group():<br/>&gt;       result = group_member_junction_dao.leave_group(10000, 9)<br/><br/>test_for_data_access_layer\test_group_member_junction_dao.py:29: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_member_junction_dao_imp.GroupMemberJunctionDao object at 0x00000167CEDDCB80&gt;<br/>user_id = 10000, group_id = 9<br/><br/>    def leave_group(self, user_id: int, group_id: int):<br/>&gt;       check_list = self.get_all_users_in_a_group()<br/><br/>..\data_access_layer\implementation_classes\group_member_junction_dao_imp.py:32: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_member_junction_dao_imp.GroupMemberJunctionDao object at 0x00000167CEDDCB80&gt;<br/><br/>    def get_all_users_in_a_group(self) -&gt; list[GroupMemberJunction] | str:<br/>        try:<br/>            sql = &quot;select first_name, last_name, user_table.user_id, group_member_junction_table.group_id from &quot; \<br/>                  &quot;user_table inner join group_member_junction_table on group_member_junction_table.user_id = &quot; \<br/>                  &quot;user_table.user_id order by user_table.user_id&quot;<br/>            cursor = connection.cursor()<br/>&gt;           cursor.execute(sql)<br/><br/>..\data_access_layer\implementation_classes\group_member_junction_dao_imp.py:19: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffa6400&gt;<br/>query = &#x27;select first_name, last_name, user_table.user_id, group_member_junction_table.group_id from user_table inner join group_member_junction_table on group_member_junction_table.user_id = user_table.user_id order by user_table.user_id&#x27;<br/>params = None<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_leave_group2</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_leave_group2():<br/>&gt;       result = group_member_junction_dao.leave_group(10000, 10)<br/><br/>test_for_data_access_layer\test_group_member_junction_dao.py:34: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_member_junction_dao_imp.GroupMemberJunctionDao object at 0x00000167CEDDCB80&gt;<br/>user_id = 10000, group_id = 10<br/><br/>    def leave_group(self, user_id: int, group_id: int):<br/>&gt;       check_list = self.get_all_users_in_a_group()<br/><br/>..\data_access_layer\implementation_classes\group_member_junction_dao_imp.py:32: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_member_junction_dao_imp.GroupMemberJunctionDao object at 0x00000167CEDDCB80&gt;<br/><br/>    def get_all_users_in_a_group(self) -&gt; list[GroupMemberJunction] | str:<br/>        try:<br/>            sql = &quot;select first_name, last_name, user_table.user_id, group_member_junction_table.group_id from &quot; \<br/>                  &quot;user_table inner join group_member_junction_table on group_member_junction_table.user_id = &quot; \<br/>                  &quot;user_table.user_id order by user_table.user_id&quot;<br/>            cursor = connection.cursor()<br/>&gt;           cursor.execute(sql)<br/><br/>..\data_access_layer\implementation_classes\group_member_junction_dao_imp.py:19: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffa6e50&gt;<br/>query = &#x27;select first_name, last_name, user_table.user_id, group_member_junction_table.group_id from user_table inner join group_member_junction_table on group_member_junction_table.user_id = user_table.user_id order by user_table.user_id&#x27;<br/>params = None<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_wrong_user</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_wrong_user():<br/>        try:<br/>&gt;           group_member_junction_dao.leave_group(1, 1)<br/><br/>test_for_data_access_layer\test_group_member_junction_dao.py:46: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_member_junction_dao_imp.GroupMemberJunctionDao object at 0x00000167CEDDCB80&gt;<br/>user_id = 1, group_id = 1<br/><br/>    def leave_group(self, user_id: int, group_id: int):<br/>&gt;       check_list = self.get_all_users_in_a_group()<br/><br/>..\data_access_layer\implementation_classes\group_member_junction_dao_imp.py:32: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_member_junction_dao_imp.GroupMemberJunctionDao object at 0x00000167CEDDCB80&gt;<br/><br/>    def get_all_users_in_a_group(self) -&gt; list[GroupMemberJunction] | str:<br/>        try:<br/>            sql = &quot;select first_name, last_name, user_table.user_id, group_member_junction_table.group_id from &quot; \<br/>                  &quot;user_table inner join group_member_junction_table on group_member_junction_table.user_id = &quot; \<br/>                  &quot;user_table.user_id order by user_table.user_id&quot;<br/>            cursor = connection.cursor()<br/>&gt;           cursor.execute(sql)<br/><br/>..\data_access_layer\implementation_classes\group_member_junction_dao_imp.py:19: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffa7950&gt;<br/>query = &#x27;select first_name, last_name, user_table.user_id, group_member_junction_table.group_id from user_table inner join group_member_junction_table on group_member_junction_table.user_id = user_table.user_id order by user_table.user_id&#x27;<br/>params = None<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_create_post_success</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_create_post_success():<br/>        post_to_be_created: GroupPost = GroupPost(9000, 9000, 9000, &quot;test create post&quot;, &quot;&quot;, 0, &quot;&quot;)<br/>&gt;       created_post = post_dao.create_post(post_to_be_created)<br/><br/>test_for_data_access_layer\test_group_post_dao.py:14: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_post_dao_imp.GroupPostDAO object at 0x00000167CF5EB130&gt;<br/>post = &lt;entities.group_post.GroupPost object at 0x00000167CFE3D660&gt;<br/><br/>    def create_post(self, post: GroupPost) -&gt; GroupPost:<br/>        try:<br/>            sql = &quot;insert into post_table values(default, %s, %s, %s, %s, %s, default) returning post_id&quot;<br/>            cursor = connection.cursor()<br/>&gt;           cursor.execute(sql, (post.user_id, post.group_id, post.post_text, post.image_format, post.likes))<br/><br/>..\data_access_layer\implementation_classes\group_post_dao_imp.py:12: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffa68d0&gt;<br/>query = &#x27;insert into post_table values(default, %s, %s, %s, %s, %s, default) returning post_id&#x27;<br/>params = (9000, 9000, &#x27;test create post&#x27;, &#x27;&#x27;, 0)<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_create_another_post_success</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_create_another_post_success():<br/>        post_to_be_created: GroupPost = GroupPost(&quot;9001&quot;, 9000, 9000, &quot;test create post&quot;, &quot;&quot;, 0, &quot;&quot;)<br/>&gt;       created_post = post_dao.create_post(post_to_be_created)<br/><br/>test_for_data_access_layer\test_group_post_dao.py:21: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_post_dao_imp.GroupPostDAO object at 0x00000167CF5EB130&gt;<br/>post = &lt;entities.group_post.GroupPost object at 0x00000167CFE52560&gt;<br/><br/>    def create_post(self, post: GroupPost) -&gt; GroupPost:<br/>        try:<br/>            sql = &quot;insert into post_table values(default, %s, %s, %s, %s, %s, default) returning post_id&quot;<br/>            cursor = connection.cursor()<br/>&gt;           cursor.execute(sql, (post.user_id, post.group_id, post.post_text, post.image_format, post.likes))<br/><br/>..\data_access_layer\implementation_classes\group_post_dao_imp.py:12: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffbd010&gt;<br/>query = &#x27;insert into post_table values(default, %s, %s, %s, %s, %s, default) returning post_id&#x27;<br/>params = (9000, 9000, &#x27;test create post&#x27;, &#x27;&#x27;, 0)<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_post_by_id</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_get_post_by_id():<br/>&gt;       get_post = post_dao.get_post_by_id(9002)<br/><br/>test_for_data_access_layer\test_group_post_dao.py:41: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_post_dao_imp.GroupPostDAO object at 0x00000167CF5EB130&gt;<br/>post_id = 9002<br/><br/>    def get_post_by_id(self, post_id: int) -&gt; GroupPost:<br/>        sql = &quot;select * from post_table where post_id = %s&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, [post_id])<br/><br/>..\data_access_layer\implementation_classes\group_post_dao_imp.py:46: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cfe9d380&gt;<br/>query = &#x27;select * from post_table where post_id = %s&#x27;, params = [9002]<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_another_post_by_id</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_get_another_post_by_id():<br/>&gt;       get_post = post_dao.get_post_by_id(9003)<br/><br/>test_for_data_access_layer\test_group_post_dao.py:47: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_post_dao_imp.GroupPostDAO object at 0x00000167CF5EB130&gt;<br/>post_id = 9003<br/><br/>    def get_post_by_id(self, post_id: int) -&gt; GroupPost:<br/>        sql = &quot;select * from post_table where post_id = %s&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, [post_id])<br/><br/>..\data_access_layer\implementation_classes\group_post_dao_imp.py:46: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cfeba1f0&gt;<br/>query = &#x27;select * from post_table where post_id = %s&#x27;, params = [9003]<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_all_posts</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_get_all_posts():<br/>&gt;       get_posts = post_dao.get_all_posts()<br/><br/>test_for_data_access_layer\test_group_post_dao.py:61: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_post_dao_imp.GroupPostDAO object at 0x00000167CF5EB130&gt;<br/><br/>    def get_all_posts(self) -&gt; list[GroupPost]:<br/>        try:<br/>            sql = &quot;select * from post_table&quot;<br/>            cursor = connection.cursor()<br/>&gt;           cursor.execute(sql)<br/><br/>..\data_access_layer\implementation_classes\group_post_dao_imp.py:55: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffa4460&gt;<br/>query = &#x27;select * from post_table&#x27;, params = None<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_all_posts_by_group_id</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_get_all_posts_by_group_id():<br/>&gt;       get_posts = post_dao.get_all_posts_by_group_id(9000)<br/><br/>test_for_data_access_layer\test_group_post_dao.py:68: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_post_dao_imp.GroupPostDAO object at 0x00000167CF5EB130&gt;<br/>group_id = 9000<br/><br/>    def get_all_posts_by_group_id(self, group_id: int) -&gt; list[GroupPost]:<br/>        sql = &quot;select * from post_table where group_id = %s&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, [group_id])<br/><br/>..\data_access_layer\implementation_classes\group_post_dao_imp.py:67: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffbc880&gt;<br/>query = &#x27;select * from post_table where group_id = %s&#x27;, params = [9000]<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_all_posts_by_group_id_fails</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_get_all_posts_by_group_id_fails():<br/>        try:<br/>&gt;           post_dao.get_all_posts_by_group_id(90000)<br/><br/>test_for_data_access_layer\test_group_post_dao.py:75: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_post_dao_imp.GroupPostDAO object at 0x00000167CF5EB130&gt;<br/>group_id = 90000<br/><br/>    def get_all_posts_by_group_id(self, group_id: int) -&gt; list[GroupPost]:<br/>        sql = &quot;select * from post_table where group_id = %s&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, [group_id])<br/><br/>..\data_access_layer\implementation_classes\group_post_dao_imp.py:67: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffa50c0&gt;<br/>query = &#x27;select * from post_table where group_id = %s&#x27;, params = [90000]<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_delete_post_by_id</td>
+          <td class="col-duration">0.05</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_delete_post_by_id():<br/>&gt;       delete_post = post_dao.delete_post_by_post_id(9004)<br/><br/>test_for_data_access_layer\test_group_post_dao.py:83: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_post_dao_imp.GroupPostDAO object at 0x00000167CF5EB130&gt;<br/>post_id = 9004<br/><br/>    def delete_post_by_post_id(self, post_id: int) -&gt; bool:<br/>        try:<br/>            sql = &quot;delete from post_table where post_id = %s&quot;<br/>            cursor = connection.cursor()<br/>&gt;           cursor.execute(sql, [post_id])<br/><br/>..\data_access_layer\implementation_classes\group_post_dao_imp.py:78: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffbe090&gt;<br/>query = &#x27;delete from post_table where post_id = %s&#x27;, params = [9004]<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_delete_post_by_id_fail_post_not_found</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_delete_post_by_id_fail_post_not_found():<br/>        try:<br/>&gt;           post_dao.delete_post_by_post_id(90000)<br/><br/>test_for_data_access_layer\test_group_post_dao.py:90: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_post_dao_imp.GroupPostDAO object at 0x00000167CF5EB130&gt;<br/>post_id = 90000<br/><br/>    def delete_post_by_post_id(self, post_id: int) -&gt; bool:<br/>        try:<br/>            sql = &quot;delete from post_table where post_id = %s&quot;<br/>            cursor = connection.cursor()<br/>&gt;           cursor.execute(sql, [post_id])<br/><br/>..\data_access_layer\implementation_classes\group_post_dao_imp.py:78: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffbeae0&gt;<br/>query = &#x27;delete from post_table where post_id = %s&#x27;, params = [90000]<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_view_postgres.py::test_view_group_by_id</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_view_group_by_id():<br/>&gt;       groups = group_view_postgres_dao.get_group_by_id(9)<br/><br/>test_for_data_access_layer\test_group_view_postgres.py:8: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_view_postgres_dao_imp.GroupViewPostgresDao object at 0x00000167CF5DA110&gt;<br/>group_id = 9<br/><br/>    def get_group_by_id(self, group_id) -&gt; [Group]:<br/>        sql = &quot;select * from group_table where group_id = %s&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, [group_id])<br/><br/>..\data_access_layer\implementation_classes\group_view_postgres_dao_imp.py:11: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cfeb99b0&gt;<br/>query = &#x27;select * from group_table where group_id = %s&#x27;, params = [9]<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_view_postgres.py::test_get_all_group</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_get_all_group():<br/>&gt;       result = group_view_postgres_dao.get_all_groups()<br/><br/>test_for_data_access_layer\test_group_view_postgres.py:13: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_view_postgres_dao_imp.GroupViewPostgresDao object at 0x00000167CF5DA110&gt;<br/><br/>    def get_all_groups(self) -&gt; List[Group]:<br/>        sql = &quot;select * from group_table&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql)<br/><br/>..\data_access_layer\implementation_classes\group_view_postgres_dao_imp.py:21: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffbf3d0&gt;<br/>query = &#x27;select * from group_table&#x27;, params = None<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_like_post_dao.py::test_like_post_success</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_like_post_success():<br/>&gt;       liked_post=like_post_dao.like_post(1)<br/><br/>test_for_data_access_layer\test_like_post_dao.py:9: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.like_post_dao_imp.LikePostDaoImp object at 0x00000167CF5D92A0&gt;<br/>post_id = 1<br/><br/>    def like_post(self,post_id:int):<br/>            sql = &quot;update post_table set likes = likes + 1 where post_id=%s returning likes&quot;<br/>            cursor = connection.cursor()<br/>&gt;           cursor.execute(sql,post_id)<br/><br/>..\data_access_layer\implementation_classes\like_post_dao_imp.py:12: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffbde80&gt;<br/>query = &#x27;update post_table set likes = likes + 1 where post_id=%s returning likes&#x27;<br/>params = 1<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>&gt;               self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:558: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Connection [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167ceddece0&gt;<br/>gen = &lt;generator object BaseCursor._execute_gen at 0x00000167CFF4FDF0&gt;<br/>timeout = 0.1<br/><br/>    def wait(self, gen: PQGen[RV], timeout: Optional[float] = 0.1) -&gt; RV:<br/>        &quot;&quot;&quot;<br/>        Consume a generator operating on the connection.<br/>    <br/>        The function must be used on generators that don&#x27;t change connection<br/>        fd (i.e. not on connect and reset).<br/>        &quot;&quot;&quot;<br/>&gt;       return waiting.wait(gen, self.pgconn.socket, timeout=timeout)<br/><br/>C:\Venv\lib\site-packages\psycopg\connection.py:767: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>gen = &lt;generator object BaseCursor._execute_gen at 0x00000167CFF4FDF0&gt;<br/>fileno = 832, timeout = 0.1<br/><br/>    def wait_selector(<br/>        gen: PQGen[RV], fileno: int, timeout: Optional[float] = None<br/>    ) -&gt; RV:<br/>        &quot;&quot;&quot;<br/>        Wait for a generator using the best strategy available.<br/>    <br/>        :param gen: a generator performing database operations and yielding<br/>            `Ready` values when it would block.<br/>        :param fileno: the file descriptor to wait on.<br/>        :param timeout: timeout (in seconds) to check for other interrupt, e.g.<br/>            to allow Ctrl-C.<br/>        :type timeout: float<br/>        :return: whatever *gen* returns on completion.<br/>    <br/>        Consume *gen*, scheduling `fileno` for completion when it is reported to<br/>        block. Once ready again send the ready state back to *gen*.<br/>        &quot;&quot;&quot;<br/>        try:<br/>&gt;           s = next(gen)<br/><br/>C:\Venv\lib\site-packages\psycopg\waiting.py:53: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffbde80&gt;<br/>query = &#x27;update post_table set likes = likes + 1 where post_id=%s returning likes&#x27;<br/>params = 1<br/><br/>    def _execute_gen(<br/>        self,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; PQGen[None]:<br/>        &quot;&quot;&quot;Generator implementing `Cursor.execute()`.&quot;&quot;&quot;<br/>        yield from self._start_query(query)<br/>&gt;       pgq = self._convert_query(query, params)<br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:203: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffbde80&gt;<br/>query = &#x27;update post_table set likes = likes + 1 where post_id=%s returning likes&#x27;<br/>params = 1<br/><br/>    def _convert_query(<br/>        self, query: Query, params: Optional[Params] = None<br/>    ) -&gt; PostgresQuery:<br/>        pgq = PostgresQuery(self._tx)<br/>&gt;       pgq.convert(query, params)<br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:376: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg._queries.PostgresQuery object at 0x00000167CFF4FC30&gt;<br/>query = &#x27;update post_table set likes = likes + 1 where post_id=%s returning likes&#x27;<br/>vars = 1<br/><br/>    def convert(self, query: Query, vars: Optional[Params]) -&gt; None:<br/>        &quot;&quot;&quot;<br/>        Set up the query and parameters to convert.<br/>    <br/>        The results of this function can be obtained accessing the object<br/>        attributes (`query`, `params`, `types`, `formats`).<br/>        &quot;&quot;&quot;<br/>        if isinstance(query, str):<br/>            bquery = query.encode(self._encoding)<br/>        elif isinstance(query, Composable):<br/>            bquery = query.as_bytes(self._tx)<br/>        else:<br/>            bquery = query<br/>    <br/>        if vars is not None:<br/>            (<br/>                self.query,<br/>                self._want_formats,<br/>                self._order,<br/>                self._parts,<br/>            ) = _query2pg(bquery, self._encoding)<br/>        else:<br/>            self.query = bquery<br/>            self._want_formats = self._order = None<br/>    <br/>&gt;       self.dump(vars)<br/><br/>C:\Venv\lib\site-packages\psycopg\_queries.py:84: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg._queries.PostgresQuery object at 0x00000167CFF4FC30&gt;, vars = 1<br/><br/>    def dump(self, vars: Optional[Params]) -&gt; None:<br/>        &quot;&quot;&quot;<br/>        Process a new set of variables on the query processed by `convert()`.<br/>    <br/>        This method updates `params` and `types`.<br/>        &quot;&quot;&quot;<br/>        if vars is not None:<br/>&gt;           params = _validate_and_reorder_params(<br/>                self._parts, vars, self._order<br/>            )<br/><br/>C:\Venv\lib\site-packages\psycopg\_queries.py:93: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>parts = [QueryPart(pre=b&#x27;update post_table set likes = likes + 1 where post_id=&#x27;, item=0, format=&lt;PyFormat.AUTO: &#x27;s&#x27;&gt;), QueryPart(pre=b&#x27; returning likes&#x27;, item=0, format=&lt;PyFormat.AUTO: &#x27;s&#x27;&gt;)]<br/>vars = 1, order = None<br/><br/>    def _validate_and_reorder_params(<br/>        parts: List[QueryPart], vars: Params, order: Optional[List[str]]<br/>    ) -&gt; Sequence[Any]:<br/>        &quot;&quot;&quot;<br/>        Verify the compatibility between a query and a set of params.<br/>        &quot;&quot;&quot;<br/>        # Try concrete types, then abstract types<br/>        t = type(vars)<br/>        if t is list or t is tuple:<br/>            sequence = True<br/>        elif t is dict:<br/>            sequence = False<br/>        elif isinstance(vars, Sequence) and not isinstance(vars, (bytes, str)):<br/>            sequence = True<br/>        elif isinstance(vars, Mapping):<br/>            sequence = False<br/>        else:<br/>&gt;           raise TypeError(<br/>                f&quot;query parameters should be a sequence or a mapping,&quot;<br/>                f&quot; got {type(vars).__name__}&quot;<br/>            )<br/><span class="error">E           TypeError: query parameters should be a sequence or a mapping, got int</span><br/><br/>C:\Venv\lib\site-packages\psycopg\_queries.py:175: TypeError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_get_user_profile_success</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_get_user_profile_success():<br/>&gt;       show_user = user_profile_dao.get_user_profile(10)<br/><br/>test_for_data_access_layer\test_user_profile_dao.py:12: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.user_profile_dao_imp.UserProfileDAOImp object at 0x00000167CF5E9DE0&gt;<br/>user_id = 10<br/><br/>    def get_user_profile(self, user_id: int) -&gt; User:<br/>        &quot;&quot;&quot;Grabs data from the user profile by user id&quot;&quot;&quot;<br/>        sql = &#x27;select * from user_table where user_id = %(user_id)s&#x27;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, {&quot;user_id&quot;: user_id})<br/><br/>..\data_access_layer\implementation_classes\user_profile_dao_imp.py:16: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffbf950&gt;<br/>query = &#x27;select * from user_table where user_id = %(user_id)s&#x27;<br/>params = {&#x27;user_id&#x27;: 10}<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_get_user_profile_success_2</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_get_user_profile_success_2():<br/>&gt;       show_user = user_profile_dao.get_user_profile(10000)<br/><br/>test_for_data_access_layer\test_user_profile_dao.py:18: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.user_profile_dao_imp.UserProfileDAOImp object at 0x00000167CF5E9DE0&gt;<br/>user_id = 10000<br/><br/>    def get_user_profile(self, user_id: int) -&gt; User:<br/>        &quot;&quot;&quot;Grabs data from the user profile by user id&quot;&quot;&quot;<br/>        sql = &#x27;select * from user_table where user_id = %(user_id)s&#x27;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, {&quot;user_id&quot;: user_id})<br/><br/>..\data_access_layer\implementation_classes\user_profile_dao_imp.py:16: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167d002ec40&gt;<br/>query = &#x27;select * from user_table where user_id = %(user_id)s&#x27;<br/>params = {&#x27;user_id&#x27;: 10000}<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_profile_about_me_success</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_update_user_profile_about_me_success():<br/>        &quot;&quot;&quot;Happy test to see if user about me is updated correctly&quot;&quot;&quot;<br/>        updated_user = User(10000, &quot;test_first_name&quot;, &quot;test_last_name&quot;, &quot;test@email.com&quot;, &quot;test_username&quot;, &quot;test_passcode&quot;,<br/>                            &quot;Updating Profile About me&quot;, &quot;2022-01-21&quot;, &quot;test_image&quot;)<br/>&gt;       updated_profile: User = user_profile_dao.update_user_profile(updated_user)<br/><br/>test_for_data_access_layer\test_user_profile_dao.py:27: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.user_profile_dao_imp.UserProfileDAOImp object at 0x00000167CF5E9DE0&gt;<br/>user = &lt;entities.user.User object at 0x00000167D0016B00&gt;<br/><br/>    def update_user_profile(self, user: User) -&gt; User:<br/>        &quot;&quot;&quot; A method used to update information for the profile besides the image&quot;&quot;&quot;<br/>    <br/>        sql = &quot;select * from user_table where user_id = %(user_id)s&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, {&#x27;user_id&#x27;: user.user_id})<br/><br/>..\data_access_layer\implementation_classes\user_profile_dao_imp.py:29: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167d002f740&gt;<br/>query = &#x27;select * from user_table where user_id = %(user_id)s&#x27;<br/>params = {&#x27;user_id&#x27;: 10000}<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_profile_birth_date_success</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_update_user_profile_birth_date_success():<br/>        &quot;&quot;&quot;Happy test to see if user birth date is updated correctly&quot;&quot;&quot;<br/>        updated_user = User(10000, &quot;test_first_name&quot;, &quot;test_last_name&quot;, &quot;test@email.com&quot;, &quot;test_username&quot;,<br/>                            &quot;test_passcode&quot;,<br/>                            user_about_me_for_tests, &quot;2022-01-05&quot;, &quot;test_image&quot;)<br/>&gt;       updated_profile: User = user_profile_dao.update_user_profile(updated_user)<br/><br/>test_for_data_access_layer\test_user_profile_dao.py:36: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.user_profile_dao_imp.UserProfileDAOImp object at 0x00000167CF5E9DE0&gt;<br/>user = &lt;entities.user.User object at 0x00000167D00E0100&gt;<br/><br/>    def update_user_profile(self, user: User) -&gt; User:<br/>        &quot;&quot;&quot; A method used to update information for the profile besides the image&quot;&quot;&quot;<br/>    <br/>        sql = &quot;select * from user_table where user_id = %(user_id)s&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, {&#x27;user_id&#x27;: user.user_id})<br/><br/>..\data_access_layer\implementation_classes\user_profile_dao_imp.py:29: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167d002e8d0&gt;<br/>query = &#x27;select * from user_table where user_id = %(user_id)s&#x27;<br/>params = {&#x27;user_id&#x27;: 10000}<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_profile_failure_no_user</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_update_user_profile_failure_no_user():<br/>        &quot;&quot;&quot;Sad test to see if there is no user found by the ID&quot;&quot;&quot;<br/>        updated_user_fail = User(1000000000, &quot;test_first_name&quot;, &quot;test_last_name&quot;, &quot;test@email.com&quot;, &quot;test_username&quot;,<br/>                                 &quot;test_passcode&quot;, user_about_me_for_tests, &quot;2022-01-21&quot;, &quot;test_image&quot;)<br/>        try:<br/>&gt;           user_profile_dao.update_user_profile(updated_user_fail)<br/><br/>test_for_data_access_layer\test_user_profile_dao.py:45: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.user_profile_dao_imp.UserProfileDAOImp object at 0x00000167CF5E9DE0&gt;<br/>user = &lt;entities.user.User object at 0x00000167D006E860&gt;<br/><br/>    def update_user_profile(self, user: User) -&gt; User:<br/>        &quot;&quot;&quot; A method used to update information for the profile besides the image&quot;&quot;&quot;<br/>    <br/>        sql = &quot;select * from user_table where user_id = %(user_id)s&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, {&#x27;user_id&#x27;: user.user_id})<br/><br/>..\data_access_layer\implementation_classes\user_profile_dao_imp.py:29: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167d002f530&gt;<br/>query = &#x27;select * from user_table where user_id = %(user_id)s&#x27;<br/>params = {&#x27;user_id&#x27;: 1000000000}<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_profile_failure_sql_injection</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_update_user_profile_failure_sql_injection():<br/>        updated_user_fail_sql_injection: User = User(10000, &quot;test_first_name&quot;, &quot;test_last_name&quot;, &quot;test@test.com&quot;,<br/>                                                     &quot;test_username&quot;,<br/>                                                     &quot;test_passcode&quot;,<br/>                                                     &quot;&#x27;; update user_table set passcode = &#x27;sqlinjection&#x27; where user_id = 10000; --&quot;,<br/>                                                     &quot;2016-01-01&quot;, &quot;Test image&quot;)<br/>&gt;       if user_profile_dao.update_user_profile(updated_user_fail_sql_injection):<br/><br/>test_for_data_access_layer\test_user_profile_dao.py:57: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.user_profile_dao_imp.UserProfileDAOImp object at 0x00000167CF5E9DE0&gt;<br/>user = &lt;entities.user.User object at 0x00000167CFE90EE0&gt;<br/><br/>    def update_user_profile(self, user: User) -&gt; User:<br/>        &quot;&quot;&quot; A method used to update information for the profile besides the image&quot;&quot;&quot;<br/>    <br/>        sql = &quot;select * from user_table where user_id = %(user_id)s&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, {&#x27;user_id&#x27;: user.user_id})<br/><br/>..\data_access_layer\implementation_classes\user_profile_dao_imp.py:29: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167d002e090&gt;<br/>query = &#x27;select * from user_table where user_id = %(user_id)s&#x27;<br/>params = {&#x27;user_id&#x27;: 10000}<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_get_user_image_success</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_get_user_image_success():<br/>&gt;       image = user_profile_dao.get_user_image(10000)<br/><br/>test_for_data_access_layer\test_user_profile_dao.py:64: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.user_profile_dao_imp.UserProfileDAOImp object at 0x00000167CF5E9DE0&gt;<br/>user_id = 10000<br/><br/>    def get_user_image(self, user_id: int) -&gt; str:<br/>        &quot;&quot;&quot;a method to get a user image from the database&quot;&quot;&quot;  # need to create a custom exception and database checker<br/>    <br/>        # Check to see if the post id is in the database, raise an error otherwise.<br/>        sql = f&quot;select user_id from user_picture_table where user_id = %(user_id)s;&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, {&quot;user_id&quot;: user_id})<br/><br/>..\data_access_layer\implementation_classes\user_profile_dao_imp.py:50: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffa7ed0&gt;<br/>query = &#x27;select user_id from user_picture_table where user_id = %(user_id)s;&#x27;<br/>params = {&#x27;user_id&#x27;: 10000}<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_get_user_image_success_2</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_get_user_image_success_2():<br/>&gt;       image = user_profile_dao.get_user_image(9000)<br/><br/>test_for_data_access_layer\test_user_profile_dao.py:69: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.user_profile_dao_imp.UserProfileDAOImp object at 0x00000167CF5E9DE0&gt;<br/>user_id = 9000<br/><br/>    def get_user_image(self, user_id: int) -&gt; str:<br/>        &quot;&quot;&quot;a method to get a user image from the database&quot;&quot;&quot;  # need to create a custom exception and database checker<br/>    <br/>        # Check to see if the post id is in the database, raise an error otherwise.<br/>        sql = f&quot;select user_id from user_picture_table where user_id = %(user_id)s;&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, {&quot;user_id&quot;: user_id})<br/><br/>..\data_access_layer\implementation_classes\user_profile_dao_imp.py:50: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cfee2140&gt;<br/>query = &#x27;select user_id from user_picture_table where user_id = %(user_id)s;&#x27;<br/>params = {&#x27;user_id&#x27;: 9000}<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_get_user_image_failure_no_image</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_get_user_image_failure_no_image():<br/>        try:<br/>&gt;           user_profile_dao.get_user_image(-5)<br/><br/>test_for_data_access_layer\test_user_profile_dao.py:75: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.user_profile_dao_imp.UserProfileDAOImp object at 0x00000167CF5E9DE0&gt;<br/>user_id = -5<br/><br/>    def get_user_image(self, user_id: int) -&gt; str:<br/>        &quot;&quot;&quot;a method to get a user image from the database&quot;&quot;&quot;  # need to create a custom exception and database checker<br/>    <br/>        # Check to see if the post id is in the database, raise an error otherwise.<br/>        sql = f&quot;select user_id from user_picture_table where user_id = %(user_id)s;&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, {&quot;user_id&quot;: user_id})<br/><br/>..\data_access_layer\implementation_classes\user_profile_dao_imp.py:50: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cfe9df30&gt;<br/>query = &#x27;select user_id from user_picture_table where user_id = %(user_id)s;&#x27;<br/>params = {&#x27;user_id&#x27;: -5}<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_image_success_1</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_update_user_image_success_1():<br/>&gt;       assert user_profile_dao.update_user_image(10000, &quot;thisisahappytest&quot;)<br/><br/>test_for_data_access_layer\test_user_profile_dao.py:82: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.user_profile_dao_imp.UserProfileDAOImp object at 0x00000167CF5E9DE0&gt;<br/>user_id = 10000, image = &#x27;thisisahappytest&#x27;<br/><br/>    def update_user_image(self, user_id: int, image: str) -&gt; str:<br/>        &quot;&quot;&quot;a method to place a user image into the database&quot;&quot;&quot;<br/>    <br/>        # Check to see if the user id is in the database, raise an error otherwise.<br/>        sql = &quot;select * from user_table where user_id = %(user_id)s;&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, {&quot;user_id&quot;: user_id})<br/><br/>..\data_access_layer\implementation_classes\user_profile_dao_imp.py:66: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffbeb90&gt;<br/>query = &#x27;select * from user_table where user_id = %(user_id)s;&#x27;<br/>params = {&#x27;user_id&#x27;: 10000}<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_image_success_2</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_update_user_image_success_2():<br/>&gt;       assert user_profile_dao.update_user_image(9000, &quot;thisisahappytest&quot;)<br/><br/>test_for_data_access_layer\test_user_profile_dao.py:86: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.user_profile_dao_imp.UserProfileDAOImp object at 0x00000167CF5E9DE0&gt;<br/>user_id = 9000, image = &#x27;thisisahappytest&#x27;<br/><br/>    def update_user_image(self, user_id: int, image: str) -&gt; str:<br/>        &quot;&quot;&quot;a method to place a user image into the database&quot;&quot;&quot;<br/>    <br/>        # Check to see if the user id is in the database, raise an error otherwise.<br/>        sql = &quot;select * from user_table where user_id = %(user_id)s;&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, {&quot;user_id&quot;: user_id})<br/><br/>..\data_access_layer\implementation_classes\user_profile_dao_imp.py:66: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffbc720&gt;<br/>query = &#x27;select * from user_table where user_id = %(user_id)s;&#x27;<br/>params = {&#x27;user_id&#x27;: 9000}<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_image_failure_no_user</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_update_user_image_failure_no_user():<br/>        try:<br/>&gt;           user_profile_dao.update_user_image(-5, &quot;this is a sad test&quot;)<br/><br/>test_for_data_access_layer\test_user_profile_dao.py:91: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.user_profile_dao_imp.UserProfileDAOImp object at 0x00000167CF5E9DE0&gt;<br/>user_id = -5, image = &#x27;this is a sad test&#x27;<br/><br/>    def update_user_image(self, user_id: int, image: str) -&gt; str:<br/>        &quot;&quot;&quot;a method to place a user image into the database&quot;&quot;&quot;<br/>    <br/>        # Check to see if the user id is in the database, raise an error otherwise.<br/>        sql = &quot;select * from user_table where user_id = %(user_id)s;&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, {&quot;user_id&quot;: user_id})<br/><br/>..\data_access_layer\implementation_classes\user_profile_dao_imp.py:66: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cfe300f0&gt;<br/>query = &#x27;select * from user_table where user_id = %(user_id)s;&#x27;<br/>params = {&#x27;user_id&#x27;: -5}<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_image_format_success_1</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_update_image_format_success_1():<br/>&gt;       assert user_profile_dao.update_user_image_format(10000, &quot;testing&quot;)<br/><br/>test_for_data_access_layer\test_user_profile_dao.py:98: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.user_profile_dao_imp.UserProfileDAOImp object at 0x00000167CF5E9DE0&gt;<br/>user_id = 10000, image_format = &#x27;testing&#x27;<br/><br/>    def update_user_image_format(self, user_id: int, image_format: str) -&gt; User:<br/>        &quot;&quot;&quot;Method to put the picture format into the database.&quot;&quot;&quot;<br/>    <br/>        # Check to see if the user id is in the database, raise an error otherwise.<br/>        sql = f&quot;select * from user_table where user_id = %(user_id)s;&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, {&quot;user_id&quot;: user_id})<br/><br/>..\data_access_layer\implementation_classes\user_profile_dao_imp.py:94: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cffbe090&gt;<br/>query = &#x27;select * from user_table where user_id = %(user_id)s;&#x27;<br/>params = {&#x27;user_id&#x27;: 10000}<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_image_format_success_2</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_update_image_format_success_2():<br/>&gt;       assert user_profile_dao.update_user_image_format(9000, &quot;testing&quot;)<br/><br/>test_for_data_access_layer\test_user_profile_dao.py:102: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.user_profile_dao_imp.UserProfileDAOImp object at 0x00000167CF5E9DE0&gt;<br/>user_id = 9000, image_format = &#x27;testing&#x27;<br/><br/>    def update_user_image_format(self, user_id: int, image_format: str) -&gt; User:<br/>        &quot;&quot;&quot;Method to put the picture format into the database.&quot;&quot;&quot;<br/>    <br/>        # Check to see if the user id is in the database, raise an error otherwise.<br/>        sql = f&quot;select * from user_table where user_id = %(user_id)s;&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, {&quot;user_id&quot;: user_id})<br/><br/>..\data_access_layer\implementation_classes\user_profile_dao_imp.py:94: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cff61850&gt;<br/>query = &#x27;select * from user_table where user_id = %(user_id)s;&#x27;<br/>params = {&#x27;user_id&#x27;: 9000}<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_image_format_failure_no_user</td>
+          <td class="col-duration">0.05</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_update_image_format_failure_no_user():<br/>        try:<br/>&gt;           user_profile_dao.update_user_image_format(-5, &quot;gif&quot;)<br/><br/>test_for_data_access_layer\test_user_profile_dao.py:107: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.user_profile_dao_imp.UserProfileDAOImp object at 0x00000167CF5E9DE0&gt;<br/>user_id = -5, image_format = &#x27;gif&#x27;<br/><br/>    def update_user_image_format(self, user_id: int, image_format: str) -&gt; User:<br/>        &quot;&quot;&quot;Method to put the picture format into the database.&quot;&quot;&quot;<br/>    <br/>        # Check to see if the user id is in the database, raise an error otherwise.<br/>        sql = f&quot;select * from user_table where user_id = %(user_id)s;&quot;<br/>        cursor = connection.cursor()<br/>&gt;       cursor.execute(sql, {&quot;user_id&quot;: user_id})<br/><br/>..\data_access_layer\implementation_classes\user_profile_dao_imp.py:94: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;psycopg.Cursor [no result] [INERROR] (host=the-jungle.cvtq9j4axrge.us-east-1.rds.amazonaws.com database=postgres) at 0x167cff62400&gt;<br/>query = &#x27;select * from user_table where user_id = %(user_id)s;&#x27;<br/>params = {&#x27;user_id&#x27;: -5}<br/><br/>    def execute(<br/>        self: _C,<br/>        query: Query,<br/>        params: Optional[Params] = None,<br/>        *,<br/>        prepare: Optional[bool] = None,<br/>        binary: Optional[bool] = None,<br/>    ) -&gt; _C:<br/>        &quot;&quot;&quot;<br/>        Execute a query or command to the database.<br/>        &quot;&quot;&quot;<br/>        try:<br/>            with self._conn.lock:<br/>                self._conn.wait(<br/>                    self._execute_gen(<br/>                        query, params, prepare=prepare, binary=binary<br/>                    )<br/>                )<br/>        except e.Error as ex:<br/>&gt;           raise ex.with_traceback(None)<br/><span class="error">E           psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block</span><br/><br/>C:\Venv\lib\site-packages\psycopg\cursor.py:564: InFailedSqlTransaction<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_for_service_layer/test_group_member_junction_service.py::test_leave_group</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_leave_group():<br/>        group_mem_service.group_member_junction_dao.get_all_users_in_a_group = MagicMock(return_value=mem_list)<br/>        group_mem_service.group_member_junction_dao.leave_group = MagicMock.return_value = True<br/>        try:<br/>&gt;           group_mem_service.leave_group(1,2)<br/><br/>test_for_service_layer\test_group_member_junction_service.py:18: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;service_layer.implementation_classes.group_member_junction_service.GroupMemberJunctionService object at 0x00000167CFE86470&gt;<br/>user_id = 1, group_id = 2<br/><br/>    def leave_group(self, user_id: int, group_id: int):<br/>        check_list = self.group_member_junction_dao.get_all_users_in_a_group()<br/>    <br/>        if not isinstance(user_id, int) and isinstance(group_id, int):<br/>            raise WrongType(&quot;only use numbers&quot;)<br/>        else:<br/>&gt;           for check in check_list:<br/><span class="error">E           TypeError: &#x27;bool&#x27; object is not iterable</span><br/><br/>..\service_layer\implementation_classes\group_member_junction_service.py:20: TypeError<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_success</td>
+          <td class="col-duration">0.45</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_success_2</td>
+          <td class="col-duration">0.46</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_failure</td>
+          <td class="col-duration">0.08</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_image_success_1</td>
+          <td class="col-duration">0.69</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_image_success_2</td>
+          <td class="col-duration">0.73</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_image_failure_no_post</td>
+          <td class="col-duration">0.09</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_create_group_sad_1</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>TypeError(&quot;InputTooLong.__init__() missing 1 required positional argument: &#x27;message&#x27;&quot;)
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_join_group_sad_1</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>TypeError(&quot;GroupIdNonExistent.__init__() missing 1 required positional argument: &#x27;message&#x27;&quot;)
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_to_many</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_failed_leave_group</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_create_post_fail_too_many_arguments</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_create_post_fail_long_string</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_post_by_id_fail</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_view_dao.py::test_get_group_success</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_view_dao.py::test_info_in_group_valid</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_view_dao.py::test_unknown_group_id</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_view_dao.py::test_negative_group_id</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_view_dao.py::test_get_all_group_success</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_password</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_create_post_service_success</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_create_post_service_failure_user_no_int</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_create_post_service_failure_text_not_string</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_create_post_service_failure_image_format_not_string</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_create_post_image_service_success</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_create_post_image_service_failure_not_int</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_create_post_image_service_failure_not_str</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_get_user_profile_service</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_get_user_profile_failure_not_int</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_profile_service_success</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_profile_service_failure_too_many_chars</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_profile_service_failure_birth_date_is_null</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_get_user_image_service_success</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_get_user_image_service_failure_not_int</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_image_service_success</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_image_service_failure_not_int</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_image_service_failure_not_string</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_image_format_service_success</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_image_format_service_failure_</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_password_service_failure</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody></table></body></html>
