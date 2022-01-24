@@ -2,14 +2,26 @@ from flask import Flask, request, jsonify
 from data_access_layer.implementation_classes.postfeed_dao_imp import PostfeedDaoimpl
 from service_layer.implementation_classes.postfeed_service_imp import PostfeedServiceImp
 from custom_exceptions.connection_error import ConnectionErrorr
-# Setup logging
+from data_access_layer.implementation_classes.like_post_dao_imp import LikePostDaoImp
+from service_layer.implementation_classes.like_post_service_imp import LikePostServiceImp
+
+from data_access_layer.implementation_classes.comment_dao_imp import CommentDAOImp
+from entities.comment import Comment
+from service_layer.implementation_classes.comment_service_imp import CommentServiceImp
+postfeeddao = PostfeedDaoimpl()
+postfeed_service = PostfeedServiceImp(postfeeddao)
+like_post_dao=LikePostDaoImp()
+like_post_service=LikePostServiceImp(like_post_dao)
+comment_dao = CommentDAOImp()
+comment_service = CommentServiceImp(comment_dao)
+
+
 
 
 # Setup flask
 app: Flask = Flask(__name__)
 
-postfeeddao = PostfeedDaoimpl()
-postfeed_service = PostfeedServiceImp(postfeeddao)
+
 
 
 @app.get("/")  # basic check for app running
@@ -39,11 +51,51 @@ def delete_a_post():
     except ConnectionErrorr :
         return str(e), 400
 
+@app.post("/postfeed")
+def add_likes_to_post():
+   try:
+    data = request.get_json()
+    postid = data["postid"],
+    return jsonify(like_post_service.service_like_post(postid))
+   except ConnectionErrorr :
+       return str(e), 400
+
+
+
+# delete comment information
+@app.delete("/Comments")
+def delete_comment():
+        data = request.get_json()
+        comment_id = data["commentid"],
+        jsonify(comment_service.service_delete_comment(comment_id))
+        return "Comment with id {} was deleted successfully".format(comment_id)
 
 
 
 
 
+
+
+@app.get("/postfeed/<post_id>")
+def get_comments_by_post_id(post_id: str):
+    results = comment_service.service_get_comment_by_post_id(int(post_id))
+    post_comments_as_dictionary = []
+    for comments in results:
+        dictionary_comment = comments.make_dictionary()
+        post_comments_as_dictionary.append(dictionary_comment)
+    return jsonify(post_comments_as_dictionary), 200
+
+
+@app.post("/createComment")
+def create_comment():
+    body = request.get_json()
+    post_id = body["postId"],
+    user_id = body["userId"],
+    group_id = body["groupId"],
+    reply_user = body["replyUser"],
+    comment_text = body["commentText"],
+    comment_id = comment_service.service_create_comment(post_id, user_id, comment_text, group_id, reply_user)
+    return jsonify(comment_id)
 
 
 
