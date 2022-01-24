@@ -5,7 +5,7 @@ from data_access_layer.abstract_classes.group_member_junction_dao import GroupMe
 from entities import group_member_junction
 from entities.group_member_junction import GroupMemberJunction
 from util.database_connection import connection
-import custom_exceptions.group_member_junction_exceptions
+from custom_exceptions.group_member_junction_exceptions import *
 
 
 class GroupMemberJunctionDao(GroupMemberJunctionAbs):
@@ -40,4 +40,4 @@ class GroupMemberJunctionDao(GroupMemberJunctionAbs):
                     return True
                 except TypeError:
                     raise TypeError("too many arguments")
-        raise custom_exceptions.group_member_junction_exceptions.WrongId("Incorrect ID")
+        raise WrongId("Incorrect ID")
