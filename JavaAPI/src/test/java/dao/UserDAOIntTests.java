@@ -5,6 +5,7 @@ import dev.com.thejungle.entity.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOIntTests {
@@ -40,4 +41,9 @@ public class UserDAOIntTests {
         Assert.assertTrue(users.size() >= 1);
     }
 
+    @Test
+    void testGetGroups(){
+        ArrayList<Integer> arrayList = userDAOInt.getGroups(9000);
+        Assert.assertTrue(arrayList.size() >= 1);
+    }
 }
