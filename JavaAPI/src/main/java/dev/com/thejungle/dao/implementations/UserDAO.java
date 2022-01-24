@@ -11,6 +11,13 @@ import java.util.List;
 
 public class UserDAO implements UserDAOInt {
 
+    public static boolean areStringsEmpty(String... strings) {
+        for (String s : strings)
+            if (s == null || s.isEmpty())
+                return true;
+        return false;
+    }
+
     @Override
     public User createNewUser(User user) {
         try (Connection connection = ConnectionDB.createConnection()) {
@@ -27,7 +34,12 @@ public class UserDAO implements UserDAOInt {
             preparedStatement.execute();
             ResultSet rs = preparedStatement.getGeneratedKeys();
             rs.next();
+            boolean emptyStrings = areStringsEmpty(user.getFirstName(), user.getLastName(), user.getEmail(), user.getUsername(),
+                    user.getPasscode(), user.getUserAbout(), user.getImageFormat());
             user.setUserId(rs.getInt("user_id"));
+            if(emptyStrings == true){
+                return false;
+            }
             return user;
         } catch (SQLException q) {
             q.printStackTrace();
