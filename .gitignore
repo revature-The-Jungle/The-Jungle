@@ -30,3 +30,5 @@
 
 #pycharm
 .pyc
+*.pyc
+*.pyc
