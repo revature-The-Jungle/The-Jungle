@@ -7,7 +7,7 @@ from custom_exceptions.group_exceptions import InputTooLong, GroupIdNonExistent,
 class GroupDAOImp(GroupDAO):
     def create_group(self, group: Group) -> Group:
         try:
-            sql = "insert into group_table values(default, %s, %s, %s, %s) returning group_id"
+            sql = 'insert into group_table values(default, %s, %s, %s, %s) returning group_id'
             cursor = connection.cursor()
             cursor.execute(sql, (group.user_id, group.group_name, group.group_about, group.image_format))
             connection.commit()

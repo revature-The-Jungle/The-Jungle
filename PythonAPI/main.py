@@ -44,8 +44,7 @@ def create_group():
             group_data["groupAbout"],
             group_data["imageFormat"]
         )
-        group_created = group_service_2.service_create_group(new_group)
-        # TODO: why isn't make_dictionary available?
+        group_created: Group = group_service_2.service_create_group(new_group)
         group_dictionary = group_created.make_dictionary()
         group_json = jsonify(group_dictionary)
         return group_json, 201
@@ -62,12 +61,16 @@ def create_group():
         exception_dictionary = {"message": str(e)}
         return jsonify(exception_dictionary), 400
 
-# TODO: group_id in join_group interferes with group_id in get_group_by_id. replace group_id with group_name?
 
 # JOIN GROUP
-# @app.post("/group/join")
-# def join_group(group_id: str, user_id: str):
-#     return jsonify(group_service_2.service_join_group(int(group_id), int(user_id)), 200
+@app.post("/group/join/<group_id>/<user_id>")
+def join_group(group_id: str, user_id: str):
+    group_joined = group_service_2.service_join_group(int(group_id), int(user_id))
+    group_joined_dictionary = {
+        "groupId": group_joined[0],
+        "userId": group_joined[1]
+    }
+    return jsonify(group_joined_dictionary), 200
 
 
 # -----------------------------------------------------------------------------------------------------

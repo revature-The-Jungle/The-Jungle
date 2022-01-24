@@ -3,7 +3,7 @@ from PythonAPI.entities.group import Group
 
 group_dao = GroupDAOImp()
 
-group_happy_1 = Group(0, 9000, "Smashing Pumpkins", "This group is for all Smashing Pumpkins fans!", "image format")
+group_happy_1 = Group(0, 9000, "Smashin Pumpkins", "This group is for all Smashing Pumpkins fans!", "image format")
 group_happy_2 = Group("a", 9000, "ZZe Top", "This group is for all ZZ Top fans!", "image format")
 
 i = 0
