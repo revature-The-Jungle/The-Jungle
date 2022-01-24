@@ -2,6 +2,7 @@ package dev.com.thejungle.service.interfaces;
 
 import dev.com.thejungle.entity.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface UserServiceInt {
@@ -13,5 +14,7 @@ public interface UserServiceInt {
     User loginService(String username, String passcode);
 
     List<User> getAllUsersService();
+
+    ArrayList<Integer> getGroups(int userId);
 
 }
