@@ -1,6 +1,6 @@
 from data_access_layer.implementation_classes.group_member_junction_dao_imp import GroupMemberJunctionDao
 from entities.group_member_junction import GroupMemberJunction
-from service_layer.abstract_classes.group_member_junction_service_abs import GroupMemberJunctionServiceAbs
+from service_layer.abstract_classes.group_member_junction_service import GroupMemberJunctionServiceAbs
 from custom_exceptions.group_member_junction_exceptions import *
 
 
