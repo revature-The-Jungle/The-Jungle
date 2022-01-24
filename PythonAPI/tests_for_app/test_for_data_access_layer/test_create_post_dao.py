@@ -72,3 +72,6 @@ def test_create_post_image_failure_no_post():
         assert False
     except PostNotFound as e:
         assert str(e) == 'The post could not be found.'
+
+
+def test_get_post_image_success():
