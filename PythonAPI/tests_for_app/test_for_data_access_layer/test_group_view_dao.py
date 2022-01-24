@@ -1,4 +1,4 @@
-from data_access_layer.implementation_classes.group_view_dao import GroupViewDaoImp
+from data_access_layer.implementation_classes.group_view_dao_imp import GroupViewDaoImp
 from entities.group import Group
 
 group_view_dao_imp = GroupViewDaoImp()

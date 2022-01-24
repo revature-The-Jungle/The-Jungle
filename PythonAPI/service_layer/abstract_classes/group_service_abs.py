@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from PythonAPI.entities.group import Group
+
+from entities.group import Group
 
 
 class GroupService(ABC):

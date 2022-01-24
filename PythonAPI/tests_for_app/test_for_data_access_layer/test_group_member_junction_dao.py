@@ -1,7 +1,7 @@
 import pytest
 
-from PythonAPI.data_access_layer.implementation_classes.group_member_junction_dao import GroupMemberJunctionDao
-from PythonAPI.entities.group_member_junction import GroupMemberJunction
+from data_access_layer.implementation_classes.group_member_junction_dao_imp import GroupMemberJunctionDao
+from entities.group_member_junction import GroupMemberJunction
 from custom_exceptions.group_member_junction_exceptions import *
 
 group_member_junction_dao = GroupMemberJunctionDao()

@@ -1,8 +1,8 @@
 import pytest
 
-from PythonAPI.custom_exceptions.post_exceptions import PostNotFound
-from PythonAPI.data_access_layer.implementation_classes.group_post_dao import GroupPostDAO
-from PythonAPI.entities.group_post import GroupPost
+from custom_exceptions.post_exceptions import PostNotFound
+from data_access_layer.implementation_classes.group_post_dao_imp import GroupPostDAO
+from entities.group_post import GroupPost
 
 post_dao = GroupPostDAO()
 

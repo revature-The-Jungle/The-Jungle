@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from PythonAPI.entities.post import Post
+from entities.post import Post
 
 
 class CreatePostDAO(ABC):
@@ -10,5 +10,5 @@ class CreatePostDAO(ABC):
         pass
 
     @abstractmethod
-    def create_post_image(self, image: str) -> bool:
+    def create_post_image(self, post_id: int, image: str) -> str:
         pass
