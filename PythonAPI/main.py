@@ -41,8 +41,8 @@ def on():
     return "python is running"
 
 
-like_post_dao=LikePostDaoImp()
-like_post_service= LikePostServiceImp(like_post_dao)
+like_post_dao = LikePostDaoImp()
+like_post_service = LikePostServiceImp(like_post_dao)
 create_post_dao = CreatePostDAOImp()
 create_post_service = CreatePostServiceImp(create_post_dao)
 
