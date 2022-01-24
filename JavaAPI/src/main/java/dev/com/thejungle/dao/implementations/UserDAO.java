@@ -1,5 +1,7 @@
 package dev.com.thejungle.dao.implementations;
 
+import dev.com.thejungle.customexception.DuplicateEmail;
+import dev.com.thejungle.customexception.DuplicateUsername;
 import dev.com.thejungle.customexception.UserNotFound;
 import dev.com.thejungle.dao.interfaces.UserDAOInt;
 import dev.com.thejungle.entity.User;
@@ -10,6 +12,7 @@ import java.util.List;
 
 
 public class UserDAO implements UserDAOInt {
+
 
     @Override
     public User createNewUser(User user) {
@@ -30,8 +33,16 @@ public class UserDAO implements UserDAOInt {
             user.setUserId(rs.getInt("user_id"));
             return user;
         } catch (SQLException q) {
-            q.printStackTrace();
-            return null;
+            if (q.getMessage().contains("username")){
+                throw new DuplicateUsername("This username is already taken");
+            }
+            else if (q.getMessage().contains("email")){
+                throw new DuplicateEmail("Email is already in use");
+            }
+            else {
+                q.printStackTrace();
+                return null;
+            }
         }
     }
 

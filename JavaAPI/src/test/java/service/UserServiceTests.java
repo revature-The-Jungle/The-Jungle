@@ -1,5 +1,6 @@
 package service;
 
+import dev.com.thejungle.customexception.BlankInputs;
 import dev.com.thejungle.customexception.DuplicateUsername;
 import dev.com.thejungle.customexception.UnallowedSpaces;
 import dev.com.thejungle.customexception.UsernameOrPasscodeException;
@@ -27,6 +28,7 @@ public class UserServiceTests {
     static User usernameSpaces;
     static User passwordSpaces;
     static List<User> newList;
+    static User blankSpaces;
 
 
     @BeforeClass
@@ -41,6 +43,7 @@ public class UserServiceTests {
         duplicateUsername = new User(0, "Dup", "Testing", "dup@email.com", "username", "password", "I like social media.", date, "imagesrc");
         usernameSpaces = new User(0, "User", "Testing", "space@email.com", "user name", "password", "I like social media.", date, "imagesrc");
         passwordSpaces = new User(0, "User", "Testing", "space2@email.com", "username", "password space", "I like social media.", date, "imagesrc");
+        blankSpaces = new User(0, "Test", "", "email@testemail.com", "", "", "Social media is fun.", date, "imagesrc");
     }
 
 
@@ -67,6 +70,13 @@ public class UserServiceTests {
     public void cannotHaveSpacesInPassword(){
         Mockito.when(userDAOImp.createNewUser(passwordSpaces)).thenThrow(new UnallowedSpaces("No spaces allowed in username or password"));
         userServiceImp.createNewUserService(passwordSpaces);
+    }
+
+    // BLANK INPUTS
+    @Test (expectedExceptions = BlankInputs.class, expectedExceptionsMessageRegExp = "Please fill in the blanks")
+    public void missingInputsForUserRegistration(){
+        Mockito.when(userDAOImp.createNewUser(blankSpaces)).thenThrow(new BlankInputs("Please fill in the blanks"));
+        userServiceImp.createNewUserService(blankSpaces);
     }
 
     //  NOT FOUND USER

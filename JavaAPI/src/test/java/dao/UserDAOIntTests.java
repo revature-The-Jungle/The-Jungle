@@ -1,5 +1,7 @@
 package dao;
 
+import dev.com.thejungle.customexception.DuplicateEmail;
+import dev.com.thejungle.customexception.DuplicateUsername;
 import dev.com.thejungle.dao.implementations.UserDAO;
 import dev.com.thejungle.entity.User;
 import org.testng.Assert;
@@ -15,11 +17,40 @@ public class UserDAOIntTests {
     @Test
     void testCreateNewUser() {
         Date date = new Date(742892400000L);
-        User newJungleUser = new User(0, "Test", "Tester", "testingemail77@gmail.com",
-                "userna", "passcode", "I like social media.", date,
-                "imagesourcefile");
+        User newJungleUser = new User(0, "Test", "Tester", "email123@emaileowun",
+                        "usernametestasdovun", "passcode", "I like social media.", date,
+                        "imagesourcefile");
         User createdUser = userDAOInt.createNewUser(newJungleUser);
         Assert.assertEquals(createdUser.getFirstName(), "Test");
+    }
+
+    // SAD PATH TEST DUPLICATE USERNAME
+    @Test
+    void testDuplicateUsernameException(){
+        try {
+            Date date = new Date(742892400000L);
+            User newJungleUser = new User(0, "Test", "Tester", "email123@emai",
+                        "username", "passcode", "I like social media.", date,
+                        "imagesourcefile");
+            userDAOInt.createNewUser(newJungleUser);
+        } catch (DuplicateUsername d) {
+            Assert.assertEquals("This username is already taken", d.getMessage());
+        }
+    }
+
+
+    // SAD PATH TEST DUPLICATE EMAIL
+    @Test
+    void testDuplicateEmailException(){
+        try {
+            Date date = new Date(742892400000L);
+            User newJungleUser = new User(0, "Test", "Tester", "email",
+                    "usernamehsrtn", "passcode", "I like social media.", date,
+                    "imagesourcefile");
+            userDAOInt.createNewUser(newJungleUser);
+        } catch (DuplicateEmail e) {
+            Assert.assertEquals("Email is already in use", e.getMessage());
+        }
     }
 
 

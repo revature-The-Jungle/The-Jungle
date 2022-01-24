@@ -1,5 +1,6 @@
 package dev.com.thejungle.dao.interfaces;
 
+
 import dev.com.thejungle.entity.User;
 import java.util.List;
 
