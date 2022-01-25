@@ -1,5 +1,4 @@
-
-
+from custom_exceptions.postIdNonExistent import postidnoneexistent
 from data_access_layer.abstract_classes.comment_dao import CommentDAO
 from entities import comment
 from entities.comment import Comment
@@ -17,6 +16,7 @@ class CommentDAOImp(CommentDAO):
         return generated_id
 
     def get_comment_by_post_id(self, post_id: int) -> list[Comment]:
+       try:
         sql = "select * from comment_table where post_id = %s"
         cursor = connection.cursor()
         cursor.execute(sql, [post_id])
@@ -25,6 +25,8 @@ class CommentDAOImp(CommentDAO):
         for comments in comment_record:
             comment_list.append(Comment(*comments))
         return comment_list
+       except Exception:
+           raise postidnoneexistent
 
     def delete_comment(self, comment_id: int) -> bool:
         sql = "delete from comment_table where comment_id = %s"

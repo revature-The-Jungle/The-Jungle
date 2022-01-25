@@ -340,12 +340,15 @@ def delete_comment():
 
 @app.get("/postfeed/<post_id>")
 def get_comments_by_post_id(post_id: str):
+   try:
     results = comment_service.service_get_comment_by_post_id(int(post_id))
     post_comments_as_dictionary = []
     for comments in results:
         dictionary_comment = comments.make_dictionary()
         post_comments_as_dictionary.append(dictionary_comment)
     return jsonify(post_comments_as_dictionary), 200
+   except Exception:
+       return "something went wrong"
 
 
 @app.post("/createComment")
