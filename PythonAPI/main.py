@@ -5,6 +5,7 @@ from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeASt
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
 from custom_exceptions.post_not_found import PostNotFound
+from custom_exceptions.post_text_must_be_a_string import PostTextMustBeAString
 from custom_exceptions.user_id_must_be_an_integer import UserIdMustBeAnInteger
 from custom_exceptions.user_image_not_found import UserImageNotFound
 from custom_exceptions.birth_date_is_null import BirthDateIsNull
@@ -12,6 +13,7 @@ from custom_exceptions.too_many_characters import TooManyCharacters
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.implementation_classes.create_post_dao_imp import CreatePostDAOImp
 from data_access_layer.implementation_classes.user_profile_dao_imp import UserProfileDAOImp
+from entities.post import Post
 from entities.user import User
 from service_layer.implementation_classes.create_post_service_imp import CreatePostServiceImp
 
@@ -20,26 +22,32 @@ import logging
 
 from service_layer.implementation_classes.user_profile_service_imp import UserProfileServiceImp
 from data_access_layer.implementation_classes.group_view_postgres_dao_imp import GroupViewPostgresDao
-from service_layer.implementation_classes.group_postgres_service import GroupPostgresService
+from service_layer.implementation_classes.group_postgres_service_imp import GroupPostgresService
+from data_access_layer.implementation_classes.like_post_dao_imp import LikePostDaoImp
+from service_layer.implementation_classes.like_post_service_imp import LikePostServiceImp
 
 logging.basicConfig(filename="records.log", level=logging.DEBUG,
                     format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
-from data_access_layer.implementation_classes.like_post_dao_imp import LikePostDaoImp
 
-
-#logging.basicConfig(filename="records.log", level=logging.DEBUG,
-                    #format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
 
 # Setup flask
-from service_layer.implementation_classes.like_post_service_imp import LikePostServiceImp
-
 app: Flask = Flask(__name__)
 CORS(app)
 
+@app.get("/")  # basic check for app running
+def on():
+    return "python is running"
+
+
 like_post_dao=LikePostDaoImp()
-like_post_service=LikePostServiceImp(like_post_dao)
+like_post_service= LikePostServiceImp(like_post_dao)
+create_post_dao = CreatePostDAOImp()
+create_post_service = CreatePostServiceImp(create_post_dao)
 
-
+user_profile_dao = UserProfileDAOImp()
+user_profile_service = UserProfileServiceImp(user_profile_dao)
+group_view_dao = GroupViewPostgresDao()
+group_service = GroupPostgresService(group_view_dao)
 
 
 @app.post("/postfeed")
@@ -47,13 +55,7 @@ def add_likes_to_post():
     data = request.get_json()
     postid = data["postid"],
     return jsonify(like_post_service.service_like_post(postid))
-    
-    
-    
-    
-    
-    
-    
+
     
     """post_likes = like_post_service.like_post_service(likes)
     reimbursements_as_dictionaries= []
@@ -63,31 +65,33 @@ def add_likes_to_post():
     return jsonify(reimbursements_as_dictionaries), 200"""
 
 
-
-
-
-
-
-
-create_post_dao = CreatePostDAOImp()
-create_post_service = CreatePostServiceImp(create_post_dao)
-
-user_profile_dao = UserProfileDAOImp()
-user_profile_service = UserProfileServiceImp(user_profile_dao)
-group_view_dao = GroupViewPostgresDao()
-group_service = GroupPostgresService(group_view_dao)
-
-@app.get("/")  # basic check for app running
-def on():
-    return "python is running"
-
-
 @app.get("/user/<user_id>")
 def get_a_user_id(user_id: int):
     try:
         user = user_profile_service.service_get_user_profile_service(int(user_id))
         user_as_dictionary = user.make_dictionary()
         return jsonify(user_as_dictionary), 200
+    except UserNotFound as e:
+        return str(e), 400
+
+
+@app.post("/post")
+def create_a_post():  # Not yet tested
+    """Method to create a new post in the database."""
+    post_body = request.get_json()
+    new_post = Post(user_id=post_body["user_id"],
+                    post_text=post_body["post_text"],
+                    image_format=post_body["image_format"])
+    try:
+        returned_post = create_post_service.create_post_service(new_post)
+        returned_post_as_json = jsonify(returned_post.make_dictionary())
+        return returned_post_as_json
+    except UserIdMustBeAnInteger as e:
+        return str(e), 400
+    except ImageFormatMustBeAString as e:
+        return str(e), 400
+    except PostTextMustBeAString as e:
+        return str(e), 400
     except UserNotFound as e:
         return str(e), 400
 
@@ -123,7 +127,7 @@ def post_the_user_image(user_id):
     try:
         image = request.data
         image_decoded = image.decode('utf-8')
-        return user_profile_service.update_user_image_service(user_id, image_decoded), 201
+        return user_profile_service.update_user_image_service(user_id, image_decoded), 200
     except UserIdMustBeAnInteger as e:
         return str(e), 400
     except ImageMustBeAString as e:
@@ -138,7 +142,7 @@ def post_the_user_image_format(user_id):
         image_data = request.get_json()
         returned_user = user_profile_service.update_user_image_format_service(user_id, image_data["image_format"])
         user_as_json = jsonify(returned_user.make_dictionary())
-        return user_as_json, 201
+        return user_as_json, 200
     except UserIdMustBeAnInteger as e:
         return str(e), 400
     except ImageFormatMustBeAString as e:

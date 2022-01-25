@@ -52,7 +52,7 @@ class UserProfileServiceImp(UserProfileService):
         if not str(user_id).isnumeric():
             raise UserIdMustBeAnInteger('The user id must be an integer.')
 
-        # Check to make sure that the image is a string
+        # Check to make sure that the image format is a string
         if not type(image_format) == str or not image_format:
             raise ImageFormatMustBeAString('The image format must be a string.')
 

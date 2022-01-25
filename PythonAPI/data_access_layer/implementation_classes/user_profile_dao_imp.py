@@ -4,6 +4,8 @@ from data_access_layer.abstract_classes.user_profile_dao import UserProfileDAO
 from entities.user import User
 from util.database_connection import connection
 
+user_not_found_string = 'The user could not be found.'
+
 
 class UserProfileDAOImp(UserProfileDAO):
 
@@ -17,7 +19,7 @@ class UserProfileDAOImp(UserProfileDAO):
             user = User(*profile_record)
             return user
         else:
-            raise UserNotFound('The user could not be found.')
+            raise UserNotFound(user_not_found_string)
 
     def update_user_profile(self, user: User) -> User:
         """ A method used to update information for the profile besides the image"""
@@ -26,7 +28,7 @@ class UserProfileDAOImp(UserProfileDAO):
         cursor = connection.cursor()
         cursor.execute(sql, {'user_id': user.user_id})
         if not cursor.fetchone():
-            raise UserNotFound('The user could not be found.')
+            raise UserNotFound(user_not_found_string)
 
         sql = "update user_table set user_about = %(user_about)s, user_birth_date = %(user_birth_date)s where user_id "\
               "= %(user_id)s "
@@ -63,7 +65,7 @@ class UserProfileDAOImp(UserProfileDAO):
         cursor = connection.cursor()
         cursor.execute(sql, {"user_id": user_id})
         if not cursor.fetchone():
-            raise UserNotFound('The user could not be found.')
+            raise UserNotFound(user_not_found_string)
 
         # delete any existing image from the database and place the image in the database
         sql = "DELETE FROM user_picture_table where user_id = %(user_id)s; "
@@ -91,7 +93,7 @@ class UserProfileDAOImp(UserProfileDAO):
         cursor = connection.cursor()
         cursor.execute(sql, {"user_id": user_id})
         if not cursor.fetchone():
-            raise UserNotFound('The user could not be found.')
+            raise UserNotFound(user_not_found_string)
 
         # Update the user image format.
         sql = f"update user_table set image_format = %(image_format)s where user_id = %(user_id)s;"
