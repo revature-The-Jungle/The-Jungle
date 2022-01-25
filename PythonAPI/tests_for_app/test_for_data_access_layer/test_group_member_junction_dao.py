@@ -26,7 +26,7 @@ def test_to_many():
 
 
 def test_leave_group():
-    result = group_member_junction_dao.leave_group(10000, 9)
+    result = group_member_junction_dao.leave_group(32, 15)
     assert result
 
 

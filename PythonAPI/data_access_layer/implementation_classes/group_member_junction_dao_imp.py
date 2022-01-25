@@ -29,7 +29,7 @@ class GroupMemberJunctionDao(GroupMemberJunctionAbs):
 
     # deletes user from group_member_junction_table
     def leave_group(self, user_id: int, group_id: int):
-        check_list = self.get_all_users_in_a_group(int)
+        check_list = self.get_all_users_in_a_group(group_id)
         for checks in check_list:
             if checks.group_id == group_id and checks.user_id == user_id:
                 try:
