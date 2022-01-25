@@ -1,7 +1,7 @@
 from custom_exceptions.post_image_not_found import PostImageNotFound
 from custom_exceptions.post_not_found import PostNotFound
 from custom_exceptions.user_not_found import UserNotFound
-from data_access_layer.abstract_classes.create_post_dao import CreatePostDAO
+from data_access_layer.abstract_classes.create_post_dao_abs import CreatePostDAO
 from util.database_connection import connection
 from entities.post import Post
 

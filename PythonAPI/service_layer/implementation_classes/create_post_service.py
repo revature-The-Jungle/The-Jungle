@@ -4,8 +4,8 @@ from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
 from custom_exceptions.post_text_must_be_a_string import PostTextMustBeAString
 from custom_exceptions.user_id_must_be_an_integer import UserIdMustBeAnInteger
 from entities.post import Post
-from service_layer.abstract_classes.create_post_service import CreatePostService
-from data_access_layer.implementation_classes.create_post_dao_imp import CreatePostDAOImp
+from service_layer.abstract_classes.create_post_service_abs import CreatePostService
+from data_access_layer.implementation_classes.create_post_dao import CreatePostDAOImp
 
 
 class CreatePostServiceImp(CreatePostService):

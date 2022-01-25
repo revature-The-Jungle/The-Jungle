@@ -1,7 +1,7 @@
 import pytest
 
 from custom_exceptions.group_member_junction_exceptions import WrongType
-from data_access_layer.implementation_classes.group_dao_imp import GroupDAOImp
+from data_access_layer.implementation_classes.group_dao import GroupDAOImp
 from entities.group import Group
 
 group_dao = GroupDAOImp()

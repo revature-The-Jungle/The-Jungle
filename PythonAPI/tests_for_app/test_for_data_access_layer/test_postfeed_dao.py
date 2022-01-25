@@ -1,4 +1,4 @@
-from data_access_layer.implementation_classes.postfeed_dao_imp import PostFeedDaoImp
+from data_access_layer.implementation_classes.postfeed_dao import PostFeedDaoImp
 
 PostfeedDao = PostFeedDaoImp()
 

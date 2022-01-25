@@ -1,8 +1,8 @@
-from data_access_layer.abstract_classes import comment_dao
-from data_access_layer.implementation_classes.comment_dao_imp import CommentDAOImp
+from data_access_layer.abstract_classes import comment_dao_abs
+from data_access_layer.implementation_classes.comment_dao import CommentDAOImp
 from entities import comment
 from entities.comment import Comment
-from service_layer.abstract_classes.comment_service import CommentService
+from service_layer.abstract_classes.comment_service_abs import CommentService
 
 
 class CommentServiceImp(CommentService):

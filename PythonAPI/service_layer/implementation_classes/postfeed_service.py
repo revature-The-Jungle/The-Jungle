@@ -1,5 +1,5 @@
-from data_access_layer.implementation_classes.postfeed_dao_imp import PostFeedDaoImp
-from service_layer.abstract_classes.postfeed_service import PostfeedService
+from data_access_layer.implementation_classes.postfeed_dao import PostFeedDaoImp
+from service_layer.abstract_classes.postfeed_service_abs import PostfeedService
 
 
 class PostFeedServiceImp(PostfeedService):

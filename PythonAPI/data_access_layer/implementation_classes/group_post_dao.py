@@ -1,5 +1,5 @@
 from custom_exceptions.post_exceptions import PostNotFound
-from data_access_layer.abstract_classes.group_post_dao import GroupPostDAOAbs
+from data_access_layer.abstract_classes.group_post_dao_abs import GroupPostDAOAbs
 from entities.group_post import GroupPost
 from util.database_connection import connection
 

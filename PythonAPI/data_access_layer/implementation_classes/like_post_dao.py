@@ -1,4 +1,4 @@
-from data_access_layer.abstract_classes.like_post_dao import LikePostDAO
+from data_access_layer.abstract_classes.like_post_dao_abs import LikePostDAO
 from entities import post
 
 from entities.post import Post

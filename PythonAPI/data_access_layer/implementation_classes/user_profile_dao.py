@@ -1,6 +1,6 @@
 from custom_exceptions.user_image_not_found import UserImageNotFound
 from custom_exceptions.user_not_found import UserNotFound
-from data_access_layer.abstract_classes.user_profile_dao import UserProfileDAO
+from data_access_layer.abstract_classes.user_profile_dao_abs import UserProfileDAO
 from entities.user import User
 from util.database_connection import connection
 

@@ -1,5 +1,5 @@
 from custom_exceptions.postIdNonExistent import postidnoneexistent
-from data_access_layer.abstract_classes.comment_dao import CommentDAO
+from data_access_layer.abstract_classes.comment_dao_abs import CommentDAO
 from entities import comment
 from entities.comment import Comment
 from util.database_connection import connection

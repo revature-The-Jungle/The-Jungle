@@ -1,5 +1,5 @@
-from data_access_layer.implementation_classes.like_post_dao_imp import LikePostDaoImp
-from service_layer.abstract_classes.like_post_service import LikePostService
+from data_access_layer.implementation_classes.like_post_dao import LikePostDaoImp
+from service_layer.abstract_classes.like_post_service_abs import LikePostService
 
 
 

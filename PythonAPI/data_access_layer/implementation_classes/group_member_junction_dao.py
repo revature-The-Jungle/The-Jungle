@@ -1,7 +1,7 @@
 import traceback
 from typing import List
 
-from data_access_layer.abstract_classes.group_member_junction_dao import GroupMemberJunctionAbs
+from data_access_layer.abstract_classes.group_member_junction_dao_abs import GroupMemberJunctionAbs
 from entities import group_member_junction
 from entities.group_member_junction import GroupMemberJunction
 from util.database_connection import connection

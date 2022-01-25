@@ -1,5 +1,5 @@
 from custom_exceptions.connection_error import ConnectionErrorr
-from data_access_layer.abstract_classes.postfeed_dao import PostFeedDao
+from data_access_layer.abstract_classes.postfeed_dao_abs import PostFeedDao
 from entities.post import Post
 from util.database_connection import connection
 
