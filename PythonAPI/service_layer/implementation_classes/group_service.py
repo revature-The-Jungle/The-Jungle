@@ -1,6 +1,6 @@
 from custom_exceptions.group_exceptions import NullValues, InputTooLong, InputTooShort, GroupNameTaken
-from data_access_layer.implementation_classes.group_dao import GroupDAOImp
-from data_access_layer.implementation_classes.group_view_postgres_dao import GroupViewPostgresDao
+from data_access_layer.implementation_classes.group_dao_imp import GroupDAOImp
+from data_access_layer.implementation_classes.group_view_postgres_dao_imp import GroupViewPostgresDao
 from entities.group import Group
 from service_layer.abstract_classes.group_service_abs import GroupService
 
@@ -27,3 +27,6 @@ class GroupPostgreService(GroupService):
 
     def service_join_group(self, group_id: int, user_id: int):
         return self.group_dao.join_group(group_id, user_id)
+
+    def service_get_creator(self, group_id: int):
+        return self.group_dao.get_creator(group_id)

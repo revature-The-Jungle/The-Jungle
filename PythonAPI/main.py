@@ -29,27 +29,27 @@ from service_layer.implementation_classes.group_postgres_service_imp import Grou
 from data_access_layer.implementation_classes.like_post_dao_imp import LikePostDaoImp
 from service_layer.implementation_classes.like_post_service_imp import LikePostServiceImp
 from custom_exceptions.group_exceptions import NullValues, InputTooShort, InputTooLong, GroupNameTaken
-from data_access_layer.implementation_classes.group_dao import GroupDAOImp
-from data_access_layer.implementation_classes.group_view_postgres_dao import GroupViewPostgresDao
+from data_access_layer.implementation_classes.group_dao_imp import GroupDAOImp
+from data_access_layer.implementation_classes.group_view_postgres_dao_imp import GroupViewPostgresDao
 from entities.group import Group
-from service_layer.implementation.group_service_imp.group_postgres_service import GroupPostgresService
+from service_layer.implementation_classes.group_postgres_service_imp import GroupPostgresService
 from service_layer.implementation_classes.group_service import GroupPostgreService
 
 logging.basicConfig(filename="records.log", level=logging.DEBUG,
                     format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
 
-
 # Setup flask
 app: Flask = Flask(__name__)
 CORS(app)
+
 
 @app.get("/")  # basic check for app running
 def on():
     return "python is running"
 
 
-like_post_dao=LikePostDaoImp()
-like_post_service= LikePostServiceImp(like_post_dao)
+like_post_dao = LikePostDaoImp()
+like_post_service = LikePostServiceImp(like_post_dao)
 create_post_dao = CreatePostDAOImp()
 create_post_service = CreatePostServiceImp(create_post_dao)
 
@@ -69,7 +69,6 @@ def add_likes_to_post():
     postid = data["postid"],
     return jsonify(like_post_service.service_like_post(postid))
 
-    
     """post_likes = like_post_service.like_post_service(likes)
     reimbursements_as_dictionaries= []
     for reimbursement in employee_reimbursements:
@@ -197,7 +196,7 @@ def update_profile_info(user_id):
         exception_json = jsonify(exception_dictionary)
         return exception_json, 400
 
-    
+
 # -----------------------------------------------------------------------------------------------------
 
 # CREATE GROUP
@@ -263,14 +262,15 @@ def get_all_groups():
         groups_as_dictionary.append(dictionary_group)
     return jsonify(groups_as_dictionary)
 
+
 """Group Junction API"""
 group_mem_dao = GroupMemberJunctionDao()
 group_junction_service = GroupMemberJunctionService(group_mem_dao)
 
 
-@app.get("/GroupJunction/UserList")
-def get_users_in_group_api():
-    group_list = group_junction_service.get_all_users_in_a_group()
+@app.get("/GroupJunction/UserList/<group_id>")
+def get_users_in_group_api(group_id):
+    group_list = group_junction_service.get_all_users_in_a_group(int(group_id))
     group_dict = []
     for mem in group_list:
         dictionary_mem = mem.make_dictionary()
@@ -288,6 +288,15 @@ def leave_group(user_id: str, group_id: str):
         return jsonify(str(e))
     except WrongId as e:
         return jsonify(str(e))
+
+
+"""Get Creator for Group HomePage"""
+
+
+@app.get("/creator/<group_id>")
+def get_creator_api(group_id: str):
+    result = group_service_2.service_get_creator(int(group_id))
+    return jsonify(result)
 
 
 app.run()

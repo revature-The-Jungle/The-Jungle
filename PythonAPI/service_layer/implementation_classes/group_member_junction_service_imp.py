@@ -8,8 +8,8 @@ class GroupMemberJunctionService(GroupMemberJunctionServiceAbs):
     def __init__(self, group_member_junction_dao: GroupMemberJunctionDao):
         self.group_member_junction_dao = group_member_junction_dao
 
-    def get_all_users_in_a_group(self) -> list[GroupMemberJunction]:
-        return self.group_member_junction_dao.get_all_users_in_a_group(int)
+    def get_all_users_in_a_group(self, group_id) -> list[GroupMemberJunction]:
+        return self.group_member_junction_dao.get_all_users_in_a_group(group_id)
 
     def leave_group(self, user_id: int, group_id: int):
         return self.group_member_junction_dao.leave_group(user_id,group_id)
