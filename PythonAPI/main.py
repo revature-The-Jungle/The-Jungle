@@ -1,10 +1,10 @@
 from flask import request, jsonify, Flask
 from flask_cors import CORS
 
-from PythonAPI.custom_exceptions.post_exceptions import InvalidInput
-from PythonAPI.data_access_layer.implementation_classes.group_post_dao_imp import GroupPostDAO
-from PythonAPI.entities.group_post import GroupPost
-from PythonAPI.service_layer.implementation_classes.group_post_service_imp import GroupPostService
+from custom_exceptions.post_exceptions import InvalidInput
+from data_access_layer.implementation_classes.group_post_dao_imp import GroupPostDAO
+from entities.group_post import GroupPost
+from service_layer.implementation_classes.group_post_service_imp import GroupPostService
 from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
