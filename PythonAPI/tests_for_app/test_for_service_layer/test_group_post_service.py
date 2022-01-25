@@ -11,23 +11,23 @@ post_service = GroupPostService(post_dao)
 
 # ------------------------------ TEST CREATE POST ------------------------------
 def test_mock_create_post_success():
-    post_service.service_create_post = MagicMock(return_value=post_service)
     created_post = GroupPost(9000, 9000, 9000, "test create post service", "none", 0, "2020-1-24")
+    post_service.post_dao.create_post = MagicMock(return_value=created_post)
+    post_service.service_create_post(created_post)
     assert post_service.service_create_post(created_post)
 
 
 def test_mock_create_empty_string():
-    post_service.service_create_post = MagicMock(return_value=post_service)
     created_post = GroupPost(9000, 9000, 9000, "", "none", 0, "2020-1-24")
     try:
+        post_service.post_dao.create_post = MagicMock(return_value=created_post)
         post_service.service_create_post(created_post)
-        assert True
+        assert False
     except InvalidInput as e:
         assert str(e) == "No Input Given!"
 
 
 def test_mock_create_long_string():
-    post_service.service_create_post = MagicMock(return_value=post_service)
     created_post = GroupPost(9000, 9000, 9000, "Lorem ipsum dolor sit amet," +
                              "consectetuer adipiscing elit. Aenean commodo " +
                              "ligula eget dolor. Aenean massa. Cum sociis natoque " +
@@ -40,28 +40,29 @@ def test_mock_create_long_string():
                              "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. " +
                              "Aenean leo ligula, porttitor eu,", "none", 0, "2020-1-24")
     try:
+        post_service.post_dao.create_post = MagicMock(return_value=created_post)
         post_service.service_create_post(created_post)
-        assert True
+        assert False
     except InvalidInput as e:
         assert str(e) == "Messages too long!"
 
 
 def test_mock_create_post_negative_user_id():
-    post_service.service_create_post = MagicMock(return_value=post_service)
     created_post = GroupPost(9000, -9000, 9000, "", "none", 0, "2020-1-24")
     try:
+        post_service.post_dao.create_post = MagicMock(return_value=created_post)
         post_service.service_create_post(created_post)
-        assert True
+        assert False
     except InvalidInput as e:
         assert str(e) == "Invalid Input!"
 
 
 def test_mock_create_wrong_type():
-    post_service.service_create_post = MagicMock(return_value=post_service)
     created_post = GroupPost("something", 9000, 9000, "", "none", 0, "2020-1-24")
     try:
+        post_service.post_dao.create_post = MagicMock(return_value=created_post)
         post_service.service_create_post(created_post)
-        assert True
+        assert False
     except InvalidInput as e:
         assert str(e) == "You need to enter number for post ID!"
 
@@ -89,25 +90,13 @@ def test_mock_get_all_posts_success():
     assert post_service.service_get_all_posts()
 
 
-def test_mock_get_all_posts_failed():
-    pass
-
-
 # ------------------------------ TEST GET ALL POST BY GROUP ID ------------------------------
 def test_mock_get_posts_by_group_id_success():
     post_service.service_get_all_posts_by_group_id = MagicMock(return_value=post_service)
     assert post_service.service_get_all_posts_by_group_id()
 
 
-def test_mock_get_posts_by_group_id_failed():
-    pass
-
-
 # ------------------------------ TEST DELETE POST BY ID ------------------------------
 def test_mock_delete_post_success():
     post_service.service_delete_post_by_post_id = MagicMock(return_value=post_service)
     assert post_service.service_delete_post_by_post_id()
-
-
-def test_mock_delete_post_failed():
-    pass

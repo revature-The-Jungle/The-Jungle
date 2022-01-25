@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import request, jsonify, Flask
 from flask_cors import CORS
 
 from PythonAPI.custom_exceptions.post_exceptions import InvalidInput
@@ -62,7 +62,8 @@ def add_likes_to_post():
     postid = data["postid"],
     return jsonify(like_post_service.service_like_post(postid))
 
-    """post_likes = like_post_service.like_post_service(likes)
+
+"""post_likes = like_post_service.like_post_service(likes)
     reimbursements_as_dictionaries= []
     for reimbursement in employee_reimbursements:
         dictionary_reimbursement =reimbursement.make_reimbursement_dictionary()
@@ -234,11 +235,10 @@ def create_group_post():
 
 
 @app.get("/group_post/<post_id>")
-def get_group_post_by_id(post_id: int):
+def get_group_post_by_id(post_id: str):
     result = post_service.service_get_post_by_id(int(post_id))
-    result_as_dictionary = result.make_dictionary()
-    post_as_json = jsonify(result_as_dictionary)
-    return post_as_json, 200
+    dictionary_request = result.make_dictionary()
+    return jsonify(dictionary_request), 200
 
 
 @app.get("/group_post")
@@ -251,8 +251,8 @@ def get_all_group_posts():
     return jsonify(posts_as_dictionary), 200
 
 
-@app.get("/group_post/<group_id>")
-def get_all_group_posts_by_group_id(group_id: int):
+@app.get("/group_post/group/<group_id>")
+def get_all_group_posts_by_group_id(group_id: str):
     posts_as_posts = post_service.service_get_all_posts_by_group_id(int(group_id))
     posts_as_dictionary = []
     for posts in posts_as_posts:

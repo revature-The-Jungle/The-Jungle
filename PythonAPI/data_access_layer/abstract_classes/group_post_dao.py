@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from entities.group_post import GroupPost
+from PythonAPI.entities.group_post import GroupPost
 
 
 class GroupPostDAOAbs(ABC):
@@ -9,7 +9,7 @@ class GroupPostDAOAbs(ABC):
         pass
 
     @abstractmethod
-    def create_post_image(self, post_id:int, image: str) -> str:
+    def create_post_image(self, post_id: int, image: str) -> str:
         pass
 
     @abstractmethod

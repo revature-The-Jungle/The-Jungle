@@ -1,7 +1,7 @@
-from custom_exceptions.post_exceptions import PostNotFound
-from data_access_layer.abstract_classes.group_post_dao import GroupPostDAOAbs
-from entities.group_post import GroupPost
-from util.database_connection import connection
+from PythonAPI.custom_exceptions.post_exceptions import PostNotFound
+from PythonAPI.data_access_layer.abstract_classes.group_post_dao import GroupPostDAOAbs
+from PythonAPI.entities.group_post import GroupPost
+from PythonAPI.util.database_connection import connection
 
 
 class GroupPostDAO(GroupPostDAOAbs):
@@ -17,7 +17,7 @@ class GroupPostDAO(GroupPostDAOAbs):
         except TypeError:
             raise TypeError("Too many arguments")
 
-    def create_post_image(self, post_id:int, image: str) -> str:
+    def create_post_image(self, post_id: int, image: str) -> str:
         """a method to place a post image into the database"""
         # Check to see if the post id is in the database, raise an error otherwise.
         sql = f"select * from post_table where post_id = %(post_id)s;"

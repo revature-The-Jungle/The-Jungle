@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from entities.group_post import GroupPost
+from PythonAPI.entities.group_post import GroupPost
 
 
 class GroupPostServiceAbs(ABC):

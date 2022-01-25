@@ -19,8 +19,7 @@ class GroupPostService(GroupPostServiceAbs):
                 raise InvalidInput("No Input Given!")
             if len(existing_post.post_text) > 500:
                 raise InvalidInput("Messages too long!")
-        created_post = self.post_dao.create_post(post)
-        return created_post
+        return self.post_dao.create_post(post)
 
     def service_create_post_image(self, image: str) -> bool:
         pass
