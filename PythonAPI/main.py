@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 from data_access_layer.implementation_classes.postfeed_dao_imp import PostFeedDaoImp
 from service_layer.implementation_classes.postfeed_service_imp import PostFeedServiceImp
 from custom_exceptions.connection_error import ConnectionErrorr
@@ -37,6 +39,7 @@ logging.basicConfig(filename="records.log", level=logging.DEBUG,
 
 # Setup flask
 app: Flask = Flask(__name__)
+CORS(app)
 
 
 @app.get("/")  # basic check for app running

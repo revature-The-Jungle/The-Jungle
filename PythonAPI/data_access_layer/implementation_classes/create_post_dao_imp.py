@@ -22,8 +22,15 @@ class CreatePostDAOImp(CreatePostDAO):
         cursor = connection.cursor()
         cursor.execute(sql, (post.user_id, post.post_text, post.image_format))
         connection.commit()
-        returned_post = cursor.fetchone()
-        return Post(*returned_post)
+        returned_post_id = cursor.fetchone()[0]
+
+        # get the image from the database and send it back
+        cursor = connection.cursor()
+        sql = f"select * from post_table where post_id = %(post_id)s;"
+        cursor.execute(sql, {"post_id": returned_post_id})
+        connection.commit()
+        new_post = cursor.fetchone()
+        return Post(*new_post)
 
     def create_post_image(self, post_id: int, image: str) -> str:
         """a method to place a post image into the database"""

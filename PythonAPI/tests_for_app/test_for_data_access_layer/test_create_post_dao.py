@@ -50,7 +50,9 @@ def create_fake_post_image(create_fake_post):
 
 def test_create_post_success(create_fake_user):
     post_to_be_created: Post = Post(user_id=100_000_000, post_text="success")
-    assert create_post_dao.create_post(post_to_be_created)
+    new_post = create_post_dao.create_post(post_to_be_created)
+    print(new_post.make_dictionary())
+    assert new_post
 
 
 def test_create_post_success_2(create_fake_user):
