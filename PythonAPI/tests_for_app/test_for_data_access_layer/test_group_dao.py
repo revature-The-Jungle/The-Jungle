@@ -1,3 +1,6 @@
+import pytest
+
+from custom_exceptions.group_member_junction_exceptions import WrongType
 from data_access_layer.implementation_classes.group_dao_imp import GroupDAOImp
 from entities.group import Group
 
@@ -54,3 +57,24 @@ def test_join_group_sad_1():
     except Exception as e:
         print(repr(e))
 
+        """Get Creator Test"""
+
+
+def test_get_creator_success():
+    try:
+        result = group_dao.get_creator(10)
+        assert result == "test"
+    except WrongType as e:
+        return str(e)
+
+
+def test_bad_Id():
+    with pytest.raises(TypeError) as e:
+        result = group_dao.get_creator(1)
+        assert "This Id does not exist" in str(e.value)
+
+
+def test_string_as_id():
+    with pytest.raises(WrongType) as e:
+        result = group_dao.get_creator("nan")
+        assert "please enter a number" in str(e.value)

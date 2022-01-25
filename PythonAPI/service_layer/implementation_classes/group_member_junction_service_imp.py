@@ -9,7 +9,7 @@ class GroupMemberJunctionService(GroupMemberJunctionServiceAbs):
         self.group_member_junction_dao = group_member_junction_dao
 
     def get_all_users_in_a_group(self) -> list[GroupMemberJunction]:
-        return self.group_member_junction_dao.get_all_users_in_a_group()
+        return self.group_member_junction_dao.get_all_users_in_a_group(int)
 
     def leave_group(self, user_id: int, group_id: int):
         return self.group_member_junction_dao.leave_group(user_id,group_id)
