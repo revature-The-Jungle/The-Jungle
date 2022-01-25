@@ -7,7 +7,9 @@ import dev.com.thejungle.dao.interfaces.UserDAOInt;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.utility.ConnectionDB;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -17,6 +19,10 @@ public class UserDAO implements UserDAOInt {
     @Override
     public User createNewUser(User user) {
         try (Connection connection = ConnectionDB.createConnection()) {
+//            long dateLong = user.getUserBirthdate();
+//            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//            java.sql.Date sqlDate = new java.sql.Date(dateLong);
+//            df.format(sqlDate);
             String sql = "insert into user_table values(default, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, user.getFirstName());

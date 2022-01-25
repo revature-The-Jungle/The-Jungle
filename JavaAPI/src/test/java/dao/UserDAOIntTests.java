@@ -17,8 +17,8 @@ public class UserDAOIntTests {
     @Test
     void testCreateNewUser() {
         Date date = new Date(742892400000L);
-        User newJungleUser = new User(0, "Test", "Tester", "email123@emaileowun",
-                        "usernametestasdovun", "passcode", "I like social media.", date,
+        User newJungleUser = new User(0, "Test", "Tester", "email123@emaileowun2",
+                        "usernametestasdovun2", "passcode", "I like social media.", date,
                         "imagesourcefile");
         User createdUser = userDAOInt.createNewUser(newJungleUser);
         Assert.assertEquals(createdUser.getFirstName(), "Test");
