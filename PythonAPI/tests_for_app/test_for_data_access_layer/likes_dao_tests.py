@@ -1,5 +1,5 @@
 
-from data_access_layer.implementation_classes.like_post_dao_imp import LikePostDaoImp
+from data_access_layer.implementation_classes.like_post_dao import LikePostDaoImp
 
 like_post_dao=LikePostDaoImp()
 

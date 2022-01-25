@@ -1,10 +1,16 @@
 from flask import Flask, request, jsonify
-from data_access_layer.implementation_classes.postfeed_dao_imp import PostFeedDaoImp
-from service_layer.implementation_classes.postfeed_service_imp import PostFeedServiceImp
+from flask_cors import CORS
+
+from data_access_layer.implementation_classes.postfeed_dao import PostFeedDaoImp
+from service_layer.implementation_classes.postfeed_service import PostFeedServiceImp
 from custom_exceptions.connection_error import ConnectionErrorr
-from data_access_layer.implementation_classes.comment_dao_imp import CommentDAOImp
-from service_layer.implementation_classes.comment_service_imp import CommentServiceImp
+from data_access_layer.implementation_classes.comment_dao import CommentDAOImp
+from service_layer.implementation_classes.comment_service import CommentServiceImp
 from custom_exceptions.group_member_junction_exceptions import WrongId
+from custom_exceptions.post_exceptions import InvalidInput
+from data_access_layer.implementation_classes.group_post_dao import GroupPostDAO
+from entities.group_post import GroupPost
+from service_layer.implementation_classes.group_post_service import GroupPostService
 from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
@@ -16,19 +22,25 @@ from custom_exceptions.user_image_not_found import UserImageNotFound
 from custom_exceptions.birth_date_is_null import BirthDateIsNull
 from custom_exceptions.too_many_characters import TooManyCharacters
 from custom_exceptions.user_not_found import UserNotFound
-from data_access_layer.implementation_classes.create_post_dao_imp import CreatePostDAOImp
-from data_access_layer.implementation_classes.user_profile_dao_imp import UserProfileDAOImp
+from data_access_layer.implementation_classes.create_post_dao import CreatePostDAOImp
+from data_access_layer.implementation_classes.user_profile_dao import UserProfileDAOImp
 from entities.post import Post
 from entities.user import User
-from service_layer.implementation_classes.create_post_service_imp import CreatePostServiceImp
-from service_layer.implementation_classes.group_member_junction_service_imp import GroupMemberJunctionService
-from data_access_layer.implementation_classes.group_member_junction_dao_imp import GroupMemberJunctionDao
+from service_layer.implementation_classes.create_post_service import CreatePostServiceImp
+from service_layer.implementation_classes.group_member_junction_service import GroupMemberJunctionService
+from data_access_layer.implementation_classes.group_member_junction_dao import GroupMemberJunctionDao
 
-from service_layer.implementation_classes.user_profile_service_imp import UserProfileServiceImp
-from data_access_layer.implementation_classes.group_view_postgres_dao_imp import GroupViewPostgresDao
-from service_layer.implementation_classes.group_postgres_service_imp import GroupPostgresService
-from data_access_layer.implementation_classes.like_post_dao_imp import LikePostDaoImp
-from service_layer.implementation_classes.like_post_service_imp import LikePostServiceImp
+from service_layer.implementation_classes.user_profile_service import UserProfileServiceImp
+from data_access_layer.implementation_classes.group_view_postgres_dao import GroupViewPostgresDao
+from service_layer.implementation_classes.group_postgres_service import GroupPostgresService
+from data_access_layer.implementation_classes.like_post_dao import LikePostDaoImp
+from service_layer.implementation_classes.like_post_service import LikePostServiceImp
+from custom_exceptions.group_exceptions import NullValues, InputTooShort, InputTooLong, GroupNameTaken
+from data_access_layer.implementation_classes.group_dao import GroupDAOImp
+from data_access_layer.implementation_classes.group_view_postgres_dao import GroupViewPostgresDao
+from entities.group import Group
+from service_layer.implementation_classes.group_postgres_service import GroupPostgresService
+from service_layer.implementation_classes.group_service import GroupPostgreService
 
 import logging
 
@@ -37,6 +49,7 @@ logging.basicConfig(filename="records.log", level=logging.DEBUG,
 
 # Setup flask
 app: Flask = Flask(__name__)
+CORS(app)
 
 
 @app.get("/")  # basic check for app running
@@ -52,6 +65,8 @@ user_profile_dao = UserProfileDAOImp()
 user_profile_service = UserProfileServiceImp(user_profile_dao)
 group_view_dao = GroupViewPostgresDao()
 group_service = GroupPostgresService(group_view_dao)
+group_post_dao = GroupPostDAO()
+group_post_service = GroupPostService(group_post_dao)
 post_feed_dao = PostFeedDaoImp()
 post_feed_service = PostFeedServiceImp(post_feed_dao)
 comment_dao = CommentDAOImp()
@@ -189,6 +204,52 @@ def update_profile_info(user_id):
         return exception_json, 400
 
 
+# -----------------------------------------------------------------------------------------------------
+
+# CREATE GROUP
+@app.post("/group")
+def create_group():
+    try:
+        group_data = request.get_json()
+        new_group = Group(
+            group_data["groupId"],
+            int(group_data["userId"]),
+            group_data["groupName"],
+            group_data["groupAbout"],
+            group_data["imageFormat"]
+        )
+        group_created: Group = group_service.service_create_group(new_group)
+        group_dictionary = group_created.make_dictionary()
+        group_json = jsonify(group_dictionary)
+        return group_json, 201
+    except NullValues as e:
+        exception_dictionary = {"message": str(e)}
+        return jsonify(exception_dictionary), 400
+    except InputTooShort as e:
+        exception_dictionary = {"message": str(e)}
+        return jsonify(exception_dictionary), 400
+    except InputTooLong as e:
+        exception_dictionary = {"message": str(e)}
+        return jsonify(exception_dictionary), 400
+    except GroupNameTaken as e:
+        exception_dictionary = {"message": str(e)}
+        return jsonify(exception_dictionary), 400
+
+
+# JOIN GROUP
+@app.post("/group/join/<group_id>/<user_id>")
+def join_group(group_id: str, user_id: str):
+    group_joined = group_service.service_join_group(int(group_id), int(user_id))
+    group_joined_dictionary = {
+        "groupId": group_joined[0],
+        "userId": group_joined[1]
+    }
+    return jsonify(group_joined_dictionary), 200
+
+
+# -----------------------------------------------------------------------------------------------------
+
+
 @app.get("/group/<group_id>")
 def get_group_by_id(group_id: str):
     result = group_service.service_get_group_by_id(int(group_id))
@@ -214,9 +275,9 @@ group_mem_dao = GroupMemberJunctionDao()
 group_junction_service = GroupMemberJunctionService(group_mem_dao)
 
 
-@app.get("/GroupJunction/UserList")
-def get_users_in_group_api():
-    group_list = group_junction_service.get_all_users_in_a_group()
+@app.get("/GroupJunction/UserList/<group_id>")
+def get_users_in_group_api(group_id):
+    group_list = group_junction_service.get_all_users_in_a_group(int(group_id))
     group_dict = []
     for mem in group_list:
         dictionary_mem = mem.make_dictionary()
@@ -281,12 +342,15 @@ def delete_comment():
 
 @app.get("/postfeed/<post_id>")
 def get_comments_by_post_id(post_id: str):
+   try:
     results = comment_service.service_get_comment_by_post_id(int(post_id))
     post_comments_as_dictionary = []
     for comments in results:
         dictionary_comment = comments.make_dictionary()
         post_comments_as_dictionary.append(dictionary_comment)
     return jsonify(post_comments_as_dictionary), 200
+   except Exception:
+       return "something went wrong"
 
 
 @app.post("/createComment")
@@ -299,6 +363,70 @@ def create_comment():
     comment_text = body["commentText"]
     comment_id = comment_service.service_create_comment(post_id, user_id, comment_text, group_id, reply_user)
     return jsonify(comment_id)
+"""Get Creator for Group HomePage"""
+
+
+@app.get("/creator/<group_id>")
+def get_creator_api(group_id: str):
+    result = group_service.service_get_creator(int(group_id))
+    return jsonify(result)
+@app.post("/group_post")
+def create_group_post():
+    try:
+        post_data = request.get_json()
+        new_post = GroupPost(
+            0,
+            int(post_data["userId"]),
+            int(post_data["groupId"]),
+            post_data["postText"],
+            post_data["imageFormat"],
+            int(post_data["likes"]),
+            post_data["dateTimeOfCreation"]
+        )
+        post_to_return = group_post_service.service_create_post(new_post)
+        post_as_dictionary = post_to_return.make_dictionary()
+        post_as_json = jsonify(post_as_dictionary)
+        return post_as_json, 201
+    except InvalidInput as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+
+
+@app.get("/group_post/<post_id>")
+def get_group_post_by_id(post_id: str):
+    result = group_post_service.service_get_post_by_id(int(post_id))
+    dictionary_request = result.make_dictionary()
+    return jsonify(dictionary_request), 200
+
+
+@app.get("/group_post")
+def get_all_group_posts():
+    posts_as_posts = group_post_service.service_get_all_posts()
+    posts_as_dictionary = []
+    for posts in posts_as_posts:
+        post_dictionary = posts.make_dictionary()
+        posts_as_dictionary.append(post_dictionary)
+    return jsonify(posts_as_dictionary), 200
+
+
+@app.get("/group_post/group/<group_id>")
+def get_all_group_posts_by_group_id(group_id: str):
+    posts_as_posts = group_post_service.service_get_all_posts_by_group_id(int(group_id))
+    posts_as_dictionary = []
+    for posts in posts_as_posts:
+        post_dictionary = posts.make_dictionary()
+        posts_as_dictionary.append(post_dictionary)
+    return jsonify(posts_as_dictionary), 200
+
+
+@app.delete("/group_post/<post_id>")
+def delete_group_post(post_id: int):
+    result = group_post_service.service_delete_post_by_post_id(int(post_id))
+    if result:
+        return "Post with ID {} was deleted successfully".format(post_id)
+    else:
+        return "Something went wrong: Post with ID {} was not deleted".format(post_id)
 
 
 app.run()
