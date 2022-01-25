@@ -65,6 +65,8 @@ user_profile_dao = UserProfileDAOImp()
 user_profile_service = UserProfileServiceImp(user_profile_dao)
 group_view_dao = GroupViewPostgresDao()
 group_service = GroupPostgresService(group_view_dao)
+group_post_dao = GroupPostDAO()
+group_post_service = GroupPostService(group_post_dao)
 post_feed_dao = PostFeedDaoImp()
 post_feed_service = PostFeedServiceImp(post_feed_dao)
 comment_dao = CommentDAOImp()
@@ -216,7 +218,7 @@ def create_group():
             group_data["groupAbout"],
             group_data["imageFormat"]
         )
-        group_created: Group = group_service_2.service_create_group(new_group)
+        group_created: Group = group_service.service_create_group(new_group)
         group_dictionary = group_created.make_dictionary()
         group_json = jsonify(group_dictionary)
         return group_json, 201
@@ -237,7 +239,7 @@ def create_group():
 # JOIN GROUP
 @app.post("/group/join/<group_id>/<user_id>")
 def join_group(group_id: str, user_id: str):
-    group_joined = group_service_2.service_join_group(int(group_id), int(user_id))
+    group_joined = group_service.service_join_group(int(group_id), int(user_id))
     group_joined_dictionary = {
         "groupId": group_joined[0],
         "userId": group_joined[1]
@@ -366,7 +368,7 @@ def create_comment():
 
 @app.get("/creator/<group_id>")
 def get_creator_api(group_id: str):
-    result = group_service_2.service_get_creator(int(group_id))
+    result = group_service.service_get_creator(int(group_id))
     return jsonify(result)
 @app.post("/group_post")
 def create_group_post():
@@ -381,7 +383,7 @@ def create_group_post():
             int(post_data["likes"]),
             post_data["dateTimeOfCreation"]
         )
-        post_to_return = post_service.service_create_post(new_post)
+        post_to_return = group_post_service.service_create_post(new_post)
         post_as_dictionary = post_to_return.make_dictionary()
         post_as_json = jsonify(post_as_dictionary)
         return post_as_json, 201
@@ -393,14 +395,14 @@ def create_group_post():
 
 @app.get("/group_post/<post_id>")
 def get_group_post_by_id(post_id: str):
-    result = post_service.service_get_post_by_id(int(post_id))
+    result = group_post_service.service_get_post_by_id(int(post_id))
     dictionary_request = result.make_dictionary()
     return jsonify(dictionary_request), 200
 
 
 @app.get("/group_post")
 def get_all_group_posts():
-    posts_as_posts = post_service.service_get_all_posts()
+    posts_as_posts = group_post_service.service_get_all_posts()
     posts_as_dictionary = []
     for posts in posts_as_posts:
         post_dictionary = posts.make_dictionary()
@@ -410,7 +412,7 @@ def get_all_group_posts():
 
 @app.get("/group_post/group/<group_id>")
 def get_all_group_posts_by_group_id(group_id: str):
-    posts_as_posts = post_service.service_get_all_posts_by_group_id(int(group_id))
+    posts_as_posts = group_post_service.service_get_all_posts_by_group_id(int(group_id))
     posts_as_dictionary = []
     for posts in posts_as_posts:
         post_dictionary = posts.make_dictionary()
@@ -420,7 +422,7 @@ def get_all_group_posts_by_group_id(group_id: str):
 
 @app.delete("/group_post/<post_id>")
 def delete_group_post(post_id: int):
-    result = post_service.service_delete_post_by_post_id(int(post_id))
+    result = group_post_service.service_delete_post_by_post_id(int(post_id))
     if result:
         return "Post with ID {} was deleted successfully".format(post_id)
     else:
