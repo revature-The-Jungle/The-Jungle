@@ -9,7 +9,7 @@ class GroupMemberJunctionAbs(ABC):
 
     @abstractmethod
     # A method to display a list of users in a particular group
-    def get_all_users_in_a_group(self) -> List[GroupMemberJunction]:
+    def get_all_users_in_a_group(self, group_id:int) -> List[GroupMemberJunction]:
         pass
 
     @abstractmethod

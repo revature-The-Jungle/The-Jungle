@@ -1,9 +1,4 @@
-class PostNotFound(Exception):
-    def __init__(self, message):
-        self.message = message
-
-
-class InvalidInput(Exception):
+class GroupIdNonExistent(Exception):
     def __init__(self, message):
         self.message = message
 
@@ -13,11 +8,21 @@ class InputTooLong(Exception):
         self.message = message
 
 
-class NoInputGiven(Exception):
+class InputTooShort(Exception):
     def __init__(self, message):
         self.message = message
 
 
-class WrongTypeInput(Exception):
+class NullValues(Exception):
+    def __init__(self, message):
+        self.message = message
+
+
+class UserIdNonExistent(Exception):
+    def __init__(self, message):
+        self.message = message
+
+
+class GroupNameTaken(Exception):
     def __init__(self, message):
         self.message = message
