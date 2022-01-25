@@ -1,6 +1,10 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+from custom_exceptions.post_exceptions import InvalidInput
+from data_access_layer.implementation_classes.group_post_dao_imp import GroupPostDAO
+from entities.group_post import GroupPost
+from service_layer.implementation_classes.group_post_service_imp import GroupPostService
 from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
@@ -29,18 +33,18 @@ from service_layer.implementation_classes.like_post_service_imp import LikePostS
 logging.basicConfig(filename="records.log", level=logging.DEBUG,
                     format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
 
-
 # Setup flask
 app: Flask = Flask(__name__)
 CORS(app)
+
 
 @app.get("/")  # basic check for app running
 def on():
     return "python is running"
 
 
-like_post_dao=LikePostDaoImp()
-like_post_service= LikePostServiceImp(like_post_dao)
+like_post_dao = LikePostDaoImp()
+like_post_service = LikePostServiceImp(like_post_dao)
 create_post_dao = CreatePostDAOImp()
 create_post_service = CreatePostServiceImp(create_post_dao)
 
@@ -48,6 +52,8 @@ user_profile_dao = UserProfileDAOImp()
 user_profile_service = UserProfileServiceImp(user_profile_dao)
 group_view_dao = GroupViewPostgresDao()
 group_service = GroupPostgresService(group_view_dao)
+post_dao = GroupPostDAO()
+post_service = GroupPostService(post_dao)
 
 
 @app.post("/postfeed")
@@ -56,7 +62,6 @@ def add_likes_to_post():
     postid = data["postid"],
     return jsonify(like_post_service.service_like_post(postid))
 
-    
     """post_likes = like_post_service.like_post_service(likes)
     reimbursements_as_dictionaries= []
     for reimbursement in employee_reimbursements:
@@ -184,7 +189,7 @@ def update_profile_info(user_id):
         exception_json = jsonify(exception_dictionary)
         return exception_json, 400
 
-    
+
 @app.get("/group/<group_id>")
 def get_group_by_id(group_id: str):
     result = group_service.service_get_group_by_id(int(group_id))
@@ -203,6 +208,65 @@ def get_all_groups():
         dictionary_group = groups.make_dictionary()
         groups_as_dictionary.append(dictionary_group)
     return jsonify(groups_as_dictionary)
+
+
+@app.post("/group_post")
+def create_group_post():
+    try:
+        post_data = request.get_json()
+        new_post = GroupPost(
+            0,
+            int(post_data["userId"]),
+            int(post_data["groupId"]),
+            post_data["postText"],
+            post_data["imageFormat"],
+            int(post_data["likes"]),
+            post_data["dateTimeOfCreation"]
+        )
+        post_to_return = post_service.service_create_post(new_post)
+        post_as_dictionary = post_to_return.make_dictionary()
+        post_as_json = jsonify(post_as_dictionary)
+        return post_as_json, 201
+    except InvalidInput as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+
+
+@app.get("/group_post/<post_id>")
+def get_group_post_by_id(post_id: str):
+    result = post_service.service_get_post_by_id(int(post_id))
+    dictionary_request = result.make_dictionary()
+    return jsonify(dictionary_request), 200
+
+
+@app.get("/group_post")
+def get_all_group_posts():
+    posts_as_posts = post_service.service_get_all_posts()
+    posts_as_dictionary = []
+    for posts in posts_as_posts:
+        post_dictionary = posts.make_dictionary()
+        posts_as_dictionary.append(post_dictionary)
+    return jsonify(posts_as_dictionary), 200
+
+
+@app.get("/group_post/group/<group_id>")
+def get_all_group_posts_by_group_id(group_id: str):
+    posts_as_posts = post_service.service_get_all_posts_by_group_id(int(group_id))
+    posts_as_dictionary = []
+    for posts in posts_as_posts:
+        post_dictionary = posts.make_dictionary()
+        posts_as_dictionary.append(post_dictionary)
+    return jsonify(posts_as_dictionary), 200
+
+
+@app.delete("/group_post/<post_id>")
+def delete_group_post(post_id: int):
+    result = post_service.service_delete_post_by_post_id(int(post_id))
+    if result:
+        return "Post with ID {} was deleted successfully".format(post_id)
+    else:
+        return "Something went wrong: Post with ID {} was not deleted".format(post_id)
 
 
 app.run()
