@@ -4,6 +4,7 @@ from flask_cors import CORS
 from custom_exceptions.group_member_junction_exceptions import WrongId
 from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
+from custom_exceptions.post_exceptions import InvalidInput
 from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
 from custom_exceptions.post_not_found import PostNotFound
 from custom_exceptions.post_text_must_be_a_string import PostTextMustBeAString
@@ -13,7 +14,9 @@ from custom_exceptions.birth_date_is_null import BirthDateIsNull
 from custom_exceptions.too_many_characters import TooManyCharacters
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.implementation_classes.create_post_dao_imp import CreatePostDAOImp
+from data_access_layer.implementation_classes.group_post_dao_imp import GroupPostDAO
 from data_access_layer.implementation_classes.user_profile_dao_imp import UserProfileDAOImp
+from entities.group_post import GroupPost
 from entities.post import Post
 from entities.user import User
 from service_layer.implementation_classes.create_post_service_imp import CreatePostServiceImp
@@ -23,6 +26,7 @@ from data_access_layer.implementation_classes.group_member_junction_dao_imp impo
 # Setup logging
 import logging
 
+from service_layer.implementation_classes.group_post_service_imp import GroupPostService
 from service_layer.implementation_classes.user_profile_service_imp import UserProfileServiceImp
 from data_access_layer.implementation_classes.group_view_postgres_dao_imp import GroupViewPostgresDao
 from service_layer.implementation_classes.group_postgres_service_imp import GroupPostgresService
@@ -61,6 +65,8 @@ group_service = GroupPostgresService(group_view_dao)
 # Create Group/Join Group
 group_dao = GroupDAOImp()
 group_service_2 = GroupPostgreService(group_dao, group_view_dao)
+post_dao = GroupPostDAO()
+post_service = GroupPostService(post_dao)
 
 
 @app.post("/postfeed")
@@ -297,6 +303,68 @@ def leave_group(user_id: str, group_id: str):
 def get_creator_api(group_id: str):
     result = group_service_2.service_get_creator(int(group_id))
     return jsonify(result)
+
+
+# -----------------------------------------------------------------------------------------------------
+
+# GROUP POST
+@app.post("/group_post")
+def create_group_post():
+    try:
+        post_data = request.get_json()
+        new_post = GroupPost(
+            0,
+            int(post_data["userId"]),
+            int(post_data["groupId"]),
+            post_data["postText"],
+            post_data["imageFormat"],
+            int(post_data["likes"]),
+            post_data["dateTimeOfCreation"]
+        )
+        post_to_return = post_service.service_create_post(new_post)
+        post_as_dictionary = post_to_return.make_dictionary()
+        post_as_json = jsonify(post_as_dictionary)
+        return post_as_json, 201
+    except InvalidInput as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+
+
+@app.get("/group_post/<post_id>")
+def get_group_post_by_id(post_id: str):
+    result = post_service.service_get_post_by_id(int(post_id))
+    dictionary_request = result.make_dictionary()
+    return jsonify(dictionary_request), 200
+
+
+@app.get("/group_post")
+def get_all_group_posts():
+    posts_as_posts = post_service.service_get_all_posts()
+    posts_as_dictionary = []
+    for posts in posts_as_posts:
+        post_dictionary = posts.make_dictionary()
+        posts_as_dictionary.append(post_dictionary)
+    return jsonify(posts_as_dictionary), 200
+
+
+@app.get("/group_post/group/<group_id>")
+def get_all_group_posts_by_group_id(group_id: str):
+    posts_as_posts = post_service.service_get_all_posts_by_group_id(int(group_id))
+    posts_as_dictionary = []
+    for posts in posts_as_posts:
+        post_dictionary = posts.make_dictionary()
+        posts_as_dictionary.append(post_dictionary)
+    return jsonify(posts_as_dictionary), 200
+
+
+@app.delete("/group_post/<post_id>")
+def delete_group_post(post_id: int):
+    result = post_service.service_delete_post_by_post_id(int(post_id))
+    if result:
+        return "Post with ID {} was deleted successfully".format(post_id)
+    else:
+        return "Something went wrong: Post with ID {} was not deleted".format(post_id)
 
 
 app.run()

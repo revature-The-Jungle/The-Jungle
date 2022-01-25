@@ -16,7 +16,6 @@ class GroupPost:
         self.likes = likes
         self.date_time_of_creation = date_time_of_creation
 
-    @property
     def make_dictionary(self):
         dictionary = {
             "post_id": self.post_id,
@@ -26,5 +25,9 @@ class GroupPost:
             "image_data": self.image_format,
             "likes": self.likes,
             "date_time_of_creation": self.date_time_of_creation
-            }
+        }
         return dictionary
+
+    def __str__(self):
+        return f"postId {self.post_id}, userId {self.user_id}, groupId {self.group_id}, postText{self.post_text}, " \
+               f"likes {self.likes}, dateTimeOfCreation {self.date_time_of_creation}"
