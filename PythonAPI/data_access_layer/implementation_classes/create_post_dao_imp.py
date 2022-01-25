@@ -1,3 +1,4 @@
+from custom_exceptions.post_image_not_found import PostImageNotFound
 from custom_exceptions.post_not_found import PostNotFound
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.abstract_classes.create_post_dao import CreatePostDAO
@@ -33,6 +34,12 @@ class CreatePostDAOImp(CreatePostDAO):
         if not cursor.fetchone():
             raise PostNotFound('The post could not be found.')
 
+        # Make certain there is no other image
+        sql = f"delete from post_picture_table where post_id = %(post_id)s;"
+        cursor = connection.cursor()
+        cursor.execute(sql, {"post_id": post_id})
+        connection.commit()
+
         # insert the image into the database
         sql = f"INSERT INTO post_picture_table VALUES (default, %(post_id)s, %(image)s)"
         cursor = connection.cursor()
@@ -40,6 +47,24 @@ class CreatePostDAOImp(CreatePostDAO):
         connection.commit()
 
         # get the new image from the database and send it back
+        sql = f"select picture from post_picture_table where post_id = %(post_id)s;"
+        cursor.execute(sql, {"post_id": post_id})
+        connection.commit()
+        image = cursor.fetchone()[0]
+        image_decoded = image.decode('utf-8')
+        return image_decoded
+
+    def get_post_image(self, post_id: int) -> str:
+        """a method to get a post image from the database."""
+        # Check to see if the post id is in the database, raise an error otherwise.
+        sql = f"select * from post_picture_table where post_id = %(post_id)s;"
+        cursor = connection.cursor()
+        cursor.execute(sql, {"post_id": post_id})
+        if not cursor.fetchone():
+            raise PostImageNotFound('The post image could not be found.')
+
+        # get the image from the database and send it back
+        cursor = connection.cursor()
         sql = f"select picture from post_picture_table where post_id = %(post_id)s;"
         cursor.execute(sql, {"post_id": post_id})
         connection.commit()

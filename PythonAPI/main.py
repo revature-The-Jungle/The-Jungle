@@ -1,9 +1,14 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
-
+from data_access_layer.implementation_classes.postfeed_dao_imp import PostFeedDaoImp
+from service_layer.implementation_classes.postfeed_service_imp import PostFeedServiceImp
+from custom_exceptions.connection_error import ConnectionErrorr
+from data_access_layer.implementation_classes.comment_dao_imp import CommentDAOImp
+from service_layer.implementation_classes.comment_service_imp import CommentServiceImp
+from custom_exceptions.group_member_junction_exceptions import WrongId
 from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
+from custom_exceptions.post_image_not_found import PostImageNotFound
 from custom_exceptions.post_not_found import PostNotFound
 from custom_exceptions.post_text_must_be_a_string import PostTextMustBeAString
 from custom_exceptions.user_id_must_be_an_integer import UserIdMustBeAnInteger
@@ -16,9 +21,8 @@ from data_access_layer.implementation_classes.user_profile_dao_imp import UserPr
 from entities.post import Post
 from entities.user import User
 from service_layer.implementation_classes.create_post_service_imp import CreatePostServiceImp
-
-# Setup logging
-import logging
+from service_layer.implementation_classes.group_member_junction_service_imp import GroupMemberJunctionService
+from data_access_layer.implementation_classes.group_member_junction_dao_imp import GroupMemberJunctionDao
 
 from service_layer.implementation_classes.user_profile_service_imp import UserProfileServiceImp
 from data_access_layer.implementation_classes.group_view_postgres_dao_imp import GroupViewPostgresDao
@@ -26,43 +30,32 @@ from service_layer.implementation_classes.group_postgres_service_imp import Grou
 from data_access_layer.implementation_classes.like_post_dao_imp import LikePostDaoImp
 from service_layer.implementation_classes.like_post_service_imp import LikePostServiceImp
 
+import logging
+
 logging.basicConfig(filename="records.log", level=logging.DEBUG,
                     format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
 
-
 # Setup flask
 app: Flask = Flask(__name__)
-CORS(app)
+
 
 @app.get("/")  # basic check for app running
 def on():
     return "python is running"
 
 
-like_post_dao=LikePostDaoImp()
-like_post_service= LikePostServiceImp(like_post_dao)
+like_post_dao = LikePostDaoImp()
+like_post_service = LikePostServiceImp(like_post_dao)
 create_post_dao = CreatePostDAOImp()
 create_post_service = CreatePostServiceImp(create_post_dao)
-
 user_profile_dao = UserProfileDAOImp()
 user_profile_service = UserProfileServiceImp(user_profile_dao)
 group_view_dao = GroupViewPostgresDao()
 group_service = GroupPostgresService(group_view_dao)
-
-
-@app.post("/postfeed")
-def add_likes_to_post():
-    data = request.get_json()
-    postid = data["postid"],
-    return jsonify(like_post_service.service_like_post(postid))
-
-    
-    """post_likes = like_post_service.like_post_service(likes)
-    reimbursements_as_dictionaries= []
-    for reimbursement in employee_reimbursements:
-        dictionary_reimbursement =reimbursement.make_reimbursement_dictionary()
-        reimbursements_as_dictionaries.append(dictionary_reimbursement)
-    return jsonify(reimbursements_as_dictionaries), 200"""
+post_feed_dao = PostFeedDaoImp()
+post_feed_service = PostFeedServiceImp(post_feed_dao)
+comment_dao = CommentDAOImp()
+comment_service = CommentServiceImp(comment_dao)
 
 
 @app.get("/user/<user_id>")
@@ -108,6 +101,17 @@ def create_a_post_image(post_id):
     except ImageMustBeAString as e:
         return str(e), 400
     except PostNotFound as e:
+        return str(e), 400
+
+
+@app.get("/post/image/<post_id>")
+def get_the_post_image(post_id):
+    """Method to grab the post image from the database by the post id."""
+    try:
+        return create_post_service.get_post_image_service(post_id), 200
+    except PostIdMustBeAnInteger as e:
+        return str(e), 400
+    except PostImageNotFound as e:
         return str(e), 400
 
 
@@ -184,7 +188,7 @@ def update_profile_info(user_id):
         exception_json = jsonify(exception_dictionary)
         return exception_json, 400
 
-    
+
 @app.get("/group/<group_id>")
 def get_group_by_id(group_id: str):
     result = group_service.service_get_group_by_id(int(group_id))
@@ -203,6 +207,98 @@ def get_all_groups():
         dictionary_group = groups.make_dictionary()
         groups_as_dictionary.append(dictionary_group)
     return jsonify(groups_as_dictionary)
+
+
+"""Group Junction API"""
+group_mem_dao = GroupMemberJunctionDao()
+group_junction_service = GroupMemberJunctionService(group_mem_dao)
+
+
+@app.get("/GroupJunction/UserList")
+def get_users_in_group_api():
+    group_list = group_junction_service.get_all_users_in_a_group()
+    group_dict = []
+    for mem in group_list:
+        dictionary_mem = mem.make_dictionary()
+        group_dict.append(dictionary_mem)
+    return jsonify(group_dict)
+
+
+@app.delete("/group/leave/<user_id>/<group_id>")
+def leave_group(user_id: str, group_id: str):
+    try:
+        group_junction_service.leave_group(int(user_id), int(group_id))
+        message = "you have left the group"
+        return jsonify(message)
+    except TypeError as e:
+        return jsonify(str(e))
+    except WrongId as e:
+        return jsonify(str(e))
+
+
+@app.get("/postfeed")
+def get_all_posts():
+    try:
+        post_as_post = post_feed_service.get_all_posts_service()
+        posts_as_dictionary = []
+        for post in post_as_post:
+            dictionary_posts = post.make_dictionary()
+            posts_as_dictionary.append(dictionary_posts)
+        return jsonify(posts_as_dictionary)
+    except ConnectionErrorr as e:
+        return str(e), 400
+
+
+@app.delete("/postfeed")
+def delete_a_post():
+    try:
+        data = request.get_json()
+        post_id = data["post_id"]
+        boolean = post_feed_service.delete_a_post_service(post_id)
+        return jsonify(boolean)
+    except ConnectionErrorr as e:
+        return str(e), 400
+
+
+@app.post("/postfeed")
+def add_likes_to_post():
+    try:
+        data = request.get_json()
+        post_id = data["post_id"]
+        return jsonify(like_post_service.service_like_post(post_id))
+    except ConnectionErrorr as e:
+        return str(e), 400
+
+
+# delete comment information
+@app.delete("/Comments")
+def delete_comment():
+    data = request.get_json()
+    comment_id = data["commentid"]
+    jsonify(comment_service.service_delete_comment(comment_id))
+    return "Comment with id {} was deleted successfully".format(comment_id)
+
+
+@app.get("/postfeed/<post_id>")
+def get_comments_by_post_id(post_id: str):
+    results = comment_service.service_get_comment_by_post_id(int(post_id))
+    post_comments_as_dictionary = []
+    for comments in results:
+        dictionary_comment = comments.make_dictionary()
+        post_comments_as_dictionary.append(dictionary_comment)
+    return jsonify(post_comments_as_dictionary), 200
+
+
+@app.post("/createComment")
+def create_comment():
+    body = request.get_json()
+    post_id = body["postId"]
+    user_id = body["userId"]
+    group_id = body["groupId"]
+    reply_user = body["replyUser"]
+    comment_text = body["commentText"]
+    comment_id = comment_service.service_create_comment(post_id, user_id, comment_text, group_id, reply_user)
+    return jsonify(comment_id)
 
 
 app.run()

@@ -12,16 +12,4 @@ class GroupMemberJunctionService(GroupMemberJunctionServiceAbs):
         return self.group_member_junction_dao.get_all_users_in_a_group()
 
     def leave_group(self, user_id: int, group_id: int):
-        check_list = self.group_member_junction_dao.get_all_users_in_a_group()
-
-        if not isinstance(user_id, int) and isinstance(group_id, int):
-            raise WrongType("only use numbers")
-        else:
-            for check in check_list:
-                if check.group_id == group_id:
-                    if check.user_id != user_id:
-                        raise WrongId("The user Id is incorrect")
-                    elif check.user_id == user_id:
-                        return self.group_member_junction_dao.leave_group(user_id,group_id)
-                else:
-                    raise WrongId("Wrong Group ID")
+        return self.group_member_junction_dao.leave_group(user_id,group_id)
