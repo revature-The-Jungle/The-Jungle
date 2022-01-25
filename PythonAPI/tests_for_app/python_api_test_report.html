@@ -467,7 +467,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>python_api_test_report.html</h1>
-    <p>Report generated on 24-Jan-2022 at 20:34:42 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <p>Report generated on 24-Jan-2022 at 20:39:38 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
@@ -483,7 +483,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <td>Python</td>
         <td>3.10.0</td></tr></table>
     <h2>Summary</h2>
-    <p>78 tests ran in 14.59 seconds. </p>
+    <p>78 tests ran in 14.50 seconds. </p>
     <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">73 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">5 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
@@ -503,21 +503,21 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log">def test_leave_group():<br/>&gt;       result = group_member_junction_dao.leave_group(10000, 9)<br/><br/>test_for_data_access_layer\test_group_member_junction_dao.py:29: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_member_junction_dao_imp.GroupMemberJunctionDao object at 0x0000021EF4FD0910&gt;<br/>user_id = 10000, group_id = 9<br/><br/>    def leave_group(self, user_id: int, group_id: int):<br/>        check_list = self.get_all_users_in_a_group()<br/>        for checks in check_list:<br/>            if checks.group_id == group_id and checks.user_id == user_id:<br/>                try:<br/>                    sql = &quot;delete from group_member_junction_table where user_id = %s and group_id = %s&quot;<br/>                    cursor = connection.cursor()<br/>                    cursor.execute(sql, [user_id, group_id])<br/>                    connection.commit()<br/>                    return True<br/>                except TypeError:<br/>                    raise TypeError(&quot;too many arguments&quot;)<br/>&gt;       raise WrongId(&quot;Incorrect ID&quot;)<br/><span class="error">E       custom_exceptions.group_member_junction_exceptions.WrongId: Incorrect ID</span><br/><br/>..\data_access_layer\implementation_classes\group_member_junction_dao_imp.py:43: WrongId<br/></div></td></tr></tbody>
+            <div class="log">def test_leave_group():<br/>&gt;       result = group_member_junction_dao.leave_group(10000, 9)<br/><br/>test_for_data_access_layer\test_group_member_junction_dao.py:29: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_member_junction_dao_imp.GroupMemberJunctionDao object at 0x00000201E2881480&gt;<br/>user_id = 10000, group_id = 9<br/><br/>    def leave_group(self, user_id: int, group_id: int):<br/>        check_list = self.get_all_users_in_a_group()<br/>        for checks in check_list:<br/>            if checks.group_id == group_id and checks.user_id == user_id:<br/>                try:<br/>                    sql = &quot;delete from group_member_junction_table where user_id = %s and group_id = %s&quot;<br/>                    cursor = connection.cursor()<br/>                    cursor.execute(sql, [user_id, group_id])<br/>                    connection.commit()<br/>                    return True<br/>                except TypeError:<br/>                    raise TypeError(&quot;too many arguments&quot;)<br/>&gt;       raise WrongId(&quot;Incorrect ID&quot;)<br/><span class="error">E       custom_exceptions.group_member_junction_exceptions.WrongId: Incorrect ID</span><br/><br/>..\data_access_layer\implementation_classes\group_member_junction_dao_imp.py:43: WrongId<br/></div></td></tr></tbody>
       <tbody class="failed results-table-row">
         <tr>
           <td class="col-result">Failed</td>
           <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_leave_group2</td>
-          <td class="col-duration">0.05</td>
+          <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log">def test_leave_group2():<br/>&gt;       result = group_member_junction_dao.leave_group(10000, 10)<br/><br/>test_for_data_access_layer\test_group_member_junction_dao.py:34: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_member_junction_dao_imp.GroupMemberJunctionDao object at 0x0000021EF4FD0910&gt;<br/>user_id = 10000, group_id = 10<br/><br/>    def leave_group(self, user_id: int, group_id: int):<br/>        check_list = self.get_all_users_in_a_group()<br/>        for checks in check_list:<br/>            if checks.group_id == group_id and checks.user_id == user_id:<br/>                try:<br/>                    sql = &quot;delete from group_member_junction_table where user_id = %s and group_id = %s&quot;<br/>                    cursor = connection.cursor()<br/>                    cursor.execute(sql, [user_id, group_id])<br/>                    connection.commit()<br/>                    return True<br/>                except TypeError:<br/>                    raise TypeError(&quot;too many arguments&quot;)<br/>&gt;       raise WrongId(&quot;Incorrect ID&quot;)<br/><span class="error">E       custom_exceptions.group_member_junction_exceptions.WrongId: Incorrect ID</span><br/><br/>..\data_access_layer\implementation_classes\group_member_junction_dao_imp.py:43: WrongId<br/></div></td></tr></tbody>
+            <div class="log">def test_leave_group2():<br/>&gt;       result = group_member_junction_dao.leave_group(10000, 10)<br/><br/>test_for_data_access_layer\test_group_member_junction_dao.py:34: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.group_member_junction_dao_imp.GroupMemberJunctionDao object at 0x00000201E2881480&gt;<br/>user_id = 10000, group_id = 10<br/><br/>    def leave_group(self, user_id: int, group_id: int):<br/>        check_list = self.get_all_users_in_a_group()<br/>        for checks in check_list:<br/>            if checks.group_id == group_id and checks.user_id == user_id:<br/>                try:<br/>                    sql = &quot;delete from group_member_junction_table where user_id = %s and group_id = %s&quot;<br/>                    cursor = connection.cursor()<br/>                    cursor.execute(sql, [user_id, group_id])<br/>                    connection.commit()<br/>                    return True<br/>                except TypeError:<br/>                    raise TypeError(&quot;too many arguments&quot;)<br/>&gt;       raise WrongId(&quot;Incorrect ID&quot;)<br/><span class="error">E       custom_exceptions.group_member_junction_exceptions.WrongId: Incorrect ID</span><br/><br/>..\data_access_layer\implementation_classes\group_member_junction_dao_imp.py:43: WrongId<br/></div></td></tr></tbody>
       <tbody class="failed results-table-row">
         <tr>
           <td class="col-result">Failed</td>
           <td class="col-name">test_for_data_access_layer/test_group_view_postgres.py::test_view_group_by_id</td>
-          <td class="col-duration">0.08</td>
+          <td class="col-duration">0.09</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -530,7 +530,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log">def test_like_post_success():<br/>&gt;       liked_post=like_post_dao.like_post(1)<br/><br/>test_for_data_access_layer\test_like_post_dao.py:9: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.like_post_dao_imp.LikePostDaoImp object at 0x0000021EF4FD3BE0&gt;<br/>post_id = 1<br/><br/>    def like_post(self,post_id:int):<br/>            sql = &quot;update post_table set likes = likes + 1 where post_id=%s returning likes&quot;<br/>            cursor = connection.cursor()<br/>            cursor.execute(sql,[post_id])<br/>            connection.commit()<br/>&gt;           generated_likes_number = cursor.fetchone()[0]<br/><span class="error">E           TypeError: &#x27;NoneType&#x27; object is not subscriptable</span><br/><br/>..\data_access_layer\implementation_classes\like_post_dao_imp.py:14: TypeError<br/></div></td></tr></tbody>
+            <div class="log">def test_like_post_success():<br/>&gt;       liked_post=like_post_dao.like_post(1)<br/><br/>test_for_data_access_layer\test_like_post_dao.py:9: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.like_post_dao_imp.LikePostDaoImp object at 0x00000201E2882830&gt;<br/>post_id = 1<br/><br/>    def like_post(self,post_id:int):<br/>            sql = &quot;update post_table set likes = likes + 1 where post_id=%s returning likes&quot;<br/>            cursor = connection.cursor()<br/>            cursor.execute(sql,[post_id])<br/>            connection.commit()<br/>&gt;           generated_likes_number = cursor.fetchone()[0]<br/><span class="error">E           TypeError: &#x27;NoneType&#x27; object is not subscriptable</span><br/><br/>..\data_access_layer\implementation_classes\like_post_dao_imp.py:14: TypeError<br/></div></td></tr></tbody>
       <tbody class="failed results-table-row">
         <tr>
           <td class="col-result">Failed</td>
@@ -539,12 +539,12 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log">def test_leave_group():<br/>        group_mem_service.group_member_junction_dao.get_all_users_in_a_group = MagicMock(return_value=mem_list)<br/>        group_mem_service.group_member_junction_dao.leave_group = MagicMock.return_value = True<br/>        try:<br/>&gt;           group_mem_service.leave_group(1,2)<br/><br/>test_for_service_layer\test_group_member_junction_service.py:18: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;service_layer.implementation_classes.group_member_junction_service_imp.GroupMemberJunctionService object at 0x0000021EF5077EB0&gt;<br/>user_id = 1, group_id = 2<br/><br/>    def leave_group(self, user_id: int, group_id: int):<br/>&gt;       return self.group_member_junction_dao.leave_group(user_id,group_id)<br/><span class="error">E       TypeError: &#x27;bool&#x27; object is not callable</span><br/><br/>..\service_layer\implementation_classes\group_member_junction_service_imp.py:15: TypeError<br/></div></td></tr></tbody>
+            <div class="log">def test_leave_group():<br/>        group_mem_service.group_member_junction_dao.get_all_users_in_a_group = MagicMock(return_value=mem_list)<br/>        group_mem_service.group_member_junction_dao.leave_group = MagicMock.return_value = True<br/>        try:<br/>&gt;           group_mem_service.leave_group(1,2)<br/><br/>test_for_service_layer\test_group_member_junction_service.py:18: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;service_layer.implementation_classes.group_member_junction_service_imp.GroupMemberJunctionService object at 0x00000201E2924B20&gt;<br/>user_id = 1, group_id = 2<br/><br/>    def leave_group(self, user_id: int, group_id: int):<br/>&gt;       return self.group_member_junction_dao.leave_group(user_id,group_id)<br/><span class="error">E       TypeError: &#x27;bool&#x27; object is not callable</span><br/><br/>..\service_layer\implementation_classes\group_member_junction_service_imp.py:15: TypeError<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_success</td>
-          <td class="col-duration">0.50</td>
+          <td class="col-duration">0.46</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -553,7 +553,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_success_2</td>
-          <td class="col-duration">0.72</td>
+          <td class="col-duration">0.48</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -571,7 +571,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_image_success_1</td>
-          <td class="col-duration">0.83</td>
+          <td class="col-duration">0.87</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -580,7 +580,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_image_success_2</td>
-          <td class="col-duration">0.89</td>
+          <td class="col-duration">0.90</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -589,7 +589,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_image_failure_no_post</td>
-          <td class="col-duration">0.10</td>
+          <td class="col-duration">0.09</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -598,7 +598,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_get_post_image_success_1</td>
-          <td class="col-duration">0.71</td>
+          <td class="col-duration">0.96</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -607,7 +607,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_get_post_image_success_2</td>
-          <td class="col-duration">0.78</td>
+          <td class="col-duration">0.80</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -662,7 +662,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_wrong_user</td>
-          <td class="col-duration">0.05</td>
+          <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -680,7 +680,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_create_another_post_success</td>
-          <td class="col-duration">0.14</td>
+          <td class="col-duration">0.13</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -716,7 +716,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_another_post_by_id</td>
-          <td class="col-duration">0.04</td>
+          <td class="col-duration">0.06</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -734,7 +734,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_all_posts</td>
-          <td class="col-duration">0.09</td>
+          <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -743,15 +743,6 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_all_posts_by_group_id</td>
-          <td class="col-duration">0.09</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_all_posts_by_group_id_fails</td>
           <td class="col-duration">0.05</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -760,8 +751,17 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_all_posts_by_group_id_fails</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_delete_post_by_id</td>
-          <td class="col-duration">0.09</td>
+          <td class="col-duration">0.08</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -824,7 +824,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_group_view_postgres.py::test_get_all_group</td>
-          <td class="col-duration">0.04</td>
+          <td class="col-duration">0.05</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -833,24 +833,6 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_postfeed_dao.py::test_get_all_posts_1</td>
-          <td class="col-duration">0.13</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_postfeed_dao.py::test_get_all_posts_2</td>
-          <td class="col-duration">0.13</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_postfeed_dao.py::test_delete_a_post</td>
           <td class="col-duration">0.09</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -859,8 +841,26 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_postfeed_dao.py::test_get_all_posts_2</td>
+          <td class="col-duration">0.05</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_for_data_access_layer/test_postfeed_dao.py::test_delete_a_post</td>
+          <td class="col-duration">0.10</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_get_user_profile_success</td>
-          <td class="col-duration">0.57</td>
+          <td class="col-duration">0.32</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -869,7 +869,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_get_user_profile_success_2</td>
-          <td class="col-duration">0.31</td>
+          <td class="col-duration">0.32</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -878,7 +878,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_profile_about_me_success</td>
-          <td class="col-duration">0.49</td>
+          <td class="col-duration">0.52</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -905,7 +905,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_profile_failure_sql_injection</td>
-          <td class="col-duration">0.45</td>
+          <td class="col-duration">0.48</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -914,7 +914,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_get_user_image_success</td>
-          <td class="col-duration">0.55</td>
+          <td class="col-duration">0.81</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -923,7 +923,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_get_user_image_success_2</td>
-          <td class="col-duration">0.52</td>
+          <td class="col-duration">0.50</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -941,7 +941,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_image_success_1</td>
-          <td class="col-duration">0.84</td>
+          <td class="col-duration">0.85</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -950,7 +950,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_image_success_2</td>
-          <td class="col-duration">0.86</td>
+          <td class="col-duration">1.14</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -959,7 +959,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_image_failure_no_user</td>
-          <td class="col-duration">0.09</td>
+          <td class="col-duration">0.10</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -968,7 +968,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_image_format_success_1</td>
-          <td class="col-duration">0.75</td>
+          <td class="col-duration">0.74</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -977,7 +977,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_image_format_success_2</td>
-          <td class="col-duration">0.73</td>
+          <td class="col-duration">0.76</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
