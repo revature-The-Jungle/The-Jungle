@@ -4,7 +4,6 @@ import dev.com.thejungle.customexception.*;
 import dev.com.thejungle.dao.interfaces.UserDAOInt;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.interfaces.UserServiceInt;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

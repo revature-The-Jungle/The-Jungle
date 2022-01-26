@@ -2,6 +2,7 @@ package dao;
 
 import dev.com.thejungle.customexception.DuplicateEmail;
 import dev.com.thejungle.customexception.DuplicateUsername;
+import dev.com.thejungle.customexception.UserNotFound;
 import dev.com.thejungle.dao.implementations.UserDAO;
 import dev.com.thejungle.entity.User;
 import org.testng.Assert;
@@ -18,8 +19,8 @@ public class UserDAOIntTests {
     @Test
     void testCreateNewUser() {
         long date = 742892400000L;
-        User newJungleUser = new User(0, "Test", "Tester", "emailavd;orin",
-                        "useragaoin", "passcode", "I like social media.", date,
+        User newJungleUser = new User(0, "Test", "Tester", "emailavd;orin2",
+                        "useravoin", "passcode", "I like social media.", date,
                         "imagesourcefile");
         User createdUser = userDAOInt.createNewUser(newJungleUser);
         Assert.assertEquals(createdUser.getFirstName(), "Test");

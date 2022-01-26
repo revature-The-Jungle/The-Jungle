@@ -1,8 +1,7 @@
 package dev.com.thejungle.app.appcontroller.controllers;
 
 import com.google.gson.Gson;
-import dev.com.thejungle.customexception.InvalidInputException;
-import dev.com.thejungle.customexception.UserNotFound;
+import dev.com.thejungle.customexception.*;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.implementations.UserService;
 import dev.com.thejungle.service.interfaces.UserServiceInt;
@@ -84,12 +83,23 @@ public class UserController {
 
     // REGISTER USER ROUTE HANDLER
     public Handler registerUser = ctx -> {
-        Gson gson = new Gson();
-        User newUser = gson.fromJson(ctx.body(), User.class);
-        User createdUser = this.userService.createNewUserService(newUser);
-        String createdUserJson = gson.toJson(createdUser);
-        ctx.result(createdUserJson);
-        ctx.status(201);
+        try {
+            Gson gson = new Gson();
+            User newUser = gson.fromJson(ctx.body(), User.class);
+            User createdUser = this.userService.createNewUserService(newUser);
+            String createdUserJson = gson.toJson(createdUser);
+            ctx.result(createdUserJson);
+            ctx.status(201);
+        } catch (UnallowedSpaces u) {
+            ctx.result(u.getMessage());
+            ctx.status(404);
+        } catch (DuplicateEmail e) {
+            ctx.result(e.getMessage());
+            ctx.status(400);
+        } catch (DuplicateUsername d) {
+            ctx.result(d.getMessage());
+            ctx.status(401);
+        }
     };
 
 

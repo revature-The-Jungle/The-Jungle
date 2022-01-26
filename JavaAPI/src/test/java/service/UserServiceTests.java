@@ -1,9 +1,6 @@
 package service;
 
-import dev.com.thejungle.customexception.DuplicateUsername;
-import dev.com.thejungle.customexception.InvalidInputException;
-import dev.com.thejungle.customexception.UnallowedSpaces;
-import dev.com.thejungle.customexception.UsernameOrPasscodeException;
+import dev.com.thejungle.customexception.*;
 import dev.com.thejungle.dao.implementations.UserDAO;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.implementations.UserService;
@@ -12,7 +9,6 @@ import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +35,7 @@ public class UserServiceTests {
     public void setup(){
         userDAOImp = Mockito.mock(UserDAO.class);
         userServiceImp = new UserService(userDAOImp);
-//        Date date = new Date(742892400000L);
-        Long date = 742892400000L;
+        long date = 742892400000L;
         userProfile = new User(0, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILoveToWrestle", "MySimplePasscode", "I enjoy the wrestling life", date,"image");
         badPasscode = new User(0, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILove", "Wrong", "I enjoy the wrestling life", date,"image");
         userProfile2 = new User(1, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILoveToWrestle", "MySimplePasscode", "I enjoy the wrestling life", date,"image");
