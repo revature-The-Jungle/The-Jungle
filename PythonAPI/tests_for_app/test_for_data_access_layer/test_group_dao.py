@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 from PythonAPI.data_access_layer.implementation_classes.group_dao_imp import GroupDAOImp
 from PythonAPI.entities.group import Group
+=======
+import pytest
+
+from custom_exceptions.group_member_junction_exceptions import WrongType
+from data_access_layer.implementation_classes.group_dao_imp import GroupDAOImp
+from entities.group import Group
+>>>>>>> ab7bbd4d38f6de80a72552a43d40368d53c2865a
 
 group_dao = GroupDAOImp()
 
@@ -73,6 +81,30 @@ def test_join_group_fail_non_existent_group_id():
     except Exception as e:
         print(repr(e))
 
+<<<<<<< HEAD
+=======
+        """Get Creator Test"""
+
+
+def test_get_creator_success():
+    try:
+        result = group_dao.get_creator(10)
+        assert result == "test"
+    except WrongType as e:
+        return str(e)
+
+
+def test_bad_Id():
+    with pytest.raises(TypeError) as e:
+        result = group_dao.get_creator(1)
+        assert "This Id does not exist" in str(e.value)
+
+
+def test_string_as_id():
+    with pytest.raises(WrongType) as e:
+        result = group_dao.get_creator("nan")
+        assert "please enter a number" in str(e.value)
+>>>>>>> ab7bbd4d38f6de80a72552a43d40368d53c2865a
 
 def test_join_group_fail_non_existent_user_id():
     try:

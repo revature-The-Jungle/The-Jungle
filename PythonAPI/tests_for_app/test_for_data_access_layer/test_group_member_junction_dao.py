@@ -8,25 +8,25 @@ group_member_junction_dao = GroupMemberJunctionDao()
 
 
 def test_get_all_users_in_a_group():
-    result = group_member_junction_dao.get_all_users_in_a_group()
+    result = group_member_junction_dao.get_all_users_in_a_group(15)
     assert len(result) >= 2
 
 
 def test_list_contains_correct_info():
-    result = group_member_junction_dao.get_all_users_in_a_group()
+    result = group_member_junction_dao.get_all_users_in_a_group(15)
     print(result)
     mem = result[1]
-    assert mem.first_name == "test create post"
+    assert mem.first_name == "Test"
 
 
 def test_to_many():
     with pytest.raises(TypeError) as e:
-        group_member_junction_dao.get_all_users_in_a_group(1)
+        group_member_junction_dao.get_all_users_in_a_group(15,2)
         assert "you have put the incorrect amount of arguments" in str(e.value)
 
 
 def test_leave_group():
-    result = group_member_junction_dao.leave_group(10000, 9)
+    result = group_member_junction_dao.leave_group(32, 15)
     assert result
 
 

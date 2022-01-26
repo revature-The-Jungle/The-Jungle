@@ -30,3 +30,6 @@
 
 #pycharm
 .pyc
+*.pyc
+*.pyc
+PythonAPI/service_layer/abstract_classes/__pycache__/group_service.cpython-37.pyc
