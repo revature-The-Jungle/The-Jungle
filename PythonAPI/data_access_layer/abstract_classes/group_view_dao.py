@@ -13,3 +13,7 @@ class GroupViewDao(ABC):
     @abstractmethod
     def get_all_groups(self) -> List[Group]:
         pass
+
+    @abstractmethod
+    def get_all_groups_by_user_id(self, user_id) -> List[Group]:
+        pass

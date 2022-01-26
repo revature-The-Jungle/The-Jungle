@@ -262,17 +262,25 @@ def join_group(group_id: str, user_id: str):
 
 @app.get("/group/<group_id>")
 def get_group_by_id(group_id: str):
-    result = group_service.service_get_group_by_id(int(group_id))
-    result_as_dictionary = []
-    for groups in result:
-        dictionary_request = groups.make_dictionary()
-        result_as_dictionary.append(dictionary_request)
-    return jsonify(result_as_dictionary)
+    group = group_service.service_get_group_by_id(int(group_id))
+    group_as_dictionary = group.make_dictionary()
+    group_as_json = jsonify(group_as_dictionary)
+    return group_as_json
 
 
 @app.get("/group")
 def get_all_groups():
     groups_as_groups = group_service.service_get_all_groups()
+    groups_as_dictionary = []
+    for groups in groups_as_groups:
+        dictionary_group = groups.make_dictionary()
+        groups_as_dictionary.append(dictionary_group)
+    return jsonify(groups_as_dictionary)
+
+
+@app.get("/group/user/<user_id>")
+def get_all_groups_by_user_id(user_id: str):
+    groups_as_groups = group_service.service_get_groups_by_user_id(int(user_id))
     groups_as_dictionary = []
     for groups in groups_as_groups:
         dictionary_group = groups.make_dictionary()
@@ -292,7 +300,7 @@ def get_users_in_group_api(group_id):
     for mem in group_list:
         dictionary_mem = mem.make_dictionary()
         group_dict.append(dictionary_mem)
-    return jsonify(group_dict)
+    return jsonify(group_dict), 200
 
 
 @app.delete("/group/leave/<user_id>/<group_id>")
@@ -300,11 +308,11 @@ def leave_group(user_id: str, group_id: str):
     try:
         group_junction_service.leave_group(int(user_id), int(group_id))
         message = "you have left the group"
-        return jsonify(message)
+        return jsonify(message), 200
     except TypeError as e:
-        return jsonify(str(e))
+        return jsonify(str(e)), 400
     except WrongId as e:
-        return jsonify(str(e))
+        return jsonify(str(e)), 400
 
 
 """Get Creator for Group HomePage"""
@@ -313,7 +321,12 @@ def leave_group(user_id: str, group_id: str):
 @app.get("/creator/<group_id>")
 def get_creator_api(group_id: str):
     result = group_service_2.service_get_creator(int(group_id))
-    return jsonify(result)
+
+
+    return jsonify(result), 200
+
+
+# --------------------------------------------------------------------------------------------------------------------------------
 
 
 @app.post("/group_post")
