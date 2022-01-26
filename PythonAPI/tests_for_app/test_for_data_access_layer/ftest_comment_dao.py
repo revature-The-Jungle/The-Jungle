@@ -15,6 +15,7 @@ def test_create_comment_success():
     created_comment = comment_dao.create_comment(3, 1, "hello world", 1, 1)
     assert created_comment.comment_id != 0
 
+
 # Happy Path Test 2
 def test_create_comment_success_2():
     try:
