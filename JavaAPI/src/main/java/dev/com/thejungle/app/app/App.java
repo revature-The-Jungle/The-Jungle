@@ -29,11 +29,7 @@ public class App {
         app.post("/user/login", userController.loginUser);
         app.get("/user/group/{userId}", userController.getGroups);
 
-
-
         app.start();
-
-
     }
 
 }
