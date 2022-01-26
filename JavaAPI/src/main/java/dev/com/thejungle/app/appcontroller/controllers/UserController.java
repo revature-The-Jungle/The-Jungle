@@ -6,11 +6,8 @@ import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.implementations.UserService;
 import dev.com.thejungle.service.interfaces.UserServiceInt;
 import io.javalin.http.Handler;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
