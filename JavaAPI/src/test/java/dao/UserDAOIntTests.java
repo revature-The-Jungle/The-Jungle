@@ -6,6 +6,8 @@ import dev.com.thejungle.dao.implementations.UserDAO;
 import dev.com.thejungle.entity.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOIntTests {
@@ -57,6 +59,7 @@ public class UserDAOIntTests {
     @Test
     void testGetUserByUsername() {
         User newJungleUser = userDAOInt.searchForUser("username");
+        System.out.println("new user is " + newJungleUser);
         Assert.assertEquals(newJungleUser.getUsername(), "username");
     }
 
@@ -69,4 +72,9 @@ public class UserDAOIntTests {
         Assert.assertTrue(users.size() >= 1);
     }
 
+    @Test
+    void testGetGroups(){
+        ArrayList<Integer> arrayList = userDAOInt.getGroups(9000);
+        Assert.assertTrue(arrayList.size() >= 1);
+    }
 }

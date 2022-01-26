@@ -104,4 +104,23 @@ public class UserDAO implements UserDAOInt {
             return null;
         }
     }
+
+    @Override
+    public ArrayList<Integer> getGroups(int userId) {
+        try (Connection connection = ConnectionDB.createConnection()) {
+            String sql = "select group_id from group_member_junction_table where user_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ArrayList<Integer> groupIds = new ArrayList<>();
+            while(resultSet.next()){
+               groupIds.add(resultSet.getInt("group_id"));
+            }
+            return groupIds;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+            return null;
+        }
+    }
+
 }
