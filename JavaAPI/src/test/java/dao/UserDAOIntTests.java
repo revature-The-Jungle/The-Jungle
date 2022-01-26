@@ -6,7 +6,6 @@ import dev.com.thejungle.dao.implementations.UserDAO;
 import dev.com.thejungle.entity.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import java.sql.Date;
 import java.util.List;
 
 public class UserDAOIntTests {
@@ -16,9 +15,9 @@ public class UserDAOIntTests {
     // TEST FOR USER CREATION/REGISTRATION
     @Test
     void testCreateNewUser() {
-        Date date = new Date(742892400000L);
-        User newJungleUser = new User(0, "Test", "Tester", "email123@emaileowun2",
-                        "usernametestasdovun2", "passcode", "I like social media.", date,
+        long date = 742892400000L;
+        User newJungleUser = new User(0, "Test", "Tester", "emailavd;orin",
+                        "useragaoin", "passcode", "I like social media.", date,
                         "imagesourcefile");
         User createdUser = userDAOInt.createNewUser(newJungleUser);
         Assert.assertEquals(createdUser.getFirstName(), "Test");
@@ -28,7 +27,7 @@ public class UserDAOIntTests {
     @Test
     void testDuplicateUsernameException(){
         try {
-            Date date = new Date(742892400000L);
+            long date = 742892400000L;
             User newJungleUser = new User(0, "Test", "Tester", "email123@emai",
                         "username", "passcode", "I like social media.", date,
                         "imagesourcefile");
@@ -43,7 +42,7 @@ public class UserDAOIntTests {
     @Test
     void testDuplicateEmailException(){
         try {
-            Date date = new Date(742892400000L);
+            long date = 742892400000L;
             User newJungleUser = new User(0, "Test", "Tester", "email",
                     "usernamehsrtn", "passcode", "I like social media.", date,
                     "imagesourcefile");
@@ -58,7 +57,6 @@ public class UserDAOIntTests {
     @Test
     void testGetUserByUsername() {
         User newJungleUser = userDAOInt.searchForUser("username");
-        System.out.println("new user is " + newJungleUser);
         Assert.assertEquals(newJungleUser.getUsername(), "username");
     }
 
