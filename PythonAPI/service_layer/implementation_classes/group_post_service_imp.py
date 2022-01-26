@@ -1,6 +1,6 @@
 from data_access_layer.implementation_classes.group_post_dao_imp import GroupPostDAO
 from entities.group_post import GroupPost
-from service_layer.abstract_classes.group_post_service_abs import GroupPostServiceAbs
+from service_layer.abstract_classes.group_post_service import GroupPostServiceAbs
 
 
 class GroupPostService(GroupPostServiceAbs):

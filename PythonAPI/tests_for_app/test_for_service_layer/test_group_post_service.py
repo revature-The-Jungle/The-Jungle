@@ -1,5 +1,5 @@
 from data_access_layer.implementation_classes.group_post_dao_imp import GroupPostDAO
-from service_layer.implementation_classes.group_post_service import GroupPostService
+from service_layer.implementation_classes.group_post_service_imp import GroupPostService
 
 post_dao = GroupPostDAO()
 post_service = GroupPostService(post_dao)

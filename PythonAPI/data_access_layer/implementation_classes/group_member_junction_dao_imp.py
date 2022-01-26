@@ -1,11 +1,11 @@
 import traceback
 from typing import List
 
-from data_access_layer.abstract_classes.group_member_junction_abs import GroupMemberJunctionAbs
+from data_access_layer.abstract_classes.group_member_junction_dao import GroupMemberJunctionAbs
 from entities import group_member_junction
 from entities.group_member_junction import GroupMemberJunction
 from util.database_connection import connection
-from custom_exceptions.group_member_junction_exceptions import *
+import custom_exceptions.group_member_junction_exceptions
 
 
 class GroupMemberJunctionDao(GroupMemberJunctionAbs):
@@ -31,14 +31,13 @@ class GroupMemberJunctionDao(GroupMemberJunctionAbs):
     def leave_group(self, user_id: int, group_id: int):
         check_list = self.get_all_users_in_a_group()
         for checks in check_list:
-            if checks.group_id == group_id:
-                if checks.user_id == user_id:
-                    try:
-                        sql = "delete from group_member_junction_table where user_id = %s and group_id = %s"
-                        cursor = connection.cursor()
-                        cursor.execute(sql, [user_id, group_id])
-                        connection.commit()
-                        return True
-                    except TypeError:
-                        raise TypeError("too many arguments")
-        raise WrongId("Incorrect ID")
+            if checks.group_id == group_id and checks.user_id == user_id:
+                try:
+                    sql = "delete from group_member_junction_table where user_id = %s and group_id = %s"
+                    cursor = connection.cursor()
+                    cursor.execute(sql, [user_id, group_id])
+                    connection.commit()
+                    return True
+                except TypeError:
+                    raise TypeError("too many arguments")
+        raise custom_exceptions.group_member_junction_exceptions.WrongId("Incorrect ID")
