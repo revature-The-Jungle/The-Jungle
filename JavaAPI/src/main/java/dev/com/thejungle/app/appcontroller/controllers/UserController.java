@@ -6,7 +6,6 @@ import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.implementations.UserService;
 import dev.com.thejungle.service.interfaces.UserServiceInt;
 import io.javalin.http.Handler;
-
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -67,14 +66,14 @@ public class UserController {
     public Handler registerUser = ctx -> {
         Gson gson = new Gson();
         User newUser = gson.fromJson(ctx.body(), User.class);
-        Date userDate = newUser.getUserBirthdate();
-        String dateString = String.valueOf(userDate);
+        String dateString = String.valueOf(newUser.getUserBirthdate());
         long dateLong = Long.parseLong(dateString);
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        java.sql.Date sqlDate = new java.sql.Date(dateLong);
-        df.format(sqlDate);
-        newUser.setUserBirthdate(sqlDate);
+        Date userBDay = new Date(dateLong);
+        newUser.setUserBirthdate(userBDay);
         User createdUser = this.userService.createNewUserService(newUser);
+//        String createdBDay = String.valueOf(createdUser.getUserBirthdate());
+//        long createdBDayLong = Long.parseLong(createdBDay);
+//        createdUser.setUserBirthdate(createdBDayLong);
         String createdUserJson = gson.toJson(createdUser);
         ctx.result(createdUserJson);
         ctx.status(201);
