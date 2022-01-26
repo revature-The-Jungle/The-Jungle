@@ -1,4 +1,4 @@
-from data_access_layer.implementation_classes.group_view_postgres_dao_imp import GroupViewPostgresDao
+from data_access_layer.implementation_classes.group_view_postgres_dao import GroupViewPostgresDao
 
 group_view_postgres_dao = GroupViewPostgresDao()
 
