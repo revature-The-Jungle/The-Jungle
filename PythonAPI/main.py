@@ -314,6 +314,10 @@ def leave_group(user_id: str, group_id: str):
 def get_creator_api(group_id: str):
     result = group_service_2.service_get_creator(int(group_id))
     return jsonify(result)
+
+
+# --------------------------------------------------------------------------------------------------------------------------------
+
 @app.post("/group_post")
 def create_group_post():
     try:
