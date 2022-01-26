@@ -9,7 +9,6 @@ import dev.com.thejungle.utility.ConnectionDB;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -31,7 +30,7 @@ public class UserDAO implements UserDAOInt {
             preparedStatement.setString(4, user.getUsername());
             preparedStatement.setString(5, user.getPasscode());
             preparedStatement.setString(6, user.getUserAbout());
-            preparedStatement.setDate(7, user.getUserBirthdate());
+            preparedStatement.setDate(7, new Date(user.getUserBirthdate()));
             preparedStatement.setString(8, user.getImageFormat());
             preparedStatement.execute();
             ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -69,7 +68,7 @@ public class UserDAO implements UserDAOInt {
                         resultSet.getString("username"),
                         resultSet.getString("passcode"),
                         resultSet.getString("user_about"),
-                        resultSet.getDate("user_birth_date"),
+                        resultSet.getDate("user_birth_date").getTime(),
                         resultSet.getString("image_format")
                 );
                 return newUser;
@@ -99,7 +98,7 @@ public class UserDAO implements UserDAOInt {
                         resultSet.getString("username"),
                         resultSet.getString("passcode"),
                         resultSet.getString("user_about"),
-                        resultSet.getDate("user_birth_date"),
+                        resultSet.getDate("user_birth_date").getTime(),
                         resultSet.getString("image_format")
                 );
                 users.add(user);

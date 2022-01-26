@@ -33,7 +33,8 @@ public class UserServiceTests {
     public void setup(){
         userDAOImp = Mockito.mock(UserDAO.class);
         userServiceImp = new UserService(userDAOImp);
-        Date date = new Date(742892400000L);
+//        Date date = new Date(742892400000L);
+        Long date = 742892400000L;
         userProfile = new User(0, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILoveToWrestle", "MySimplePasscode", "I enjoy the wrestling life", date,"image");
         userProfile2 = new User(1, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILoveToWrestle", "MySimplePasscode", "I enjoy the wrestling life", date,"image");
         returnedProfile = new User(2, "Solomon", "Grundy", "solomon@gmail.com", "BornOnMonday", "Tuesday", "I have a poem", date,"image");
