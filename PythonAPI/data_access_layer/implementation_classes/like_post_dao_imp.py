@@ -11,3 +11,11 @@ class LikePostDaoImp(LikePostDAO):
             connection.commit()
             generated_likes_number = cursor.fetchone()[0]
             return generated_likes_number
+
+    def like_comment(self, comment_id: int):
+            sql = "update comment_table set likes = likes + 1 where comment_id=%s returning likes"
+            cursor = connection.cursor()
+            cursor.execute(sql, [comment_id])
+            connection.commit()
+            generated_likes_number = cursor.fetchone()[0]
+            return generated_likes_number

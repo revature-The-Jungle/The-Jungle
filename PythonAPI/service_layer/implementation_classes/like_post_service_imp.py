@@ -13,3 +13,6 @@ class LikePostServiceImp(LikePostService):
 
     def service_like_post(self, post_id):
         return self.like_post_dao.like_post(post_id)
+
+    def service_like_comment(self, comment_id: int):
+        return self.like_post_dao.like_comment(comment_id)

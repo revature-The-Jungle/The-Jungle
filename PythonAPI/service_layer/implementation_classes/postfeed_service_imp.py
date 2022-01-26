@@ -10,5 +10,10 @@ class PostfeedServiceImp(PostfeedService):
     def get_all_posts_service(self):
         return self.postfeeddao.get_all_posts()
 
+
+    def get_all_posts_by_groupid_service(self, groupid: int):
+        return self.postfeeddao.get_all_posts_with_group_id(groupid)
+
+
     def delete_a_post_service(self, postid: int):
         return self.postfeeddao.delete_a_post(postid)

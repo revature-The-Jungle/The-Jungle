@@ -8,6 +8,8 @@ from service_layer.implementation_classes.like_post_service_imp import LikePostS
 from data_access_layer.implementation_classes.comment_dao_imp import CommentDAOImp
 from entities.comment import Comment
 from service_layer.implementation_classes.comment_service_imp import CommentServiceImp
+from flask_cors import CORS
+
 postfeeddao = PostfeedDaoimpl()
 postfeed_service = PostfeedServiceImp(postfeeddao)
 like_post_dao=LikePostDaoImp()
@@ -18,9 +20,11 @@ comment_service = CommentServiceImp(comment_dao)
 
 
 
+
+
 # Setup flask
 app: Flask = Flask(__name__)
-
+CORS(app)
 
 
 
@@ -41,11 +45,32 @@ def get_all_posts():
     except ConnectionErrorr:
         return str(e), 400
 
+
+@app.get("/postfeed/Group")
+def get_all_posts_by_groupid():
+    try:
+        data = request.get_json()
+        groupid = data["groupId"]
+        post_as_post = postfeed_service.get_all_posts_by_groupid_service(groupid)
+        posts_as_dictionary = []
+        for post in post_as_post:
+            dicionary_posts = post.make_dictionary()
+            posts_as_dictionary.append(dicionary_posts)
+        return jsonify(posts_as_dictionary)
+    except ConnectionErrorr:
+        return str(e), 400
+
+
+
+
+
+
+
 @app.delete("/postfeed")
 def delete_a_post():
     try:
         data = request.get_json()
-        postid = data["postid"],
+        postid = data["postId"],
         boolean = postfeed_service.delete_a_post_service(postid)
         return jsonify(boolean)
     except ConnectionErrorr :
@@ -55,8 +80,19 @@ def delete_a_post():
 def add_likes_to_post():
    try:
     data = request.get_json()
-    postid = data["postid"],
+    postid = data["postId"],
     return jsonify(like_post_service.service_like_post(postid))
+   except ConnectionErrorr :
+       return str(e), 400
+
+
+
+@app.post("/postfeed/group")
+def add_likes_to_comment():
+   try:
+    data = request.get_json()
+    commentid = data["commentId"],
+    return jsonify(like_post_service.service_like_comment(commentid))
    except ConnectionErrorr :
        return str(e), 400
 
@@ -66,7 +102,7 @@ def add_likes_to_post():
 @app.delete("/Comments")
 def delete_comment():
         data = request.get_json()
-        comment_id = data["commentid"],
+        comment_id = data["commentId"],
         jsonify(comment_service.service_delete_comment(comment_id))
         return "Comment with id {} was deleted successfully".format(comment_id)
 
