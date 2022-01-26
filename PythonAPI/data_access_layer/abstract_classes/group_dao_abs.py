@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 
-from entities.group import Group
+from PythonAPI.entities.group import Group
 
 
 class GroupDAO(ABC):
     @abstractmethod
-    def create_group(self, group: Group):
+    def create_group(self, group: Group) -> Group:
         pass
 
     @abstractmethod

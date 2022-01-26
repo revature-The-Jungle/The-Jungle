@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+from custom_exceptions.group_exceptions import NullValues, InputTooShort, GroupNameTaken, InputTooLong
 from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
@@ -13,9 +14,12 @@ from custom_exceptions.too_many_characters import TooManyCharacters
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.implementation_classes.create_post_dao_imp import CreatePostDAOImp
 from data_access_layer.implementation_classes.user_profile_dao_imp import UserProfileDAOImp
+from data_access_layer.implementation_classes.group_dao_imp import GroupDAOImp
+from entities.group import Group
 from entities.post import Post
 from entities.user import User
 from service_layer.implementation_classes.create_post_service_imp import CreatePostServiceImp
+from service_layer.implementation_classes.group_service_imp import GroupPostgreService
 
 # Setup logging
 import logging
@@ -29,18 +33,18 @@ from service_layer.implementation_classes.like_post_service_imp import LikePostS
 logging.basicConfig(filename="records.log", level=logging.DEBUG,
                     format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
 
-
 # Setup flask
 app: Flask = Flask(__name__)
 CORS(app)
+
 
 @app.get("/")  # basic check for app running
 def on():
     return "python is running"
 
 
-like_post_dao=LikePostDaoImp()
-like_post_service= LikePostServiceImp(like_post_dao)
+like_post_dao = LikePostDaoImp()
+like_post_service = LikePostServiceImp(like_post_dao)
 create_post_dao = CreatePostDAOImp()
 create_post_service = CreatePostServiceImp(create_post_dao)
 
@@ -49,6 +53,56 @@ user_profile_service = UserProfileServiceImp(user_profile_dao)
 group_view_dao = GroupViewPostgresDao()
 group_service = GroupPostgresService(group_view_dao)
 
+# Create Group/Join Group
+group_dao = GroupDAOImp()
+group_service_2 = GroupPostgreService(group_dao, group_view_dao)
+
+
+# -----------------------------------------------------------------------------------------------------
+
+# CREATE GROUP
+@app.post("/group")
+def create_group():
+    try:
+        group_data = request.get_json()
+        new_group = Group(
+            group_data["groupId"],
+            int(group_data["userId"]),
+            group_data["groupName"],
+            group_data["groupAbout"],
+            group_data["imageFormat"]
+        )
+        group_created: Group = group_service_2.service_create_group(new_group)
+        group_dictionary = group_created.make_dictionary()
+        group_json = jsonify(group_dictionary)
+        return group_json, 201
+    except NullValues as e:
+        exception_dictionary = {"message": str(e)}
+        return jsonify(exception_dictionary), 400
+    except InputTooShort as e:
+        exception_dictionary = {"message": str(e)}
+        return jsonify(exception_dictionary), 400
+    except InputTooLong as e:
+        exception_dictionary = {"message": str(e)}
+        return jsonify(exception_dictionary), 400
+    except GroupNameTaken as e:
+        exception_dictionary = {"message": str(e)}
+        return jsonify(exception_dictionary), 400
+
+
+# JOIN GROUP
+@app.post("/group/join/<group_id>/<user_id>")
+def join_group(group_id: str, user_id: str):
+    group_joined = group_service_2.service_join_group(int(group_id), int(user_id))
+    group_joined_dictionary = {
+        "groupId": group_joined[0],
+        "userId": group_joined[1]
+    }
+    return jsonify(group_joined_dictionary), 200
+
+
+# -----------------------------------------------------------------------------------------------------
+
 
 @app.post("/postfeed")
 def add_likes_to_post():
@@ -56,7 +110,6 @@ def add_likes_to_post():
     postid = data["postid"],
     return jsonify(like_post_service.service_like_post(postid))
 
-    
     """post_likes = like_post_service.like_post_service(likes)
     reimbursements_as_dictionaries= []
     for reimbursement in employee_reimbursements:
@@ -184,7 +237,7 @@ def update_profile_info(user_id):
         exception_json = jsonify(exception_dictionary)
         return exception_json, 400
 
-    
+
 @app.get("/group/<group_id>")
 def get_group_by_id(group_id: str):
     result = group_service.service_get_group_by_id(int(group_id))
