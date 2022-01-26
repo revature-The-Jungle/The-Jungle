@@ -1,6 +1,6 @@
 from custom_exceptions.user_image_not_found import UserImageNotFound
 from custom_exceptions.user_not_found import UserNotFound
-from data_access_layer.implementation_classes.user_profile_dao_imp import UserProfileDAOImp, UserProfileDAO
+from data_access_layer.implementation_classes.user_profile_dao import UserProfileDAOImp, UserProfileDAO
 from entities.user import User
 from pytest import fixture
 

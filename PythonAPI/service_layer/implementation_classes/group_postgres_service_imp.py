@@ -1,8 +1,8 @@
 from typing import List
 
-from data_access_layer.implementation_classes.group_view_postgres_dao_imp import GroupViewPostgresDao
+from data_access_layer.implementation_classes.group_view_postgres_dao import GroupViewPostgresDao
 from entities.group import Group
-from service_layer.abstract_classes.group_service import GroupService
+from service_layer.abstract_classes.group_postgres_service_abs import GroupService
 
 
 class GroupPostgresService(GroupService):
