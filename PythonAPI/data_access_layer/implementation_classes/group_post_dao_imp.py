@@ -1,5 +1,3 @@
-from typing import List
-
 from custom_exceptions.post_exceptions import PostNotFound
 from data_access_layer.abstract_classes.group_post_dao import GroupPostDAOAbs
 from entities.group_post import GroupPost
@@ -50,7 +48,7 @@ class GroupPostDAO(GroupPostDAOAbs):
         post = GroupPost(*post_record)
         return post
 
-    def get_all_posts(self) -> List[GroupPost]:
+    def get_all_posts(self) -> list[GroupPost]:
         try:
             sql = "select * from post_table"
             cursor = connection.cursor()
@@ -63,7 +61,7 @@ class GroupPostDAO(GroupPostDAOAbs):
         except PostNotFound as e:
             raise str(e) == "Post Not Found!"
 
-    def get_all_posts_by_group_id(self, group_id: int) -> List[GroupPost]:
+    def get_all_posts_by_group_id(self, group_id: int) -> list[GroupPost]:
         sql = "select * from post_table where group_id = %s"
         cursor = connection.cursor()
         cursor.execute(sql, [group_id])

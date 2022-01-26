@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import List
 
 from entities.group_post import GroupPost
 
@@ -18,11 +17,11 @@ class GroupPostServiceAbs(ABC):
         pass
 
     @abstractmethod
-    def service_get_all_posts(self) -> List[GroupPost]:
+    def service_get_all_posts(self) -> list[GroupPost]:
         pass
 
     @abstractmethod
-    def service_get_all_posts_by_group_id(self, group_id: int) -> List[GroupPost]:
+    def service_get_all_posts_by_group_id(self, group_id: int) -> list[GroupPost]:
         pass
 
     @abstractmethod
