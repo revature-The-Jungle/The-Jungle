@@ -30,11 +30,7 @@ public class App {
         app.get("/user/group/{userId}", userController.getGroups);
         app.post("/user/registration", userController.registerUser);
 
-
-
         app.start();
-
-
     }
 
 }

@@ -1,6 +1,9 @@
 package service;
 
-import dev.com.thejungle.customexception.*;
+import dev.com.thejungle.customexception.DuplicateUsername;
+import dev.com.thejungle.customexception.InvalidInputException;
+import dev.com.thejungle.customexception.UnallowedSpaces;
+import dev.com.thejungle.customexception.UsernameOrPasscodeException;
 import dev.com.thejungle.dao.implementations.UserDAO;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.implementations.UserService;
@@ -10,6 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceTests {
@@ -25,6 +29,8 @@ public class UserServiceTests {
     static User usernameSpaces;
     static User passwordSpaces;
     static List<User> newList;
+    static ArrayList<User> anotherList = new ArrayList<>();
+    static User badPasscode;
     static User blankSpaces;
     static User duplicateEmailUser;
 
@@ -36,12 +42,15 @@ public class UserServiceTests {
 //        Date date = new Date(742892400000L);
         Long date = 742892400000L;
         userProfile = new User(0, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILoveToWrestle", "MySimplePasscode", "I enjoy the wrestling life", date,"image");
+        badPasscode = new User(0, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILove", "Wrong", "I enjoy the wrestling life", date,"image");
         userProfile2 = new User(1, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILoveToWrestle", "MySimplePasscode", "I enjoy the wrestling life", date,"image");
         returnedProfile = new User(2, "Solomon", "Grundy", "solomon@gmail.com", "BornOnMonday", "Tuesday", "I have a poem", date,"image");
         badUsername = new User(0, "Solomon", "Grundy", "solomon@gmail.com", "IAmSolomonGrundy", "Tuesday", "I have a poem", date,"image");
         duplicateUsername = new User(0, "Dup", "Testing", "dup@email.com", "username", "password", "I like social media.", date, "imagesrc");
         usernameSpaces = new User(0, "User", "Testing", "space@email.com", "user name", "password", "I like social media.", date, "imagesrc");
         passwordSpaces = new User(0, "User", "Testing", "space2@email.com", "username", "password space", "I like social media.", date, "imagesrc");
+        anotherList.add(userProfile);
+        anotherList.add(userProfile2);
         blankSpaces = new User(0, "Test", "", "email@testemail.com", "", "", "Social media is fun.", date, "imagesrc");
         duplicateEmailUser = new User(0, "Dup", "Testing", "testingemail@gmail.com", "avoihoih", "password", "I like social media.", date, "imagesrc");
     }
@@ -101,12 +110,26 @@ public class UserServiceTests {
     }
 
     // BAD PASSCODE
-//    @Test(expectedExceptions =  UsernameOrPasscodeException.class)
-//    public void BadPasscodeForMockito() {
-//        Mockito.when(userDAOImp)
-//    }
+    @Test(expectedExceptions =  UsernameOrPasscodeException.class)
+    public void BadPasscodeForMockito() {
+        Mockito.when(userDAOImp.searchForUser(userProfile.getUsername())).thenReturn(badPasscode);
+        userServiceImp.loginService(userProfile.getUsername(), badPasscode.getPasscode());
+    }
 
+    // Get GroupId
+    @Test(expectedExceptions = InvalidInputException.class)
+    public void getGroupMockito(){
+        Mockito.when(userDAOImp.getGroups(-2)).thenThrow(InvalidInputException.class);
+        userServiceImp.getGroups(-2);
+    }
 
+    @Test(expectedExceptions = InvalidInputException.class)
+    public void getGroupNoIdMockito(){
+        Mockito.when(userDAOImp.getGroups(0)).thenThrow(InvalidInputException.class);
+        userServiceImp.getGroups(0);
+    }
+
+    // Get All
     @Test
     public void getAllUsersMockito() {
         Mockito.when(userDAOImp.getAllUsers()).thenReturn(newList);
@@ -114,7 +137,12 @@ public class UserServiceTests {
         Assert.assertEquals(result, newList);
     }
 
-
+    @Test
+    public void getAllUsersTwoMockito() {
+        Mockito.when(userDAOImp.getAllUsers()).thenReturn(anotherList);
+        List<User> result = userServiceImp.getAllUsersService();
+        Assert.assertEquals(result, anotherList);
+    }
 
 
 //  ----------------------------------  STUBBED TESTS --------------------------------------
@@ -132,5 +160,4 @@ public class UserServiceTests {
         User result = userServiceImp.searchForUserService(userProfile.getUsername());
         Assert.assertEquals(result, userProfile2);
     }
-
 }

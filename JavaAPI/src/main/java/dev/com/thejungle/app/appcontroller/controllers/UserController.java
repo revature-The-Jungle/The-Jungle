@@ -54,7 +54,7 @@ public class UserController {
         Map<String, String> loginCredentials = gson.fromJson(ctx.body(), Map.class);
         try {
             User userLogin = this.userService.loginService(loginCredentials.get("username"),
-                    loginCredentials.get("password"));
+                    loginCredentials.get("passcode"));
             String userLoginJSON = gson.toJson(userLogin);
             ctx.result(userLoginJSON);
             ctx.status(200);
