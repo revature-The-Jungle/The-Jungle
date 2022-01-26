@@ -1,4 +1,4 @@
-from data_access_layer.abstract_classes.group_dao import GroupDAO
+from data_access_layer.abstract_classes.group_dao_abs import GroupDAO
 from entities.group import Group
 from util.database_connection import connection
 from custom_exceptions.group_member_junction_exceptions import WrongType

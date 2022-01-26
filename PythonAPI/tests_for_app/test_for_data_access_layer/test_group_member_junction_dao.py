@@ -43,6 +43,6 @@ def test_failed_leave_group():
 
 def test_wrong_user():
     try:
-        group_member_junction_dao.leave_group(1, 1)
+        group_member_junction_dao.leave_group(13, 16)
     except WrongId as e:
         assert str(e) == "Incorrect ID"
