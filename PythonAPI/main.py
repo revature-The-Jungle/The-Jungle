@@ -82,19 +82,19 @@ def add_likes_to_post():
     data = request.get_json()
     postid = data["postId"],
     return jsonify(like_post_service.service_like_post(postid))
-   except ConnectionErrorr :
-       return str(e), 400
+   except TypeError :
+       return ("post not found!"), 400
 
 
 
-@app.post("/postfeed/group")
+@app.post("/postfeed/comment")
 def add_likes_to_comment():
    try:
     data = request.get_json()
     commentid = data["commentId"],
     return jsonify(like_post_service.service_like_comment(commentid))
-   except ConnectionErrorr :
-       return str(e), 400
+   except TypeError :
+       return ("comment not found"), 400
 
 
 
