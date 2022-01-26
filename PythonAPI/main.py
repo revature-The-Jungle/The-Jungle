@@ -7,6 +7,11 @@ from custom_exceptions.post_exceptions import InvalidInput
 from data_access_layer.implementation_classes.group_post_dao_imp import GroupPostDAO
 from entities.group_post import GroupPost
 from service_layer.implementation_classes.group_post_service_imp import GroupPostService
+from custom_exceptions.group_member_junction_exceptions import WrongId
+from custom_exceptions.post_exceptions import InvalidInput
+from data_access_layer.implementation_classes.group_post_dao_imp import GroupPostDAO
+from entities.group_post import GroupPost
+from service_layer.implementation_classes.group_post_service_imp import GroupPostService
 from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
@@ -25,6 +30,8 @@ from entities.post import Post
 from entities.user import User
 from service_layer.implementation_classes.create_post_service_imp import CreatePostServiceImp
 from service_layer.implementation_classes.group_service_imp import GroupPostgreService
+from service_layer.implementation_classes.group_member_junction_service_imp import GroupMemberJunctionService
+from data_access_layer.implementation_classes.group_member_junction_dao_imp import GroupMemberJunctionDao
 from service_layer.implementation_classes.group_member_junction_service_imp import GroupMemberJunctionService
 from data_access_layer.implementation_classes.group_member_junction_dao_imp import GroupMemberJunctionDao
 
@@ -71,52 +78,6 @@ post_service = GroupPostService(post_dao)
 # Create Group/Join Group
 group_dao = GroupDAOImp()
 group_service_2 = GroupPostgreService(group_dao, group_view_dao)
-
-
-# -----------------------------------------------------------------------------------------------------
-
-# CREATE GROUP
-@app.post("/group")
-def create_group():
-    try:
-        group_data = request.get_json()
-        new_group = Group(
-            group_data["groupId"],
-            int(group_data["userId"]),
-            group_data["groupName"],
-            group_data["groupAbout"],
-            group_data["imageFormat"]
-        )
-        group_created: Group = group_service_2.service_create_group(new_group)
-        group_dictionary = group_created.make_dictionary()
-        group_json = jsonify(group_dictionary)
-        return group_json, 201
-    except NullValues as e:
-        exception_dictionary = {"message": str(e)}
-        return jsonify(exception_dictionary), 400
-    except InputTooShort as e:
-        exception_dictionary = {"message": str(e)}
-        return jsonify(exception_dictionary), 400
-    except InputTooLong as e:
-        exception_dictionary = {"message": str(e)}
-        return jsonify(exception_dictionary), 400
-    except GroupNameTaken as e:
-        exception_dictionary = {"message": str(e)}
-        return jsonify(exception_dictionary), 400
-
-
-# JOIN GROUP
-@app.post("/group/join/<group_id>/<user_id>")
-def join_group(group_id: str, user_id: str):
-    group_joined = group_service_2.service_join_group(int(group_id), int(user_id))
-    group_joined_dictionary = {
-        "groupId": group_joined[0],
-        "userId": group_joined[1]
-    }
-    return jsonify(group_joined_dictionary), 200
-
-
-# -----------------------------------------------------------------------------------------------------
 
 
 @app.post("/postfeed")
@@ -253,7 +214,50 @@ def update_profile_info(user_id):
         return exception_json, 400
 
 
+# -----------------------------------------------------------------------------------------------------
 
+# CREATE GROUP
+@app.post("/group")
+def create_group():
+    try:
+        group_data = request.get_json()
+        new_group = Group(
+            group_data["groupId"],
+            int(group_data["userId"]),
+            group_data["groupName"],
+            group_data["groupAbout"],
+            group_data["imageFormat"]
+        )
+        group_created: Group = group_service_2.service_create_group(new_group)
+        group_dictionary = group_created.make_dictionary()
+        group_json = jsonify(group_dictionary)
+        return group_json, 201
+    except NullValues as e:
+        exception_dictionary = {"message": str(e)}
+        return jsonify(exception_dictionary), 400
+    except InputTooShort as e:
+        exception_dictionary = {"message": str(e)}
+        return jsonify(exception_dictionary), 400
+    except InputTooLong as e:
+        exception_dictionary = {"message": str(e)}
+        return jsonify(exception_dictionary), 400
+    except GroupNameTaken as e:
+        exception_dictionary = {"message": str(e)}
+        return jsonify(exception_dictionary), 400
+
+
+# JOIN GROUP
+@app.post("/group/join/<group_id>/<user_id>")
+def join_group(group_id: str, user_id: str):
+    group_joined = group_service_2.service_join_group(int(group_id), int(user_id))
+    group_joined_dictionary = {
+        "groupId": group_joined[0],
+        "userId": group_joined[1]
+    }
+    return jsonify(group_joined_dictionary), 200
+
+
+# -----------------------------------------------------------------------------------------------------
 
 
 @app.get("/group/<group_id>")
@@ -310,8 +314,6 @@ def leave_group(user_id: str, group_id: str):
 def get_creator_api(group_id: str):
     result = group_service_2.service_get_creator(int(group_id))
     return jsonify(result)
-
-
 @app.post("/group_post")
 def create_group_post():
     try:

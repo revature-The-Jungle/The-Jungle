@@ -1,5 +1,3 @@
-from typing import List
-
 import pytest
 
 from custom_exceptions.post_exceptions import InvalidInput, InputTooLong, NoInputGiven, WrongTypeInput
@@ -29,10 +27,10 @@ class GroupPostService(GroupPostServiceAbs):
     def service_get_post_by_id(self, post_id: int) -> GroupPost:
         return self.post_dao.get_post_by_id(post_id)
 
-    def service_get_all_posts(self) -> List[GroupPost]:
+    def service_get_all_posts(self) -> list[GroupPost]:
         return self.post_dao.get_all_posts()
 
-    def service_get_all_posts_by_group_id(self, group_id: int) -> List[GroupPost]:
+    def service_get_all_posts_by_group_id(self, group_id: int) -> list[GroupPost]:
         return self.post_dao.get_all_posts_by_group_id(group_id)
 
     def service_delete_post_by_post_id(self, post_id: int) -> bool:

@@ -1,4 +1,3 @@
-from custom_exceptions.group_exceptions import InputTooLong, GroupIdNonExistent, UserIdNonExistent
 from data_access_layer.abstract_classes.group_dao_abs import GroupDAO
 from entities.group import Group
 from util.database_connection import connection
@@ -9,7 +8,7 @@ from custom_exceptions.group_id_nonexistent import GroupIdNonExistent
 
 class GroupDAOImp(GroupDAO):
     def get_creator(self, group_id: int):
-        if not isinstance(group_id, int):
+        if not isinstance(group_id,int):
             raise WrongType("please enter a number")
         else:
             try:
@@ -44,4 +43,3 @@ class GroupDAOImp(GroupDAO):
             return group_joined
         except Exception:
             raise GroupIdNonExistent(UserIdNonExistent)
-

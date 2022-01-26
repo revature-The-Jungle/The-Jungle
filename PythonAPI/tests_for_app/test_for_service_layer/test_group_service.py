@@ -1,17 +1,10 @@
 from typing import List
 from unittest.mock import MagicMock
 from custom_exceptions.group_exceptions import NullValues, InputTooLong, InputTooShort, GroupNameTaken
-<<<<<<< HEAD
-from data_access_layer.implementation_classes.group_dao_imp import GroupDAOImp
-from data_access_layer.implementation_classes.group_view_postgres_dao_imp import GroupViewPostgresDao
-from entities.group import Group
-from service_layer.implementation_classes.group_service_imp import GroupPostgreService
-=======
 from data_access_layer.implementation_classes.group_dao import GroupDAOImp
 from data_access_layer.implementation_classes.group_view_postgres_dao import GroupViewPostgresDao
 from entities.group import Group
 from service_layer.implementation_classes.group_service import GroupPostgreService
->>>>>>> ab7bbd4d38f6de80a72552a43d40368d53c2865a
 
 group_dao = GroupDAOImp()
 group_view_dao = GroupViewPostgresDao()
