@@ -5,6 +5,7 @@ from entities.group import Group
 
 
 class GroupViewDaoImp(GroupViewDao):
+
     dummy_group = Group(1, 12, "Comic Club", "We love superheros", "placeholder")
     dummy_group_two = Group(2, 11, "Soccer Fans", "We Love Futbol", "placeholder")
     group_list = [dummy_group, dummy_group_two]
@@ -17,3 +18,6 @@ class GroupViewDaoImp(GroupViewDao):
 
     def get_all_groups(self) -> List[Group]:
         return GroupViewDaoImp.group_list
+
+    def get_all_groups_by_user_id(self, user_id) -> List[Group]:
+        return  GroupViewDaoImp.group_list
