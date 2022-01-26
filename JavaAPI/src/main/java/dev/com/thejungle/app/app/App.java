@@ -3,7 +3,6 @@ package dev.com.thejungle.app.app;
 import dev.com.thejungle.app.appcontroller.appcontroller.AppController;
 import dev.com.thejungle.app.appcontroller.controllers.UserController;
 import dev.com.thejungle.dao.implementations.UserDAO;
-import dev.com.thejungle.dao.interfaces.UserDAOInt;
 import dev.com.thejungle.service.implementations.UserService;
 import io.javalin.Javalin;
 
@@ -29,10 +28,9 @@ public class App {
         app.get("/users", userController.getAllUsers);
         app.post("/user/login", userController.loginUser);
         app.get("/user/group/{userId}", userController.getGroups);
-
-
-//        app.get("/user/{username}", UserController.getUserByUsername);
         app.post("/user/registration", userController.registerUser);
+
+
 
         app.start();
 

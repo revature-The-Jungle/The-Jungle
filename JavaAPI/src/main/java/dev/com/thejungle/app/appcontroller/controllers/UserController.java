@@ -86,13 +86,6 @@ public class UserController {
     public Handler registerUser = ctx -> {
         Gson gson = new Gson();
         User newUser = gson.fromJson(ctx.body(), User.class);
-//        Date userDate = new Date(newUser.getUserBirthdate());
-//        String dateString = String.valueOf(userDate);
-//        long dateLong = Long.parseLong(dateString);
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-//        java.sql.Date sqlDate = new java.sql.Date(dateLong);
-//        df.format(sqlDate);
-//        newUser.setUserBirthdate(sqlDate.getTime());
         User createdUser = this.userService.createNewUserService(newUser);
         String createdUserJson = gson.toJson(createdUser);
         ctx.result(createdUserJson);
