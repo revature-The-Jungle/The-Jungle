@@ -6,6 +6,7 @@ from service_layer.abstract_classes.group_service import GroupService
 
 
 class GroupPostgresService(GroupService):
+
     def __init__(self, group_view_dao: GroupViewPostgresDao):
         self.group_view_dao = group_view_dao
 
@@ -14,3 +15,6 @@ class GroupPostgresService(GroupService):
 
     def service_get_all_groups(self) -> List[Group]:
         return self.group_view_dao.get_all_groups()
+
+    def service_get_groups_by_user_id(self, user_id: int) -> List[Group]:
+        return self.group_view_dao.get_all_groups_by_user_id(user_id)

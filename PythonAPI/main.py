@@ -251,17 +251,25 @@ def join_group(group_id: str, user_id: str):
 
 @app.get("/group/<group_id>")
 def get_group_by_id(group_id: str):
-    result = group_service.service_get_group_by_id(int(group_id))
-    result_as_dictionary = []
-    for groups in result:
-        dictionary_request = groups.make_dictionary()
-        result_as_dictionary.append(dictionary_request)
-    return jsonify(result_as_dictionary)
+    group = group_service.service_get_group_by_id(int(group_id))
+    group_as_dictionary = group.make_dictionary()
+    group_as_json = jsonify(group_as_dictionary)
+    return group_as_json
 
 
 @app.get("/group")
 def get_all_groups():
     groups_as_groups = group_service.service_get_all_groups()
+    groups_as_dictionary = []
+    for groups in groups_as_groups:
+        dictionary_group = groups.make_dictionary()
+        groups_as_dictionary.append(dictionary_group)
+    return jsonify(groups_as_dictionary)
+
+
+@app.get("/group/user/<user_id>")
+def get_all_groups_by_user_id(user_id: str):
+    groups_as_groups = group_service.service_get_groups_by_user_id(int(user_id))
     groups_as_dictionary = []
     for groups in groups_as_groups:
         dictionary_group = groups.make_dictionary()
@@ -303,6 +311,8 @@ def leave_group(user_id: str, group_id: str):
 def get_creator_api(group_id: str):
     result = group_service_2.service_get_creator(int(group_id))
     return jsonify(result)
+
+
 @app.post("/group_post")
 def create_group_post():
     try:
