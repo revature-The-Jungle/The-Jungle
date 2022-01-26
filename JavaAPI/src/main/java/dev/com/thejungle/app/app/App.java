@@ -16,7 +16,7 @@ public class App {
 
         AppController appController = new AppController();
 
-        app.ws("/chat/{id}", appController.chatController::connectToWebSocket);
+        app.ws("/chat/{id}/{userName}", appController.chatController::connectToWebSocket);
 
         // Dependency injection for DAO and service layer
         UserDAO userDAO = new UserDAO();
