@@ -1,6 +1,12 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+from custom_exceptions.group_exceptions import NullValues, InputTooShort, GroupNameTaken, InputTooLong
+from custom_exceptions.group_member_junction_exceptions import WrongId
+from custom_exceptions.post_exceptions import InvalidInput
+from data_access_layer.implementation_classes.group_post_dao_imp import GroupPostDAO
+from entities.group_post import GroupPost
+from service_layer.implementation_classes.group_post_service_imp import GroupPostService
 from custom_exceptions.group_member_junction_exceptions import WrongId
 from custom_exceptions.post_exceptions import InvalidInput
 from data_access_layer.implementation_classes.group_post_dao_imp import GroupPostDAO
@@ -18,9 +24,14 @@ from custom_exceptions.too_many_characters import TooManyCharacters
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.implementation_classes.create_post_dao_imp import CreatePostDAOImp
 from data_access_layer.implementation_classes.user_profile_dao_imp import UserProfileDAOImp
+from data_access_layer.implementation_classes.group_dao_imp import GroupDAOImp
+from entities.group import Group
 from entities.post import Post
 from entities.user import User
 from service_layer.implementation_classes.create_post_service_imp import CreatePostServiceImp
+from service_layer.implementation_classes.group_service_imp import GroupPostgreService
+from service_layer.implementation_classes.group_member_junction_service_imp import GroupMemberJunctionService
+from data_access_layer.implementation_classes.group_member_junction_dao_imp import GroupMemberJunctionDao
 from service_layer.implementation_classes.group_member_junction_service_imp import GroupMemberJunctionService
 from data_access_layer.implementation_classes.group_member_junction_dao_imp import GroupMemberJunctionDao
 
@@ -289,7 +300,7 @@ def get_users_in_group_api(group_id):
     for mem in group_list:
         dictionary_mem = mem.make_dictionary()
         group_dict.append(dictionary_mem)
-    return jsonify(group_dict)
+    return jsonify(group_dict), 200
 
 
 @app.delete("/group/leave/<user_id>/<group_id>")
@@ -297,11 +308,11 @@ def leave_group(user_id: str, group_id: str):
     try:
         group_junction_service.leave_group(int(user_id), int(group_id))
         message = "you have left the group"
-        return jsonify(message)
+        return jsonify(message), 200
     except TypeError as e:
-        return jsonify(str(e))
+        return jsonify(str(e)), 400
     except WrongId as e:
-        return jsonify(str(e))
+        return jsonify(str(e)), 400
 
 
 """Get Creator for Group HomePage"""
@@ -310,8 +321,10 @@ def leave_group(user_id: str, group_id: str):
 @app.get("/creator/<group_id>")
 def get_creator_api(group_id: str):
     result = group_service_2.service_get_creator(int(group_id))
-    return jsonify(result)
+    return jsonify(result), 200
 
+
+# --------------------------------------------------------------------------------------------------------------------------------
 
 @app.post("/group_post")
 def create_group_post():
