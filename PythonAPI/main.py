@@ -292,7 +292,7 @@ def get_users_in_group_api(group_id):
     for mem in group_list:
         dictionary_mem = mem.make_dictionary()
         group_dict.append(dictionary_mem)
-    return jsonify(group_dict)
+    return jsonify(group_dict), 200
 
 
 @app.delete("/group/leave/<user_id>/<group_id>")
@@ -300,11 +300,11 @@ def leave_group(user_id: str, group_id: str):
     try:
         group_junction_service.leave_group(int(user_id), int(group_id))
         message = "you have left the group"
-        return jsonify(message)
+        return jsonify(message), 200
     except TypeError as e:
-        return jsonify(str(e))
+        return jsonify(str(e)), 400
     except WrongId as e:
-        return jsonify(str(e))
+        return jsonify(str(e)), 400
 
 
 """Get Creator for Group HomePage"""
@@ -313,7 +313,7 @@ def leave_group(user_id: str, group_id: str):
 @app.get("/creator/<group_id>")
 def get_creator_api(group_id: str):
     result = group_service_2.service_get_creator(int(group_id))
-    return jsonify(result)
+    return jsonify(result), 200
 
 
 # --------------------------------------------------------------------------------------------------------------------------------
