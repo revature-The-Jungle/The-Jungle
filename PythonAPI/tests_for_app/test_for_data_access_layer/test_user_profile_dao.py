@@ -20,7 +20,9 @@ def create_fake_user():
     sql = "Delete from user_table where user_id >= 100000000;" \
           "Insert into user_table values(100000000, 'first10000', 'last10000', 'email@email.com', 'username1000000', " \
           "'passcode100000', 'about', '1991-08-06', 'gif');" \
-          "Insert into user_table values(100000001, 'first10000', 'last10000', 'email2@email.com', 'username100000001'," \
+          "Insert into user_table values(100000001, 'first10000', 'last10000', 'email1@email.com', 'username100000001'," \
+          "'passcode100000', 'about', '1991-08-06', 'gif');" \
+          "Insert into user_table values(100000002, 'first10000', 'last10000', 'email2@email.com', 'username100000002'," \
           "'passcode100000', 'about', '1991-08-06', 'gif');"
     cursor = connection.cursor()
     cursor.execute(sql)
@@ -38,6 +40,19 @@ def create_fake_image(create_fake_user):
 
     sql = "Insert into user_picture_table values(100000000, 100000000, 'test_image');" \
           "Insert into user_picture_table values(100000001, 100000001, 'test_image');"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    connection.commit()
+
+
+@fixture
+def create_fake_followers(create_fake_user):
+    """Create followers for the fake users"""
+
+    sql = "Insert into user_follow_junction_table values(100000000, 100000001);" \
+          "Insert into user_follow_junction_table values(100000000, 100000002);" \
+          "Insert into user_follow_junction_table values(100000001, 100000000);" \
+          "Insert into user_follow_junction_table values(100000002, 100000000);"
     cursor = connection.cursor()
     cursor.execute(sql)
     connection.commit()
@@ -149,3 +164,32 @@ def test_update_image_format_failure_no_user():
 def test_update_password():
     """stretch"""
     pass
+
+
+def test_user_followers_success(create_fake_followers):
+    """Tests to see if user 100000000 has more than two followers"""
+    follower_dict: dict[str:int] = user_profile_dao.get_user_followers(100000000)
+    print(str(follower_dict))
+    assert len(follower_dict) >= 2
+
+
+def test_user_following_success(create_fake_followers):
+    """Tests to see if user 100000000 is following the two fake users"""
+    following_dict: dict[str:int] = user_profile_dao.get_users_following_user(100000000)
+    assert len(following_dict) >= 2
+
+
+def test_user_followers_failure_no_user():
+    try:
+        user_profile_dao.get_user_followers(-1)
+        assert False
+    except UserNotFound as e:
+        assert str(e) == user_not_found_message
+
+
+def test_user_following_failure_no_user():
+    try:
+        user_profile_dao.get_users_following_user(-1)
+        assert False
+    except UserNotFound as e:
+        assert str(e) == user_not_found_message
