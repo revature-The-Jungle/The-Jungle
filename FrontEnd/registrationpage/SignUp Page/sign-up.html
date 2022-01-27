@@ -29,7 +29,7 @@
                 ><span class="span poppins-bold-red-18px">*</span>
               </div>
               <div class="overlap-group7">
-                <input type="text" class="rectangle-1 border-1px-mischka" id="signup-firstname" required>  <!-- FIRST NAME INPUT BOX -->
+                <input type="text" class="rectangle-1 border-1px-mischka" id="signup-firstname" required maxlength="20">  <!-- FIRST NAME INPUT BOX -->
               </div>
               <div class="overlap-group6">
                 <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
@@ -39,7 +39,7 @@
             </div>
             <div class="last-name">
               <div class="last-name-1 poppins-bold-bright-red-18px">Last Name *</div>
-              <input type="text" class="password-rectangle" id="signup-lastname" required>
+              <input type="text" class="password-rectangle" id="signup-lastname" required maxlength="20">
               <!-- LAST NAME INPUT BOX -->
             </div>
             <div class="overlap-group6">
@@ -53,7 +53,7 @@
                 ><span class="span poppins-bold-red-18px">*</span>
               </div>
               <div class="overlap-group5">
-                <input type="email" class="rectangle-1 border-1px-mischka" id="signup-email" required>
+                <input type="email" class="rectangle-1 border-1px-mischka" id="signup-email" required maxlength="50">
                 <!-- EMAIL INPUT BOX -->
               </div>
               <div class="overlap-group6">
@@ -83,7 +83,7 @@
                 ><span class="span poppins-bold-red-18px">*</span>
               </div>
               <div class="overlap-group3">
-                <input type="text" class="rectangle-1 border-1px-mischka" id="signup-username" required> <!-- USERNAME INPUT BOX -->
+                <input type="text" class="rectangle-1 border-1px-mischka" id="signup-username" required maxlength="50"> <!-- USERNAME INPUT BOX -->
               </div>
               <div class="overlap-group6">
                 <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
@@ -97,7 +97,7 @@
                 ><span class="span poppins-bold-red-18px">*</span>
               </div>
               <div class="overlap-group2">
-                <input type="password" class="rectangle-1 border-1px-mischka" id="signup-password" required> <!-- PASSWORD INPUT BOX -->
+                <input type="password" class="rectangle-1 border-1px-mischka" id="signup-password" required maxlength="50"> <!-- PASSWORD INPUT BOX -->
               </div>
               <div class="overlap-group6">
                 <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
@@ -111,7 +111,7 @@
                 ><span class="span poppins-bold-red-18px">*</span>
               </div>
               <div class="overlap-group1">
-                <input type="password" class="rectangle-1 border-1px-mischka" id="signup-repeat-password" required> <!-- REPEAT PASSWORD INPUT BOX -->
+                <input type="password" class="rectangle-1 border-1px-mischka" id="signup-repeat-password" required maxlength="50"> <!-- REPEAT PASSWORD INPUT BOX -->
               </div>
               <div class="overlap-group6">
                 <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
@@ -120,11 +120,11 @@
               </div>
             </div>
             <div class="dont-have-an-account poppins-bold-white-18px">
-              <span class="span0">Already have an account?&nbsp;&nbsp; </span><span class="span1"><a href="../loginpage/login.html">Log in</a></span>
+              <span class="span0">Already have an account?&nbsp;&nbsp; </span><span class="span1"><a href="../loginpage/login.html">Log in</span>
             </div>
             <div class="overlap-group">
               <div class="rectangle-3"></div>
-              <button onclick="validateSignUpInput();" class="submit valign-text-middle" id="signup-submit">Submit</button>
+              <button class="submit valign-text-middle" id="signup-submit">Submit</button>
               <!-- SUBMIT BUTTON FOR SIGN UP -->
             </div>
           </div>
