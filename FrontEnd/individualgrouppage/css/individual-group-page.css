@@ -4,8 +4,8 @@
   align-items: flex-start;
   background-color: var(--white);
   display: flex;
-  height: 1024px;
-  width: 1440px;
+  height: 100vh;
+  width: 100vw;
 }
 
 .individual-group-page .flex-col {
@@ -14,6 +14,7 @@
   flex-direction: column;
   min-height: 593px;
   width: 16vw;
+  height: 100vh;
   margin: 3vh 0 3vh 3vh;
 }
 
@@ -168,10 +169,10 @@
 }
 
 .individual-group-page .overlap-group4 {
-  height: 873px;
-  margin-left: 34px;
+  height: 100vh;
+  margin-left: 1vw;
   position: relative;
-  width: 944px;
+  width: 84vw;
 }
 
 .individual-group-page .line-left {
@@ -324,10 +325,11 @@
   display: flex;
   flex-direction: column;
   left: 38px;
-  min-height: 861px;
+  /* min-height: 861px; */
   position: absolute;
   top: 12px;
-  width: 546px;
+  width: 37.5vw;
+  height: 100vh;
 }
 
 .individual-group-page .overlap-group3-1 {
