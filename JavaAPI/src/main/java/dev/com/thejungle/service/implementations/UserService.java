@@ -1,6 +1,7 @@
 package dev.com.thejungle.service.implementations;
 
 import dev.com.thejungle.customexception.*;
+import dev.com.thejungle.dao.implementations.UserDAO;
 import dev.com.thejungle.dao.interfaces.UserDAOInt;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.interfaces.UserServiceInt;
@@ -10,10 +11,10 @@ import java.util.Objects;
 
 public class UserService implements UserServiceInt {
 
-    private final UserDAOInt userDAOInt;
+    private final UserDAO userDAO;
 
-    public UserService (UserDAOInt userDAOInt) {
-        this.userDAOInt = userDAOInt;
+    public UserService (UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     @Override
@@ -24,7 +25,7 @@ public class UserService implements UserServiceInt {
             } else if (user.getPasscode().matches(".*\\s+.*")) {
                 throw new UnallowedSpaces("No spaces allowed in username or password");
             } else {
-                return this.userDAOInt.createNewUser(user);
+                return this.userDAO.createNewUser(user);
             }
         } catch (DuplicateUsername d) {
             throw new DuplicateUsername("This username is already taken");
@@ -38,7 +39,7 @@ public class UserService implements UserServiceInt {
     @Override
     public User searchForUserService(String username) {
         try {
-            return this.userDAOInt.searchForUser(username);
+            return this.userDAO.searchForUser(username);
         } catch (UserNotFound e) {
             throw new UserNotFound("User not found");
         }
@@ -46,7 +47,7 @@ public class UserService implements UserServiceInt {
 
     @Override
     public User loginService(String username, String passcode) {
-        User newUser = this.userDAOInt.searchForUser(username);
+        User newUser = this.userDAO.searchForUser(username);
         if ((username.length() > 20) || (passcode.length() > 30))
             throw new TooManyCharacters("You are exceeding your character limit");
         if ((username.length() == 0) || (passcode.length() == 0))
@@ -59,7 +60,7 @@ public class UserService implements UserServiceInt {
 
     @Override
     public List<User> getAllUsersService() {
-        return this.userDAOInt.getAllUsers();
+        return this.userDAO.getAllUsers();
     }
 
     @Override
@@ -67,7 +68,7 @@ public class UserService implements UserServiceInt {
         try {
             if (userId > 0) {
                 if (userId < 1000000) {
-                    return this.userDAOInt.getGroups(userId);
+                    return this.userDAO.getGroups(userId);
                 } else {
                     throw new InvalidInputException("User Id needs to be positive and in range");
                 }

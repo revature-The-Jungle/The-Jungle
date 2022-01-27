@@ -11,7 +11,7 @@ public class ChatServiceTests {
     ChatService chatService = new ChatService(new ChatDAO());
 
     /**
-     * serviceCreateMessage with invalid chatId
+     * serviceCreateMessage with invalid userId
      */
     @Test(expectedExceptions = InvalidInputException.class, expectedExceptionsMessageRegExp = "Invalid User ID")
     public void serviceCreateMessageFailInvalidChatId(){
@@ -25,6 +25,14 @@ public class ChatServiceTests {
     @Test(expectedExceptions = InvalidInputException.class, expectedExceptionsMessageRegExp = "Invalid Group ID")
     public void serviceCreateMessageFailInvalidGroupId(){
         ChatMessage chatMessage = new ChatMessage(9000, 0, "hi");
+        chatService.serviceCreateMessageObject(chatMessage);
+    }
+    /**
+     * serviceCreateMessage with Long Content
+     */
+    @Test(expectedExceptions = InvalidInputException.class, expectedExceptionsMessageRegExp = "Long Content")
+    public void serviceCreateMessageWithLongContent(){
+        ChatMessage chatMessage = new ChatMessage(9000, 9000, "N".repeat(301));
         chatService.serviceCreateMessageObject(chatMessage);
     }
 

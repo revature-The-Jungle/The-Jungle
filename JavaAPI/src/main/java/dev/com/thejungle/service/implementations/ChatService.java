@@ -29,6 +29,8 @@ public class ChatService implements ChatServiceInt {
             throw new InvalidInputException("Invalid Group ID");
         } else if (chatMessage.getChatContent().isEmpty()) {
             throw new InvalidInputException("Invalid Chat Content");
+        } else if (chatMessage.getChatContent().length() > 300){
+            throw new InvalidInputException("Long Content");
         } else {
             return chatDAO.createMessage(chatMessage);
         }
