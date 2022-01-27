@@ -1,6 +1,5 @@
 package dev.com.thejungle.entity;
 
-import java.sql.Date;
 import java.util.Objects;
 
 public class User {
@@ -13,7 +12,7 @@ public class User {
     private String username;
     private String passcode;
     private String userAbout;
-    private Date userBirthdate;
+    private long userBirthdate;
     private String imageFormat;
 
 
@@ -21,7 +20,7 @@ public class User {
     public User(){}
 
     public User(int userId, String firstName, String lastName, String email, String username, String passcode,
-                String userAbout, Date userBirthdate, String imageFormat) {
+                String userAbout, long userBirthdate, String imageFormat) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -125,11 +124,11 @@ public class User {
         this.userAbout = userAbout;
     }
 
-    public Date getUserBirthdate() {
+    public long getUserBirthdate() {
         return userBirthdate;
     }
 
-    public void setUserBirthdate(Date userBirthdate) {
+    public void setUserBirthdate(long userBirthdate) {
         this.userBirthdate = userBirthdate;
     }
 
@@ -140,4 +139,6 @@ public class User {
     public void setImageFormat(String imageFormat) {
         this.imageFormat = imageFormat;
     }
+
+
 }
