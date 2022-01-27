@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/styleguide.css" />
     <link rel="stylesheet" type="text/css" href="css/globals.css" />
   </head>
-  <body style="margin: 0; background: #ffffff">
+  <body onload="createChatConnection()" style="margin: 0; background: #ffffff">
     <input type="hidden" id="anPageName" name="page" value="chat-page" />
     <div class="container-center-horizontal">
       <div class="chat-page screen">
@@ -116,8 +116,13 @@
               </div>
               <div class="overlap-group-1">
                 <div class="x-rectangle"></div>
-                <div class="name-2 valign-text-middle poppins-bold-astronaut-22px">Greg Suminski</div>
-                <img class="ellipse-1-1" src="img/ellipse-1@2x.png" />
+                <div class="name-2 poppins-bold-astronaut-22px">
+      
+                <ul id="chatList" class="overflowprop">
+                    
+                </ul> 
+                </div>
+                
                 <img class="line-under-search-1" src="img/line-under-search@2x.svg" />
                 <img class="group-icon" src="img/group-icon@2x.svg" />
                 <div class="people-in-chat valign-text-middle">People in Chat</div>
@@ -127,5 +132,8 @@
         </div>
       </div>
     </div>
+
+    
+    <script src="js/uludag.js"></script>
   </body>
 </html>

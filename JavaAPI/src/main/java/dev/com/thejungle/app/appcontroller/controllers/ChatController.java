@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 public class ChatController {
 
@@ -33,7 +34,6 @@ public class ChatController {
             Map<String,Object> userInfo = new HashMap<>();
             userInfo.put("groupId" , groupId);
             userInfo.put("userName", userName );
-
             userUsernameMap.put(ctx, userInfo);
             userListBroadcast(groupId);
             if(groupId == 0)
