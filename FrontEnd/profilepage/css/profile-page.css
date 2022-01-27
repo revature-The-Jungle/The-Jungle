@@ -726,3 +726,10 @@
 .profile-page #updateProfileEditProfileBtn{
   width: 100%;
 }
+
+.profile-page .create-post{
+  color: #fff;
+  background-color: #f47635;
+  border-color: #f47635;
+  border-radius: 10px;
+}
