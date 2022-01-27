@@ -30,7 +30,6 @@ public class ChatDAOTests {
         ChatMessage chatMessage = new ChatMessage(99999, 99999, "Nine Thousand");
         ChatMessage testCreateMessage = chatDAO.createMessage(chatMessage);
         Assert.assertNull(testCreateMessage); //The user/data was entering incorrect information into the system, hence giving an error.
-
     }
 
     /**
