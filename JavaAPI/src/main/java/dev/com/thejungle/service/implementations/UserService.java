@@ -6,7 +6,6 @@ import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.interfaces.UserServiceInt;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class UserService implements UserServiceInt {
 
