@@ -44,12 +44,13 @@ public class UserService implements UserServiceInt {
 
     @Override
     public User loginService(String username, String passcode){
-        User newUser = this.userDAOInt.searchForUser(username);
-        if ((username.length() > 20) || (passcode.length() > 30))
-            throw new TooManyCharacters("You are exceeding your character limit");
-        if (!Objects.equals(newUser.getUsername(), username) || !Objects.equals(newUser.getPasscode(), passcode))
-            throw new UsernameOrPasscodeException("Username or Passcode are incorrect");
-        return newUser;
+//        User newUser = this.userDAOInt.searchForUser(username);
+//        if ((username.length() > 20) || (passcode.length() > 30))
+//            throw new TooManyCharacters("You are exceeding your character limit");
+//        if (!Objects.equals(newUser.getUsername(), username) || !Objects.equals(newUser.getPasscode(), passcode))
+//            throw new UsernameOrPasscodeException("Username or Passcode are incorrect");
+//        return newUser;
+        return null;
     }
 
 

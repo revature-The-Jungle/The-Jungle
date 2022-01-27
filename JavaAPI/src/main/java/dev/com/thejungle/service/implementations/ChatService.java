@@ -30,7 +30,7 @@ public class ChatService implements ChatServiceInt {
     }
 
     /**
-     * calls getMessageHistory in ChatDAO
+     * calls getMessageHistory in ChatDAO for Group Chatroom
      * @param groupId
      * @return ArrayList of ChatMessage objects from 5 minutes ago in group chat room
      * Will return empty ArrayList if no messages
@@ -44,7 +44,7 @@ public class ChatService implements ChatServiceInt {
     }
 
     /**
-     * calls getMessageHistory in ChatDAO
+     * calls getMessageHistory in ChatDAO for Global Chatroom
      * @return ArrayList of ChatMessage objects from 5 minutes ago in global chat room
      * Will return empty ArrayList if no messages
      */

@@ -13,7 +13,6 @@ public class ChatServiceTests {
     /**
      * serviceCreateMessage with 0 as chatId
      */
-
     @Test(expectedExceptions = InvalidInputException.class, expectedExceptionsMessageRegExp = "Invalid Input Exception")
     public void serviceCreateMessageFailInvalidChatId(){
         ChatMessage chatMessage = new ChatMessage(0, 0, "");
