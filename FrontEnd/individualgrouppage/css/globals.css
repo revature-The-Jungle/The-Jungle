@@ -23,7 +23,7 @@
 }
 
 .container-center-horizontal > * {
-  flex-shrink: 0;
+  flex-shrink: 1;
   pointer-events: auto;
 }
 
