@@ -13,11 +13,14 @@ import java.util.Map;
 
 
 public class UserController {
-    UserServiceInt userService;
+
+    private UserService userService;
+
     public UserController(UserService userService){
         this.userService = userService;
     }
 
+    // Get User By UserName
     public Handler getUserByUsername = ctx -> {
         String username = ctx.pathParam("username");
         try {
@@ -32,6 +35,7 @@ public class UserController {
         }
     };
 
+    // Get All Users
     public Handler getAllUsers = ctx -> {
         try {
             List<User> users = this.userService.getAllUsersService();
@@ -45,6 +49,7 @@ public class UserController {
         }
     };
 
+    // Login User
     public Handler loginUser = ctx -> {
         Gson gson = new Gson();
         Map<String, String> loginCredentials = gson.fromJson(ctx.body(), Map.class);
@@ -60,6 +65,7 @@ public class UserController {
         }
     };
 
+    // Get Groups
     public Handler getGroups = ctx -> {
         int userId = Integer.parseInt(ctx.pathParam("userId"));
         try {
@@ -75,10 +81,7 @@ public class UserController {
         }
     };
 
-
-
-
-    // REGISTER USER ROUTE HANDLER
+    // Register User
     public Handler registerUser = ctx -> {
         try {
             Gson gson = new Gson();
@@ -89,16 +92,13 @@ public class UserController {
             ctx.status(201);
         } catch (UnallowedSpaces u) {
             ctx.result(u.getMessage());
-            ctx.status(404);
+            ctx.status(400);
         } catch (DuplicateEmail e) {
             ctx.result(e.getMessage());
             ctx.status(400);
         } catch (DuplicateUsername d) {
             ctx.result(d.getMessage());
-            ctx.status(401);
+            ctx.status(400);
         }
     };
-
-
-
 }

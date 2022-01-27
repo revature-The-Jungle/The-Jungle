@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class UserService implements UserServiceInt {
 
-    UserDAOInt userDAOInt;
+    private final UserDAOInt userDAOInt;
 
     public UserService (UserDAOInt userDAOInt) {
         this.userDAOInt = userDAOInt;
