@@ -30,8 +30,9 @@
               <img class="x-icon" src="img/group-icon-1@2x.svg" />
             </div>
             <div class="logout-container">
-              <div class="logout valign-text-middle poppins-semi-bold-astronaut-24px">Logout</div>
-              <img class="x-icon" src="img/logout-icon@2x.svg" />
+              <div class="logout valign-text-middle poppins-semi-bold-astronaut-24px"></div>
+                <!-- <button id="logoutButton" onclick="logout()">Logout</button> -->
+              <img class="x-icon" type="button" src="img/logout-icon@2x.svg" onclick="logout()" />
             </div>
           </div>
         </div>
@@ -95,11 +96,13 @@
               </div>
             </div>
             <img class="line-right" src="img/line-right@1x.svg" />
-            <div class="overlap-group-container">
+            <div class="overlap-group-container"> <!-- here you will include the group of chats... -->
               <div class="overlap-group1-1">
                 <div class="x-rectangle"></div>
-                <div class="friend-3">
-                  <img class="friend" src="img/friend-3@2x.png" />
+                 <div class="friend-1">
+                  <p id="userT" class="name valign-text-middle poppins-bold-astronaut-22px" onclick=""><br></p>
+                  </div> 
+                   <!-- <img class="friend" src="img/friend-3@2x.png" />
                   <div class="name valign-text-middle poppins-bold-astronaut-22px">Karen Gillan</div>
                 </div>
                 <div class="friend-2">
@@ -110,9 +113,9 @@
                   <img class="friend" src="img/friend-1@2x.png" />
                   <div class="briel-larson valign-text-middle poppins-bold-astronaut-22px">Briel Larson</div>
                 </div>
-                <img class="friends-icon" src="img/friends-icon@2x.svg" />
+                <img class="friends-icon" src="img/friends-icon@2x.svg" /> -->
                 <div class="friends valign-text-middle">Chats</div>
-                <img class="line" src="img/line@2x.svg" />
+                <img class="line" src="img/line@2x.svg" /> 
               </div>
               <div class="overlap-group-1">
                 <div class="x-rectangle"></div>
@@ -127,5 +130,6 @@
         </div>
       </div>
     </div>
+    <script src="chat-page.js"></script>
   </body>
 </html>

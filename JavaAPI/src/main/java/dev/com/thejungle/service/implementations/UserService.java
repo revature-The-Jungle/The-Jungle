@@ -6,6 +6,7 @@ import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.interfaces.UserServiceInt;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -58,6 +59,14 @@ public class UserService implements UserServiceInt {
         return this.userDAOInt.getAllUsers();
     }
 
+    @Override
+    public HashMap<Integer, String> getGroupsNames(int userId) {
+        if (userId > 0) {
+            return this.userDAOInt.getGroupsNames(userId);
+        } else {
+            throw new InvalidInputException("User Id needs to be positive");
+        }
+    }
     @Override
     public ArrayList<Integer> getGroups(int userId) {
         if (userId > 0) {

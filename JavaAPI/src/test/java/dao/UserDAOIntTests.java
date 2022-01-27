@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class UserDAOIntTests {
@@ -40,10 +41,15 @@ public class UserDAOIntTests {
             System.out.println(u);
         Assert.assertTrue(users.size() >= 1);
     }
-
     @Test
     void testGetGroups(){
         ArrayList<Integer> arrayList = userDAOInt.getGroups(9000);
+        Assert.assertTrue(arrayList.size() >= 1);
+    }
+
+    @Test
+    void testGetGroupsNames(){
+        HashMap<Integer, String> arrayList = userDAOInt.getGroupsNames(9000);
         Assert.assertTrue(arrayList.size() >= 1);
     }
 }

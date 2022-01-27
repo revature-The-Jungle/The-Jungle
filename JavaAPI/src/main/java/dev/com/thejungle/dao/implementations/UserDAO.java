@@ -6,6 +6,7 @@ import dev.com.thejungle.entity.User;
 import dev.com.thejungle.utility.ConnectionDB;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -95,6 +96,25 @@ public class UserDAO implements UserDAOInt {
     }
 
     @Override
+    public HashMap<Integer, String> getGroupsNames(int userId) {
+        try (Connection connection = ConnectionDB.createConnection()) {
+            String sql = "select gmjt.group_id, gt.group_name from group_member_junction_table gmjt" +
+            " inner join group_table gt ON gmjt.group_id = gt.group_id" +
+            " where gmjt.user_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            HashMap<Integer, String> groupIds = new HashMap<>();
+            while(resultSet.next()){
+               groupIds.put(resultSet.getInt("group_id"), resultSet.getString("group_name"));
+            }
+            return groupIds;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+            return null;
+        }
+    }
+    @Override
     public ArrayList<Integer> getGroups(int userId) {
         try (Connection connection = ConnectionDB.createConnection()) {
             String sql = "select group_id from group_member_junction_table where user_id = ?";
@@ -103,7 +123,7 @@ public class UserDAO implements UserDAOInt {
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<Integer> groupIds = new ArrayList<>();
             while(resultSet.next()){
-               groupIds.add(resultSet.getInt("group_id"));
+                groupIds.add(resultSet.getInt("group_id"));
             }
             return groupIds;
         } catch (SQLException sqlException) {
@@ -111,5 +131,4 @@ public class UserDAO implements UserDAOInt {
             return null;
         }
     }
-
 }
