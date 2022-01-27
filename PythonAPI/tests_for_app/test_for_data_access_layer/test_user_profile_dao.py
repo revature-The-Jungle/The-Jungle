@@ -3,12 +3,6 @@ from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.implementation_classes.user_profile_dao import UserProfileDAOImp, UserProfileDAO
 from entities.user import User
 from pytest import fixture
-<<<<<<< HEAD
-
-from util.database_connection import connection
-
-user_profile_dao: UserProfileDAO = UserProfileDAOImp()
-=======
 
 from util.database_connection import connection
 
@@ -67,89 +61,13 @@ def create_fake_followers(create_fake_user):
 def test_get_user_profile_success(create_fake_user):
     show_user = user_profile_dao.get_user_profile(100000000)
     assert show_user.user_id == 100000000
->>>>>>> origin/eJennings/Python
 
-user_about_me_for_tests = "Updating Profile About me"
-user_email_for_tests = "test@email.com"
-user_not_found_message = "The user could not be found."
-
-
-@fixture
-def create_fake_user():
-    """Creates two new users for testing and deletes them once the tests are done"""
-
-    sql = "Delete from user_table where user_id >= 100000000;" \
-          "Insert into user_table values(100000000, 'first10000', 'last10000', 'email@email.com', 'username1000000', " \
-          "'passcode100000', 'about', '1991-08-06', 'gif');" \
-<<<<<<< HEAD
-          "Insert into user_table values(100000001, 'first10000', 'last10000', 'email2@email.com', 'username100000001'," \
-=======
-          "Insert into user_table values(100000001, 'first10000', 'last10000', 'email1@email.com', 'username100000001'," \
-          "'passcode100000', 'about', '1991-08-06', 'gif');" \
-          "Insert into user_table values(100000002, 'first10000', 'last10000', 'email2@email.com', 'username100000002'," \
->>>>>>> origin/eJennings/Python
-          "'passcode100000', 'about', '1991-08-06', 'gif');"
-    cursor = connection.cursor()
-    cursor.execute(sql)
-    connection.commit()
-    yield
-    sql = "delete from user_table where user_id >= 100000000;"
-    cursor = connection.cursor()
-    cursor.execute(sql)
-    connection.commit()
-
-
-@fixture
-def create_fake_image(create_fake_user):
-    """Creates a fake images for the test users"""
-
-    sql = "Insert into user_picture_table values(100000000, 100000000, 'test_image');" \
-          "Insert into user_picture_table values(100000001, 100000001, 'test_image');"
-    cursor = connection.cursor()
-    cursor.execute(sql)
-    connection.commit()
-<<<<<<< HEAD
-
-=======
-
-
-@fixture
-def create_fake_followers(create_fake_user):
-    """Create followers for the fake users"""
-
-    sql = "Insert into user_follow_junction_table values(100000000, 100000001);" \
-          "Insert into user_follow_junction_table values(100000000, 100000002);" \
-          "Insert into user_follow_junction_table values(100000001, 100000000);" \
-          "Insert into user_follow_junction_table values(100000002, 100000000);"
-    cursor = connection.cursor()
-    cursor.execute(sql)
-    connection.commit()
-
-
-def test_get_user_profile_success(create_fake_user):
-    show_user = user_profile_dao.get_user_profile(100000000)
-    assert show_user.user_id == 100000000
->>>>>>> origin/eJennings/Python
-
-def test_get_user_profile_success(create_fake_user):
-    show_user = user_profile_dao.get_user_profile(100000000)
-    assert show_user.user_id == 100000000
-
-<<<<<<< HEAD
-=======
-def test_get_user_profile_success_2(create_fake_user):
-    show_user = user_profile_dao.get_user_profile(100000001)
-    assert show_user.user_id == 100000001
->>>>>>> origin/eJennings/Python
 
 def test_get_user_profile_success_2(create_fake_user):
     show_user = user_profile_dao.get_user_profile(100000001)
     assert show_user.user_id == 100000001
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/eJennings/Python
 def test_update_user_profile_about_me_success(create_fake_user):
     """Happy test to see if user about me is updated correctly"""
     updated_user = User(100000000, "test_first_name", "test_last_name", user_email_for_tests, "test_username",
@@ -177,67 +95,10 @@ def test_update_user_profile_failure_no_user():
     except UserNotFound as e:
         assert str(e) == user_not_found_message
 
-<<<<<<< HEAD
-=======
-def test_get_user_profile_success_2(create_fake_user):
-    show_user = user_profile_dao.get_user_profile(100000001)
-    assert show_user.user_id == 100000001
->>>>>>> origin/eJennings/Python
 
 def test_update_user_profile_failure_sql_injection(create_fake_user):
     """Tests to see if an sql injection will occur when updating the about me"""
 
-<<<<<<< HEAD
-    updated_user_fail_sql_injection: User = User(100000000, "test_first_name", "test_last_name", user_email_for_tests,
-                                                 "test_username",
-                                                 "test_passcode",
-                                                 "'; update user_table set passcode = 'sqlinjection' where user_id = 10000; --",
-                                                 "2016-01-01", "Test image")
-    if user_profile_dao.update_user_profile(updated_user_fail_sql_injection):
-        assert updated_user_fail_sql_injection.user_about == "'; update user_table set passcode = 'sqlinjection' " \
-                                                             "where user_id = 10000; --"
-    else:
-        assert updated_user_fail_sql_injection.passcode != "test_passcode"
-=======
-def test_update_user_profile_about_me_success(create_fake_user):
-    """Happy test to see if user about me is updated correctly"""
-    updated_user = User(100000000, "test_first_name", "test_last_name", user_email_for_tests, "test_username",
-                        "test_passcode", user_about_me_for_tests, "2022-01-21", "test_image")
-    updated_profile: User = user_profile_dao.update_user_profile(updated_user)
-    assert updated_profile.user_about == "Updating Profile About me"
-
-
-def test_update_user_profile_birth_date_success(create_fake_user):
-    """Happy test to see if user birth date is updated correctly"""
-    updated_user = User(100000000, "test_first_name", "test_last_name", "test@email.com", "test_username",
-                        "test_passcode",
-                        user_about_me_for_tests, "2022-01-05", "test_image")
-    updated_profile: User = user_profile_dao.update_user_profile(updated_user)
-    assert updated_profile.user_about == user_about_me_for_tests
-
-
-def test_update_user_profile_failure_no_user():
-    """Sad test to see if there is no user found by the ID"""
-    updated_user_fail = User(100000000, "test_first_name", "test_last_name", user_email_for_tests, "test_username",
-                             "test_passcode", user_about_me_for_tests, "2022-01-21", "test_image")
-    try:
-        user_profile_dao.update_user_profile(updated_user_fail)
-        assert False
-    except UserNotFound as e:
-        assert str(e) == user_not_found_message
-
->>>>>>> origin/eJennings/Python
-
-def test_update_user_profile_failure_sql_injection(create_fake_user):
-    """Tests to see if an sql injection will occur when updating the about me"""
-
-<<<<<<< HEAD
-def test_get_user_image_success(create_fake_image):
-    image = user_profile_dao.get_user_image(100000000)
-    assert image
-
-
-=======
     updated_user_fail_sql_injection: User = User(100000000, "test_first_name", "test_last_name", user_email_for_tests,
                                                  "test_username",
                                                  "test_passcode",
@@ -255,7 +116,6 @@ def test_get_user_image_success(create_fake_image):
     assert image
 
 
->>>>>>> origin/eJennings/Python
 def test_get_user_image_success_2(create_fake_image):
     image = user_profile_dao.get_user_image(100000001)
     assert image

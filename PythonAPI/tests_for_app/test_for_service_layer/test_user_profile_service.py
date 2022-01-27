@@ -5,14 +5,7 @@ from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeASt
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.too_many_characters import TooManyCharacters
 from custom_exceptions.user_id_must_be_an_integer import UserIdMustBeAnInteger
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 from custom_exceptions.user_not_found import UserNotFound
->>>>>>> origin/eJennings/Python
-=======
-from custom_exceptions.user_not_found import UserNotFound
->>>>>>> origin/eJennings/Python
 from data_access_layer.abstract_classes.user_profile_dao_abs import UserProfileDAO
 from data_access_layer.implementation_classes.user_profile_dao import UserProfileDAOImp
 from entities.user import User
@@ -45,17 +38,8 @@ def test_update_user_profile_service_success():
 
 def test_update_user_profile_service_failure_too_many_chars():
     updated_user_fail_about_me: User = User(1, "test_first_name", "test_last_name", "test@test.com", "test_username",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                            "test_passcode", "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901",
-=======
                                             "test_passcode",
                                             "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901",
->>>>>>> origin/eJennings/Python
-=======
-                                            "test_passcode",
-                                            "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901",
->>>>>>> origin/eJennings/Python
                                             "2022-01-22", "Test image")
     try:
         user_profile_service.update_user_profile_service(updated_user_fail_about_me)
@@ -66,15 +50,7 @@ def test_update_user_profile_service_failure_too_many_chars():
 
 def test_update_user_profile_service_failure_birth_date_is_null():
     updated_user_fail_birth_date: User = User(1, "test_first_name", "test_last_name", "test@test.com", "test_username",
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                      "test_passcode", "About me test", None, "Test image")
-=======
                                               "test_passcode", "About me test", None, "Test image")
->>>>>>> origin/eJennings/Python
-=======
-                                              "test_passcode", "About me test", None, "Test image")
->>>>>>> origin/eJennings/Python
     try:
         user_profile_service.update_user_profile_service(updated_user_fail_birth_date)
         assert False

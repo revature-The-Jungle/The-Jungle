@@ -61,11 +61,6 @@ class UserProfileServiceImp(UserProfileService):
     def update_password_service(self, user_id: int, password: str) -> User:
         """Stretch"""
         pass
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> origin/eJennings/Python
 
     def get_user_followers_service(self, user_id: int) -> dict[str:int]:
         """Stretch"""
@@ -80,7 +75,3 @@ class UserProfileServiceImp(UserProfileService):
         if not str(user_id).isnumeric():
             raise UserIdMustBeAnInteger('The user id must be an integer.')
         return self.user_profile_dao.get_users_following_user(user_id)
-<<<<<<< HEAD
->>>>>>> origin/eJennings/Python
-=======
->>>>>>> origin/eJennings/Python

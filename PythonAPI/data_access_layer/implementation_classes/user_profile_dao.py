@@ -30,15 +30,7 @@ class UserProfileDAOImp(UserProfileDAO):
         if not cursor.fetchone():
             raise UserNotFound(user_not_found_string)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        sql = "update user_table set user_about = %(user_about)s, user_birth_date = %(user_birth_date)s where user_id "\
-=======
         sql = "update user_table set user_about = %(user_about)s, user_birth_date = %(user_birth_date)s where user_id " \
->>>>>>> origin/eJennings/Python
-=======
-        sql = "update user_table set user_about = %(user_about)s, user_birth_date = %(user_birth_date)s where user_id " \
->>>>>>> origin/eJennings/Python
               "= %(user_id)s "
         cursor.execute(sql, {'user_about': user.user_about, 'user_birth_date': user.user_birth_date,
                              'user_id': user.user_id})
@@ -121,11 +113,6 @@ class UserProfileDAOImp(UserProfileDAO):
     def update_password(self, user_id: int, password: str) -> User:
         """Stretch"""
         pass
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> origin/eJennings/Python
 
     def get_user_followers(self, user_id: int) -> dict[str:int]:
         """Returns a dictionary with username as key and their userId as the value of the followers of userID"""
@@ -167,7 +154,3 @@ class UserProfileDAOImp(UserProfileDAO):
             following_dict.update({follower[0]: follower[1]})
         return following_dict
 
-<<<<<<< HEAD
->>>>>>> origin/eJennings/Python
-=======
->>>>>>> origin/eJennings/Python
