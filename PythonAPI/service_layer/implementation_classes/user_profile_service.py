@@ -71,4 +71,7 @@ class UserProfileServiceImp(UserProfileService):
 
     def get_users_following_user_service(self, user_id: int) -> dict[str:int]:
         """Stretch"""
-        pass
+        # Check to make sure the user_id is an integer
+        if not str(user_id).isnumeric():
+            raise UserIdMustBeAnInteger('The user id must be an integer.')
+        return self.user_profile_dao.get_users_following_user(user_id)

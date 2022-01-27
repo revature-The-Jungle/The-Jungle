@@ -122,3 +122,15 @@ def test_get_user_followers_failure_not_int():
     except UserIdMustBeAnInteger as e:
         assert str(e) == "The user id must be an integer."
 
+
+def test_get_user_following_success():
+    user_profile_dao.get_users_following_user = MagicMock(return_value="{'username' : 1}")
+    assert user_profile_service.get_users_following_user_service(2)
+
+
+def test_get_user_following_failure_not_int():
+    try:
+        user_profile_service.get_users_following_user_service(1.0)
+        assert False
+    except UserIdMustBeAnInteger as e:
+        assert str(e) == "The user id must be an integer."

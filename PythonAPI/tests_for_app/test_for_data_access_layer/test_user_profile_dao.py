@@ -185,3 +185,11 @@ def test_user_followers_failure_no_user():
         assert False
     except UserNotFound as e:
         assert str(e) == user_not_found_message
+
+
+def test_user_following_failure_no_user():
+    try:
+        user_profile_dao.get_users_following_user(-1)
+        assert False
+    except UserNotFound as e:
+        assert str(e) == user_not_found_message
