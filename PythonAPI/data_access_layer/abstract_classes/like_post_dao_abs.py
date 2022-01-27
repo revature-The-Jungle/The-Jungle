@@ -3,12 +3,12 @@ from abc import ABC, abstractmethod
 from entities.post import Post
 
 
-class CreatePostDAO(ABC):
+class LikePostDAO(ABC):
 
     @abstractmethod
-    def create_post(self, post: Post) -> Post:
+    def like_post(self, post_id: int) -> Post:
         pass
 
     @abstractmethod
-    def create_post_image(self, image: str) -> bool:
+    def like_comment(self, comment_id : int) :
         pass
