@@ -453,7 +453,10 @@ def delete_group_post(post_id: int):
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/eJennings/Python
 @app.get("/user/followers/<user_id>")
 def get_user_followers(user_id: int):
     try:
@@ -484,5 +487,8 @@ def get_user_following(user_id: int):
         return exception_json, 400
 
 
+<<<<<<< HEAD
+>>>>>>> origin/eJennings/Python
+=======
 >>>>>>> origin/eJennings/Python
 app.run()
