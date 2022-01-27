@@ -54,8 +54,6 @@ def on():
     return "python is running"
 
 
-like_post_dao = LikePostDaoImp()
-like_post_service = LikePostServiceImp(like_post_dao)
 create_post_dao = CreatePostDAOImp()
 create_post_service = CreatePostServiceImp(create_post_dao)
 user_profile_dao = UserProfileDAOImp()
@@ -69,11 +67,9 @@ post_feed_service = PostFeedServiceImp(post_feed_dao)
 comment_dao = CommentDAOImp()
 comment_service = CommentServiceImp(comment_dao)
 group_dao = GroupDAOImp()
-group_service2 = GroupPostgreService(group_dao, group_view_dao)  # look into why there is a group_service2
+group_service2 = GroupPostgreService(group_dao, group_view_dao)  # Possibly need to clean up the code.
 like_post_dao = LikePostDaoImp()
 like_post_service = LikePostServiceImp(like_post_dao)
-comment_dao = CommentDAOImp()
-comment_service = CommentServiceImp(comment_dao)
 
 
 @app.get("/user/<user_id>")
@@ -325,7 +321,7 @@ def get_all_posts():
 def delete_a_post():
     try:
         data = request.get_json()
-        postid = data["postId"],
+        postid = data["postId"]
         boolean = post_feed_service.delete_a_post_service(postid)
         return jsonify(boolean)
     except ConnectionErrorr as e:
@@ -336,7 +332,7 @@ def delete_a_post():
 def add_likes_to_post():
     try:
         data = request.get_json()
-        postid = data["postId"],
+        postid = data["postId"]
         return jsonify(like_post_service.service_like_post(postid))
     except TypeError:
         return ("post not found!"), 400
@@ -346,7 +342,7 @@ def add_likes_to_post():
 def add_likes_to_comment():
     try:
         data = request.get_json()
-        commentid = data["commentId"],
+        commentid = data["commentId"]
         return jsonify(like_post_service.service_like_comment(commentid))
     except TypeError:
         return ("comment not found"), 400
@@ -356,7 +352,7 @@ def add_likes_to_comment():
 @app.delete("/Comments")
 def delete_comment():
     data = request.get_json()
-    comment_id = data["commentId"],
+    comment_id = data["commentId"]
     jsonify(comment_service.service_delete_comment(comment_id))
     return "Comment with id {} was deleted successfully".format(comment_id)
 
