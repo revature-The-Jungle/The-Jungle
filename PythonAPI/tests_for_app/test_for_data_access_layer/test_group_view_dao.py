@@ -40,5 +40,21 @@ def test_get_all_group_success():
     group_list = group_view_dao_imp.get_all_groups()
     assert len(group_list) >= 2
 
-# need 1 sad path for this function maybe
 
+def test_group_contain_valid_info():
+    result = group_view_dao_imp.get_all_groups()
+    print(result)
+    group = result[1]
+    assert group.group_name == "Soccer Fans"
+
+
+# testing to check for invalid names search
+def test_invalid_info_for_group():
+    result = group_view_dao_imp.get_all_groups()
+    print(result)
+    group = result[1]
+    if group.group_name == "Test":
+        assert False
+    else:
+        assert True
+# need 1 sad path for this function maybe

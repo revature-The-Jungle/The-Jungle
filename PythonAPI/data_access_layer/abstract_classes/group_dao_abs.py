@@ -13,5 +13,5 @@ class GroupDAO(ABC):
         pass
 
     @abstractmethod
-    def get_creator(self,group_id:int):
+    def get_creator(self, group_id: int):
         pass

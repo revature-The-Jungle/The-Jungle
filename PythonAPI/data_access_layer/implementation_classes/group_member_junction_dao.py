@@ -10,7 +10,7 @@ from custom_exceptions.group_member_junction_exceptions import *
 
 class GroupMemberJunctionDao(GroupMemberJunctionAbs):
     # grabs all users first name last name user id and group id and puts it in a list
-    def get_all_users_in_a_group(self, group_id: int) -> list[GroupMemberJunction] | str:
+    def get_all_users_in_a_group(self, group_id: int) -> List[GroupMemberJunction]:
         try:
             sql = "select first_name, last_name, user_table.user_id, group_member_junction_table.group_id from " \
                   "user_table inner join group_member_junction_table on group_member_junction_table.user_id = " \
