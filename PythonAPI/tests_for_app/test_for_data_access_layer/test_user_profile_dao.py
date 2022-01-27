@@ -20,7 +20,13 @@ def create_fake_user():
     sql = "Delete from user_table where user_id >= 100000000;" \
           "Insert into user_table values(100000000, 'first10000', 'last10000', 'email@email.com', 'username1000000', " \
           "'passcode100000', 'about', '1991-08-06', 'gif');" \
+<<<<<<< HEAD
           "Insert into user_table values(100000001, 'first10000', 'last10000', 'email2@email.com', 'username100000001'," \
+=======
+          "Insert into user_table values(100000001, 'first10000', 'last10000', 'email1@email.com', 'username100000001'," \
+          "'passcode100000', 'about', '1991-08-06', 'gif');" \
+          "Insert into user_table values(100000002, 'first10000', 'last10000', 'email2@email.com', 'username100000002'," \
+>>>>>>> origin/eJennings/Python
           "'passcode100000', 'about', '1991-08-06', 'gif');"
     cursor = connection.cursor()
     cursor.execute(sql)
@@ -41,18 +47,48 @@ def create_fake_image(create_fake_user):
     cursor = connection.cursor()
     cursor.execute(sql)
     connection.commit()
+<<<<<<< HEAD
+
+=======
+
+
+@fixture
+def create_fake_followers(create_fake_user):
+    """Create followers for the fake users"""
+
+    sql = "Insert into user_follow_junction_table values(100000000, 100000001);" \
+          "Insert into user_follow_junction_table values(100000000, 100000002);" \
+          "Insert into user_follow_junction_table values(100000001, 100000000);" \
+          "Insert into user_follow_junction_table values(100000002, 100000000);"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    connection.commit()
 
 
 def test_get_user_profile_success(create_fake_user):
     show_user = user_profile_dao.get_user_profile(100000000)
     assert show_user.user_id == 100000000
+>>>>>>> origin/eJennings/Python
 
+def test_get_user_profile_success(create_fake_user):
+    show_user = user_profile_dao.get_user_profile(100000000)
+    assert show_user.user_id == 100000000
+
+<<<<<<< HEAD
+=======
+def test_get_user_profile_success_2(create_fake_user):
+    show_user = user_profile_dao.get_user_profile(100000001)
+    assert show_user.user_id == 100000001
+>>>>>>> origin/eJennings/Python
 
 def test_get_user_profile_success_2(create_fake_user):
     show_user = user_profile_dao.get_user_profile(100000001)
     assert show_user.user_id == 100000001
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/eJennings/Python
 def test_update_user_profile_about_me_success(create_fake_user):
     """Happy test to see if user about me is updated correctly"""
     updated_user = User(100000000, "test_first_name", "test_last_name", user_email_for_tests, "test_username",
@@ -149,3 +185,32 @@ def test_update_image_format_failure_no_user():
 def test_update_password():
     """stretch"""
     pass
+
+
+def test_user_followers_success(create_fake_followers):
+    """Tests to see if user 100000000 has more than two followers"""
+    follower_dict: dict[str:int] = user_profile_dao.get_user_followers(100000000)
+    print(str(follower_dict))
+    assert len(follower_dict) >= 2
+
+
+def test_user_following_success(create_fake_followers):
+    """Tests to see if user 100000000 is following the two fake users"""
+    following_dict: dict[str:int] = user_profile_dao.get_users_following_user(100000000)
+    assert len(following_dict) >= 2
+
+
+def test_user_followers_failure_no_user():
+    try:
+        user_profile_dao.get_user_followers(-1)
+        assert False
+    except UserNotFound as e:
+        assert str(e) == user_not_found_message
+
+
+def test_user_following_failure_no_user():
+    try:
+        user_profile_dao.get_users_following_user(-1)
+        assert False
+    except UserNotFound as e:
+        assert str(e) == user_not_found_message

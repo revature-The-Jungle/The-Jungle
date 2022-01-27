@@ -30,7 +30,11 @@ class UserProfileDAOImp(UserProfileDAO):
         if not cursor.fetchone():
             raise UserNotFound(user_not_found_string)
 
+<<<<<<< HEAD
         sql = "update user_table set user_about = %(user_about)s, user_birth_date = %(user_birth_date)s where user_id "\
+=======
+        sql = "update user_table set user_about = %(user_about)s, user_birth_date = %(user_birth_date)s where user_id " \
+>>>>>>> origin/eJennings/Python
               "= %(user_id)s "
         cursor.execute(sql, {'user_about': user.user_about, 'user_birth_date': user.user_birth_date,
                              'user_id': user.user_id})
@@ -113,3 +117,47 @@ class UserProfileDAOImp(UserProfileDAO):
     def update_password(self, user_id: int, password: str) -> User:
         """Stretch"""
         pass
+<<<<<<< HEAD
+=======
+
+    def get_user_followers(self, user_id: int) -> dict[str:int]:
+        """Returns a dictionary with username as key and their userId as the value of the followers of userID"""
+        sql = "select * from user_table where user_id = %(user_id)s"
+        cursor = connection.cursor()
+        cursor.execute(sql, {'user_id': user_id})
+        if not cursor.fetchone():
+            raise UserNotFound(user_not_found_string)
+
+        sql = "select user_table.username, user_follower_id from user_follow_junction_table" \
+              " inner join user_table on user_follow_junction_table.user_follower_id = user_table.user_id" \
+              " where user_follow_junction_table.user_id = %(user_id)s;"
+        cursor = connection.cursor()
+        cursor.execute(sql, {"user_id": user_id})
+        connection.commit()
+        follower_records = cursor.fetchall()
+        follower_dict = {}
+        for follower in follower_records:
+            follower_dict.update({follower[0]: follower[1]})
+        return follower_dict
+
+    def get_users_following_user(self, user_id: int) -> dict[str:int]:
+        """Stretch"""
+        sql = "select * from user_table where user_id = %(user_id)s"
+        cursor = connection.cursor()
+        cursor.execute(sql, {'user_id': user_id})
+        if not cursor.fetchone():
+            raise UserNotFound(user_not_found_string)
+
+        sql = "select user_table.username, user_table.user_id from user_follow_junction_table" \
+              " inner join user_table on user_follow_junction_table.user_id = user_table.user_id" \
+              " where user_follower_id = %(user_id)s;"
+        cursor = connection.cursor()
+        cursor.execute(sql, {"user_id": user_id})
+        connection.commit()
+        following_records = cursor.fetchall()
+        following_dict = {}
+        for follower in following_records:
+            following_dict.update({follower[0]: follower[1]})
+        return following_dict
+
+>>>>>>> origin/eJennings/Python
