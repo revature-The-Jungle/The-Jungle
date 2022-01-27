@@ -20,7 +20,8 @@ public class AppController {
     }
 
     public void createUserRoutes() {
-        app.get("/user/{username}", userController.getUserByUsername);
+        app.get("/user/search/{username}", userController.SearchUserByUsername);
+        app.get("/user/{userId}", userController.getUserById);
         app.get("/users", userController.getAllUsers);
         app.post("/user/login", userController.loginUser);
         app.get("/user/group/{userId}", userController.getGroups);
