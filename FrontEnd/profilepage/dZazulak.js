@@ -1,7 +1,7 @@
 const userBirthDate = document.getElementById("userBirthdateInput");
 const userAboutMe = document.getElementById("userAboutMeInput");
 const modalMessageDiv = document.getElementById("profileModalMsg");
-const followerSectionDiv = document.getElementById("followerDiv");
+const followerSectionDiv = document.getElementById("overlap-group9");
 
 /*
     Grabs the user profile information from the update profile modal and sends it through the layers
@@ -80,14 +80,19 @@ async function getUserFollowers(){
 }
 
 function populateUserFollowers(followerBody){
+    let x = 1;
     for(let follower in followerBody){
-        let followerP = document.createElement("p");
-        followerP.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
-        followerP.innerHTML = follower;
-        followerSectionDiv.append(followerP);
-
-        
-
+        let followerDiv = document.createElement("div");
+        let followerImage = document.createElement("img");
+        let followerUsernameDiv = document.createElement("div");
+        followerDiv.setAttribute("class", "friend-" + x);
+        followerImage.setAttribute("class", "friend");
+        x++;
+        followerUsernameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
+        followerUsernameDiv.innerHTML = follower;
+        followerSectionDiv.appendChild(followerDiv);
+        followerDiv.appendChild(followerImage);
+        followerDiv.appendChild(followerUsernameDiv);
 
     }
 }
