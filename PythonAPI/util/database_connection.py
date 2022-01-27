@@ -1,4 +1,4 @@
-from psycopg2 import connect, OperationalError
+from psycopg import connect, OperationalError
 import os
 
 

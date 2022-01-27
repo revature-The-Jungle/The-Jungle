@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from PythonAPI.entities.group import Group
+from entities.group import Group
 
 
 class GroupDAO(ABC):
@@ -13,5 +13,5 @@ class GroupDAO(ABC):
         pass
 
     @abstractmethod
-    def get_creator(self,group_id:int):
+    def get_creator(self, group_id: int):
         pass
