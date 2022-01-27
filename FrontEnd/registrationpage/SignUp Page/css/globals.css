@@ -1,12 +1,7 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:700");
-@font-face {
-  font-family: "Now-Bold";
-  font-style: normal;
-  font-weight: 700;
-  src: url("../fonts/Now-Bold.otf") format("opentype");
-}
+
 
 .screen a {
   display: contents;
