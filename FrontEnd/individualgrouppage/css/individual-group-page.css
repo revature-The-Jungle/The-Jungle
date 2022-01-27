@@ -1,5 +1,20 @@
 /* screen - individual-group-page */
 
+.joinGroupButton {
+  background-color: var(--atomic-tangerine);
+  color: white;
+  font-family: var(--font-family-poppins);
+  margin: 1.7rem 0 0 0;
+  padding: 0.4rem 2rem;
+}
+
+.linkSpan {
+  height: 3rem;
+  text-align: center;
+  padding-top: 0.5rem;
+  color: #223172;
+}
+
 .individual-group-page {
   align-items: flex-start;
   background-color: var(--white);
@@ -93,7 +108,7 @@
 .individual-group-page .line-under-about-group {
   height: 1px;
   margin-right: 6px;
-  margin-top: 33px;
+  margin-top: 2rem;
   width: 16vw;
 }
 
@@ -122,6 +137,7 @@
   text-align: center;
   top: 1px;
   width: 184px;
+  display: flex;
 }
 
 .individual-group-page .x-icon {
