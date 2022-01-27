@@ -33,7 +33,7 @@ async function createGroupPost() {
 }
 
 async function getPost() {
-  let response = await fetch(url + "/group_post", { //replace with get_all_group_posts_by_group_id
+  let response = await fetch(url + "/group_post/group/" + `group_id`, { //replace with get_all_group_posts_by_group_id
     method: "GET",
     mode: "cors",
 
