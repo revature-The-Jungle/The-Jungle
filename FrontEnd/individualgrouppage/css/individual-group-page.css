@@ -202,7 +202,7 @@
 .individual-group-page .middle-section {
   background-color: var(--desert-storm);
   height: 100vh;
-  left: 0;
+  left: 1px;
   position: absolute;
   top: 0;
   width: 84vw;
