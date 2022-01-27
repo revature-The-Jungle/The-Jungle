@@ -1,10 +1,38 @@
 import pytest
+from _pytest.fixtures import fixture
 
-from data_access_layer.implementation_classes.group_member_junction_dao import GroupMemberJunctionDao
-from entities.group_member_junction import GroupMemberJunction
 from custom_exceptions.group_member_junction_exceptions import *
+from data_access_layer.implementation_classes.group_member_junction_dao import GroupMemberJunctionDao
+from util.database_connection import connection
 
 group_member_junction_dao = GroupMemberJunctionDao()
+
+
+@fixture
+def create_fake_user():
+    """Creates two new users for testing and deletes them once the tests are done"""
+
+    sql = "Delete from user_table where user_id >= 100000000;" \
+          "Insert into user_table values(100000000, 'first10000', 'last10000', 'email@email.com', 'username1000000', " \
+          "'passcode100000', 'about', '1991-08-06', 'gif');" \
+          "Insert into user_table values(100000001, 'first10000', 'last10000', 'email2@email.com', 'username100000001'," \
+          "'passcode100000', 'about', '1991-08-06', 'gif');"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    connection.commit()
+    yield
+    sql = "delete from user_table where user_id >= 100000000;"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    connection.commit()
+
+
+@fixture
+def fake_join_group(create_fake_user):
+    sql = "insert into group_member_junction_table values(10,100000000); " \
+          "insert into group_member_junction_table values(10,100000001);"
+    connection.cursor().execute(sql)
+    connection.commit()
 
 
 def test_get_all_users_in_a_group():
@@ -21,17 +49,17 @@ def test_list_contains_correct_info():
 
 def test_to_many():
     with pytest.raises(TypeError) as e:
-        group_member_junction_dao.get_all_users_in_a_group(15,2)
+        group_member_junction_dao.get_all_users_in_a_group(15, 2)
         assert "you have put the incorrect amount of arguments" in str(e.value)
 
 
-def test_leave_group():
-    result = group_member_junction_dao.leave_group(32, 15)
+def test_leave_group(fake_join_group):
+    result = group_member_junction_dao.leave_group(100000000, 10)
     assert result
 
 
-def test_leave_group2():
-    result = group_member_junction_dao.leave_group(10000, 10)
+def test_leave_group2(fake_join_group):
+    result = group_member_junction_dao.leave_group(100000001, 10)
     assert result
 
 
