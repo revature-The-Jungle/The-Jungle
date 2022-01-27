@@ -30,7 +30,7 @@ class GroupDAOImp(GroupDAO):
         if not cursor.fetchone():
             raise UserNotFound('The user could not be found.')
 
-        # Check to see if there is already a group with the same name throw an error otherwise
+        # Check to see if there is already a group with the same name, raise an error otherwise
         sql = "select * from group_table where group_name = %(group_name)s;"
         cursor = connection.cursor()
         cursor.execute(sql, {"group_name": group.group_name})
