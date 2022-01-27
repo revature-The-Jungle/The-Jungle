@@ -9,7 +9,11 @@ class PostFeedDao(ABC):
     def get_all_posts(self)->list[Post]:
         pass
 
-    
-    def delete_a_post(self, post_id : int) -> bool:
+    @abstractmethod
+    def get_all_posts_with_group_id(self, groupid : int) -> list[Post]:
+        pass
+
+    @abstractmethod
+    def delete_a_post(self, postid : int) -> bool:
         pass
 

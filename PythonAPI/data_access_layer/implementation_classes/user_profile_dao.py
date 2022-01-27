@@ -51,7 +51,7 @@ class UserProfileDAOImp(UserProfileDAO):
         if not cursor.fetchone():
             raise UserImageNotFound('The user image could not be found.')
 
-        sql = f"select picture from user_picture_table where user_id = %(user_id)s;"
+        sql = "select picture from user_picture_table where user_id = %(user_id)s;"
         cursor.execute(sql, {"user_id": user_id})
         image = cursor.fetchone()[0]
         image_decoded = image.decode('utf-8')
