@@ -4,7 +4,6 @@ import dev.com.thejungle.customexception.*;
 import dev.com.thejungle.dao.interfaces.UserDAOInt;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.interfaces.UserServiceInt;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +15,6 @@ public class UserService implements UserServiceInt {
     public UserService (UserDAOInt userDAOInt) {
         this.userDAOInt = userDAOInt;
     }
-
 
     @Override
     public User createNewUserService(User user) {
@@ -30,6 +28,10 @@ public class UserService implements UserServiceInt {
             }
         } catch (DuplicateUsername d) {
             throw new DuplicateUsername("This username is already taken");
+        } catch (BlankInputs b) {
+            throw new BlankInputs("Please fill in the blanks");
+        } catch (DuplicateEmail e) {
+            throw new DuplicateEmail("Email is already in use");
         }
     }
 
@@ -43,10 +45,12 @@ public class UserService implements UserServiceInt {
     }
 
     @Override
-    public User loginService(String username, String passcode){
+    public User loginService(String username, String passcode) {
         User newUser = this.userDAOInt.searchForUser(username);
         if ((username.length() > 20) || (passcode.length() > 30))
-          //  throw new TooManyCharacters("You are exceeding your character limit");
+            throw new TooManyCharacters("You are exceeding your character limit");
+        if ((username.length() == 0) || (passcode.length() == 0))
+            throw new NoValuePasscode("You must enter a passcode");
         if (!Objects.equals(newUser.getUsername(), username) || !Objects.equals(newUser.getPasscode(), passcode))
             throw new UsernameOrPasscodeException("Username or Passcode are incorrect");
         return newUser;
@@ -60,12 +64,19 @@ public class UserService implements UserServiceInt {
 
     @Override
     public ArrayList<Integer> getGroups(int userId) {
-        if (userId > 0) {
-            return this.userDAOInt.getGroups(userId);
-        } else {
-            throw new InvalidInputException("User Id needs to be positive");
+        try {
+            if (userId > 0) {
+                if (userId < 1000000) {
+                    return this.userDAOInt.getGroups(userId);
+                } else {
+                    throw new InvalidInputException("User Id needs to be positive and in range");
+                }
+            } else {
+                throw new InvalidInputException("User Id needs to be positive and in range");
+            }
+        } catch (UserNotFound e) {
+            throw new UserNotFound("User not found");
         }
     }
-
 }
 
