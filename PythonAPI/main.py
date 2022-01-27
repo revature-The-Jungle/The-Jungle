@@ -3,6 +3,12 @@ import logging
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+from entities.group import Group
+from entities.group_post import GroupPost
+from entities.post import Post
+from entities.user import User
+from entities.comment import Comment
+
 from custom_exceptions.birth_date_is_null import BirthDateIsNull
 from custom_exceptions.connection_error import ConnectionErrorr
 from custom_exceptions.group_exceptions import NullValues, InputTooShort, InputTooLong, GroupNameTaken
@@ -27,30 +33,13 @@ from data_access_layer.implementation_classes.like_post_dao import LikePostDaoIm
 from data_access_layer.implementation_classes.postfeed_dao import PostFeedDaoImp
 from data_access_layer.implementation_classes.user_profile_dao import UserProfileDAOImp
 from data_access_layer.implementation_classes.group_dao import GroupDAOImp
-from entities.group import Group
-from entities.group_post import GroupPost
-from entities.post import Post
-from entities.user import User
 from service_layer.implementation_classes.comment_service import CommentServiceImp
 from service_layer.implementation_classes.create_post_service import CreatePostServiceImp
 from service_layer.implementation_classes.group_member_junction_service import GroupMemberJunctionService
 from data_access_layer.implementation_classes.group_member_junction_dao import GroupMemberJunctionDao
-from data_access_layer.implementation_classes.like_post_dao_imp import LikePostDaoImp
-from service_layer.implementation_classes.like_post_service_imp import LikePostServiceImp
-
-from data_access_layer.implementation_classes.comment_dao_imp import CommentDAOImp
-from entities.comment import Comment
-from service_layer.implementation_classes.comment_service_imp import CommentServiceImp
-from flask_cors import CORS
-
-postfeeddao = PostfeedDaoimpl()
-postfeed_service = PostfeedServiceImp(postfeeddao)
-like_post_dao=LikePostDaoImp()
-like_post_service=LikePostServiceImp(like_post_dao)
-comment_dao = CommentDAOImp()
-comment_service = CommentServiceImp(comment_dao)
-
-from service_layer.implementation_classes.user_profile_service import UserProfileServiceImp
+from data_access_layer.implementation_classes.like_post_dao import LikePostDaoImp
+from data_access_layer.implementation_classes.comment_dao import CommentDAOImp
+from service_layer.implementation_classes.comment_service import CommentServiceImp
 from data_access_layer.implementation_classes.group_view_postgres_dao import GroupViewPostgresDao
 from service_layer.implementation_classes.group_post_service import GroupPostService
 from service_layer.implementation_classes.group_postgres_service import GroupPostgresService
@@ -63,10 +52,10 @@ logging.basicConfig(filename="records.log", level=logging.DEBUG,
                     format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
 
 
-
 # Setup flask
 app: Flask = Flask(__name__)
 CORS(app)
+
 
 @app.get("/")  # basic check for app running
 def on():
@@ -88,7 +77,11 @@ post_feed_service = PostFeedServiceImp(post_feed_dao)
 comment_dao = CommentDAOImp()
 comment_service = CommentServiceImp(comment_dao)
 group_dao = GroupDAOImp()
-group_service2 = GroupPostgreService(group_dao)
+group_service2 = GroupPostgreService(group_dao, group_view_dao)  # look into why there is a group_service2
+like_post_dao = LikePostDaoImp()
+like_post_service = LikePostServiceImp(like_post_dao)
+comment_dao = CommentDAOImp()
+comment_service = CommentServiceImp(comment_dao)
 
 
 @app.get("/user/<user_id>")
@@ -341,7 +334,7 @@ def delete_a_post():
     try:
         data = request.get_json()
         postid = data["postId"],
-        boolean = postfeed_service.delete_a_post_service(postid)
+        boolean = post_feed_service.delete_a_post_service(postid)
         return jsonify(boolean)
     except ConnectionErrorr as e:
         return str(e), 400
@@ -357,7 +350,6 @@ def add_likes_to_post():
        return ("post not found!"), 400
 
 
-
 @app.post("/postfeed/comment")
 def add_likes_to_comment():
    try:
@@ -368,7 +360,6 @@ def add_likes_to_comment():
        return ("comment not found"), 400
 
 
-
 # delete comment information
 @app.delete("/Comments")
 def delete_comment():
@@ -376,11 +367,6 @@ def delete_comment():
     comment_id = data["commentId"],
     jsonify(comment_service.service_delete_comment(comment_id))
     return "Comment with id {} was deleted successfully".format(comment_id)
-
-
-
-
-
 
 
 @app.get("/postfeed/<post_id>")

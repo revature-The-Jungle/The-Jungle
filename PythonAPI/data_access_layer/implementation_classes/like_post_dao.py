@@ -1,5 +1,5 @@
 from custom_exceptions.connection_error import ConnectionErrorr
-from data_access_layer.abstract_classes.like_post_dao import LikePostDAO
+from data_access_layer.abstract_classes.like_post_dao_abs import LikePostDAO
 from util.database_connection import connection
 
 
