@@ -452,4 +452,19 @@ def delete_group_post(post_id: int):
         return "Something went wrong: Post with ID {} was not deleted".format(post_id)
 
 
+@app.get("/user/followers/<user_id>")
+def get_user_followers(user_id: int):
+    try:
+        followers = user_profile_service.get_user_followers_service(user_id)
+        return jsonify(followers), 200
+    except UserNotFound as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+    except UserIdMustBeAnInteger as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+
+
 app.run()
