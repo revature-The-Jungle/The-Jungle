@@ -58,6 +58,6 @@ function updateUserList(userList){
     id("chatList").innerHTML = ""
     const unique = [...new Set(userList)];
     for(let a of unique){
-      id("chatList").innerHTML += `<li style="margin-top: 0.4em;">${a}</li>`
+      id("chatList").innerHTML += `<li class="list-group-item" style="margin-right: 0.2em;"><img src="img/online.png" style="width:0.5em;height:0.5em;"> <span style="color:#20316ee8"> ${a}</span></li>`
     }
 }

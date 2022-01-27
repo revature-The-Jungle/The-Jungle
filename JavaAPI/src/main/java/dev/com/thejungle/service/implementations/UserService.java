@@ -1,19 +1,19 @@
 package dev.com.thejungle.service.implementations;
 
 import dev.com.thejungle.customexception.*;
-import dev.com.thejungle.dao.interfaces.UserDAOInt;
+import dev.com.thejungle.dao.implementations.UserDAO;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.interfaces.UserServiceInt;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UserService implements UserServiceInt {
 
-    private final UserDAOInt userDAO;
+    private final UserDAO userDAO;
 
-    public UserService(UserDAOInt userDAOInt) {
-        this.userDAO = userDAOInt;
+    public UserService (UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     @Override
