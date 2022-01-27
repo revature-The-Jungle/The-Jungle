@@ -1,13 +1,11 @@
 package dev.com.thejungle.app.appcontroller.controllers;
 
 import com.google.gson.Gson;
-import dev.com.thejungle.customexception.InvalidInputException;
-import dev.com.thejungle.customexception.UserNotFound;
+import dev.com.thejungle.customexception.*;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.implementations.UserService;
 import dev.com.thejungle.service.interfaces.UserServiceInt;
 import io.javalin.http.Handler;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +50,7 @@ public class UserController {
         Map<String, String> loginCredentials = gson.fromJson(ctx.body(), Map.class);
         try {
             User userLogin = this.userService.loginService(loginCredentials.get("username"),
-                    loginCredentials.get("password"));
+                    loginCredentials.get("passcode"));
             String userLoginJSON = gson.toJson(userLogin);
             ctx.result(userLoginJSON);
             ctx.status(200);
@@ -76,4 +74,31 @@ public class UserController {
             ctx.status(400);
         }
     };
+
+
+
+
+    // REGISTER USER ROUTE HANDLER
+    public Handler registerUser = ctx -> {
+        try {
+            Gson gson = new Gson();
+            User newUser = gson.fromJson(ctx.body(), User.class);
+            User createdUser = this.userService.createNewUserService(newUser);
+            String createdUserJson = gson.toJson(createdUser);
+            ctx.result(createdUserJson);
+            ctx.status(201);
+        } catch (UnallowedSpaces u) {
+            ctx.result(u.getMessage());
+            ctx.status(404);
+        } catch (DuplicateEmail e) {
+            ctx.result(e.getMessage());
+            ctx.status(400);
+        } catch (DuplicateUsername d) {
+            ctx.result(d.getMessage());
+            ctx.status(401);
+        }
+    };
+
+
+
 }
