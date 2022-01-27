@@ -5,7 +5,6 @@
   background-color: var(--white);
   display: flex;
   height: 1024px;
-  padding: 0 29px;
   width: 1440px;
 }
 
@@ -15,7 +14,7 @@
   flex-direction: column;
   min-height: 593px;
   width: 16vw;
-  padding: 2rem 0;
+  margin: 3vh 0 3vh 3vh;
 }
 
 .individual-group-page .logo {
