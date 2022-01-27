@@ -32,6 +32,7 @@ public class UserServiceTests {
     static List<User> newList;
     static ArrayList<User> anotherList = new ArrayList<>();
     static User badPasscode;
+    static User otherProfile;
 
 
     @BeforeClass
@@ -43,6 +44,7 @@ public class UserServiceTests {
         badPasscode = new User(0, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILove", "Wrong", "I enjoy the wrestling life", date,"image");
         userProfile2 = new User(1, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILoveToWrestle", "MySimplePasscode", "I enjoy the wrestling life", date,"image");
         returnedProfile = new User(2, "Solomon", "Grundy", "solomon@gmail.com", "BornOnMonday", "Tuesday", "I have a poem", date,"image");
+        otherProfile = new User(3, "Solomon", "Grundy", "solomon@gmail.com", "BornOnMonday", "Tuesday", "I have a poem", date,"image");
         badUsername = new User(0, "Solomon", "Grundy", "solomon@gmail.com", "IAmSolomonGrundy", "Tuesday", "I have a poem", date,"image");
         duplicateUsername = new User(0, "Dup", "Testing", "dup@email.com", "username", "password", "I like social media.", date, "imagesrc");
         usernameSpaces = new User(0, "User", "Testing", "space@email.com", "user name", "password", "I like social media.", date, "imagesrc");
@@ -50,8 +52,6 @@ public class UserServiceTests {
         anotherList.add(userProfile);
         anotherList.add(userProfile2);
     }
-
-
 
 //  ------------------------------------ MOCK TESTS ----------------------------------------
 
@@ -126,6 +126,21 @@ public class UserServiceTests {
         Assert.assertEquals(result, anotherList);
     }
 
+    //  Search By Username
+    @Test
+    public void searchForUsernameMockito() {
+        Mockito.when(userDAOImp.searchForUser(userProfile.getUsername())).thenReturn(userProfile2);
+        userServiceImp.searchForUserService(userProfile.getUsername());
+        Assert.assertEquals(userProfile.getUsername(), userProfile2.getUsername());
+    }
+
+    @Test
+    public void searchForUsernameTwoMockito() {
+        Mockito.when(userDAOImp.searchForUser(returnedProfile.getUsername())).thenReturn(otherProfile);
+        userServiceImp.searchForUserService(returnedProfile.getUsername());
+        Assert.assertEquals(returnedProfile.getUsername(), otherProfile.getUsername());
+    }
+
 
 //  ----------------------------------  STUBBED TESTS --------------------------------------
     @Test
@@ -134,7 +149,6 @@ public class UserServiceTests {
         User result = userServiceImp.loginService("BornOnMonday", "Tuesday");
         Assert.assertEquals(result, returnedProfile);
     }
-
 
     @Test
     public void searchForUserByUsernameMockito(){

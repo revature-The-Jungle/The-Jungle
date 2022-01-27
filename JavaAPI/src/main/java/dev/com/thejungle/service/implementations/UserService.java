@@ -44,7 +44,7 @@ public class UserService implements UserServiceInt {
     @Override
     public User loginService(String username, String passcode) {
         User newUser = this.userDAOInt.searchForUser(username);
-        if ((username.length() > 20) || (passcode.length() > 30))
+        if ((username.length() > 50) || (passcode.length() > 50))
             throw new TooManyCharacters("You are exceeding your character limit");
         if ((username.length() == 0) || (passcode.length() == 0))
             throw new NoValuePasscode("You must enter a passcode");

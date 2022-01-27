@@ -1,49 +1,98 @@
-const username = document.getElementById("username");
-const passcode = document.getElementById("passcode");
-const url = "http://localhost:8080";
+const usernames = document.getElementById("usernameInput");
+const passcodes = document.getElementById("passcodeInput");
+const submitLogin = document.getElementById("submitLogin");
+submitLogin.disabled = true;
 let loginStatus = false;
-let signupStatus = false;
+const specialChar2 = /[ `^*()+=\[\]{};':"\\|,<>\/~]/;
+const invalidIcon = document.querySelectorAll("[id='invalid-icon']");
+let invalidMessage = document.querySelectorAll("[id='signup-invalid-message']");
+const url = "http://localhost:8080";
+let validateCounter = 0;
+
+// function displayErrorMessage(errorMessage, container, shown) {
+//     shown = true;
+//     const div = document.getElementById("errorMessageGoesHere");
+//     message.textContent = errorMessage;
+//     // div.appendChild(message);
+//     // setTimeout(deleteMessage, 500, shown);
+// }
+const div = document.getElementById("errorMessageGoesHere");
+div.textContent = "";
 
 async function login() {
-
     let response = await fetch("http://localhost:8080/user/login", {
         method:"POST",
         mode:"cors",
         headers:{"Content-Type": "application/json"},
         body: JSON.stringify({
-            username: username.value,
-            passcode: passcode.value
+            username: usernames.value,
+            passcode: passcodes.value
         })
     })
-}
-
-const displayMessage = (errorMessage, hidden) => {
-    hidden = true;
-    const div = document.getElementById(nameOfContainer); //  Need this name
-    const message = document.createElement("p");
-    message.setAttribute("id", id);
-    message.textContent = errorMessage;
-    div.appendChild(message);
-    setTimeout(deletemessage, 2500, id, hidden)
-}
-
+    
 if (response.status === 200){
     let body = await response.json();
     //  Storing information for later
-    sessionStorage.setItem("userId", body.userId);
-    sessionStorage.setItem("firstName", body.firstName);
-    sessionStorage.setItem("lastName", body.lastName);
-    sessionStorage.setItem("email", body.email);
-    sessionStorage.setItem("username", body.username);
-    sessionStorage.setItem("userAbout", body.userAbout);
-    sessionStorage.setItem("userBirthDate", body.userBirthDate);
-    sessionStorage.setItem("imageFormat", body.imageFormat);
+    localStorage.setItem("userId", body.userId);
     console.log(body);
-    window.location.href="secondPageWhateverTheTitleIs.html" //  Need this location
+    console.log(body.userId);
+    console.log("Success");
+    window.location.href="secondPageWhateverTheTitleIs.html" //  Redirect to Here????
 } else {
-    username.value="";
-    passcode.value="";
-    if(!loginStatus) {
-        displayMessage("Incorrect Username or Password");
+    div.textContent = "Incorrect Username or Password";
+    // displayErrorMessage("Incorrect Username or Password", "errorMessageGoesHere", loginStatus);
+    // div.textContent = "";
+    // username.value="";
+    // passcode.value="";
     }
 }
+
+let jsonLoginObject = {
+    username: "",
+    passcode: ""
+};
+
+//  ----------------------------  Validation for inputs ----------------------------
+usernames.addEventListener("focusin", loginUsername());
+function loginUsername(){
+    usernames.addEventListener("focusout", function() {
+        if (usernames.value == "") {
+            invalidIcon[0].style.display = "";
+            invalidMessage[0].textContent = 'Username is incorrect or missing';
+        }
+        else if (specialChar2.test(usernames.value)){
+            invalidIcon[0].style.display = "";
+            invalidMessage[0].textContent = 'Cannot contain spaces or special characters: `^*()+=[]{}"<>~|;:';
+        } else {
+            validateCounter += 1;
+            invalidIcon[0].style.display = "none";
+            invalidMessage[0].textContent = '';
+            jsonLoginObject.username = usernames.value;
+            console.log(jsonLoginObject.username);
+        }
+    });
+}
+
+passcodes.addEventListener("focusin", loginPasscode());
+function loginPasscode(){
+    passcodes.addEventListener("focusout", function() {
+        if (passcodes.value == "") {
+            invalidIcon[1].style.display = "";
+            invalidMessage[1].textContent = 'Password is incorrect or missing';
+        }
+        else if (specialChar2.test(passcodes.value)){
+            invalidIcon[1].style.display = "";
+            invalidMessage[1].textContent = 'Cannot contain spaces or special characters: `^*()+=[]{}"<>~|;:';
+        } else {
+            validateCounter += 1;
+            invalidIcon[1].style.display = "none";
+            invalidMessage[1].textContent = '';
+            jsonLoginObject.passcode = passcodes.value;
+            console.log(jsonLoginObject.passcode);
+            if (validateCounter > 1){
+                submitLogin.disabled = false;
+            }
+        }
+    });
+}
+submitLogin.addEventListener("click", login);

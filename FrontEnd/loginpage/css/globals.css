@@ -1,12 +1,6 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:700,500");
-@font-face {
-  font-family: "Now-Bold";
-  font-style: normal;
-  font-weight: 700;
-  src: url("../fonts/Now-Bold.otf") format("opentype");
-}
 
 .screen a {
   display: contents;
@@ -22,7 +16,7 @@
 }
 
 .container-center-horizontal > * {
-  flex-shrink: 0;
+  flex-shrink: 1;
   pointer-events: auto;
 }
 
