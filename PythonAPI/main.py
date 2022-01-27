@@ -29,6 +29,20 @@ from entities.user import User
 from service_layer.implementation_classes.create_post_service import CreatePostServiceImp
 from service_layer.implementation_classes.group_member_junction_service import GroupMemberJunctionService
 from data_access_layer.implementation_classes.group_member_junction_dao import GroupMemberJunctionDao
+from data_access_layer.implementation_classes.like_post_dao_imp import LikePostDaoImp
+from service_layer.implementation_classes.like_post_service_imp import LikePostServiceImp
+
+from data_access_layer.implementation_classes.comment_dao_imp import CommentDAOImp
+from entities.comment import Comment
+from service_layer.implementation_classes.comment_service_imp import CommentServiceImp
+from flask_cors import CORS
+
+postfeeddao = PostfeedDaoimpl()
+postfeed_service = PostfeedServiceImp(postfeeddao)
+like_post_dao=LikePostDaoImp()
+like_post_service=LikePostServiceImp(like_post_dao)
+comment_dao = CommentDAOImp()
+comment_service = CommentServiceImp(comment_dao)
 
 from service_layer.implementation_classes.user_profile_service import UserProfileServiceImp
 from data_access_layer.implementation_classes.group_view_postgres_dao import GroupViewPostgresDao
@@ -47,10 +61,11 @@ import logging
 logging.basicConfig(filename="records.log", level=logging.DEBUG,
                     format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
 
+
+
 # Setup flask
 app: Flask = Flask(__name__)
 CORS(app)
-
 
 @app.get("/")  # basic check for app running
 def on():
@@ -314,8 +329,8 @@ def get_all_posts():
 def delete_a_post():
     try:
         data = request.get_json()
-        post_id = data["post_id"]
-        boolean = post_feed_service.delete_a_post_service(post_id)
+        postid = data["postId"],
+        boolean = postfeed_service.delete_a_post_service(postid)
         return jsonify(boolean)
     except ConnectionErrorr as e:
         return str(e), 400
@@ -323,21 +338,38 @@ def delete_a_post():
 
 @app.post("/postfeed")
 def add_likes_to_post():
-    try:
-        data = request.get_json()
-        post_id = data["post_id"]
-        return jsonify(like_post_service.service_like_post(post_id))
-    except ConnectionErrorr as e:
-        return str(e), 400
+   try:
+    data = request.get_json()
+    postid = data["postId"],
+    return jsonify(like_post_service.service_like_post(postid))
+   except TypeError :
+       return ("post not found!"), 400
+
+
+
+@app.post("/postfeed/comment")
+def add_likes_to_comment():
+   try:
+    data = request.get_json()
+    commentid = data["commentId"],
+    return jsonify(like_post_service.service_like_comment(commentid))
+   except TypeError :
+       return ("comment not found"), 400
+
 
 
 # delete comment information
 @app.delete("/Comments")
 def delete_comment():
     data = request.get_json()
-    comment_id = data["commentid"]
+    comment_id = data["commentId"],
     jsonify(comment_service.service_delete_comment(comment_id))
     return "Comment with id {} was deleted successfully".format(comment_id)
+
+
+
+
+
 
 
 @app.get("/postfeed/<post_id>")
