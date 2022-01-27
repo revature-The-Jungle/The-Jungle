@@ -3,12 +3,6 @@ import logging
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-from entities.group import Group
-from entities.group_post import GroupPost
-from entities.post import Post
-from entities.user import User
-from entities.comment import Comment
-
 from custom_exceptions.birth_date_is_null import BirthDateIsNull
 from custom_exceptions.connection_error import ConnectionErrorr
 from custom_exceptions.group_exceptions import NullValues, InputTooShort, InputTooLong, GroupNameTaken
@@ -26,31 +20,29 @@ from custom_exceptions.user_image_not_found import UserImageNotFound
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.implementation_classes.comment_dao import CommentDAOImp
 from data_access_layer.implementation_classes.create_post_dao import CreatePostDAOImp
+from data_access_layer.implementation_classes.group_dao import GroupDAOImp
 from data_access_layer.implementation_classes.group_member_junction_dao import GroupMemberJunctionDao
 from data_access_layer.implementation_classes.group_post_dao import GroupPostDAO
 from data_access_layer.implementation_classes.group_view_postgres_dao import GroupViewPostgresDao
 from data_access_layer.implementation_classes.like_post_dao import LikePostDaoImp
 from data_access_layer.implementation_classes.postfeed_dao import PostFeedDaoImp
 from data_access_layer.implementation_classes.user_profile_dao import UserProfileDAOImp
-from data_access_layer.implementation_classes.group_dao import GroupDAOImp
+from entities.group import Group
+from entities.group_post import GroupPost
+from entities.post import Post
+from entities.user import User
 from service_layer.implementation_classes.comment_service import CommentServiceImp
 from service_layer.implementation_classes.create_post_service import CreatePostServiceImp
 from service_layer.implementation_classes.group_member_junction_service import GroupMemberJunctionService
-from data_access_layer.implementation_classes.group_member_junction_dao import GroupMemberJunctionDao
-from data_access_layer.implementation_classes.like_post_dao import LikePostDaoImp
-from data_access_layer.implementation_classes.comment_dao import CommentDAOImp
-from service_layer.implementation_classes.comment_service import CommentServiceImp
-from data_access_layer.implementation_classes.group_view_postgres_dao import GroupViewPostgresDao
 from service_layer.implementation_classes.group_post_service import GroupPostService
 from service_layer.implementation_classes.group_postgres_service import GroupPostgresService
+from service_layer.implementation_classes.group_service import GroupPostgreService
 from service_layer.implementation_classes.like_post_service import LikePostServiceImp
 from service_layer.implementation_classes.postfeed_service import PostFeedServiceImp
 from service_layer.implementation_classes.user_profile_service import UserProfileServiceImp
-from service_layer.implementation_classes.group_service import GroupPostgreService
 
 logging.basicConfig(filename="records.log", level=logging.DEBUG,
                     format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
-
 
 # Setup flask
 app: Flask = Flask(__name__)
@@ -342,22 +334,22 @@ def delete_a_post():
 
 @app.post("/postfeed")
 def add_likes_to_post():
-   try:
-    data = request.get_json()
-    postid = data["postId"],
-    return jsonify(like_post_service.service_like_post(postid))
-   except TypeError :
-       return ("post not found!"), 400
+    try:
+        data = request.get_json()
+        postid = data["postId"],
+        return jsonify(like_post_service.service_like_post(postid))
+    except TypeError:
+        return ("post not found!"), 400
 
 
 @app.post("/postfeed/comment")
 def add_likes_to_comment():
-   try:
-    data = request.get_json()
-    commentid = data["commentId"],
-    return jsonify(like_post_service.service_like_comment(commentid))
-   except TypeError :
-       return ("comment not found"), 400
+    try:
+        data = request.get_json()
+        commentid = data["commentId"],
+        return jsonify(like_post_service.service_like_comment(commentid))
+    except TypeError:
+        return ("comment not found"), 400
 
 
 # delete comment information
