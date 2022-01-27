@@ -1,9 +1,9 @@
 from unittest.mock import MagicMock
 
 from custom_exceptions.post_exceptions import InvalidInput, InputTooLong, NoInputGiven, WrongTypeInput
-from data_access_layer.implementation_classes.group_post_dao_imp import GroupPostDAO
+from data_access_layer.implementation_classes.group_post_dao import GroupPostDAO
 from entities.group_post import GroupPost
-from service_layer.implementation_classes.group_post_service_imp import GroupPostService
+from service_layer.implementation_classes.group_post_service import GroupPostService
 
 post_dao = GroupPostDAO()
 post_service = GroupPostService(post_dao)
