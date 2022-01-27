@@ -7,6 +7,19 @@ from util.database_connection import connection
 
 
 class GroupDAOImp(GroupDAO):
+    def get_creator(self, group_id: int):
+        if not isinstance(group_id, int):
+            raise WrongType("please enter a number")
+        else:
+            try:
+                sql = "select username from user_table inner join group_table on " \
+                      "group_table.user_id = user_table.user_id where group_id = %s"
+                cursor = connection.cursor()
+                cursor.execute(sql, [group_id])
+                creator_record = cursor.fetchone()[0]
+                return creator_record
+            except TypeError:
+                raise TypeError("This Id does not exist")
 
     def create_group(self, group: Group):
 

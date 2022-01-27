@@ -139,3 +139,23 @@ def test_join_group_fail_non_existent_user_id():
     except UserNotFound as e:
         print(str(e))
         assert str(e) == 'The user could not be found.'
+
+
+def test_bad_Id():
+    with pytest.raises(TypeError) as e:
+        result = group_dao.get_creator(1)
+        assert "This Id does not exist" in str(e.value)
+
+
+def test_string_as_id():
+    with pytest.raises(WrongType) as e:
+        result = group_dao.get_creator("nan")
+        assert "please enter a number" in str(e.value)
+
+
+def test_join_group_fail_non_existent_user_id():
+    try:
+        group_joined = group_dao.join_group(16, 4323)
+        assert group_joined == (16, 10)
+    except Exception as e:
+        print(repr(e))
