@@ -709,3 +709,20 @@
   top: 874px;
   width: 215px;
 }
+
+#profileModalMsg {
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+
+.profile-page .edit-button{
+  color: #fff;
+  background-color: #f47635;
+  border-color: #f47635;
+  border-radius: 10px;
+}
+
+.profile-page #updateProfileEditProfileBtn{
+  width: 100%;
+}
