@@ -384,11 +384,10 @@
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  margin-right: 4px;
-  margin-top: 16px;
-  min-height: 507px;
   padding: 18px 3.7px;
   width: 46vw;
+  height: auto;
+  margin: 2rem 0;
 }
 
 .individual-group-page .flex-row {
@@ -484,20 +483,22 @@
 
 .individual-group-page .overlap-group2 {
   align-self: flex-start;
-  height: 33px;
+  height: 6vh;
   margin-top: 29px;
   position: relative;
-  width: 399px;
+  width: 43vw;
 }
 
 .individual-group-page .feed-text-2 {
-  height: 33px;
+  height: auto;
   left: 10vw;
   letter-spacing: -0.27px;
   position: absolute;
   text-align: left;
   top: 0;
-  width: 32.5vw;
+  width: 31vw;
+  margin-left: 1rem;
+  overflow-wrap: break-word;
 }
 
 .individual-group-page .username-2 {
