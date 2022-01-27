@@ -23,7 +23,7 @@ def create_fake_user():
     cursor.execute(sql)
     connection.commit()
     yield  # everything after the yield is the teardown and called after each test
-    sql = "delete from user_table where user_id = 100000000;"
+    sql = "Delete from user_table where user_id >= 100000000;"
     cursor = connection.cursor()
     cursor.execute(sql)
     connection.commit()
@@ -151,11 +151,3 @@ def test_string_as_id():
     with pytest.raises(WrongType) as e:
         result = group_dao.get_creator("nan")
         assert "please enter a number" in str(e.value)
-
-
-def test_join_group_fail_non_existent_user_id():
-    try:
-        group_joined = group_dao.join_group(16, 4323)
-        assert group_joined == (16, 10)
-    except Exception as e:
-        print(repr(e))
