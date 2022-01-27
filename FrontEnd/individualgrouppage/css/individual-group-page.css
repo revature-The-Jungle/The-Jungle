@@ -15,7 +15,7 @@
   min-height: 593px;
   width: 16vw;
   height: 100vh;
-  margin: 3vh 0 3vh 3vh;
+  margin: 3vh 0 0 1vw;
 }
 
 .individual-group-page .logo {
@@ -185,16 +185,16 @@
 
 .individual-group-page .middle-section {
   background-color: var(--desert-storm);
-  height: 720px;
+  height: 100vh;
   left: 0;
   position: absolute;
   top: 0;
-  width: 943px;
+  width: 84vw;
 }
 
 .individual-group-page .overlap-group3 {
   height: 677px;
-  left: 642px;
+  left: 48rem;
   position: absolute;
   top: 18px;
   width: 270px;
@@ -203,11 +203,11 @@
 .individual-group-page .group-rectangle {
   background-color: var(--white);
   border-radius: 20px;
-  height: 677px;
+  height: 94vh;
   left: 2px;
   position: absolute;
   top: 0;
-  width: 266px;
+  width: 27vw;
 }
 
 .individual-group-page .member-3 {
@@ -313,8 +313,8 @@
 }
 
 .individual-group-page .line-right {
-  height: 720px;
-  left: 613px;
+  height: 100vh;
+  left: 46rem;
   position: absolute;
   top: 0;
   width: 1px;
@@ -325,11 +325,15 @@
   display: flex;
   flex-direction: column;
   left: 38px;
-  /* min-height: 861px; */
   position: absolute;
   top: 12px;
-  width: 37.5vw;
+  width: 46.5vw;
   height: 100vh;
+  overflow: scroll;
+}
+
+.individual-group-page .feed-section::-webkit-scrollbar {
+  display: none;
 }
 
 .individual-group-page .overlap-group3-1 {
@@ -341,7 +345,7 @@
   margin-right: 0.34px;
   min-height: 89px;
   padding: 22.5px 14px;
-  width: 546px;
+  width: 46vw;
 }
 
 .individual-group-page .feed-container {
@@ -384,14 +388,15 @@
   margin-top: 16px;
   min-height: 507px;
   padding: 18px 3.7px;
-  width: 539px;
+  width: 46vw;
 }
 
 .individual-group-page .flex-row {
   align-items: center;
   display: flex;
   margin-right: 19.85px;
-  min-width: 452px;
+  width: 41vw;
+  justify-content: space-between;
 }
 
 .individual-group-page .overlap-group {
@@ -448,7 +453,7 @@
   display: flex;
   margin-right: 2.06px;
   margin-top: 14px;
-  min-width: 468px;
+  width: 39vw;
 }
 
 .individual-group-page .heart-icon {
