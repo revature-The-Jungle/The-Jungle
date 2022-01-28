@@ -37,6 +37,8 @@
    * HTML 5
    * CSS 3
    * Javascript
+   * Bootstrap
+   * Figma
 * Other
    * Postman
    * DBeaver
@@ -44,7 +46,7 @@
 ## Features
 
 ### List of features ready and TODOs for future development
-* Resgistration Feature
+* Registration Feature
    * Users are able to register a new account using unique username and email
 * Login Feature
    * Users are able to login using their username and password
