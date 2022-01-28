@@ -1,3 +1,5 @@
+from typing import List
+
 from data_access_layer.abstract_classes import comment_dao_abs
 from data_access_layer.implementation_classes.comment_dao import CommentDAOImp
 from entities import comment
@@ -13,7 +15,7 @@ class CommentServiceImp(CommentService):
         id = self.comment_dao.create_comment(post_id, user_id, comment_text, group_id, reply_user )
         return id
 
-    def service_get_comment_by_post_id(self, post_id: int) -> list[Comment]:
+    def service_get_comment_by_post_id(self, post_id: int) -> List[Comment]:
         return self.comment_dao.get_comment_by_post_id(post_id)
 
     def service_delete_comment(self, comment_id: int) -> bool:

@@ -2,26 +2,45 @@ const url = "http://127.0.0.1:5000/";
 
 /** -----------------------------------------------------Create Group------------------------------------------------------------ */
 async function createGroup() {
-    // const userId = sessionStorage.getItem("userId");
-    const groupName = document.getElementById("groupName");
-    const groupAbout = document.getElementById("groupAbout");
-    let groupCreated = {"groupId": 0, "userId": 9000, "groupName": groupName.value.trim(), "groupAbout": groupAbout.value.trim(), "imageFormat": "imageFormat"};
-    const htmlBody = document.getElementById("htmlBody");
+    const userId = localStorage.getItem("userId").value;
+    const groupName = document.getElementById("groupName").value.trim();
+    const groupAbout = document.getElementById("groupAbout").value.trim();
+    let groupCreated = {"groupId": 0, "userId": userId, "groupName": groupName, "groupAbout": groupAbout, "imageFormat": "imageFormat"};
 
-    if (groupName.length == 0 || groupAbout.length == 0) {
-        alert("You must fill in all inputs!");
+    if (groupName.length === 0 && groupAbout.length === 0) {
+        const groupNameNull = document.getElementById("groupNameNull");
+        const groupAboutNull = document.getElementById("groupAboutNull");
+        groupAboutNull.style.display = "block";
+        groupNameNull.style.display = "block"; 
+    }
+
+    if (groupName.length === 0) {
+        const groupNameNull = document.getElementById("groupNameNull");
+        groupNameNull.style.display = "block";
         return;
     }
+
+    if (groupAbout.length === 0) {
+        const groupAboutNull = document.getElementById("groupAboutNull");
+        groupAboutNull.style.display = "block";
+        return;
+    }
+
     if (groupName.length < 3) {
-        alert("Group name should be at least three characters long!");
+        const groupNameThreeChar = document.getElementById("groupNameThreeChar");
+        groupNameThreeChar.style.display = "block";
         return;
     }
-    if (groupName > 40) {
-        alert("You have exceeded the 40-character limit!");
+
+    if (groupName.length > 40) {
+        const groupNameFortyChar = document.getElementById("groupNameFortyChar");
+        groupNameFortyChar.style.display = "block";
         return;
     }
-    if (groupAbout > 500) {
-        alert("You have exceeded the 500-character limit!");
+
+    if (groupAbout.length > 500) {
+        const groupAbout500Char = document.getElementById("groupAbout500Char");
+        groupAbout500Char.style.display = "block";
         return;
     }
 
@@ -29,38 +48,17 @@ async function createGroup() {
         body: JSON.stringify(groupCreated)});
 
     let groupObject = await response.json();
-    // console.log(groupObject);
+    
     if (groupObject.message) {
-        alert(groupObject.message);
+        let groupNameException = document.getElementById("duplicateGroupNameMessage");
+        groupNameException.textContent = groupObject.message;
+        duplicateGroupNameMessage.style.display = "block";
     }
-    // else {
-    //     populateNewGroup(body);
-    // }
+    else {
+        let messageGroupCreated = document.getElementById("messageGroupCreated");
+        messageGroupCreated.style.display = "block";   
+    }
 }
-
-// function populateNewGroup(createGroupBody) {
-//     for (let property of createGroupBody) {
-//         let 
-//     }
-// }
 
 const submitCreateGroup = document.getElementById("submitCreateGroup");
 submitCreateGroup.addEventListener("click", createGroup);
-
-
-
-/** -----------------------------------------------------Join Group------------------------------------------------------------ */
-async function joinGroup(groupId, userId) {
-    let groupId = document.getElementById("groupId");
-    let userId = document.getElementById("userId");
-    let joinGroup = {"groupId": groupId.value, "userId": userId.value};
-
-    let response = await fetch(url + `group/join/${groupId}/${userId}`, {method: "POST", mode: "cors", headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(joinGroup)});
-    
-    let response = await response.json();
-
-    if (response.ok) {
-        alert("You have joined successfully!");
-    }
-}
