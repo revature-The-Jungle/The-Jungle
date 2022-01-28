@@ -78,5 +78,6 @@ public class UserService implements UserServiceInt {
             throw new UserNotFound("User not found");
         }
     }
+
 }
 
