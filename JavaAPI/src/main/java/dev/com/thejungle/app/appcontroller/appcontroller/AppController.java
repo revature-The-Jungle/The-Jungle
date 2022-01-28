@@ -25,6 +25,7 @@ public class AppController {
         app.get("/users", userController.getAllUsers);
         app.post("/user/login", userController.loginUser);
         app.get("/user/group/{userId}", userController.getGroups);
+        app.get("/user/groupNames/{userId}",userController.getGroupsNames);
         app.post("/user/registration", userController.registerUser);
     }
 }
