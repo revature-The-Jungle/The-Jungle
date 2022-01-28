@@ -269,6 +269,23 @@
   min-width: 420px;
 }
 
+.chat-page .overlap-group8{
+  height: 391px;
+  left: 1028px;
+  position: absolute;
+  top: 563px;
+  width: 361px;
+}
+
+.chat-page .overlap-group9::-webkit-scrollbar{
+  display: none;
+}
+
+.chat-page .overlap-group9{
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .chat-page .overlap-group4 {
   align-items: center;
   background-image: url(../img/rectangle-5-1@2x.svg);
@@ -472,7 +489,7 @@
   left: 53px;
   min-width: 243px;
   position: absolute;
-  top: 119px;
+  top: 116px;
 }
 
 .chat-page .briel-larson {
@@ -551,6 +568,22 @@
   position: absolute;
   top: 15px;
   width: 40px;
+}
+.chat-page .chat-in-list{
+  height: 40px;
+  min-width: 221px;
+  max-width: 9rem;
+  align-items: center;
+  display: flex;
+  margin: 10px 0px 35px 15px;
+}
+
+.chat-page .chatGroupName{
+  width: 338px;
+  height: 345px;
+  position: absolute;
+  top: 95px;
+  left: 17px;
 }
 
 .chat-page .people-in-chat {
