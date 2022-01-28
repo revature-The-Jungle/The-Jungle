@@ -10,7 +10,9 @@ public interface UserServiceInt {
 
     User createNewUserService(User user);
 
-    User searchForUserService(String username);
+    User getUserByIdService(int userId);
+
+    ArrayList<User> searchForUserService(String username);
 
     User loginService(String username, String passcode);
 
