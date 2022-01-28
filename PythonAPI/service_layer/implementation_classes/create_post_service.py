@@ -3,15 +3,9 @@ from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
 from custom_exceptions.post_text_must_be_a_string import PostTextMustBeAString
 from custom_exceptions.user_id_must_be_an_integer import UserIdMustBeAnInteger
-<<<<<<< HEAD
 from data_access_layer.implementation_classes.create_post_dao import CreatePostDAOImp
 from entities.post import Post
 from service_layer.abstract_classes.create_post_service_abs import CreatePostService
-=======
-from entities.post import Post
-from service_layer.abstract_classes.create_post_service_abs import CreatePostService
-from data_access_layer.implementation_classes.create_post_dao import CreatePostDAOImp
->>>>>>> origin/vFloresHerrera/python/profile_create_post/sp1
 
 
 class CreatePostServiceImp(CreatePostService):
@@ -22,11 +16,8 @@ class CreatePostServiceImp(CreatePostService):
     def create_post_service(self, post: Post) -> Post:
         """Method to check the input then send the post to the data access layer."""
 
-<<<<<<< HEAD
         # Check to see if the post is empty.
 
-=======
->>>>>>> origin/vFloresHerrera/python/profile_create_post/sp1
         # Check to make sure the user_id is an integer
         if not str(post.user_id).isnumeric():
             raise UserIdMustBeAnInteger('The user id must be an integer.')

@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 from custom_exceptions.follower_not_found import FollowerNotFound
-=======
->>>>>>> origin/vFloresHerrera/python/profile_create_post/sp1
 from custom_exceptions.user_image_not_found import UserImageNotFound
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.abstract_classes.user_profile_dao_abs import UserProfileDAO
@@ -158,7 +155,6 @@ class UserProfileDAOImp(UserProfileDAO):
             following_dict.update({follower[0]: follower[1]})
         return following_dict
 
-<<<<<<< HEAD
     def follow_user(self, user_follower_id: int, user_being_followed_id: int) -> bool:
 
         sql = "select * from user_table where user_id = %(user_id)s"
@@ -194,5 +190,3 @@ class UserProfileDAOImp(UserProfileDAO):
         connection.commit()
         return True
 
-=======
->>>>>>> origin/vFloresHerrera/python/profile_create_post/sp1

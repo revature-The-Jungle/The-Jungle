@@ -75,7 +75,6 @@ class UserProfileServiceImp(UserProfileService):
         if not str(user_id).isnumeric():
             raise UserIdMustBeAnInteger('The user id must be an integer.')
         return self.user_profile_dao.get_users_following_user(user_id)
-<<<<<<< HEAD
 
     def follow_user_service(self, user_follower_id: int, user_being_followed_id: int) -> bool:
         # Check to make sure the user_follower_id and user_being_followed_id is an integer
@@ -88,5 +87,3 @@ class UserProfileServiceImp(UserProfileService):
         if not str(user_follower_id).isnumeric() and str(user_being_followed_id).isnumeric():
             raise UserIdMustBeAnInteger('The user id must be an integer.')
         return self.user_profile_dao.unfollow_user(user_follower_id, user_being_followed_id)
-=======
->>>>>>> origin/vFloresHerrera/python/profile_create_post/sp1

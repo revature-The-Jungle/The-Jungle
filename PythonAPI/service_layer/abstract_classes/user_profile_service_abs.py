@@ -39,7 +39,6 @@ class UserProfileService(ABC):
     def get_users_following_user_service(self, user_id: int) -> dict[str:int]:
         """Stretch"""
         pass
-<<<<<<< HEAD:PythonAPI/service_layer/abstract_classes/user_profile_service_abs.py
 
     @abstractmethod
     def follow_user_service(self, user_follower_id: int, user_being_followed_id: int) -> bool:
@@ -48,5 +47,3 @@ class UserProfileService(ABC):
     @abstractmethod
     def unfollow_user_service(self, user_follower_id: int, user_being_followed_id: int) -> bool:
         pass
-=======
->>>>>>> origin/vFloresHerrera/python/profile_create_post/sp1:PythonAPI/service_layer/abstract_classes/user_profile_service.py
