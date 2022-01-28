@@ -1,3 +1,4 @@
+from custom_exceptions.follower_not_found import FollowerNotFound
 from custom_exceptions.user_image_not_found import UserImageNotFound
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.implementation_classes.user_profile_dao import UserProfileDAOImp, UserProfileDAO
@@ -193,3 +194,43 @@ def test_user_following_failure_no_user():
         assert False
     except UserNotFound as e:
         assert str(e) == user_not_found_message
+
+
+def test_follow_user_success_1(create_fake_user):
+    user_profile_dao.follow_user(100000000, 100000001)
+
+
+def test_follow_user_success_2(create_fake_user):
+    user_profile_dao.follow_user(100000000, 100000002)
+
+
+def test_follow_user_failure_user_follower_id_failure(create_fake_user):
+    try:
+        user_profile_dao.follow_user(-1, 100000000)
+        assert False
+    except UserNotFound as e:
+        assert str(e) == user_not_found_message
+
+
+def test_follow_user_failure_user_being_followed_id_failure(create_fake_user):
+    try:
+        user_profile_dao.follow_user(100000000, -1)
+        assert False
+    except UserNotFound as e:
+        assert str(e) == user_not_found_message
+
+
+def test_unfollow_user_success_1(create_fake_followers):
+    user_profile_dao.unfollow_user(100000000, 100000001)
+
+
+def test_unfollow_user_success_2(create_fake_followers):
+    user_profile_dao.unfollow_user(100000000, 100000002)
+
+
+def test_unfollow_user_failure_follower_not_found(create_fake_followers):
+    try:
+        user_profile_dao.unfollow_user(100000000, -1)
+        assert False
+    except FollowerNotFound as e:
+        assert str(e) == "The follower was not found."
