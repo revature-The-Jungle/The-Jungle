@@ -99,10 +99,10 @@
   display: flex;
   flex-direction: column;
   left: 387px;
-  min-height: 200px;
+  min-height: 140px;
   padding: 20px 4px;
   position: absolute;
-  top: 204px;
+  top: 150px;
   width: 590px;
 }
 
