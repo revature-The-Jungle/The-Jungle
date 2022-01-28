@@ -3,16 +3,20 @@ let id = id => document.getElementById(id);
 
 //Establish the WebSocket connection and set up event handlers
 
+function logout(){
+    sessionStorage.clear();
+    window.location.href = "../loginpage.html" //Change the link here to the login page html...
+}
+
 sessionStorage.setItem("userId","10000");
 sessionStorage.setItem("userName", "Irfan")
 groupdId = Math.floor(Math.random() * 10 + 10);
+
 async function getGroups(){
-
-    sessionStorage.getItem("userId",);
-
+    sessionStorage.getItem("userId");
     // CALL THE FETCH API FOR GETTING GROUPS 
-
 }
+
 let ws;
 function createChatConnection(){
 console.log(groupdId)
@@ -31,13 +35,11 @@ id("message").addEventListener("keypress", function (e) {
 }
 
 function sendAndClear(message) {
-
     if (message !== "") {
         let msg = {
             userId: sessionStorage.getItem("userId"),
             userName:sessionStorage.getItem("userName"),
             chatContent: id("message").value,
-
           };
         ws.send(JSON.stringify(msg));
         id("message").value = "";
@@ -51,7 +53,6 @@ function updateChat(msg) {
     }else {
         updateUserList(data.userList);
     }
- 
 }
 
 function updateUserList(userList){

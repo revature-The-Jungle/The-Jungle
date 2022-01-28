@@ -149,6 +149,22 @@ public class UserController {
         }
     };
 
+    public Handler getGroupsNames = ctx -> {
+        Gson gson = new Gson();
+        int userId = Integer.parseInt(ctx.pathParam("userId"));
+        try {
+            Map<Integer, String> map = this.userService.getGroupsNames(userId);
+            String resultsJson = gson.toJson(map);
+            ctx.result(resultsJson);
+            ctx.status(200);
+        } catch (InvalidInputException e) {
+            HashMap<String, String> message = new HashMap<>();
+            message.put("errorMessage", e.getMessage());
+            ctx.result(gson.toJson(message));
+            ctx.status(400);
+        }
+    };
+
     // Register User
     public Handler registerUser = ctx -> {
         Gson gson = new Gson();
