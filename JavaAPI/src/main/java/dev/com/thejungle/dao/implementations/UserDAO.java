@@ -1,11 +1,10 @@
 package dev.com.thejungle.dao.implementations;
 
-import dev.com.thejungle.customexception.DuplicateEmail;
-import dev.com.thejungle.customexception.DuplicateUsername;
-import dev.com.thejungle.customexception.UserNotFound;
+import dev.com.thejungle.customexception.*;
 import dev.com.thejungle.dao.interfaces.UserDAOInt;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.utility.ConnectionDB;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,48 +37,102 @@ public class UserDAO implements UserDAOInt {
             user.setUserId(rs.getInt("user_id"));
             return user;
         } catch (SQLException q) {
-            if (q.getMessage().contains("username")){
+            if (q.getMessage().contains("username")) {
                 throw new DuplicateUsername("This username is already taken");
-            }
-            else if (q.getMessage().contains("email")){
+            } else if (q.getMessage().contains("email")) {
                 throw new DuplicateEmail("Email is already in use");
-            }
-            else {
+            } else {
                 q.printStackTrace();
                 return null;
             }
         }
     }
 
-    /**
-     * connects to the database to search for a User using username and retrieve its results
-     * @param username username to search by
-     * @return ArrayList of Users matching the search result
-     */
     @Override
-    public User searchForUser(String username) {
-        try(Connection connection = ConnectionDB.createConnection()) {
-            String sql = "select * from user_table where username = %?%";
+    public User requestLogin(String username, String password) {
+        try (Connection connection = ConnectionDB.createConnection()) {
+            String sql = "select user_id, first_name, last_name, email, username, user_birth_date" +
+                    " from user_table" +
+                    " where username = ? and passcode = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()) {
-                User newUser = new User (
-                        resultSet.getInt("user_Id"),
+            if (resultSet.next()) {
+                return new User(
+                        resultSet.getInt("user_id"),
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name"),
                         resultSet.getString("email"),
                         resultSet.getString("username"),
-                        resultSet.getString("passcode"),
-                        resultSet.getString("user_about"),
-                        resultSet.getDate("user_birth_date").getTime(),
-                        resultSet.getString("image_format")
+                        resultSet.getDate("user_birth_date").getTime()
                 );
-                return newUser;
             } else {
-                throw new UserNotFound("User not found");
+                throw new UsernameOrPasscodeException("Login Failed");
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    /**
+     * connects to the database to search for a user using userId
+     * @param userId id of user to search by
+     * @return User with its information
+     */
+    @Override
+    public User getUserById(int userId) {
+        try (Connection connection = ConnectionDB.createConnection()) {
+            String sql = "select user_id, first_name, last_name, email, username, user_birth_date" +
+                    " from user_table" +
+                    " where user_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return new User(
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("username"),
+                        resultSet.getDate("user_birth_date").getTime()
+                );
+            } else {
+                throw new UserNotFound("User Not Found");
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    /**
+     * connects to the database to search for Users using username and retrieve its results
+     * @param username username to search by
+     * @return ArrayList of Users matching the search result
+     */
+    @Override
+    public ArrayList<User> searchForUser(String username) {
+        try (Connection connection = ConnectionDB.createConnection()) {
+            String sql = "select * from user_table where username ilike ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "%" + username + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ArrayList<User> users = new ArrayList<>();
+            while (resultSet.next()) {
+                users.add(
+                        new User(
+                                resultSet.getInt("user_Id"),
+                                resultSet.getString("first_name"),
+                                resultSet.getString("last_name"),
+                                resultSet.getString("email"),
+                                resultSet.getString("username"),
+                                resultSet.getDate("user_birth_date").getTime()
+                        )
+                );
+            }
+            return users;
+        } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
@@ -117,6 +170,8 @@ public class UserDAO implements UserDAOInt {
         }
     }
 
+
+
     /**
      * connects to the database to retrieve list of groups that a specific user is in
      * @param userId id of user to search by
@@ -130,10 +185,14 @@ public class UserDAO implements UserDAOInt {
             preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<Integer> groupIds = new ArrayList<>();
-            while(resultSet.next()){
-               groupIds.add(resultSet.getInt("group_id"));
+            if (!resultSet.isBeforeFirst()){
+                throw new InvalidInputException();
+            } else {
+                while (resultSet.next()) {
+                    groupIds.add(resultSet.getInt("group_id"));
+                }
+                return groupIds;
             }
-            return groupIds;
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
             return null;
