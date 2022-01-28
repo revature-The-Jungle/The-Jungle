@@ -239,9 +239,10 @@ async function registerUser(event){
     let registeredUserBody = await response.json();
 
     if(response.status === 201){
-        // let registeredUserBody = await response.json();
+        let userIdStored = registeredUserBody.userId;
+        window.localStorage.setItem("userIdSignup", userIdStored);
         window.location.href = "../profilepage/profile-page.html";
-        console.log(registeredUserBody);
+        // console.log(registeredUserBody);
     }
     else {
         let error = registeredUserBody.errorMessage;
@@ -249,8 +250,4 @@ async function registerUser(event){
         invalidMessage[7].textContent = error;
     }
 }
-
-
-
-
 

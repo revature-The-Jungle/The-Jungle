@@ -26,7 +26,7 @@ body {
 }
 
 .container-center-horizontal > * {
-  flex-shrink: 1;
+  flex-shrink: 0;
   pointer-events: auto;
 }
 
