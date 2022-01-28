@@ -67,7 +67,7 @@ public class UserService implements UserServiceInt {
     @Override
     public HashMap<Integer, String> getGroupsNames(int userId) {
         if (userId > 0) {
-            return this.userDAOInt.getGroupsNames(userId);
+            return this.userDAO.getGroupsNames(userId);
         } else {
             throw new InvalidInputException("User Id needs to be positive");
         }

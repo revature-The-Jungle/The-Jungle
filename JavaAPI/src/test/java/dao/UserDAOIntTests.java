@@ -14,15 +14,15 @@ public class UserDAOIntTests {
     UserDAO userDAOInt = new UserDAO();
 
     // TEST FOR USER CREATION/REGISTRATION
-    @Test
-    void testCreateNewUser() {
-        Date date = new Date(742892400000L);
-        User newJungleUser = new User(0, "Test", "Tester", "testingemail77@gmail.com",
-                "userna", "passcode", "I like social media.", date,
-                "imagesourcefile");
-        User createdUser = userDAOInt.createNewUser(newJungleUser);
-        Assert.assertEquals(createdUser.getFirstName(), "Test");
-    }
+//    @Test
+//    void testCreateNewUser() {
+//        Date date = new Date(742892400000L);
+//        User newJungleUser = new User(0, "Test", "Tester", "testingemail77@gmail.com",
+//                "userna", "passcode", "I like social media.", date,
+//                "imagesourcefile");
+//        User createdUser = userDAOInt.createNewUser(newJungleUser);
+//        Assert.assertEquals(createdUser.getFirstName(), "Test");
+//    }
 
 
     // TEST TO SEARCH BY USERNAME

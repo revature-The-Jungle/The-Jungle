@@ -127,14 +127,14 @@ public class UserDAO implements UserDAOInt {
     public HashMap<Integer, String> getGroupsNames(int userId) {
         try (Connection connection = ConnectionDB.createConnection()) {
             String sql = "select gmjt.group_id, gt.group_name from group_member_junction_table gmjt" +
-            " inner join group_table gt ON gmjt.group_id = gt.group_id" +
-            " where gmjt.user_id = ?";
+                    " inner join group_table gt ON gmjt.group_id = gt.group_id" +
+                    " where gmjt.user_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
             HashMap<Integer, String> groupIds = new HashMap<>();
             while(resultSet.next()){
-               groupIds.put(resultSet.getInt("group_id"), resultSet.getString("group_name"));
+                groupIds.put(resultSet.getInt("group_id"), resultSet.getString("group_name"));
             }
             return groupIds;
         } catch (SQLException sqlException) {

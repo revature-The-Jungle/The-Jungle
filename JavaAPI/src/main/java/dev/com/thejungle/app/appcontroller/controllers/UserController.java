@@ -64,6 +64,20 @@ public class UserController {
             ctx.status(400);
         }
     };
+    // Get Group Names
+    public Handler getGroupsNames = ctx -> {
+        int userId = Integer.parseInt(ctx.pathParam("userId"));
+        try {
+            Gson gson = new Gson();
+            Map<Integer, String> map = this.userService.getGroupsNames(userId);
+            String resultsJson = gson.toJson(map);
+            ctx.result(resultsJson);
+            ctx.status(200);
+        } catch (InvalidInputException e) {
+            ctx.result(e.getMessage());
+            ctx.status(400);
+        }
+    };
 
     // Get Groups
     public Handler getGroups = ctx -> {
