@@ -68,7 +68,7 @@ public class UserDAO implements UserDAOInt {
                         resultSet.getDate("user_birth_date").getTime()
                 );
             } else {
-                throw new UsernameOrPasscodeException("Login Failed");
+                throw new UsernameOrPasscodeException("User Not Found");
             }
         } catch (SQLException e) {
             return null;
