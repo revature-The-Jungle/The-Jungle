@@ -27,6 +27,7 @@
       * Selenium - 4.1.1
       * Mockito - 0.4.13
       * Gson - 2.8.9
+      * log4j - 2.17.0
    * Python - 3.9
       * behave - 1.2.6
       * Selenium - 4.1.0
