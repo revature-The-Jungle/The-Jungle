@@ -15,9 +15,22 @@ public class User {
     private long userBirthdate;
     private String imageFormat;
 
-
     // CONSTRUCTORS
     public User(){}
+
+    public User(String username, String passcode) {
+        this.username = username;
+        this.passcode = passcode;
+    }
+
+    public User(int userId, String firstName, String lastName, String email, String username, long userBirthdate) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.userBirthdate = userBirthdate;
+    }
 
     public User(int userId, String firstName, String lastName, String email, String username, String passcode,
                 String userAbout, long userBirthdate, String imageFormat) {

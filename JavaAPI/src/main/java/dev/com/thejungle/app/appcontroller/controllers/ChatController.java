@@ -13,13 +13,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 public class ChatController {
 
 
-    public Map<WsContext, Map> userUsernameMap = new ConcurrentHashMap<>();
+    private Map<WsContext, Map> userUsernameMap = new ConcurrentHashMap<>();
 
-    ChatService chatService;
+    private ChatService chatService;
 
     public ChatController(ChatService chatService){
         this.chatService = chatService;
@@ -33,7 +34,6 @@ public class ChatController {
             Map<String,Object> userInfo = new HashMap<>();
             userInfo.put("groupId" , groupId);
             userInfo.put("userName", userName );
-
             userUsernameMap.put(ctx, userInfo);
             userListBroadcast(groupId);
             if(groupId == 0)
@@ -71,6 +71,15 @@ public class ChatController {
         });
     };
 
+    /**
+     * sends to front-end a json of ChatMessage that the requesting user sent to other users in the same group chat
+     * @param chatId id of chat
+     * @param userId id of user
+     * @param chatContent content of chat
+     * @param userName username
+     * @param date date the chat was sent
+     * @param groupId id of group
+     */
     public void broadcastMessage(int chatId, int userId, String chatContent,String userName,String date, int groupId) {
 
         userUsernameMap.keySet().stream().filter(ctx -> (ctx.session.isOpen() && (Integer) userUsernameMap.get(ctx).get("groupId") == groupId)).forEach(session -> {
@@ -86,6 +95,10 @@ public class ChatController {
         });
     }
 
+    /**
+     * sends to front-end a list of users that are in a specific group chat given the groupId.
+     * @param groupId used to filter users by groups
+     */
     public void userListBroadcast(int groupId){
         ArrayList<String> userList = new ArrayList();
         userUsernameMap.keySet().stream().filter(ctx -> (ctx.session.isOpen() && (Integer) userUsernameMap.get(ctx).get("groupId") == groupId)).forEach(session -> {
