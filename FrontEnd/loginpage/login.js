@@ -31,7 +31,7 @@ if (response.status === 200){
     console.log(body);
     console.log(body.userId);
     console.log("Success");
-    window.location.href="secondPageWhateverTheTitleIs.html" //  Redirect to Here????
+    window.location.href="../profilepage/profile-page.html" //  Redirect to Here????
 } else {
     div.textContent = "Incorrect Username or Password";
     // displayErrorMessage("Incorrect Username or Password", "errorMessageGoesHere", loginStatus);

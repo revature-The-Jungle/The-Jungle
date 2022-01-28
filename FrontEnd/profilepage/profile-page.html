@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1440, maximum-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="https://animaproject.s3.amazonaws.com/home/favicon.png"
+    />
+    <meta name="og:type" content="website" />
+    <meta name="twitter:card" content="photo" />
+    <link rel="stylesheet" type="text/css" href="css/profile-page.css" />
+    <link rel="stylesheet" type="text/css" href="css/styleguide.css" />
+    <link rel="stylesheet" type="text/css" href="css/globals.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.css"
+    />
+  </head>
+  <body style="margin: 0; background: #ffffff">
+    <input type="hidden" id="anPageName" name="page" value="profile-page" />
+    <div class="container-center-horizontal">
+      <div class="profile-page screen">
+        <div class="overlap-group10 poppins-bold-astronaut-22px">
+          <div class="middle-section"></div>
+          <div class="overlap-group">
+            <div class="rectangle-2"></div>
+            <img class="feed-picture-2" src="img/feed-picture-2@1x.svg" />
+            <img class="three-dots-icon" src="img/bi-three-dots@2x.svg" />
+            <div class="location-2 valign-text-middle">Orlando, FL</div>
+            <div
+              class="username-2 valign-text-middle poppins-bold-cape-cod-20px"
+            >
+              Erod321
+            </div>
+            <img class="feed-avatar" src="img/feed-avatar@2x.png" />
+          </div>
+          <div class="overlap-group1">
+            <div class="flex-row">
+              <div class="overlap-group2">
+                <div class="new-york-ny valign-text-middle">New York, NY</div>
+                <div
+                  class="username-1 valign-text-middle poppins-bold-cape-cod-20px"
+                >
+                  JostSNL21
+                </div>
+                <img class="feed-avatar-1" src="img/ellipse-1@2x.png" />
+              </div>
+              <img class="three-dots-icon-1" src="img/bi-three-dots@2x.svg" />
+            </div>
+            <img class="feed-picture" src="img/feed-picture@1x.svg" />
+            <div class="icon-container">
+              <img class="heart-icon" src="img/heart-icon@2x.svg" />
+              <img class="chat-bubble-icon" src="img/chat-bubble-icon@2x.svg" />
+              <img class="share-icon" src="img/share-icon@2x.svg" />
+              <img class="bookmark-icon" src="img/bookmark-icon@2x.svg" />
+            </div>
+            <div class="overlap-group-1">
+              <div
+                class="feed-text-2 valign-text-middle poppins-medium-black-18px"
+              >
+                At the beach with bae
+              </div>
+              <div
+                class="username-2-1 valign-text-middle poppins-bold-cape-cod-20px"
+              >
+                JostSNL21
+              </div>
+            </div>
+          </div>
+          <img class="line-right" src="img/line-right@1x.svg" />
+          <div class="search">
+            <div class="search-container">
+              <div
+                class="search-for-friends valign-text-middle poppins-medium-pink-swan-18px"
+              >
+                Search for friends
+              </div>
+              <img class="search-icon" src="img/search-icon@2x.svg" />
+            </div>
+            <img
+              class="line-under-search"
+              src="img/line-under-search-1@1x.svg"
+            />
+          </div>
+          <div class="left-section"></div>
+          <img class="line-left" src="img/line-left@1x.svg" />
+          <div class="nav">
+            <div class="chat-container">
+              <div
+                class="chat valign-text-middle poppins-semi-bold-astronaut-24px"
+              >
+                Chat
+              </div>
+              <img class="x-icon" src="img/chat-icon@2x.svg" />
+            </div>
+            <div class="group-container">
+              <div
+                class="groups valign-text-middle poppins-semi-bold-astronaut-24px"
+              >
+                Groups
+              </div>
+              <img class="x-icon" src="img/group-icon-1@2x.svg" />
+            </div>
+            <div class="logout-container">
+              <div
+                class="logout valign-text-middle poppins-semi-bold-astronaut-24px"
+              >
+                Logout
+              </div>
+              <img class="x-icon" src="img/logout-icon@2x.svg" />
+            </div>
+          </div>
+          <div class="about-me">
+            <img class="user-avatar" src="img/user-avatar@2x.png" />
+            <div
+              class="user-name valign-text-middle poppins-bold-cape-cod-18px"
+            >
+              Scarlett Johansson
+            </div>
+            <div class="flex-row-1">
+              <div class="birthday valign-text-middle">DOB - Jan. 1st</div>
+              <img class="line-1" src="img/line-1@2x.svg" />
+              <div class="username valign-text-middle">@Scar_Jo12</div>
+            </div>
+            <div class="flex-col">
+              <!-- Edit Profile Button and Modal -->
+              <div class="edit-container">
+                <button
+                  id="updateProfileEditProfileBtn"
+                  type="button"
+                  class="edit-button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#myModal"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-pencil"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"
+                    ></path>
+                  </svg>
+                  Profile
+                </button>
+
+                <!-- Modal -->
+                <div
+                  class="modal fade"
+                  id="myModal"
+                  tabindex="-1"
+                  aria-labelledby="modalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5
+                          class="modal-title"
+                          id="updateUserProfileModalTitle"
+                        >
+                          Update User Profile
+                        </h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                          onclick="resetProfileModalData()"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <form id="updateUserProfileForm">
+                          <div class="mb-3">
+                            <label class="form-label">About me</label>
+                            <textarea
+                              id="userAboutMeInput"
+                              class="form-control"
+                            ></textarea>
+                          </div>
+                          <div class="mb-3">
+                            <label for="form-label">Birthday</label>
+                            <br />
+                            <input
+                              id="userBirthdateInput"
+                              class="form-control"
+                              type="date"
+                            />
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <div id="profileModalMsg"></div>
+                        <div>
+                          <button
+                            id="updateProfileCloseModalBtn"
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                            onclick="resetProfileModalData()"
+                          >
+                            Close
+                          </button>
+                          <button
+                            id="updateProfileModalBtn"
+                            type="button"
+                            class="edit-button"
+                            onclick="updateUserProfileData()"
+                          >
+                            Save changes
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <img
+                class="line-under-search-1"
+                src="img/line-under-search-1@2x.svg"
+              />
+            </div>
+          </div>
+          <div class="overlap-group7">
+            <img class="jungle3-1" src="img/jungle3-1@2x.png" />
+            <h1 class="title now-bold-biscay-48px">jungle</h1>
+          </div>
+          <div class="overlap-group8">
+            <div class="group-rectangle"></div>
+            <img
+              class="unsplash9-qmh-ikc8-yvy"
+              src="img/unsplash-9qmhikc8yvy@2x.svg"
+            />
+            <img
+              class="unsplashp-xj-qa-gxi4-ja"
+              src="img/unsplash-pxjqagxi4ja@2x.svg"
+            />
+            <img
+              class="unsplashjl-hy-iwix46c"
+              src="img/unsplash-jlhyiwix46c@2x.svg"
+            />
+            <img
+              class="line-under-search-2"
+              src="img/line-under-search@2x.svg"
+            />
+            <img class="group-icon" src="img/group-icon-1@2x.svg" />
+            <div
+              class="groups-1 valign-text-middle poppins-bold-astronaut-24px"
+            >
+              Groups
+            </div>
+          </div>
+          <div id="overlap-group9" class="overlap-group9">
+            <div class="chat-rectange"></div>
+
+            <img class="friends-icon" src="img/friends-icon@2x.svg" />
+            <div class="friends valign-text-middle poppins-bold-astronaut-24px">
+              Followers
+            </div>
+            <img class="line" src="img/line@2x.svg" />
+          </div>
+          <div class="mando-mercs valign-text-middle">Mando Mercs</div>
+          <div class="spidey-verse valign-text-middle">SpideyVerse</div>
+          <div class="romanoff-is-alive valign-text-middle">
+            Romanoff Is Alive
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"
+  ></script>
+  <script src="dZazulak.js"></script>
+</html>
