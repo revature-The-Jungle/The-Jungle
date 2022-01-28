@@ -52,7 +52,7 @@
    * Users are able to login using their username and password
 * User Profile Feature
    * Users are able to write "About Me" in their profile for others to see
-* Search Other Users Featuer
+* Search Other Users Feature
    * Users are able to search other users using username 
 * View Post Feed Feature
    * Users are able to view posts
@@ -70,14 +70,14 @@
    * Users will see previous chat history up to 5 minutes upon joining a chat
    * Types of chatroom
       * Global chatroom - All users can join
-      * Group chatroom - Only users that are in the speicifc group can join
+      * Group chatroom - Only users that are in the specific group can join
 
 ### To-do list:
 * Follower/Following Feature
-   * Usere are able to follow and unfollow as well as view the number of followers and following
+   * Users are able to follow and unfollow as well as view the number of followers and following
    * Users should only see posts from following users
 * Upload Profile Picture Feature
-   * Usere are able to upload profile picture to stylize their profile
+   * Users are able to upload profile picture to stylize their profile
 * Dark Mode Feature
    * Users are able to toggle dark / light theme depending on their preference
 * Host/Join events Feature
@@ -127,13 +127,13 @@ git clone https://github.com/revature-The-Jungle/The-Jungle.git
 - [Daniel Landeros](https://github.com/Virtud87)
 - [David Zazulak](https://github.com/dZazulak)
 - [Dearce Goodman](https://github.com/DearceGoodman)
-- [Eric Jennigs](https://github.com/ericthered1138)
+- [Eric Jennings](https://github.com/ericthered1138)
 - [Hyungsuk Kim](https://github.com/hsKim93)
-- [Irfan Ulugad](https://github.com/Uirfan)
+- [Irfan Uludag](https://github.com/Uirfan)
 - [Kyla Karnoski](https://github.com/bluedragonscales)
 - [Loc Phan](https://github.com/LocPhanRevature)
 - [Mohammad Bahrami](https://github.com/mohbah)
-- [Victor FloresHerrera](https://github.com/VictorFloresHerrera)
+- [Victor Flores Herrera](https://github.com/VictorFloresHerrera)
 
 ## License
 
