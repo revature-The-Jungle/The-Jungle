@@ -94,12 +94,12 @@
 
 .profile-page .overlap-group1 {
   align-items: center;
-  background-color: var(--white);
+  /* background-color: var(--white); */
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  left: 377px;
-  min-height: 555px;
+  left: 387px;
+  min-height: 200px;
   padding: 20px 4px;
   position: absolute;
   top: 204px;
@@ -725,11 +725,4 @@
 
 .profile-page #updateProfileEditProfileBtn{
   width: 100%;
-}
-
-.profile-page .create-post{
-  color: #fff;
-  background-color: #f47635;
-  border-color: #f47635;
-  border-radius: 10px;
 }
