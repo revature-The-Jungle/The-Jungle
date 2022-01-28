@@ -399,12 +399,12 @@ def create_group_post():
         post_data = request.get_json()
         new_post = GroupPost(
             0,
-            int(post_data["userId"]),
-            int(post_data["groupId"]),
-            post_data["postText"],
-            post_data["imageFormat"],
+            int(post_data["user_id"]),
+            int(post_data["group_id"]),
+            post_data["post_text"],
+            post_data["image_data"],
             int(post_data["likes"]),
-            post_data["dateTimeOfCreation"]
+            post_data["date_time_of_creation"]
         )
         post_to_return = group_post_service.service_create_post(new_post)
         post_as_dictionary = post_to_return.make_dictionary()
