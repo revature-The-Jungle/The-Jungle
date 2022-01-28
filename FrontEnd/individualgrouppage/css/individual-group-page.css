@@ -29,7 +29,7 @@
   flex-direction: column;
   min-height: 593px;
   width: 16vw;
-  height: 100vh;
+  /* height: 100vh; */
   margin: 3vh 0 0 1vw;
 }
 
@@ -303,12 +303,12 @@
   left: 17px;
   position: absolute;
   top: 59px;
-  width: 232px;
+  width: 15.5rem;
 }
 
 .individual-group-page .group-icon {
   height: 30px;
-  left: 208px;
+  left: 14.7rem;
   position: absolute;
   top: 18px;
   width: 30px;
