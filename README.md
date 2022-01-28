@@ -33,6 +33,7 @@
       * Flask - 2.0.2
       * Psycopg - 3.0.8
       * pytest - 6.2.5
+        * MagicMock
 * Frontend
    * HTML 5
    * CSS 3
