@@ -406,7 +406,12 @@
   position: relative;
   width: 358px;
 }
-
+.overflowprop {
+ height: 300px;
+ max-height: 300px;
+ width:300px;
+ overflow-y: auto;
+}
 .chat-page .x-rectangle {
   background-color: var(--white);
   border-radius: 15px;
@@ -516,13 +521,11 @@
 }
 
 .chat-page .name-2 {
-  height: 31px;
-  left: 114px;
+
+  left: 40px;
   letter-spacing: -0.33px;
   position: absolute;
-  text-align: center;
-  top: 119px;
-  width: 179px;
+  top: 80px;
 }
 
 .chat-page .ellipse-1-1 {
