@@ -39,6 +39,7 @@ class UserProfileDAO(ABC):
     def get_users_following_user(self, user_id: int) -> dict[str:int]:
         """Stretch"""
         pass
+<<<<<<< HEAD:PythonAPI/data_access_layer/abstract_classes/user_profile_dao_abs.py
 
     @abstractmethod
     def follow_user(self, user_follower_id: int, user_being_followed_id: int) -> bool:
@@ -47,3 +48,5 @@ class UserProfileDAO(ABC):
     @abstractmethod
     def unfollow_user(self, user_follower_id: int, user_being_followed_id: int) -> bool:
         pass
+=======
+>>>>>>> origin/vFloresHerrera/python/profile_create_post/sp1:PythonAPI/data_access_layer/abstract_classes/user_profile_dao.py

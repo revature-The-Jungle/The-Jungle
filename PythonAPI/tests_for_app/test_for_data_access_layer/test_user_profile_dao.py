@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 from custom_exceptions.follower_not_found import FollowerNotFound
+=======
+>>>>>>> origin/vFloresHerrera/python/profile_create_post/sp1
 from custom_exceptions.user_image_not_found import UserImageNotFound
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.implementation_classes.user_profile_dao import UserProfileDAOImp, UserProfileDAO
@@ -49,6 +52,7 @@ def create_fake_image(create_fake_user):
 @fixture
 def create_fake_followers(create_fake_user):
     """Create followers for the fake users"""
+<<<<<<< HEAD
 
     sql = "Insert into user_follow_junction_table values(100000000, 100000001);" \
           "Insert into user_follow_junction_table values(100000000, 100000002);" \
@@ -69,6 +73,28 @@ def test_get_user_profile_success_2(create_fake_user):
     assert show_user.user_id == 100000001
 
 
+=======
+
+    sql = "Insert into user_follow_junction_table values(100000000, 100000001);" \
+          "Insert into user_follow_junction_table values(100000000, 100000002);" \
+          "Insert into user_follow_junction_table values(100000001, 100000000);" \
+          "Insert into user_follow_junction_table values(100000002, 100000000);"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    connection.commit()
+
+
+def test_get_user_profile_success(create_fake_user):
+    show_user = user_profile_dao.get_user_profile(100000000)
+    assert show_user.user_id == 100000000
+
+
+def test_get_user_profile_success_2(create_fake_user):
+    show_user = user_profile_dao.get_user_profile(100000001)
+    assert show_user.user_id == 100000001
+
+
+>>>>>>> origin/vFloresHerrera/python/profile_create_post/sp1
 def test_update_user_profile_about_me_success(create_fake_user):
     """Happy test to see if user about me is updated correctly"""
     updated_user = User(100000000, "test_first_name", "test_last_name", user_email_for_tests, "test_username",
@@ -194,6 +220,7 @@ def test_user_following_failure_no_user():
         assert False
     except UserNotFound as e:
         assert str(e) == user_not_found_message
+<<<<<<< HEAD
 
 
 def test_follow_user_success_1(create_fake_user):
@@ -234,3 +261,5 @@ def test_unfollow_user_failure_follower_not_found(create_fake_followers):
         assert False
     except FollowerNotFound as e:
         assert str(e) == "The follower was not found."
+=======
+>>>>>>> origin/vFloresHerrera/python/profile_create_post/sp1

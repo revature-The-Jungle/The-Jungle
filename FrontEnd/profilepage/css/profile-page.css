@@ -393,10 +393,12 @@
 }
 
 .profile-page .user-avatar {
-  height: 151px;
+  height: 160px;
   margin-right: 6.0px;
   object-fit: cover;
-  width: 151px;
+  width: 160px;
+  margin-top: 50px;
+  border-radius: 100px;
 }
 
 .profile-page .user-name {
@@ -465,6 +467,32 @@
   margin-right: 10.0px;
   position: relative;
   width: 216px;
+}
+
+.profile-page .chooseuserimagebutton {
+  background-color: var(--white);
+  border: 2px solid #f47635;
+  border-radius: 10px;
+  height: 42px;
+  margin-right: 10.0px;
+  position: relative;
+  width: 216px;
+  margin-top: 20px;
+  color: #ff4500;
+  font-size: 16px;
+}
+
+.profile-page .changeuserimagebutton  {
+  background-color: var(--white);
+  border: 2px solid #f47635;
+  border-radius: 10px;
+  height: 42px;
+  margin-right: 10.0px;
+  position: relative;
+  width: 216px;
+  margin-top: 10px;
+  color: #ff4500;
+  font-size: 18px;
 }
 
 .profile-page .edit-profile {
