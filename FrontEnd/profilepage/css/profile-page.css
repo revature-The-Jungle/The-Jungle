@@ -203,7 +203,7 @@
 .profile-page .overlap-group-1 {
   align-self: flex-start;
   height: 36px;
-  margin-top: 30px;
+  margin-top: 50px;
   position: relative;
   width: 413px;
 }
@@ -754,4 +754,25 @@
   position: absolute;
   top: 95px;
   left: 17px;
+}
+
+/* .profile-page .icon-container {
+    align-items: center;
+    display: flex;
+    margin-right: 1px;
+    margin-top: 16px;
+    min-width: 511px;
+} */
+
+.likedComment {
+  width: 20vw;
+  margin: 0;
+  position: absolute;
+  bottom: 4rem;
+  left: 2rem;
+  color: var(--black);
+  font-family: var(--font-family-poppins);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
 }
