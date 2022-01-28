@@ -8,7 +8,7 @@ sessionStorage.setItem("userName", "Irfan")
 groupdId = Math.floor(Math.random() * 10 + 10);
 async function getGroups(){
 
-    sessionStorage.getItem("userId",);
+    sessionStorage.getItem("userId");
 
     // CALL THE FETCH API FOR GETTING GROUPS 
 
@@ -46,8 +46,27 @@ function sendAndClear(message) {
 
 function updateChat(msg) { 
     let data = JSON.parse(msg.data);
+
     if(data.userList === undefined ){
-        id("chat").insertAdjacentHTML("beforeend", "<p>" + "<span style='font-weight:700;color:green'>"+data.userName+": </span>"+data.chatContent + "</p>");
+        //if its a message from current user then make right side chat bubble
+        console.log(data.userName);
+        console.log(sessionStorage.getItem("userName"));
+        if(data.userName === sessionStorage.getItem("userName")){
+            id("chat").insertAdjacentHTML("beforeend", "<div class='overlap-group5'>" +
+                "<div class='check-the-documentation valign-text-middle poppins-medium-white-18px'>" +
+                data.chatContent + 
+                "</div>");
+        }
+        else{
+            id("chat").insertAdjacentHTML("beforeend", "<div class='received-message-1'>" +
+            "<img class='ellipse-1' src='img/ellipse-1@2x.png' />" +
+            "<div class='overlap-group6'>" +
+              "<div class='where-are-the-user-stories valign-text-middle poppins-medium-black-18px'>" +
+                data.chatContent +
+              "</div>" +
+            "</div>" +
+          "</div>");
+        }
     }else {
         updateUserList(data.userList);
     }
