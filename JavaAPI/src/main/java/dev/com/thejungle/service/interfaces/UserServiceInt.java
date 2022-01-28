@@ -3,6 +3,7 @@ package dev.com.thejungle.service.interfaces;
 import dev.com.thejungle.entity.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public interface UserServiceInt {
@@ -16,6 +17,8 @@ public interface UserServiceInt {
     User loginService(String username, String passcode);
 
     List<User> getAllUsersService();
+
+    HashMap<Integer, String> getGroupsNames(int userId);
 
     ArrayList<Integer> getGroups(int userId);
 

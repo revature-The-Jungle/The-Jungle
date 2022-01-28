@@ -149,6 +149,60 @@ public class UserController {
         }
     };
 
+    public Handler getGroupsNames = ctx -> {
+        int userId = Integer.parseInt(ctx.pathParam("userId"));
+        try {
+            Gson gson = new Gson();
+            Map<Integer, String> map = this.userService.getGroupsNames(userId);
+            String resultsJson = gson.toJson(map);
+            ctx.result(resultsJson);
+            ctx.status(200);
+        } catch (InvalidInputException e) {
+            HashMap<String, String> message = new HashMap<>();
+            message.put("errorMessage", e.getMessage());
+            ctx.result(gson.toJson(message));
+            ctx.status(400);
+        }
+    };
+
+    // Register User
+    public Handler registerUser = ctx -> {
+        Gson gson = new Gson();
+        try {
+            User newUser = gson.fromJson(ctx.body(), User.class);
+            User createdUser = this.userService.createNewUserService(newUser);
+            if (createdUser == null) {
+                HashMap<String, String> message = new HashMap<>();
+                message.put("errorMessage", "Error processing request");
+                ctx.result(gson.toJson(message));
+                ctx.status(400);
+            }
+            String createdUserJson = gson.toJson(createdUser);
+            ctx.result(createdUserJson);
+            ctx.status(201);
+        } catch (UnallowedSpaces e) {
+            HashMap<String, String> message = new HashMap<>();
+            message.put("errorMessage", e.getMessage());
+            ctx.result(gson.toJson(message));
+            ctx.status(400);
+        } catch (DuplicateEmail e) {
+            HashMap<String, String> message = new HashMap<>();
+            message.put("errorMessage", e.getMessage());
+            ctx.result(gson.toJson(message));
+            ctx.status(400);
+        } catch (DuplicateUsername e) {
+            HashMap<String, String> message = new HashMap<>();
+            message.put("errorMessage", e.getMessage());
+            ctx.result(gson.toJson(message));
+            ctx.status(400);
+        } catch (BlankInputs e) {
+            HashMap<String, String> message = new HashMap<>();
+            message.put("errorMessage", e.getMessage());
+            ctx.result(gson.toJson(message));
+            ctx.status(400);
+        }
+    };
+
     // Register User
     public Handler registerUser = ctx -> {
         Gson gson = new Gson();

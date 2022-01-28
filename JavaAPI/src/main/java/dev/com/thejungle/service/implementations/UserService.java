@@ -5,6 +5,7 @@ import dev.com.thejungle.dao.implementations.UserDAO;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.interfaces.UserServiceInt;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class UserService implements UserServiceInt {
@@ -63,6 +64,15 @@ public class UserService implements UserServiceInt {
     }
 
     @Override
+    public HashMap<Integer, String> getGroupsNames(int userId) {
+        if (userId > 0) {
+            return this.userDAO.getGroupsNames(userId);
+        } else {
+            throw new InvalidInputException("User Id needs to be positive");
+        }
+    }
+
+    @Override
     public ArrayList<Integer> getGroups(int userId) {
         try {
             if (userId > 0) {
@@ -78,6 +88,5 @@ public class UserService implements UserServiceInt {
             throw new UserNotFound("User not found");
         }
     }
-
 }
 
