@@ -11,12 +11,10 @@ function logout(){
 sessionStorage.setItem("userId","10000");
 sessionStorage.setItem("userName", "Irfan")
 groupdId = Math.floor(Math.random() * 10 + 10);
+
 async function getGroups(){
-
     sessionStorage.getItem("userId");
-
     // CALL THE FETCH API FOR GETTING GROUPS 
-
 }
 
 let ws;
@@ -28,22 +26,20 @@ ws.onmessage = msg => updateChat(msg,ws);
 ws.onclose = () => updateChat("WebSocket connection closed");
 
 // Add event listeners to button and input field
-// id("send").addEventListener("click", () => sendAndClear(id("message").value));
-// id("message").addEventListener("keypress", function (e) {
-//     if (e.keyCode === 13) { // Send message if enter is pressed in input field
-//         sendAndClear(e.target.value);
-//     }
-// });
+id("send").addEventListener("click", () => sendAndClear(id("message").value));
+id("message").addEventListener("keypress", function (e) {
+    if (e.keyCode === 13) { // Send message if enter is pressed in input field
+        sendAndClear(e.target.value);
+    }
+});
 }
 
 function sendAndClear(message) {
-
     if (message !== "") {
         let msg = {
             userId: sessionStorage.getItem("userId"),
             userName:sessionStorage.getItem("userName"),
             chatContent: id("message").value,
-
           };
         ws.send(JSON.stringify(msg));
         id("message").value = "";
@@ -57,7 +53,6 @@ function updateChat(msg) {
     }else {
         updateUserList(data.userList);
     }
- 
 }
 
 function updateUserList(userList){

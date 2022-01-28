@@ -153,7 +153,7 @@ public class UserDAOTests {
         userDAO.getUserById(9996784);
     }
 
-    @Test(expectedExceptions = UsernameOrPasscodeException.class, expectedExceptionsMessageRegExp = "Login Failed")
+    @Test(expectedExceptions = UsernameOrPasscodeException.class, expectedExceptionsMessageRegExp = "User Not Found")
     void testRequestLoginFailWrongPassword() {
         userDAO.requestLogin("username", "33");
     }
