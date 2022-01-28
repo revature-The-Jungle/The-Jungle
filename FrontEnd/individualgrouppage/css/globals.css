@@ -20,7 +20,7 @@ body {
 }
 
 .screen a {
-  display: contents;
+  display: block;
   text-decoration: none;
 }
 

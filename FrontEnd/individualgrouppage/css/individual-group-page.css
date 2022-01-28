@@ -8,11 +8,19 @@
   padding: 0.4rem 2rem;
 }
 
-.linkSpan {
+.linkGroups,
+.linkChat {
   height: 3rem;
   text-align: center;
-  padding-top: 0.5rem;
   color: #223172;
+}
+
+.linkGroups {
+  padding: 0.5rem 0 0 1rem;
+}
+
+.linkChat {
+  padding: 0.5rem 0;
 }
 
 .individual-group-page {
@@ -192,7 +200,7 @@
 }
 
 .individual-group-page .line-left {
-  height: 100%;
+  height: 102vh;
   left: 0;
   position: absolute;
   top: 0;
@@ -201,11 +209,11 @@
 
 .individual-group-page .middle-section {
   background-color: var(--desert-storm);
-  height: 100vh;
+  height: 102vh;
   left: 1px;
   position: absolute;
   top: 0;
-  width: 84vw;
+  width: 82vw;
 }
 
 .individual-group-page .overlap-group3 {
@@ -223,7 +231,7 @@
   left: 2px;
   position: absolute;
   top: 0;
-  width: 22vw;
+  width: 19vw;
 }
 
 .individual-group-page .member-3 {
@@ -250,7 +258,7 @@
   margin-bottom: 1.3px;
   margin-left: 2px;
   text-align: center;
-  width: 182px;
+  width: 9rem;
 }
 
 .individual-group-page .member-2 {
@@ -270,7 +278,7 @@
   margin-bottom: 0.15px;
   margin-left: 18px;
   text-align: center;
-  width: 185px;
+  width: 9rem;
 }
 
 .individual-group-page .member-1 {
@@ -295,7 +303,7 @@
   margin-bottom: 1px;
   margin-left: 2px;
   text-align: center;
-  width: 177px;
+  width: 9rem;
 }
 
 .individual-group-page .line-under-groups {
@@ -303,12 +311,12 @@
   left: 17px;
   position: absolute;
   top: 59px;
-  width: 15.5rem;
+  width: 13.1rem;
 }
 
 .individual-group-page .group-icon {
   height: 30px;
-  left: 14.7rem;
+  left: 12.3rem;
   position: absolute;
   top: 18px;
   width: 30px;
@@ -329,7 +337,7 @@
 }
 
 .individual-group-page .line-right {
-  height: 100vh;
+  height: 102vh;
   left: 46rem;
   position: absolute;
   top: 0;
@@ -343,7 +351,7 @@
   left: 38px;
   position: absolute;
   top: 12px;
-  width: 46.5vw;
+  width: 48.5vw;
   height: 100vh;
   overflow: scroll;
 }

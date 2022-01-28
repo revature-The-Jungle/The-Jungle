@@ -1,4 +1,4 @@
-:root { 
+:root {
   --astronaut: #223172;
   --atomic-tangerine: #f4996a;
   --biscay: #20316ee8;
@@ -16,7 +16,7 @@
   --red: #f70e0e;
   --silver: #c0bfbf;
   --white: #ffffff;
- 
+
   --font-size-l: 20px;
   --font-size-m: 18px;
   --font-size-s: 14px;
@@ -24,7 +24,7 @@
   --font-size-xxl: 24px;
   --font-size-xxxl: 36px;
   --font-size-xxxxl: 48px;
- 
+
   --font-family-now-bold: "Now-Bold", Helvetica;
   --font-family-poppins: "Poppins", Helvetica;
 }
@@ -134,7 +134,7 @@
 .poppins-bold-astronaut-20px {
   color: var(--astronaut);
   font-family: var(--font-family-poppins);
-  font-size: var(--font-size-l);
+  font-size: var(--font-size-m);
   font-style: normal;
   font-weight: 700;
 }
