@@ -4,7 +4,7 @@ from entities.post import Post
 
 
 class LikePostDAO(ABC):
-    
+
     @abstractmethod
-    def like_post(self,post_id:int)-> Post:
+    def like_post(self, post_id: int) -> Post:
         pass

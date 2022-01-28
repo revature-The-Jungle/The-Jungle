@@ -1,6 +1,6 @@
 class User:
     def __init__(self,
-                 user_id: int = 'default',  # primary key
+                 user_id: int = None,  # primary key
                  first_name: str = None,
                  last_name: str = None,
                  email: str = None,
@@ -31,11 +31,6 @@ class User:
             "passcode": self.passcode,
             "user_about": self.user_about,
             "user_birth_date": self.user_birth_date,
-            "user_image_format": self.user_image_format
+            "user_image_format": self.user_image_format,
             }
         return dictionary
-
-    def __str__(self):
-        return f"user_id: {self.user_id},first_name: {self.first_name},last_name: {self.last_name}, " \
-               f"email: {self.email}, username: {self.username}, passcode: ********, user_about: {self.user_about}," \
-               f"user_birth_date: {self.user_birth_date},user_image_format: {self.user_image_format}"
