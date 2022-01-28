@@ -27,23 +27,40 @@
             <div class="username">
               <div class="username-1"><span class="span0">Username </span><span class="span1">*</span></div>
               <div class="overlap-group2">
-                <div class="rectangle-1"></div>
-                <div class="john123">john123</div>
+                <!-- <div class="rectangle-1"> -->
+                  <!-- Input For Username  -->
+                  <input type="text" class="rectangle-1" id="usernameInput" placeholder="Username" maxlength="50">
+                <!-- </div> -->
+                <!-- <div class="john123"></div> -->
+              </div>
+              <div class="overlap-group6">
+                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
+                <!-- INVALID MESSAGE ICON Will appear with invalid message-->
+                <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> <!-- INVALID MESSAGE CONTAINER -->
               </div>
             </div>
             <div class="password">
               <div class="password-1">Password *</div>
-              <div class="password-rectangle"></div>
+              <!-- <div class="password-rectangle"></div> -->
+              <!--   Input for Password    -->
+              <input type="password" class ="password-rectangle" id="passcodeInput" placeholder="Password" maxlength="50">
             </div>
-            <div class="overlap-group1">
+            <div class="overlap-group6" id="errorMessageArea">
+              <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
+              <!-- INVALID MESSAGE ICON Will appear with invalid message-->
+              <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> <!-- INVALID MESSAGE CONTAINER -->
+            </div>
+            <!-- <div class="overlap-group1">
               <img class="info-icon" src="img/info-icon@2x.svg" />
               <div class="please-enter-valid-password">Please enter valid password</div>
-            </div>
+            </div> -->
             <div class="dont-have-an-account">
               <span class="span0-1">Don’t have an account? </span><span class="span1-1"><a href="../registrationpage/sign-up.html">Sign Up</a></span>
             </div>
-            <div class="overlap-group"><div class="submit">Submit</div></div>
+            <!-- Submit Button -->
+            <div class="overlap-group"><button id="submitLogin">Submit</button></div>
           </div>
+          <p id="errorMessageGoesHere"></p>
         </div>
         <div class="overlap-group4">
           <img class="wave-shape" src="img/wave-shape@1x.svg" />
@@ -52,4 +69,5 @@
       </div>
     </div>
   </body>
+  <script src="login.js"></script>
 </html>

@@ -28,6 +28,7 @@ public class UserServiceTests {
     static List<User> newList;
     static ArrayList<User> anotherList = new ArrayList<>();
     static User badPasscode;
+    static User otherProfile;
     static User blankSpaces;
     static User duplicateEmailUser;
 
@@ -41,6 +42,7 @@ public class UserServiceTests {
         badPasscode = new User(0, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILove", "Wrong", "I enjoy the wrestling life", date, "image");
         userProfile2 = new User(1, "Razor", "Ramon", "iwrestleforaliving@gmail.com", "ILoveToWrestle", "MySimplePasscode", "I enjoy the wrestling life", date, "image");
         returnedProfile = new User(2, "Solomon", "Grundy", "solomon@gmail.com", "BornOnMonday", "Tuesday", "I have a poem", date, "image");
+        otherProfile = new User(3, "Solomon", "Grundy", "solomon@gmail.com", "BornOnMonday", "Tuesday", "I have a poem", date, "image");
         badUsername = new User(0, "Solomon", "Grundy", "solomon@gmail.com", "IAmSolomonGrundy", "Tuesday", "I have a poem", date, "image");
         duplicateUsername = new User(0, "Dup", "Testing", "dup@email.com", "username", "password", "I like social media.", date, "imagesrc");
         usernameSpaces = new User(0, "User", "Testing", "space@email.com", "user name", "password", "I like social media.", date, "imagesrc");
@@ -50,6 +52,7 @@ public class UserServiceTests {
         blankSpaces = new User(0, "Test", "", "email@testemail.com", "", "", "Social media is fun.", date, "imagesrc");
         duplicateEmailUser = new User(0, "Dup", "Testing", "testingemail@gmail.com", "avoihoih", "password", "I like social media.", date, "imagesrc");
     }
+
 
 
 //  ------------------------------------ MOCK TESTS ----------------------------------------
