@@ -16,8 +16,6 @@ class CreatePostServiceImp(CreatePostService):
     def create_post_service(self, post: Post) -> Post:
         """Method to check the input then send the post to the data access layer."""
 
-        # Check to see if the post is empty.
-
         # Check to make sure the user_id is an integer
         if not str(post.user_id).isnumeric():
             raise UserIdMustBeAnInteger('The user id must be an integer.')

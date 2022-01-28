@@ -76,11 +76,14 @@ async function createPostWithImage() {
         alert("File Error")//need to replace this alert method later
       }
     }, false);
-  
+    
     if (file) {
       reader.readAsDataURL(file);
-    }else{ // if there is no file put in, then the post is sent with the simpler method
+    }else if (document.getElementById("postText")){ // if there is no file put in, then the post is sent with the simpler method as long as there is text
       createPost()
+    }else{
+      alert("No Post entered.")//need to replace this alert method later
     }
+    
     document.getElementById("createPostForm").reset();//because I don't know how to use PHP
   }
