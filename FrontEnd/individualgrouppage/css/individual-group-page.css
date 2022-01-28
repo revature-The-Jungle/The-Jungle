@@ -192,7 +192,7 @@
 }
 
 .individual-group-page .line-left {
-  height: 720px;
+  height: 100%;
   left: 0;
   position: absolute;
   top: 0;
@@ -209,7 +209,7 @@
 }
 
 .individual-group-page .overlap-group3 {
-  height: 677px;
+  height: 93%;
   left: 48rem;
   position: absolute;
   top: 18px;
@@ -223,7 +223,7 @@
   left: 2px;
   position: absolute;
   top: 0;
-  width: 27vw;
+  width: 22vw;
 }
 
 .individual-group-page .member-3 {
