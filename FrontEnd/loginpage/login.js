@@ -9,13 +9,7 @@ let invalidMessage = document.querySelectorAll("[id='signup-invalid-message']");
 const url = "http://localhost:8080";
 let validateCounter = 0;
 
-// function displayErrorMessage(errorMessage, container, shown) {
-//     shown = true;
-//     const div = document.getElementById("errorMessageGoesHere");
-//     message.textContent = errorMessage;
-//     // div.appendChild(message);
-//     // setTimeout(deleteMessage, 500, shown);
-// }
+
 const div = document.getElementById("errorMessageGoesHere");
 div.textContent = "";
 
