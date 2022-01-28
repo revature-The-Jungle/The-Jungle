@@ -1,5 +1,5 @@
-let userId = 9000;
-let postId = 273;
+let userId = 9000; // temporary 
+let postId = 273; // temporary
 
 // this is just a proof of concept and does not contain styling elements of the finished code
 //assuming you are getting all the posts at once, this method will have to be called individually in a for loop for each post
@@ -19,7 +19,6 @@ async function getPostImage(){// the postId and imageFormat will probably have t
       document.getElementById("postImage").appendChild(image_Element);// also the element id will have to be dynamically created for each post so that the image is placed on the correct post
   }
 }
-getPostImage()
 
 
 
@@ -83,4 +82,5 @@ async function createPostWithImage() {
     }else{ // if there is no file put in, then the post is sent with the simpler method
       createPost()
     }
+    document.getElementById("createPostForm").reset();//because I don't know how to use PHP
   }
