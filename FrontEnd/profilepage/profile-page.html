@@ -69,14 +69,23 @@
               <img class="x-icon" src="img/logout-icon@2x.svg" />
             </div>
           </div>
+
           <div class="about-me">
-            <img class="user-avatar" src="img/user-avatar@2x.png" />
+            <img class="user-avatar" id = "userImage">
+              <div>
+              <form>
+                      <input class="chooseuserimagebutton" type="file" id="imageFile">
+                      <button type="button" class="changeuserimagebutton" onclick="createUserWithImage()">Change Image</button>
+              </form>
+              </div>
+            </div>
             <div class="user-name valign-text-middle poppins-bold-cape-cod-18px">Scarlett Johansson</div>
             <div class="flex-row-1">
               <div class="birthday valign-text-middle">DOB - Jan. 1st</div>
               <img class="line-1" src="img/line-1@2x.svg" />
               <div class="username valign-text-middle">@Scar_Jo12</div>
             </div>
+
             <div class="flex-col">
               <div class="edit-container">
                 <div class="edit-profile valign-text-middle">Edit Profile</div>
@@ -123,4 +132,6 @@
       </div>
     </div>
   </body>
+  <!-- HTML user profile image src -->
+  <script src="userprofileimage-vfh.js"></script>
 </html>
