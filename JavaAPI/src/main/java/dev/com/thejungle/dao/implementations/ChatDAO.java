@@ -50,7 +50,7 @@ public class ChatDAO implements ChatDAOInt {
                 String sql = "select chat_id, chat_date, clt.user_id, ut.username, group_id, chat_content from chat_log_table clt " +
             "inner join user_table ut on ut.user_id = clt.user_id " +
             "where clt.chat_date >= now() - interval '5 minutes' and group_id = ? " +
-                        "order by asc";
+                        "order by chat_id asc";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, groupId);
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -83,7 +83,7 @@ public class ChatDAO implements ChatDAOInt {
             String sql = "select chat_id, chat_date, clt.user_id, ut.username, group_id, chat_content from chat_log_table clt " +
                     "inner join user_table ut on ut.user_id = clt.user_id " +
                     "where clt.chat_date >= now() - interval '5 minutes' and group_id = null " +
-                    "order by asc";
+                    "order by chat_id asc";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             ArrayList<ChatMessage> chatMessages = new ArrayList<>();

@@ -140,38 +140,6 @@ public class UserDAO implements UserDAOInt {
     }
 
     /**
-     * connects to the database to search for Users using username and retrieve its results
-     * @param username username to search by
-     * @return ArrayList of Users matching the search result
-     */
-    @Override
-    public ArrayList<User> searchForUser(String username) {
-        try (Connection connection = ConnectionDB.createConnection()) {
-            String sql = "select * from user_table where username ilike ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, "%" + username + "%");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            ArrayList<User> users = new ArrayList<>();
-            while (resultSet.next()) {
-                users.add(
-                        new User(
-                                resultSet.getInt("user_Id"),
-                                resultSet.getString("first_name"),
-                                resultSet.getString("last_name"),
-                                resultSet.getString("email"),
-                                resultSet.getString("username"),
-                                resultSet.getDate("user_birth_date").getTime()
-                        )
-                );
-            }
-            return users;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
      * connects to the database to retrieve all existing Users
      * @return List of Users
      */
