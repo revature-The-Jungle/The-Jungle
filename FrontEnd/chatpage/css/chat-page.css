@@ -200,6 +200,8 @@
   align-items: flex-end;
   background-image: url(../img/chat-rectangle@1x.svg);
   background-size: 100% 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   margin-right: 2px;
@@ -207,6 +209,8 @@
   min-height: 824px;
   padding: 24px 12px;
   width: 600px;
+  height: calc(50vh - 40px);
+  position: relative;
 }
 
 .chat-page .received-message-1 {
@@ -361,8 +365,16 @@
   align-items: flex-start;
   display: flex;
   margin-right: 6px;
-  margin-top: 85px;
+  margin-top: 0px;
   min-width: 552px;
+}
+
+.chat-page .input-box{
+  border: none;
+  border-color: transparent;
+  outline: none;
+  height: 45px;
+  min-width: 430px;
 }
 
 .chat-page .overlap-group {

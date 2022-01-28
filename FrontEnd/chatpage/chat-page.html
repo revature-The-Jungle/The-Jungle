@@ -47,7 +47,7 @@
                 </div>
                 <img class="line-under-search" src="img/line-under-search-1@1x.svg" />
               </div>
-              <div class="chat-box">
+              <div class="chat-box" id="chat">
                 <div class="received-message-1">
                   <img class="ellipse-1" src="img/ellipse-1@2x.png" />
                   <div class="overlap-group6">
@@ -60,49 +60,21 @@
                   <div class="check-the-documentation valign-text-middle poppins-medium-white-18px">
                     Check the documentation.
                   </div>
+                </div>               
+              </div>
+              <div class="flex-row-1">
+                <div class="overlap-group">
+                  <div class="write-a-message valign-text-middle"><input class="input-box" type="text" id="message" placeholder="Write a Message... "></div>
                 </div>
-                <div class="received-message-2">
-                  <img class="ellipse-1" src="img/ellipse-1@2x.png" />
-                  <div class="overlap-group4">
-                    <div class="what-are-the-naming-conventions valign-text-middle poppins-medium-black-18px">
-                      What are the naming conventions?
-                    </div>
-                  </div>
-                </div>
-                <div class="overlap-group3">
-                  <div class="check-the-documentation valign-text-middle poppins-medium-white-18px">
-                    Check the documentation.
-                  </div>
-                </div>
-                <div class="received-message-3">
-                  <img class="ellipse-1" src="img/ellipse-1@2x.png" />
-                  <div class="overlap-group2">
-                    <div class="im-not-seeing-the-updates valign-text-middle poppins-medium-black-18px">
-                      Im not seeing the updates
-                    </div>
-                  </div>
-                </div>
-                <div class="overlap-group1">
-                  <div class="check-the-documentation valign-text-middle poppins-medium-white-18px">
-                    Check the documentation.
-                  </div>
-                </div>
-                <div class="flex-row-1">
-                  <div class="overlap-group">
-                    <div class="write-a-message valign-text-middle">Write a Message...</div>
-                  </div>
-                  <div class="send-button"><img class="send-icon" src="img/send-icon@2x.svg" /></div>
-                </div>
+                <button class="send-button" id="send"><img class="send-icon" src="img/send-icon@2x.svg" /></button>
               </div>
             </div>
             <img class="line-right" src="img/line-right@1x.svg" />
             <div class="overlap-group-container">
               <div class="overlap-group1-1">
-                <div class="x-rectangle" style="overflow: auto;"></div>
-                  <div id="chatGroupName" class="chatGroupName" onclick="createChatConnection()">
-                  
-                  </div>
-                  <!-- <img class="friend" src="img/friend-3@2x.png" />
+                <div class="x-rectangle"></div>
+                <div class="friend-3">
+                  <img class="friend" src="img/friend-3@2x.png" />
                   <div class="name valign-text-middle poppins-bold-astronaut-22px">Karen Gillan</div>
                 </div>
                 <div class="friend-2">
@@ -113,7 +85,7 @@
                   <img class="friend" src="img/friend-1@2x.png" />
                   <div class="briel-larson valign-text-middle poppins-bold-astronaut-22px">Briel Larson</div>
                 </div>
-                <img class="friends-icon" src="img/friends-icon@2x.svg" /> -->
+                <img class="friends-icon" src="img/friends-icon@2x.svg" />
                 <div class="friends valign-text-middle">Chats</div>
                 <img class="line" src="img/line@2x.svg" />
               </div>
@@ -137,7 +109,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="js/chat-page.js"></script>
     <script src="js/uludag.js"></script>
   </body>
 </html>
