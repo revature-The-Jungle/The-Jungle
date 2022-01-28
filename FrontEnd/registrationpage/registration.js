@@ -240,8 +240,8 @@ async function registerUser(event){
         window.location.href = "../profilepage/profile-page.html";
         console.log(registeredUserBody);
     }
-    else {
-        console.log("Not working!");
+    else if(response.status === 400) {
+        console.log(response.status);
     }
 }
 
