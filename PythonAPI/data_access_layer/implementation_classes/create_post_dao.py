@@ -2,8 +2,8 @@ from custom_exceptions.post_image_not_found import PostImageNotFound
 from custom_exceptions.post_not_found import PostNotFound
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.abstract_classes.create_post_dao_abs import CreatePostDAO
-from util.database_connection import connection
 from entities.post import Post
+from util.database_connection import connection
 
 
 class CreatePostDAOImp(CreatePostDAO):
@@ -16,6 +16,8 @@ class CreatePostDAOImp(CreatePostDAO):
         cursor.execute(sql, {"user_id": post.user_id})
         if not cursor.fetchone():
             raise UserNotFound('The user could not be found.')
+
+        # Check to see if the post is empty.
 
         # Create the post.
         sql = "insert into post_table values(default, %s, NULL, %s, %s, 0, default) returning post_id"
