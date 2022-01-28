@@ -235,13 +235,18 @@ async function registerUser(event){
              "userAbout":"",
              "userBirthdate":userBirthdate,
              "imageFormat":""}) });
+
+    let registeredUserBody = await response.json();
+
     if(response.status === 201){
-        let registeredUserBody = await response.json();
+        // let registeredUserBody = await response.json();
         window.location.href = "../profilepage/profile-page.html";
         console.log(registeredUserBody);
     }
-    else if(response.status === 400) {
-        console.log(response.status);
+    else {
+        let error = registeredUserBody.errorMessage;
+        invalidIcon[7].style.display = "none";
+        invalidMessage[7].textContent = error;
     }
 }
 
