@@ -14,7 +14,8 @@
     />
     <link rel="stylesheet" type="text/css" href="css/styleguide.css" />
     <link rel="stylesheet" type="text/css" href="css/globals.css" />
-    <script src="../group_junction.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
     <title>Individual Group Page</title>
   </head>
   <body style="margin: 0; background: #ffffff">
@@ -67,7 +68,7 @@
         <div class="overlap-group4">
           <img class="line-left" src="img/line-left@1x.svg" />
           <div class="middle-section"></div>
-          <div id="memList" class="overlap-group3">
+          <div class="overlap-group3">
             <div class="group-rectangle"></div>
             <div class="member-3">
               <img class="member" src="img/member-3@2x.png" />
@@ -83,7 +84,7 @@
                 Elizabeth Olson
               </div>
             </div>
-            <div id="members" class="member-1">
+            <div class="member-1">
               <img class="member-1-1" src="img/member-1@2x.png" />
               <div
                 class="briel-larson valign-text-middle poppins-bold-astronaut-20px"
@@ -97,14 +98,24 @@
           </div>
           <img class="line-right" src="img/line-left@1x.svg" />
           <div class="feed-section">
+
+            <!-- -------------------------------------- Post Input Area----------------------------------------------- -->
             <div class="overlap-group3-1">
               <div class="feed-container">
-                <div class="feed valign-text-middle">Feed</div>
+                <div class="feed valign-text-middle">
+                  <textarea placeholder="What's on your mind?" id="postInput"></textarea>
+                </div>
                 <img class="feed-button" src="img/feed-button@2x.svg" />
+                <button id="sendGroupPostButton">Send</button>
               </div>
               <img class="line-under-feed" src="img/line-under-feed@2x.svg" />
+              
             </div>
-            <div class="overlap-group1">
+
+            <p id="postInfo"></p>
+            <p id="allpost"></p>
+
+            <!-- <div class="overlap-group1">
               <div class="flex-row">
                 <div class="overlap-group">
                   <div
@@ -132,7 +143,6 @@
                   src="img/chat-bubble-icon@2x.svg"
                 />
                 <img class="share-icon" src="img/share-icon@2x.svg" />
-                <img class="bookmark-icon" src="img/bookmark-icon@2x.svg" />
               </div>
               <div class="overlap-group2">
                 <div
@@ -146,8 +156,10 @@
                   JostSNL21
                 </div>
               </div>
-            </div>
-            <div class="overlap-group-1">
+            </div> -->
+            
+
+            <!-- <div class="overlap-group-1">
               <div class="rectangle-2"></div>
               <img class="feed-picture-2" src="img/feed-picture-2@2x.svg" />
               <img class="three-dots-icon-1" src="img/three-dots-icon@2x.svg" />
@@ -162,10 +174,46 @@
                 Erod321
               </div>
               <img class="feed-avatar-1" src="img/feed-avatar@2x.png" />
-            </div>
+            </div> -->
+<!-- -----------------------------------------------------------MY CHANGES-------------------------------------- -->
+<div class="overlap-group1">
+  <div class="flex-row">
+    <div class="overlap-group">
+      
+      <div
+        class="username-1 valign-text-middle poppins-bold-cape-cod-20px"
+      >
+        JostSNL21
+      </div>
+      <img class="feed-avatar" src="img/feed-avatar-1@2x.png" />
+    </div>
+    <img
+      class="three-dots-icon"
+      src="img/three-dots-icon-1@2x.svg"
+    />
+  </div>
+  <div class="overlap-group2">
+    <div
+      class="feed-text-2 valign-text-middle poppins-medium-black-18px" id="postInfo"
+    >
+      Post Info here
+    </div>
+  </div>
+  <!-- ------------ICON--------------- -->
+  <div class="icon-container">
+    <img class="heart-icon" src="img/heart-icon@2x.svg" />
+    <img
+      class="chat-bubble-icon"
+      src="img/chat-bubble-icon@2x.svg"
+    />
+    <img class="share-icon" src="img/share-icon@2x.svg" />
+  </div>
+</div>
+
           </div>
         </div>
       </div>
     </div>
+    <script src="../group_post.js"></script>
   </body>
 </html>

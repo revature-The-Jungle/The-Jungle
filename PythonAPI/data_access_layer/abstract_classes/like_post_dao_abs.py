@@ -8,3 +8,7 @@ class LikePostDAO(ABC):
     @abstractmethod
     def like_post(self, post_id: int) -> Post:
         pass
+
+    @abstractmethod
+    def like_comment(self, comment_id : int) :
+        pass
