@@ -186,47 +186,38 @@ function validateRepeatPassword(password){
 
 
 
-// let jsonUserObject = {
-//     firstName: "",
-//     lastName: "",
-//     email: "",
-//     username: "",
-//     passcode: "",
-//     userBirthdate: 0
-// };
-
-
 // ROUTE TO REGISTER/CREATE USER
 signupSubmitButton.addEventListener("click", registerUser);
 async function registerUser(){
+    let userFirstName = jsonUserObject.firstName;
+    let userLastName = jsonUserObject.lastName;
+    let userEmail = jsonUserObject.email;
+    let userUsername = jsonUserObject.username;
+    let userPasscode = jsonUserObject.passcode;
+    let userBirthdate = jsonUserObject.userBirthdate;
     const registerRoute = "http://localhost:8080/user/registration";
+    let response = await fetch(registerRoute, {
+        headers:{'Content-Type':'application/json'},
+        method:["POST"],
+        body:JSON.stringify(
+            {"userId":0,
+             "firstName":userFirstName,
+             "lastName":userLastName,
+             "email":userEmail,
+             "username":userUsername,
+             "passcode":userPasscode,
+             "userAbout":"",
+             "userBirthdate":userBirthdate,
+             "imageFormat":""}) });
+    if(response.status === 201){
+        let registeredUserBody = await response.json();
+        // window.location.replace.href = "../loginpage/login.html";
+        console.log(registeredUserBody);
+    }
+    else {
+        console.log("Not working!");
+    }
 }
-
-// async function createMedia(){
-//     let mediaType = document.getElementById("media-type");
-//     let mediaTitle = document.getElementById("media-title");
-
-//     const createRoute = "http://localhost:8080/newMedia";
-//     let response = await fetch(createRoute, {headers:{'Content-Type':'application/json'}, method:["POST"], body:JSON.stringify({"mediaId":0, 
-//                     "title":mediaTitle.value, 
-//                     "creator":mediaCreator.value, 
-//                     "synopsis":mediaSynopsis.value, 
-//                     "mediaType": mediaType.value, 
-//                     "genre":mediaGenre.value, 
-//                     "status":false, 
-//                     "userId": sessionStorage.getItem("webUserId")}) });
-//     if(response.status == 201){
-//         let createdMediaBody = await response.json();
-//         mediaType.value = '';
-//         mediaTitle.value = '';
-//         mediaCreator.value = '';
-//         mediaGenre.value = '';
-//         mediaSynopsis.value = '';
-//         submitMessage.textContent = 'Your media has been added and is awaiting approval.';
-//     } else {
-//         submitMessage.textContent = 'There was an issue. Your media was not added.';
-//     };
-// };
 
 
 
