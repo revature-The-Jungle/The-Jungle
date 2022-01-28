@@ -468,11 +468,8 @@
 }
 
 .profile-page .edit-icon {
-  height: 24px;
-  left: 19px;
-  position: absolute;
-  top: 6px;
-  width: 24px;
+    left: 52px;
+    position: absolute;
 }
 
 .profile-page .line-under-search-1 {
@@ -581,7 +578,21 @@
   position: absolute;
   top: 61px;
   width: 359px;
+  overflow: scroll;
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.profile-page .overlap-group9::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.profile-page .overlap-group9 {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
 
 .profile-page .chat-rectange {
   background-color: var(--white);
@@ -717,12 +728,34 @@
 }
 
 .profile-page .edit-button{
-  color: #fff;
-  background-color: #f47635;
-  border-color: #f47635;
+  color: var(--atomic-orange);
+  background-color: white;
+  border-color: var(--atomic-orange);
   border-radius: 10px;
+  font-family: var(--font-family-poppins);
+  margin: 1.7rem 0 0 0;
+  padding: 0.4rem 0.2rem 0.4rem 1rem;
 }
 
 .profile-page #updateProfileEditProfileBtn{
   width: 100%;
 }
+
+.profile-page .follower-in-list{
+  height: 40px;
+  min-width: 221px;
+  max-width: 9rem;
+  align-items: center;
+  display: flex;
+  margin: 10px 0px 35px 15px;
+}
+
+.profile-page .followers-div{
+  width: 326px;
+  height: 280px;
+  position: absolute;
+  top: 95px;
+  left: 17px;
+}
+
+
