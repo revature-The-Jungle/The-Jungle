@@ -28,18 +28,41 @@
           <div class="overlap-group1">
             <div class="flex-row">
 
-              <!-- create post form -->
-              <!-- Used the row system from bootstrap to fill the area. -->
-              <form class = "row" id = "createPostForm">
-                <div class="mb-3">
-                  <textarea id="postText" class="form-control"></textarea>
-                </div>
-                <div class="mb-3">
-                    <input class="form-control" type="file" id="imageFile">
+              <!-- create post modal form -->
+              <!-- Edit Profile Button and Modal -->
+              <button id="updateProfileEditProfileBtn" type="button" class="btn edit-button" data-bs-toggle="modal" data-bs-target="#myModal">
+                <img src="img/Edit_Icon.png" alt="edit-icon" class="edit-icon"/> Create A New Post
+              </button>
+
+              <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="updateUserProfileModalTitle">Create A Post</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="resetProfileModalData()">
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form class="row" id="createPostForm">
+                        <div class="mb-3">
+                          <textarea id="postText" class="form-control"></textarea>
+                        </div>
+                        <div class="mb-3">
+                          <input class="form-control" type="file" id="imageFile" class="btn edit-button">
+                        </div>
+                        <button type="button" class="btn edit-button" onclick="createPostWithImage()">Create</button>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <div id="profileModalMsg">
+                      </div>
+                    </div>
                   </div>
-                <button type="button" class="edit-button" onclick="createPostWithImage()">Create Post</button>
-              </form>
-              <!-- create post form  end -->
+                </div>
+              </div>
+              <!-- end create post modal form -->
+
 
             </div>  
           </div>

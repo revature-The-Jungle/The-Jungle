@@ -17,8 +17,6 @@ class CreatePostDAOImp(CreatePostDAO):
         if not cursor.fetchone():
             raise UserNotFound('The user could not be found.')
 
-        # Check to see if the post is empty.
-
         # Create the post.
         sql = "insert into post_table values(default, %s, NULL, %s, %s, 0, default) returning post_id"
         cursor = connection.cursor()
