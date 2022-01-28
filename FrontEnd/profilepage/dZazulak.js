@@ -2,6 +2,7 @@ const userBirthDate = document.getElementById("userBirthdateInput");
 const userAboutMe = document.getElementById("userAboutMeInput");
 const modalMessageDiv = document.getElementById("profileModalMsg");
 const followerSectionDiv = document.getElementById("followers-div");
+const groupSectionDiv = document.getElementById("groups-div");
 
 /*
     Grabs the user profile information from the update profile modal and sends it through the layers
@@ -103,4 +104,39 @@ function populateUserFollowers(followerBody){
     }
 }
 
+async function getGroupsForUser(){
+    let url = "http://127.0.0.1:5000/group/user/10"
+
+    let response = await fetch(url);
+
+    if(response.status === 200){
+        let body = await response.json();
+        console.log(body);
+        populateGroupsForUsers(body);
+    }
+    else{
+        alert("Error with groups");
+    }
+}
+
+function populateGroupsForUsers(groupBody){
+    for (let group in groupBody){
+        let groupsDiv = document.createElement("div");
+        groupsDiv.setAttribute("class", "group-in-list");
+
+        let groupImage = document.createElement("img");
+        groupImage.setAttribute("class", "friend");
+
+        let groupNameDiv = document.createElement("div");
+        groupNameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
+        groupNameDiv.innerHTML = groupBody[group].groupName;
+
+        groupSectionDiv.appendChild(groupsDiv);
+        groupsDiv.appendChild(groupImage);
+        groupsDiv.appendChild(groupNameDiv);
+
+
+    }
+}
 getUserFollowers();
+getGroupsForUser();
