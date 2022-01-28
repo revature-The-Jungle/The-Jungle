@@ -20,13 +20,13 @@ from custom_exceptions.user_image_not_found import UserImageNotFound
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.implementation_classes.comment_dao import CommentDAOImp
 from data_access_layer.implementation_classes.create_post_dao import CreatePostDAOImp
+from data_access_layer.implementation_classes.group_dao import GroupDAOImp
 from data_access_layer.implementation_classes.group_member_junction_dao import GroupMemberJunctionDao
 from data_access_layer.implementation_classes.group_post_dao import GroupPostDAO
 from data_access_layer.implementation_classes.group_view_postgres_dao import GroupViewPostgresDao
 from data_access_layer.implementation_classes.like_post_dao import LikePostDaoImp
 from data_access_layer.implementation_classes.postfeed_dao import PostFeedDaoImp
 from data_access_layer.implementation_classes.user_profile_dao import UserProfileDAOImp
-from data_access_layer.implementation_classes.group_dao import GroupDAOImp
 from entities.group import Group
 from entities.group_post import GroupPost
 from entities.post import Post
@@ -36,10 +36,10 @@ from service_layer.implementation_classes.create_post_service import CreatePostS
 from service_layer.implementation_classes.group_member_junction_service import GroupMemberJunctionService
 from service_layer.implementation_classes.group_post_service import GroupPostService
 from service_layer.implementation_classes.group_postgres_service import GroupPostgresService
+from service_layer.implementation_classes.group_service import GroupPostgreService
 from service_layer.implementation_classes.like_post_service import LikePostServiceImp
 from service_layer.implementation_classes.postfeed_service import PostFeedServiceImp
 from service_layer.implementation_classes.user_profile_service import UserProfileServiceImp
-from service_layer.implementation_classes.group_service import GroupPostgreService
 
 logging.basicConfig(filename="records.log", level=logging.DEBUG,
                     format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
@@ -54,8 +54,6 @@ def on():
     return "python is running"
 
 
-like_post_dao = LikePostDaoImp()
-like_post_service = LikePostServiceImp(like_post_dao)
 create_post_dao = CreatePostDAOImp()
 create_post_service = CreatePostServiceImp(create_post_dao)
 user_profile_dao = UserProfileDAOImp()
@@ -69,7 +67,9 @@ post_feed_service = PostFeedServiceImp(post_feed_dao)
 comment_dao = CommentDAOImp()
 comment_service = CommentServiceImp(comment_dao)
 group_dao = GroupDAOImp()
-group_service2 = GroupPostgreService(group_dao)
+group_service2 = GroupPostgreService(group_dao, group_view_dao)  # Possibly need to clean up the code.
+like_post_dao = LikePostDaoImp()
+like_post_service = LikePostServiceImp(like_post_dao)
 
 
 @app.get("/user/<user_id>")
@@ -321,8 +321,8 @@ def get_all_posts():
 def delete_a_post():
     try:
         data = request.get_json()
-        post_id = data["post_id"]
-        boolean = post_feed_service.delete_a_post_service(post_id)
+        postid = data["postId"]
+        boolean = post_feed_service.delete_a_post_service(postid)
         return jsonify(boolean)
     except ConnectionErrorr as e:
         return str(e), 400
@@ -332,17 +332,27 @@ def delete_a_post():
 def add_likes_to_post():
     try:
         data = request.get_json()
-        post_id = data["post_id"]
-        return jsonify(like_post_service.service_like_post(post_id))
-    except ConnectionErrorr as e:
-        return str(e), 400
+        postid = data["postId"]
+        return jsonify(like_post_service.service_like_post(postid))
+    except TypeError:
+        return ("post not found!"), 400
+
+
+@app.post("/postfeed/comment")
+def add_likes_to_comment():
+    try:
+        data = request.get_json()
+        commentid = data["commentId"]
+        return jsonify(like_post_service.service_like_comment(commentid))
+    except TypeError:
+        return ("comment not found"), 400
 
 
 # delete comment information
 @app.delete("/Comments")
 def delete_comment():
     data = request.get_json()
-    comment_id = data["commentid"]
+    comment_id = data["commentId"]
     jsonify(comment_service.service_delete_comment(comment_id))
     return "Comment with id {} was deleted successfully".format(comment_id)
 
@@ -389,12 +399,12 @@ def create_group_post():
         post_data = request.get_json()
         new_post = GroupPost(
             0,
-            int(post_data["userId"]),
-            int(post_data["groupId"]),
-            post_data["postText"],
-            post_data["imageFormat"],
+            int(post_data["user_id"]),
+            int(post_data["group_id"]),
+            post_data["post_text"],
+            post_data["image_data"],
             int(post_data["likes"]),
-            post_data["dateTimeOfCreation"]
+            post_data["date_time_of_creation"]
         )
         post_to_return = group_post_service.service_create_post(new_post)
         post_as_dictionary = post_to_return.make_dictionary()

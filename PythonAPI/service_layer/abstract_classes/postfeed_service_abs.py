@@ -9,5 +9,9 @@ class PostfeedService(ABC):
         pass
 
     @abstractmethod
-    def delete_a_post_service(self, post_id :int):
+    def get_all_posts_by_groupid_service(self, groupid: int):
+        pass
+
+    @abstractmethod
+    def delete_a_post_service(self, postid :int):
         pass
