@@ -9,6 +9,11 @@ import java.util.ArrayList;
 
 public class ChatDAO implements ChatDAOInt {
 
+    /**
+     * connects to database to create a new ChatMessage
+     * @param chatMessage Object that contains information of the chat sent by the user
+     * @return ChatMessage that was created in the database
+     */
     @Override
     public ChatMessage createMessage(ChatMessage chatMessage) {
         try (Connection connection = ConnectionDB.createConnection()) {
@@ -35,7 +40,7 @@ public class ChatDAO implements ChatDAOInt {
 
     /**
      * connects to database to retrieve messages from 5 minutes ago in group chat
-     * @param groupId
+     * @param groupId id of group
      * @return ArrayList of ChatMessage objects from 5 minutes ago in group chat room
      * Will return empty ArrayList if no messages
      */

@@ -1,8 +1,11 @@
 package dev.com.thejungle.app.app;
 
 import dev.com.thejungle.app.appcontroller.appcontroller.AppController;
+import dev.com.thejungle.app.appcontroller.controllers.ChatController;
 import dev.com.thejungle.app.appcontroller.controllers.UserController;
+import dev.com.thejungle.dao.implementations.ChatDAO;
 import dev.com.thejungle.dao.implementations.UserDAO;
+import dev.com.thejungle.service.implementations.ChatService;
 import dev.com.thejungle.service.implementations.UserService;
 import io.javalin.Javalin;
 
@@ -14,20 +17,21 @@ public class App {
             config.enableDevLogging();
         });
 
-        AppController appController = new AppController();
+        // Chat Controller
+        ChatDAO chatDAO = new ChatDAO();
+        ChatService chatService = new ChatService(chatDAO);
+        ChatController chatController = new ChatController(chatService);
 
-        app.ws("/chat/{id}", appController.chatController::connectToWebSocket);
-
-        // Dependency injection for DAO and service layer
+        // User Controller
         UserDAO userDAO = new UserDAO();
         UserService userService = new UserService(userDAO);
         UserController userController = new UserController(userService);
 
-        // User Routes
-        app.get("/user/{username}", userController.getUserByUsername);
-        app.get("/users", userController.getAllUsers);
-        app.post("/user/login", userController.loginUser);
-        app.get("/user/group/{userId}", userController.getGroups);
+        // App Controller
+        AppController appController = new AppController(app, chatController, userController);
+
+        appController.createChatRoutes();
+        appController.createUserRoutes();
 
         app.start();
     }
