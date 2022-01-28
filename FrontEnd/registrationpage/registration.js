@@ -14,6 +14,7 @@ let validateCounter = 0;
 
 const specialChar1 = /[ `!@#$%^&*()_+=\[\]{};':"\\|,.<>\/?~]/;
 const specialChar2 = /[ `^*()+=\[\]{};':"\\|,<>\/~]/;
+const emailChar = /[@.]/;
 
 let jsonUserObject = {
     firstName: "",
@@ -43,7 +44,11 @@ function validateFirstName(){
             invalidMessage[0].textContent = '';
             jsonUserObject.firstName = signupFirstName.value;
             validateCounter = validateCounter + 1;
+            console.log(validateCounter);
             // console.log(jsonUserObject.firstName);
+            if(validateCounter > 5){
+                signupSubmitButton.disabled = false;
+            }
         }
     });
 };
@@ -66,7 +71,11 @@ function validateLastName(){
             invalidMessage[1].textContent = '';
             jsonUserObject.lastName = signupLastName.value;
             validateCounter = validateCounter + 1;
+            console.log(validateCounter);
             // console.log(jsonUserObject.lastName);
+            if(validateCounter > 5){
+                signupSubmitButton.disabled = false;
+            }
         }
     });
 };
@@ -84,12 +93,20 @@ function validateEmail(){
             invalidIcon[2].style.display = "";
             invalidMessage[2].textContent = 'Cannot contain spaces or special characters: `^*()+=[]{}"<>~|;:';
         }
+        else if (!emailChar.test(signupEmail.value)) {
+            invalidIcon[2].style.display = "";
+            invalidMessage[2].textContent = 'This must be an email.';
+        }
         else {
             invalidIcon[2].style.display = "none";
             invalidMessage[2].textContent = '';
             jsonUserObject.email = signupEmail.value;
             validateCounter = validateCounter + 1;
+            console.log(validateCounter);
             // console.log(jsonUserObject.email);
+            if(validateCounter > 5){
+                signupSubmitButton.disabled = false;
+            }
         }
     });
 };
@@ -110,7 +127,11 @@ function validateBirthdate(){
             let userBDay = new Date(signupBirthdate.value).getTime();
             jsonUserObject.userBirthdate = userBDay;
             validateCounter = validateCounter + 1;
+            console.log(validateCounter);
             // console.log(jsonUserObject.userBirthdate);
+            if(validateCounter > 5){
+                signupSubmitButton.disabled = false;
+            }
         }
     });
 };
@@ -133,7 +154,11 @@ function validateUsername(){
             invalidMessage[4].textContent = '';
             jsonUserObject.username = signupUsername.value;
             validateCounter = validateCounter + 1;
+            console.log(validateCounter);
             // console.log(jsonUserObject.username);
+            if(validateCounter > 5){
+                signupSubmitButton.disabled = false;
+            }
         }
     });
 };
@@ -176,7 +201,7 @@ function validateRepeatPassword(password){
             jsonUserObject.passcode = password;
             validateCounter = validateCounter + 1;
             // console.log(jsonUserObject.passcode);
-            // console.log(validateCounter);
+            console.log(validateCounter);
             if(validateCounter > 5){
                 signupSubmitButton.disabled = false;
             }
@@ -185,10 +210,11 @@ function validateRepeatPassword(password){
 };
 
 
-
 // ROUTE TO REGISTER/CREATE USER
 signupSubmitButton.addEventListener("click", registerUser);
-async function registerUser(){
+async function registerUser(event){
+    event.preventDefault();
+    event.stopPropagation();
     let userFirstName = jsonUserObject.firstName;
     let userLastName = jsonUserObject.lastName;
     let userEmail = jsonUserObject.email;
@@ -211,7 +237,7 @@ async function registerUser(){
              "imageFormat":""}) });
     if(response.status === 201){
         let registeredUserBody = await response.json();
-        // window.location.replace.href = "../loginpage/login.html";
+        window.location.href = "../profilepage/profile-page.html";
         console.log(registeredUserBody);
     }
     else {
