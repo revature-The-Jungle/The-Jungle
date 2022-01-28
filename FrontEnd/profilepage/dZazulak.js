@@ -80,16 +80,22 @@ async function getUserFollowers(){
 }
 
 function populateUserFollowers(followerBody){
-    let x = 1;
     for(let follower in followerBody){
+
+        // Created div to hold the image and username div and set class name
         let followerDiv = document.createElement("div");
-        let followerImage = document.createElement("img");
-        let followerUsernameDiv = document.createElement("div");
         followerDiv.setAttribute("class", "follower-in-list");
+
+        // Create the image tag and set class name
+        let followerImage = document.createElement("img");
         followerImage.setAttribute("class", "friend");
-        x++;
+
+        // Created the username div and set the class name and username
+        let followerUsernameDiv = document.createElement("div");
         followerUsernameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
         followerUsernameDiv.innerHTML = follower;
+
+        // Append the created elements to the page
         followerSectionDiv.appendChild(followerDiv);
         followerDiv.appendChild(followerImage);
         followerDiv.appendChild(followerUsernameDiv);

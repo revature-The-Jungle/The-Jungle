@@ -737,6 +737,14 @@
   padding: 0.4rem 0.2rem 0.4rem 1rem;
 }
 
+.profile-page .save-profile-button{
+  color: white;
+  background-color: var(--atomic-orange);
+  border-color: var(--atomic-orange);
+  border-radius: 10px;
+  font-family: var(--font-family-poppins);
+}
+
 .profile-page #updateProfileEditProfileBtn{
   width: 100%;
 }
