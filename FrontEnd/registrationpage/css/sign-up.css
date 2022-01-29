@@ -104,6 +104,7 @@
   width: 165px;
 }
 
+/* Label */
 .labelSize,
 .asterisk {
   font-size: var(--font-size-s);
@@ -113,6 +114,7 @@
   font-weight: 700;
 }
 
+/* Asterisks */
 .asterisk {
   color: var(--red);
   font-family: var(--font-family-poppins);
@@ -134,11 +136,11 @@
 .sign-up .rectangle-1 {
   background-color: var(--white);
   border-radius: 10px;
-  height: 53px;
+  height: 2.5rem;
   left: 8px;
   position: absolute;
   top: 0;
-  width: 460px;
+  width: 26vw;
 }
 
 .sign-up .name {
