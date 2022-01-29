@@ -104,6 +104,20 @@
   width: 165px;
 }
 
+.labelSize,
+.asterisk {
+  font-size: var(--font-size-s);
+  color: var(--cape-cod);
+  font-family: var(--font-family-poppins);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.asterisk {
+  color: var(--red);
+  font-family: var(--font-family-poppins);
+}
+
 .sign-up .span {
   letter-spacing: -0.05px;
 }
