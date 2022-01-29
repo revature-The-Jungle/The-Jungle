@@ -63,16 +63,18 @@
 
 /* *********** Logo (end) *********** */
 
+/* *********** "Form" (begin) *********** */
+
 .sign-up .create-account {
   align-self: center;
   color: var(--cape-cod);
   font-family: var(--font-family-poppins);
-  font-size: var(--font-size-xxl);
+  font-size: var(--font-size-xl);
   font-weight: 700;
   letter-spacing: -0.54px;
   margin-left: 11px;
-  margin-top: 33px;
-  min-height: 54px;
+  margin-top: 0.7rem;
+  min-height: 24px;
   text-align: center;
   width: 472px;
 }
@@ -420,3 +422,5 @@
   top: 1px;
   width: 459px;
 }
+
+/* *********** "Form" (End) *********** */
