@@ -1,11 +1,7 @@
-<<<<<<< HEAD:PythonAPI/data_access_layer/implementation_classes/create_post_dao.py
 from custom_exceptions.post_image_not_found import PostImageNotFound
 from custom_exceptions.post_not_found import PostNotFound
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.abstract_classes.create_post_dao_abs import CreatePostDAO
-=======
-from data_access_layer.abstract_classes.create_post_dao import CreatePostDAO
->>>>>>> origin/mBahrami/Python/post-comments/sp2:PythonAPI/data_access_layer/implementation_classes/create_post_dao_imp.py
 from entities.post import Post
 from util.database_connection import connection
 
@@ -14,8 +10,13 @@ class CreatePostDAOImp(CreatePostDAO):
 
     def create_post(self, post: Post) -> Post:
         """a method to create a post in the database"""
+        # Check to see if the user id is in the database, raise an error otherwise.
+        sql = "select * from user_table where user_id = %(user_id)s;"
+        cursor = connection.cursor()
+        cursor.execute(sql, {"user_id": post.user_id})
+        if not cursor.fetchone():
+            raise UserNotFound('The user could not be found.')
 
-<<<<<<< HEAD:PythonAPI/data_access_layer/implementation_classes/create_post_dao.py
         # Create the post.
         sql = "insert into post_table values(default, %s, NULL, %s, %s, 0, default) returning post_id"
         cursor = connection.cursor()
@@ -77,10 +78,3 @@ class CreatePostDAOImp(CreatePostDAO):
         image = cursor.fetchone()[0]
         image_decoded = image.decode('utf-8')
         return image_decoded
-=======
-        pass
-
-    def create_post_image(self, image: str) -> bool:
-        """a method to place an image into the database"""
-        pass
->>>>>>> origin/mBahrami/Python/post-comments/sp2:PythonAPI/data_access_layer/implementation_classes/create_post_dao_imp.py

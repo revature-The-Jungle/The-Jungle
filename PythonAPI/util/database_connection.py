@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-from psycopg2 import connect, OperationalError
->>>>>>> origin/mBahrami/Python/post-comments/sp2
 import os
 
 from psycopg import connect, OperationalError

@@ -8,11 +8,7 @@ class LikePostServiceImp(LikePostService):
         self.like_post_dao: LikePostDaoImp = like_post_dao
 
     def service_like_post(self, post_id):
-<<<<<<< HEAD:PythonAPI/service_layer/implementation_classes/like_post_service.py
         return self.like_post_dao.like_post(post_id)
 
     def service_like_comment(self, comment_id: int):
         pass
-=======
-        return self.like_post_dao.like_post(post_id)
->>>>>>> origin/mBahrami/Python/post-comments/sp2:PythonAPI/service_layer/implementation_classes/like_post_service_imp.py
