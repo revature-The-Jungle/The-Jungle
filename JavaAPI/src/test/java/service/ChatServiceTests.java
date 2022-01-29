@@ -11,37 +11,12 @@ public class ChatServiceTests {
     ChatService chatService = new ChatService(new ChatDAO());
 
     /**
-     * serviceCreateMessage with invalid userId
+     * serviceCreateMessage with 0 as chatId
      */
-    @Test(expectedExceptions = InvalidInputException.class, expectedExceptionsMessageRegExp = "Invalid User ID")
+
+    @Test(expectedExceptions = InvalidInputException.class, expectedExceptionsMessageRegExp = "Invalid Input Exception")
     public void serviceCreateMessageFailInvalidChatId(){
-        ChatMessage chatMessage = new ChatMessage(0, 9000, "hi");
-        chatService.serviceCreateMessageObject(chatMessage);
-    }
-
-    /**
-     * serviceCreateMessage with invalid groupId
-     */
-    @Test(expectedExceptions = InvalidInputException.class, expectedExceptionsMessageRegExp = "Invalid Group ID")
-    public void serviceCreateMessageFailInvalidGroupId(){
-        ChatMessage chatMessage = new ChatMessage(9000, 0, "hi");
-        chatService.serviceCreateMessageObject(chatMessage);
-    }
-    /**
-     * serviceCreateMessage with Long Content
-     */
-    @Test(expectedExceptions = InvalidInputException.class, expectedExceptionsMessageRegExp = "Long Content")
-    public void serviceCreateMessageWithLongContent(){
-        ChatMessage chatMessage = new ChatMessage(9000, 9000, "N".repeat(301));
-        chatService.serviceCreateMessageObject(chatMessage);
-    }
-
-    /**
-     * serviceCreateMessage with invalid chatContent
-     */
-    @Test(expectedExceptions = InvalidInputException.class, expectedExceptionsMessageRegExp = "Invalid Chat Content")
-    public void serviceCreateMessageFailInvalidChatContent(){
-        ChatMessage chatMessage = new ChatMessage(9000, 9000, "");
+        ChatMessage chatMessage = new ChatMessage(0, 0, "");
         chatService.serviceCreateMessageObject(chatMessage);
     }
 
