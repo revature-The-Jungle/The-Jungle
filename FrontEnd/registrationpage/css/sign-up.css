@@ -329,7 +329,6 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   flex-direction: column;
   margin-right: 3.88px;
   margin-top: 14px;
-  min-height: 91px;
   width: 483px;
   height: 10vh;
 }
@@ -366,15 +365,15 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   flex-direction: column;
   margin-left: 9.77px;
   margin-top: 16px;
-  min-height: 86px;
-  width: 496px;
+  width: 469px;
+  height: 10vh;
 }
 
 .sign-up .password-1 {
   letter-spacing: -0.27px;
-  min-height: 29px;
+  min-height: 22px;
   text-align: center;
-  width: 165px;
+  width: 101px;
 }
 
 .sign-up .overlap-group2 {
