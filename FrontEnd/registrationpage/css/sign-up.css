@@ -399,16 +399,16 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   display: flex;
   flex-direction: column;
   margin-right: 3.88px;
-  margin-top: 20px;
-  min-height: 82px;
-  width: 498px;
+  margin-top: 12px;
+  width: 484px;
+  height: 10vh;
 }
 
 .sign-up .password-2 {
   letter-spacing: -0.27px;
   min-height: 29px;
   text-align: center;
-  width: 165px;
+  width: 188px;
 }
 
 .sign-up .overlap-group1 {
