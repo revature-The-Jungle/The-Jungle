@@ -36,28 +36,32 @@
 .sign-up .overlap-group8 {
   align-self: flex-end;
   height: 97px;
-  margin-right: 2.0px;
+  margin-right: 2px;
   position: relative;
   width: 289px;
 }
 
+/* *********** Logo (start) *********** */
 .sign-up .jungle3-1 {
-  height: 97px;
+  height: 4rem;
   left: 0;
   object-fit: cover;
   position: absolute;
   top: 0;
-  width: 96px;
+  width: 4rem;
 }
 
 .sign-up .title {
-  left: 96px;
+  left: 50px;
   letter-spacing: -0.72px;
   position: absolute;
   text-align: center;
-  top: 17px;
+  top: 7px;
   width: 193px;
+  font-size: var(--font-size-xxl);
 }
+
+/* *********** Logo (end) *********** */
 
 .sign-up .create-account {
   align-self: center;
@@ -66,7 +70,7 @@
   font-size: var(--font-size-xxl);
   font-weight: 700;
   letter-spacing: -0.54px;
-  margin-left: 11.0px;
+  margin-left: 11px;
   margin-top: 33px;
   min-height: 54px;
   text-align: center;
@@ -74,7 +78,7 @@
 }
 
 .sign-up .form {
-  align-items: flex-end;
+  align-items: center;
   display: flex;
   flex-direction: column;
   margin-top: 33px;
@@ -86,7 +90,7 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-right: -2.0px;
+  margin-right: -2px;
   min-height: 88px;
   width: 487px;
 }
@@ -105,7 +109,7 @@
 .sign-up .overlap-group7 {
   align-self: flex-end;
   height: 53px;
-  margin-right: 4.0px;
+  margin-right: 4px;
   margin-top: 6px;
   position: relative;
   width: 468px;
@@ -153,7 +157,7 @@
   border: 1px solid #ad010b;
   border-radius: 10px;
   height: 53px;
-  margin-right: 2.0px;
+  margin-right: 2px;
   width: 460px;
 }
 
@@ -203,7 +207,7 @@
 .sign-up .overlap-group5 {
   align-self: flex-end;
   height: 53px;
-  margin-right: 4.0px;
+  margin-right: 4px;
   margin-top: 8px;
   position: relative;
   width: 468px;
@@ -238,7 +242,7 @@
 .sign-up .overlap-group4 {
   align-self: flex-end;
   height: 53px;
-  margin-right: 4.0px;
+  margin-right: 4px;
   margin-top: 5px;
   position: relative;
   width: 468px;
@@ -273,7 +277,7 @@
 .sign-up .overlap-group3 {
   align-self: flex-end;
   height: 53px;
-  margin-right: 4.0px;
+  margin-right: 4px;
   margin-top: 9px;
   position: relative;
   width: 468px;
@@ -309,7 +313,7 @@
 .sign-up .overlap-group2 {
   align-self: flex-end;
   height: 53px;
-  margin-right: 4.0px;
+  margin-right: 4px;
   margin-top: 4px;
   position: relative;
   width: 468px;
@@ -344,7 +348,7 @@
 .sign-up .overlap-group1 {
   align-self: flex-end;
   height: 53px;
-  margin-right: 4.0px;
+  margin-right: 4px;
   position: relative;
   width: 468px;
 }
