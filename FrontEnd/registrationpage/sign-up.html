@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1440, maximum-scale=1.0" />
     <link rel="shortcut icon" type="image/png" href="favicon.ico" />
-    <meta name="og:type" content="website" />
-    <meta name="twitter:card" content="photo" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/sign-up.css" />
     <link rel="stylesheet" type="text/css" href="css/styleguide.css" />
     <link rel="stylesheet" type="text/css" href="css/globals.css" />
@@ -16,10 +15,13 @@
       <div class="sign-up screen">
         <div class="leftSection"><img class="image" src="img/signUpImage.png" /></div>
         <div class="flex-col">
-          <div class="overlap-group8">
+          <!-- <div class="overlap-group8">
             <img class="jungle3-1" src="img/jungle3-1@2x.png" />
             <h1 class="title now-bold-biscay-48px">jungle</h1>
-          </div>
+          </div> -->
+
+          <img class="jungle3-1" src="img/Logo.png" />
+
           <div class="create-account">Create Account</div>
           <div class="form">
 
@@ -130,7 +132,6 @@
               </div> -->
             </div>
 
-
             <div class="repeat-password">
               <div class="password-2 poppins-bold-white-18px">
                 <span class="labelSize">Repeat Password</span
@@ -141,31 +142,36 @@
               <div class="overlap-group1">
                 <input type="password" class="rectangle-1 border-1px-mischka" id="signup-repeat-password" required maxlength="50" placeholder="pass1234^&*"> 
               </div>
-              <div class="overlap-group6">
-                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
+
+              <!-- INVALID MESSAGE CONTAINER -->
+              <!-- <div class="overlap-group6">
+                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon"> -->
                 <!-- INVALID MESSAGE ICON Will appear with invalid message-->
-                <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> <!-- INVALID MESSAGE CONTAINER -->
-              </div>
+                <!-- <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
+              </div> -->
             </div>
+
             <div class="dont-have-an-account poppins-bold-white-18px">
-              <span class="span0">Already have an account?&nbsp;&nbsp; </span><span class="span1"><a href="../loginpage/login.html">Log in</span>
+              <span class="span0">Already have an account?</span><span class="span1"><a href="../loginpage/login.html">Log in</span>
             </div>
-            <div class="overlap-group">
-              <div class="rectangle-3"></div>
-              <button class="submit valign-text-middle" id="signup-submit">Submit</button>
+            
+             
+              <button class="btn submit valign-text-middle" id="signup-submit" disabled>Submit</button>
               <!-- SUBMIT BUTTON FOR SIGN UP -->
-              <!-- Why is this button redirecting me to a new page? -->
-            </div>
-            <div class="overlap-group6">
-              <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
+            
+
+            <!-- INVALID MESSAGE CONTAINER -->
+            <!-- <div class="overlap-group6">
+              <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon"> -->
               <!-- INVALID MESSAGE ICON Will appear with invalid message-->
-              <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> <!-- INVALID MESSAGE CONTAINER -->
-            </div>
+              <!-- <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
+            </div> -->
           </div>
         </div>
       </div>
     </div>
 
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <script src="registration.js"></script>
 </html>
