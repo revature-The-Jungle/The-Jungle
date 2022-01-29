@@ -29,4 +29,3 @@ class Post:
             "date_time_of_creation": self.date_time_of_creation
             }
         return dictionary
-

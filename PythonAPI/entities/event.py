@@ -1,4 +1,4 @@
-class Event:
+class Group:
     def __init__(self,
                  event_id: int = None,  # primary key
                  user_id: int = None,  # the original user that created the event

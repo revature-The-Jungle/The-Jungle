@@ -1,6 +1,7 @@
 import logging
 
 from flask import Flask, request, jsonify
+<<<<<<< HEAD
 from flask_cors import CORS
 
 from custom_exceptions.birth_date_is_null import BirthDateIsNull
@@ -40,20 +41,45 @@ from service_layer.implementation_classes.group_service import GroupPostgreServi
 from service_layer.implementation_classes.like_post_service import LikePostServiceImp
 from service_layer.implementation_classes.postfeed_service import PostFeedServiceImp
 from service_layer.implementation_classes.user_profile_service import UserProfileServiceImp
+=======
+from data_access_layer.implementation_classes.postfeed_dao_imp import PostfeedDaoimpl
+from service_layer.implementation_classes.postfeed_service_imp import PostfeedServiceImp
+from custom_exceptions.connection_error import ConnectionErrorr
+from data_access_layer.implementation_classes.like_post_dao_imp import LikePostDaoImp
+from service_layer.implementation_classes.like_post_service_imp import LikePostServiceImp
+>>>>>>> origin/mBahrami/Python/post-comments/sp2
 
-logging.basicConfig(filename="records.log", level=logging.DEBUG,
-                    format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
+from data_access_layer.implementation_classes.comment_dao_imp import CommentDAOImp
+from entities.comment import Comment
+from service_layer.implementation_classes.comment_service_imp import CommentServiceImp
+from flask_cors import CORS
+
+postfeeddao = PostfeedDaoimpl()
+postfeed_service = PostfeedServiceImp(postfeeddao)
+like_post_dao=LikePostDaoImp()
+like_post_service=LikePostServiceImp(like_post_dao)
+comment_dao = CommentDAOImp()
+comment_service = CommentServiceImp(comment_dao)
+
+
+
+
 
 # Setup flask
 app: Flask = Flask(__name__)
 CORS(app)
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/mBahrami/Python/post-comments/sp2
 @app.get("/")  # basic check for app running
 def on():
     return "python is running"
 
 
+<<<<<<< HEAD
 create_post_dao = CreatePostDAOImp()
 create_post_service = CreatePostServiceImp(create_post_dao)
 user_profile_dao = UserProfileDAOImp()
@@ -80,44 +106,53 @@ def get_a_user_id(user_id: int):
         return jsonify(user_as_dictionary), 200
     except UserNotFound as e:
         return str(e), 400
-
-
-@app.post("/post")
-def create_a_post():  # Not yet tested
-    """Method to create a new post in the database."""
-    post_body = request.get_json()
-    new_post = Post(user_id=post_body["user_id"],
-                    post_text=post_body["post_text"],
-                    image_format=post_body["image_format"])
+=======
+@app.get("/postfeed")
+def get_all_posts():
     try:
-        returned_post = create_post_service.create_post_service(new_post)
-        returned_post_as_json = jsonify(returned_post.make_dictionary())
-        return returned_post_as_json
-    except UserIdMustBeAnInteger as e:
-        return str(e), 400
-    except ImageFormatMustBeAString as e:
-        return str(e), 400
-    except PostTextMustBeAString as e:
-        return str(e), 400
-    except UserNotFound as e:
+        post_as_post = postfeed_service.get_all_posts_service()
+        posts_as_dictionary = []
+        for post in post_as_post:
+            dicionary_posts = post.make_dictionary()
+            posts_as_dictionary.append(dicionary_posts)
+        return jsonify(posts_as_dictionary)
+    except ConnectionErrorr:
         return str(e), 400
 
-
-@app.post("/post/image/<post_id>")
-def create_a_post_image(post_id):
-    """Method to insert an image into the database. Returns the same image back from the database."""
+@app.delete("/postfeed")
+def delete_a_post():
     try:
-        image = request.data
-        image_decoded = image.decode('utf-8')
-        return create_post_service.create_post_image_service(post_id, image_decoded), 201
-    except PostIdMustBeAnInteger as e:
-        return str(e), 400
-    except ImageMustBeAString as e:
-        return str(e), 400
-    except PostNotFound as e:
+        data = request.get_json()
+        postid = data["postid"],
+        boolean = postfeed_service.delete_a_post_service(postid)
+        return jsonify(boolean)
+    except ConnectionErrorr :
         return str(e), 400
 
+@app.post("/postfeed")
+def add_likes_to_post():
+   try:
+    data = request.get_json()
+    postid = data["postid"],
+    return jsonify(like_post_service.service_like_post(postid))
+   except ConnectionErrorr :
+       return str(e), 400
 
+>>>>>>> origin/mBahrami/Python/post-comments/sp2
+
+
+# delete comment information
+@app.delete("/Comments")
+def delete_comment():
+        data = request.get_json()
+        comment_id = data["commentid"],
+        jsonify(comment_service.service_delete_comment(comment_id))
+        return "Comment with id {} was deleted successfully".format(comment_id)
+
+
+
+
+<<<<<<< HEAD
 @app.get("/post/image/<post_id>")
 def get_the_post_image(post_id):
     """Method to grab the post image from the database by the post id."""
@@ -138,37 +173,36 @@ def get_the_user_image(user_id):
         return str(e), 400
     except UserImageNotFound as e:
         return str(e), 400
+=======
+>>>>>>> origin/mBahrami/Python/post-comments/sp2
 
 
-@app.post("/user/image/<user_id>")
-def post_the_user_image(user_id):
-    try:
-        image = request.data
-        image_decoded = image.decode('utf-8')
-        return user_profile_service.update_user_image_service(user_id, image_decoded), 200
-    except UserIdMustBeAnInteger as e:
-        return str(e), 400
-    except ImageMustBeAString as e:
-        return str(e), 400
-    except UserNotFound as e:
-        return str(e), 400
+
+@app.get("/postfeed/<post_id>")
+def get_comments_by_post_id(post_id: str):
+   try:
+    results = comment_service.service_get_comment_by_post_id(int(post_id))
+    post_comments_as_dictionary = []
+    for comments in results:
+        dictionary_comment = comments.make_dictionary()
+        post_comments_as_dictionary.append(dictionary_comment)
+    return jsonify(post_comments_as_dictionary), 200
+   except Exception:
+       return "something went wrong"
 
 
-@app.post("/user/imageFormat/<user_id>")
-def post_the_user_image_format(user_id):
-    try:
-        image_data = request.get_json()
-        returned_user = user_profile_service.update_user_image_format_service(user_id, image_data["image_format"])
-        user_as_json = jsonify(returned_user.make_dictionary())
-        return user_as_json, 200
-    except UserIdMustBeAnInteger as e:
-        return str(e), 400
-    except ImageFormatMustBeAString as e:
-        return str(e), 400
-    except UserNotFound as e:
-        return str(e), 400
+@app.post("/createComment")
+def create_comment():
+    body = request.get_json()
+    post_id = body["postId"],
+    user_id = body["userId"],
+    group_id = body["groupId"],
+    reply_user = body["replyUser"],
+    comment_text = body["commentText"],
+    comment_id = comment_service.service_create_comment(post_id, user_id, comment_text, group_id, reply_user)
+    return jsonify(comment_id)
 
-
+<<<<<<< HEAD
 @app.patch("/user/profile/update/<user_id>")
 def update_profile_info(user_id):
     try:
@@ -265,6 +299,8 @@ def get_all_groups():
         dictionary_group = groups.make_dictionary()
         groups_as_dictionary.append(dictionary_group)
     return jsonify(groups_as_dictionary)
+=======
+>>>>>>> origin/mBahrami/Python/post-comments/sp2
 
 
 @app.get("/group/user/<user_id>")

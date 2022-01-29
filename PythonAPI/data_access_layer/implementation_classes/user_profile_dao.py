@@ -1,16 +1,17 @@
+<<<<<<< HEAD:PythonAPI/data_access_layer/implementation_classes/user_profile_dao.py
 from custom_exceptions.follower_not_found import FollowerNotFound
 from custom_exceptions.user_image_not_found import UserImageNotFound
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.abstract_classes.user_profile_dao_abs import UserProfileDAO
+=======
+from data_access_layer.abstract_classes.user_profile_dao import UserProfileDAO
+>>>>>>> origin/mBahrami/Python/post-comments/sp2:PythonAPI/data_access_layer/implementation_classes/user_profile_dao_imp.py
 from entities.user import User
-from util.database_connection import connection
-
-user_not_found_string = 'The user could not be found.'
 
 
 class UserProfileDAOImp(UserProfileDAO):
-
     def get_user_profile(self, user_id: int) -> User:
+<<<<<<< HEAD:PythonAPI/data_access_layer/implementation_classes/user_profile_dao.py
         """Grabs data from the user profile by user id"""
         sql = 'select * from user_table where user_id = %(user_id)s'
         cursor = connection.cursor()
@@ -67,52 +68,35 @@ class UserProfileDAOImp(UserProfileDAO):
         cursor.execute(sql, {"user_id": user_id})
         if not cursor.fetchone():
             raise UserNotFound(user_not_found_string)
+=======
+        pass
 
-        # delete any existing image from the database and place the image in the database
-        sql = "DELETE FROM user_picture_table where user_id = %(user_id)s; "
-        cursor.execute(sql, {"user_id": user_id})
-        connection.commit()
+    def get_user_image(self, user_id: int) -> str:
+        pass
+>>>>>>> origin/mBahrami/Python/post-comments/sp2:PythonAPI/data_access_layer/implementation_classes/user_profile_dao_imp.py
 
-        # do the thing
-        sql = "INSERT INTO user_picture_table VALUES (default, %(user_id)s, %(image)s);"
-        cursor.execute(sql, {"user_id": user_id, "image": image})
-        connection.commit()
+    def update_user_image(self, user_id: int, image: str) -> bool:
+        pass
 
-        # get the new image and send it back up to the service layer
-        sql = f"select picture from user_picture_table where user_id = %(user_id)s;"
-        cursor.execute(sql, {"user_id": user_id})
-        connection.commit()
-        image = cursor.fetchone()[0]
-        image_decoded = image.decode('utf-8')
-        return image_decoded
+    def update_image_format(self, user_id: int, image_data: str) -> User:
+        pass
 
-    def update_user_image_format(self, user_id: int, image_format: str) -> User:
-        """Method to put the picture format into the database."""
+    def update_first_name(self, user_id: int, first_name: str) -> User:
+        pass
 
-        # Check to see if the user id is in the database, raise an error otherwise.
-        sql = f"select * from user_table where user_id = %(user_id)s;"
-        cursor = connection.cursor()
-        cursor.execute(sql, {"user_id": user_id})
-        if not cursor.fetchone():
-            raise UserNotFound(user_not_found_string)
+    def update_last_name(self, user_id: int, last_name: str) -> User:
+        pass
 
-        # Update the user image format.
-        sql = f"update user_table set image_format = %(image_format)s where user_id = %(user_id)s;"
-        cursor = connection.cursor()
-        cursor.execute(sql, {"image_format": image_format, "user_id": user_id})
-        connection.commit()
-
-        # Grab the user from the database and send it back.
-        sql = f"select * from user_table where user_id = %(user_id)s"
-        cursor = connection.cursor()
-        cursor.execute(sql, {"user_id": user_id})
-        connection.commit()
-        profile_record = cursor.fetchone()
-        user = User(*profile_record)
-        return user
+    def update_username(self, user_id: int, username: str) -> User:
+        pass
 
     def update_password(self, user_id: int, password: str) -> User:
-        """Stretch"""
+        pass
+
+    def update_about_me(self, user_id: int, about_me: str) -> User:
+        pass
+
+    def update_birthdate(self, user_id: int, birthdate: str) -> User:
         pass
 
     def get_user_followers(self, user_id: int) -> dict[str:int]:
