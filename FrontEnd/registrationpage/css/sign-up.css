@@ -123,6 +123,28 @@
   font-family: var(--font-family-poppins);
 }
 
+/* Placeholder */
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #d8d8d8;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #d8d8d8;
+}
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #d8d8d8;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #d8d8d8;
+}
+
+input[type="date"]:invalid::-webkit-datetime-edit {
+  color: #d8d8d8;
+}
+
 .sign-up .span {
   letter-spacing: -0.05px;
 }
@@ -149,6 +171,8 @@
   position: absolute;
   top: 0;
   width: 26vw;
+  padding-left: 10px;
+  font-family: var(--font-family-poppins);
 }
 
 .sign-up .lastName {
@@ -271,7 +295,8 @@
   margin-right: 6.23px;
   margin-top: 14px;
   min-height: 87px;
-  width: 482px;
+  width: 487px;
+  height: 10vh;
 }
 
 .sign-up .date-of-birth-1 {
