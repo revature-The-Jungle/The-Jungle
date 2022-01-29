@@ -99,9 +99,9 @@
 
 .sign-up .first-name-1 {
   letter-spacing: -0.27px;
-  min-height: 29px;
-  text-align: center;
+  min-height: 20px;
   width: 165px;
+  margin: 0 0 0 1.5rem;
 }
 
 /* Label */
