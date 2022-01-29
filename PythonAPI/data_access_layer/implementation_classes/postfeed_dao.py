@@ -31,5 +31,12 @@ class PostFeedDaoImp(PostFeedDao):
         except ConnectionErrorr:
             return False
 
-    def get_all_posts_with_group_id(self, groupid: int) -> List[Post]:
-        pass
+    def get_all_posts_with_user_id(self, user_id: int) -> List[Post]:
+        sql = "select * from post_table where user_id = %s and group_id is Null order by date_time_of_creation desc"
+        cursor = connection.cursor()
+        cursor.execute(sql, [user_id])
+        post_records = cursor.fetchall()
+        post_list = []
+        for post in post_records:
+            post_list.append(Post(*post))
+        return post_list

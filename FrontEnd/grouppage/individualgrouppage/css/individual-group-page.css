@@ -412,7 +412,7 @@
   position: absolute;
   text-align: center;
   top: 25px;
-  width: 112px;
+  width: 130px;
 }
 
 .individual-group-page .username-1 {
@@ -445,7 +445,7 @@
   height: 35vh;
   margin-right: 6.16px;
   margin-top: 14px;
-  width: 40vw;
+  max-width: 40vw;
 }
 
 .individual-group-page .icon-container {

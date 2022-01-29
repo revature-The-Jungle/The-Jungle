@@ -177,7 +177,7 @@
   height: 294px;
   margin-right: 5.0px;
   margin-top: 16px;
-  width: 531px;
+  max-width: 531px;
 }
 
 .profile-page .icon-container {
@@ -812,4 +812,10 @@
 /* for treating the image as a file upload button */
 .image-upload>input {
   display: none;
+}
+
+
+/* for adding spacing between posts */
+.profile-page .post{
+  margin-top:25px;
 }
