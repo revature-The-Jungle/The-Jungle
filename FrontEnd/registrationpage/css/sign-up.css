@@ -86,7 +86,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: 33px;
+  margin-top: 1.5rem;
   min-height: 846px;
   width: 518px;
 }
@@ -294,16 +294,15 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   flex-direction: column;
   margin-right: 6.23px;
   margin-top: 14px;
-  min-height: 87px;
   width: 487px;
   height: 10vh;
 }
 
 .sign-up .date-of-birth-1 {
   letter-spacing: -0.27px;
-  min-height: 29px;
+  min-height: 20px;
   text-align: center;
-  width: 165px;
+  width: 159px;
 }
 
 .sign-up .overlap-group4 {
@@ -331,14 +330,15 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   margin-right: 3.88px;
   margin-top: 14px;
   min-height: 91px;
-  width: 493px;
+  width: 483px;
+  height: 10vh;
 }
 
 .sign-up .user-name {
   letter-spacing: -0.27px;
-  min-height: 29px;
+  min-height: 20px;
   text-align: center;
-  width: 165px;
+  width: 138px;
 }
 
 .sign-up .overlap-group3 {
