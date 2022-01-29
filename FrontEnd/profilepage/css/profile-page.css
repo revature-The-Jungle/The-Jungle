@@ -809,4 +809,7 @@
   left: 20px;
 }
 
-
+/* for treating the image as a file upload button */
+.image-upload>input {
+  display: none;
+}
