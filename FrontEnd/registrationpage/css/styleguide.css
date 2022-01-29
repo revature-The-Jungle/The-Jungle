@@ -53,10 +53,11 @@
   font-weight: 700;
 }
 
+/* Error Font Styling */
 .poppins-bold-bright-red-18px {
   color: var(--bright-red);
   font-family: var(--font-family-poppins);
-  font-size: var(--font-size-m);
+  font-size: var(--font-size-s);
   font-style: normal;
   font-weight: 700;
 }

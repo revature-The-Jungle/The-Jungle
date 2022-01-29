@@ -136,14 +136,24 @@
   width: 468px;
 }
 
-.sign-up .rectangle-1 {
+.labelLastName {
+  margin: 0 0 0 1.7rem;
+}
+
+.sign-up .rectangle-1,
+.lastName {
   background-color: var(--white);
-  border-radius: 10px;
+  border-radius: 5px;
   height: 2.5rem;
   left: 8px;
   position: absolute;
   top: 0;
   width: 26vw;
+}
+
+.sign-up .lastName {
+  top: 1.5rem;
+  left: 1.6rem;
 }
 
 .sign-up .name {
@@ -163,6 +173,7 @@
   margin-top: 14px;
   min-height: 82px;
   width: 486px;
+  position: relative;
 }
 
 .sign-up .last-name-1 {
@@ -172,14 +183,25 @@
   width: 165px;
 }
 
-.sign-up .password-rectangle {
+/* .sign-up .password-rectangle {
   align-self: flex-end;
   background-color: #ffeaea;
   border: 1px solid #ad010b;
-  border-radius: 10px;
+  border-radius: 5px;
   height: 53px;
   margin-right: 2px;
   width: 460px;
+} */
+
+/* Error Input Styling...label styling on line 56 */
+.errorDivColor {
+  align-self: flex-end;
+  background-color: #ffeaea;
+  border: 1px solid #ad010b;
+  border-radius: 5px;
+  height: 53px;
+  margin-right: 2px;
+  width: 26vw;
 }
 
 .sign-up .overlap-group6 {
