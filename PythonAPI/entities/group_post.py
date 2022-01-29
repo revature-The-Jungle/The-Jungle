@@ -25,7 +25,7 @@ class GroupPost:
             "image_data": self.image_format,
             "likes": self.likes,
             "date_time_of_creation": self.date_time_of_creation
-            }
+        }
         return dictionary
 
     def __str__(self):
