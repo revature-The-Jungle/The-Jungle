@@ -10,7 +10,7 @@ const url = "http://localhost:8080";
 let validateCounter = 0;
 
 
-const div = document.getElementById("errorMessageGoesHere");
+const div = document.getElementById("errorMessageArea");
 div.textContent = "";
 
 async function login() {
@@ -31,7 +31,7 @@ if (response.status === 200){
     console.log(body);
     console.log(body.userId);
     console.log("Success");
-    window.location.href="../profilepage/profile-page.html" //  Redirect to Here????
+    window.location.href="../profilepage/profile-page.html"
 } else {
     div.textContent = "Incorrect Username or Password";
     // displayErrorMessage("Incorrect Username or Password", "errorMessageGoesHere", loginStatus);

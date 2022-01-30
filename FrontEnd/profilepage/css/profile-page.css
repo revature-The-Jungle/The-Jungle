@@ -246,6 +246,16 @@
   top: 58px;
   width: 592px;
 }
+/* .searchDropDown {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  left: 378px;
+  min-height: 96px;
+  position: absolute;
+  top: 58px;
+  width: 592px;
+} */
 
 .profile-page .search-container {
   background-color: var(--white);
@@ -755,3 +765,11 @@
   top: 95px;
   left: 17px;
 }
+
+#searchInputBox {
+  border-style: hidden;
+  border-width: 0px;
+  outline: none;
+  width:500px;
+}
+
