@@ -1,5 +1,5 @@
 const signupSubmitButton = document.getElementById("signup-submit");
-signupSubmitButton.disabled = true;
+// signupSubmitButton.disabled = true;
 
 const signupFirstName = document.getElementById("signup-firstname");
 const signupLastName = document.getElementById("signup-lastname");
@@ -166,7 +166,6 @@ function validatePassword() {
       invalidIcon[5].style.display = "none";
       invalidMessage[5].textContent = "";
       let validatedPass = signupPassword.value;
-      // console.log(validatedPass);
       signupPasswordRepeat.addEventListener(
         "focusin",
         validateRepeatPassword(validatedPass)
@@ -196,7 +195,7 @@ function validateRepeatPassword(password) {
 }
 
 // ROUTE TO REGISTER/CREATE USER
-signupSubmitButton.addEventListener("click", registerUser);
+signupSubmitButton.addEventListener("submit", registerUser);
 async function registerUser(event) {
   event.preventDefault();
   event.stopPropagation();

@@ -24,11 +24,11 @@
           <!-- Logo -->
           <img class="logo" src="img/Logo.png" />
 
-          <form class="form">
+          <form class="form" id="signup-submit">
             <div class="create-account">Create Account</div>
 
             <!-- FIRST NAME INPUT BOX -->
-            <div class="first-name firstName">
+            <div class="first-name firstName" data-error="Name is required">
               <span class="labelSize labelFirstName"
                 >First Name <span class="asterisk">*</span></span
               >
@@ -40,6 +40,19 @@
                 maxlength="20"
                 placeholder="Luke"
               />
+
+              <div class="invalidDiv">
+                <img
+                  class="info-icon"
+                  src="img/info-icon@2x.svg"
+                  id="invalid-icon"
+                />
+
+                <p
+                  class="please-enter-a-valid-entry poppins-bold-bright-red-18px"
+                  id="signup-invalid-message"
+                ></p>
+              </div>
             </div>
 
             <!-- LAST NAME INPUT BOX -->
@@ -51,9 +64,9 @@
                 type="text"
                 class="inputs border-1px-mischka"
                 id="signup-lastname"
-                required
                 maxlength="20"
                 placeholder="Skywalker"
+                required
               />
             </div>
 
@@ -67,9 +80,9 @@
                 type="email"
                 class="inputs border-1px-mischka"
                 id="signup-email"
-                required
                 maxlength="50"
                 placeholder="luke.skywalker@jedi.net"
+                required
               />
             </div>
 
@@ -101,6 +114,7 @@
                 required
                 maxlength="50"
                 placeholder="MasterJedi12"
+                required
               />
             </div>
 
@@ -114,9 +128,9 @@
                 type="password"
                 class="inputs border-1px-mischka"
                 id="signup-password"
-                required
                 maxlength="50"
                 placeholder="pass1234^&*"
+                required
               />
             </div>
 
@@ -127,9 +141,7 @@
               >
             </div>
 
-            <button class="btn submit valign-text-middle" id="signup-submit">
-              Sign Up
-            </button>
+            <button class="btn submit valign-text-middle">Sign Up</button>
           </form>
 
           <!-- <div class="create-account">Create Account</div> -->

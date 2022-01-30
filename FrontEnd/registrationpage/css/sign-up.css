@@ -252,13 +252,14 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   width: 26vw;
 }
 
-.sign-up .overlap-group6 {
+.sign-up .invalidDiv {
   align-self: flex-start;
   height: 27px;
-  margin-left: 25px;
-  margin-top: 14px;
+  margin-left: -17px;
+  margin-top: 41px;
   position: relative;
   width: 336px;
+  display: none;
 }
 
 .sign-up .info-icon {
@@ -272,10 +273,8 @@ input[type="date"]:invalid::-webkit-datetime-edit {
 .sign-up .please-enter-a-valid-entry {
   left: 0;
   letter-spacing: -0.27px;
-  position: absolute;
-  text-align: center;
-  top: 0;
   width: 336px;
+  margin: 6px 0 0 3.2rem;
 }
 
 .sign-up .email {
@@ -509,6 +508,12 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   position: absolute;
   top: 25rem;
   left: 1.4rem;
+}
+
+.invalid {
+  border-color: #c92432;
+  color: #c92432;
+  background-color: #fffafa;
 }
 
 /* *********** "Form" (End) *********** */
