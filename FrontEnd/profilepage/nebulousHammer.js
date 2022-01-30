@@ -140,7 +140,7 @@ async function createPostWithImage() {
             <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">JostSNL21</div>
             <img class="feed-avatar-1" src="`+ user_image_text + `" alt="img/ellipse-1@2x.png" />
           </div>
-          <input type="image" class="three-dots-icon" src="img/bi-three-dots@2x.svg" id="deletePost${post.post_id}" onclick="deletePost(${post.post_id})"/>
+          <input type="image" class="three-dots-icon-1" src="img/bi-three-dots@2x.svg" id="deletePost${post.post_id}" onclick="deletePost(${post.post_id})"/>
         </div>
         <img class="feed-picture" src="`+ image_text +`" />
         <div class="icon-container">
@@ -162,7 +162,7 @@ async function createPostWithImage() {
           <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">JostSNL21</div>
           <img class="feed-avatar-1" src="`+ user_image_text + `" alt="img/ellipse-1@2x.png" />
         </div>
-        <input type="image" class="three-dots-icon" src="img/bi-three-dots@2x.svg" id="deletePost${post.post_id}" onclick="deletePost(${post.post_id})"/>
+        <input type="image" class="three-dots-icon-1" src="img/bi-three-dots@2x.svg" id="deletePost${post.post_id}" onclick="deletePost(${post.post_id})"/>
       </div>
       <div class="icon-container">
         <input type="image" class="heart-icon" src="img/heart-icon@2x.svg" />
@@ -184,9 +184,9 @@ async function createPostWithImage() {
 
   async function deletePost(post_id) {
     let deleteResponse = await fetch("http://127.0.0.1:5000/group_post/" + post_id, {
-      method: "DELETE",
-      mode: "cors"
-    }).then(response => {return response.json()});
+      method: "DELETE"
+    })
+    console.log(deleteResponse)
     if (deleteResponse.status === 200) {
       document.getElementById("post" + post_id).remove();
     }
