@@ -18,39 +18,67 @@
           <!-- Logo -->
           <img class="logo" src="img/Logo.png" />
 
-          <div class="create-account">Create Account</div>
-          <div class="form">
+          <form class="form">
+            <div class="create-account">Create Account</div>
+
+            <!-- First Name Input -->
+            <div class="first-name">
+              <!-- <div class="first-name-1 poppins-bold-white-18px"> -->
+                <span class="labelSize">First Name <span class="asterisk">*</span></span>
+              <!-- </div> -->
+
+              <input type="text" class="inputs firstName border-1px-mischka" id="signup-firstname" required maxlength="20" placeholder="Luke">
+
+            </div>
+
+            <!-- LAST NAME INPUT BOX -->
+            <div class="last-name">
+              <span class="labelSize labelLastName">Last Name <span class="asterisk">*</span></span>
+              <input type="text" class="inputs lastName border-1px-mischka" id="signup-lastname" required maxlength="20" placeholder="Skywalker">
+            </div>
+
+            <!-- EMAIL INPUT BOX -->
+
+            <div class="dont-have-an-account poppins-bold-white-18px">
+              <span class="span0">Already have an account?</span><span class="span1"><a href="../loginpage/login.html">Log in</span>
+            </div>
+             
+            <button class="btn submit valign-text-middle" id="signup-submit">Submit</button>
+
+          </form>
+
+          <!-- <div class="create-account">Create Account</div> -->
+          <!-- <div class="form">
 
             <div class="first-name">
               <div class="first-name-1 poppins-bold-white-18px">
-                <span class="labelSize">First Name </span
-                ><span class="asterisk">*</span>
+                <span class="labelSize">First Name <span class="asterisk">*</span></span>
               </div>
 
-              <!-- FIRST NAME INPUT BOX -->
+              
               <div class="overlap-group7">
                 <input type="text" class="rectangle-1 border-1px-mischka" id="signup-firstname" required maxlength="20" placeholder="Luke">
               </div>
 
-              <!-- INVALID MESSAGE CONTAINER FIRST NAME-->
-              <!-- <div class="overlap-group6">
-                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon"> -->
-                <!-- INVALID MESSAGE ICON Will appear with invalid message-->
-                <!-- <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p>
-              </div> -->
+          
+              <div class="overlap-group6">
+                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon"> 
+                
+               <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p>
+              </div>
             </div>
             <div class="last-name">
               <span class="labelSize labelLastName">Last Name <span class="asterisk">*</span></span>
-              <input type="text" class="rectangle-1 lastName border-1px-mischka" id="signup-lastname" required maxlength="20" placeholder="Skywalker">
-              <!-- LAST NAME INPUT BOX -->
+              <input type="text" class="rectangle-1 lastName border-1px-mischka" id="signup-lastname" required maxlength="20" placeholder="Skywalker"> 
+              
             </div>
 
-            <!-- INVALID MESSAGE CONTAINER -->
-            <!-- <div class="overlap-group6">
-              <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon"> -->
-              <!-- INVALID MESSAGE ICON Will appear with invalid message-->
-              <!-- <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
-            </div> -->
+            
+            <div class="overlap-group6">
+              <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon"> 
+              
+              <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
+            </div>
 
             <div class="email">
               <div class="email-1">
@@ -58,16 +86,16 @@
                 ><span class="span poppins-bold-red-18px">*</span>
               </div>
               <div class="overlap-group5">
-                <input type="email" class="rectangle-1 border-1px-mischka" id="signup-email" required maxlength="50" placeholder="luke.skywalker@jedi.net">
-                <!-- EMAIL INPUT BOX -->
+                <input type="email" class="inputs border-1px-mischka" id="signup-email" required maxlength="50" placeholder="luke.skywalker@jedi.net">
+                
               </div>
 
-              <!-- EMAIL INVALID MESSAGE CONTAINER -->
-              <!-- <div class="overlap-group6">
-                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon"> -->
-                <!-- INVALID MESSAGE ICON Will appear with invalid message-->
-                <!-- <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p>
-              </div> -->
+              
+              <div class="overlap-group6">
+                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
+               
+                <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p>
+              </div>
             </div>
 
             <div class="date-of-birth">
@@ -76,18 +104,18 @@
                 ><span class="span poppins-bold-red-18px">*</span>
               </div>
 
-              <!-- DATE INPUT BOX -->
+              
               <div class="overlap-group4">
-                <input type="date" class="rectangle-1 border-1px-mischka" id="signup-bdate" required>
+                <input type="date" class="inputs border-1px-mischka" id="signup-bdate" required>
                 
               </div>
 
-              <!-- DATE INVALID MESSAGE CONTAINER -->
-              <!-- <div class="overlap-group6">
-                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon"> -->
-                <!-- INVALID MESSAGE ICON Will appear with invalid message-->
-                <!-- <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
-              </div> -->
+              
+              <div class="overlap-group6">
+                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
+               
+                <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
+              </div>
             </div>
 
             <div class="username">
@@ -96,17 +124,17 @@
                 ><span class="span poppins-bold-red-18px">*</span>
               </div>
 
-              <!-- USERNAME INPUT BOX -->
+              
               <div class="overlap-group3">
-                <input type="text" class="rectangle-1 border-1px-mischka" id="signup-username" required maxlength="50" placeholder="MasterJedi12"> 
+                <input type="text" class="inputs border-1px-mischka" id="signup-username" required maxlength="50" placeholder="MasterJedi12"> 
               </div>
 
-              <!-- INVALID MESSAGE CONTAINER -->
-              <!-- <div class="overlap-group6">
-                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon"> -->
-                <!-- INVALID MESSAGE ICON Will appear with invalid message-->
-                <!-- <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
-              </div> -->
+              
+              <div class="overlap-group6">
+                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
+                
+                <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
+              </div>
             </div>
 
             <div class="password">
@@ -115,44 +143,44 @@
                 ><span class="span poppins-bold-red-18px">*</span>
               </div>
 
-              <!-- PASSWORD INPUT BOX -->
+       
               <div class="overlap-group2">
-                <input type="password" class="rectangle-1 border-1px-mischka" id="signup-password" required maxlength="50" placeholder="pass1234^&*">
+                <input type="password" class="inputs border-1px-mischka" id="signup-password" required maxlength="50" placeholder="pass1234^&*">
               </div>
 
-              <!-- INVALID MESSAGE CONTAINER -->
-              <!-- <div class="overlap-group6">
-                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon"> -->
-                <!-- INVALID MESSAGE ICON Will appear with invalid message-->
-                <!-- <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
-              </div> -->
+              
+              <div class="overlap-group6">
+                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
+                
+                <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
+              </div>
             </div>
 
-            <!-- <div class="repeat-password">
+            <div class="repeat-password">
               <div class="password-2 poppins-bold-white-18px">
                 <span class="labelSize">Repeat Password</span
                 ><span class="span poppins-bold-red-18px">*</span>
-              </div> -->
+              </div>
 
-              <!-- REPEAT PASSWORD INPUT BOX -->
-              <!-- <div class="overlap-group1">
+              
+              <div class="overlap-group1">
                 <input type="password" class="rectangle-1 border-1px-mischka" id="signup-repeat-password" required maxlength="50" placeholder="pass1234^&*"> 
-              </div> -->
+              </div>
 
-              <!-- INVALID MESSAGE CONTAINER -->
-              <!-- <div class="overlap-group6">
-                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon"> -->
-                <!-- INVALID MESSAGE ICON Will appear with invalid message-->
-                <!-- <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
-              </div> -->
-            <!-- </div> -->
+             
+              <div class="overlap-group6">
+                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
+                
+                <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
+              </div>
+            </div> -->
 
-            <div class="dont-have-an-account poppins-bold-white-18px">
+            <!-- <div class="dont-have-an-account poppins-bold-white-18px">
               <span class="span0">Already have an account?</span><span class="span1"><a href="../loginpage/login.html">Log in</span>
             </div>
             
              
-              <button class="btn submit valign-text-middle" id="signup-submit" disabled>Submit</button>
+              <button class="btn submit valign-text-middle" id="signup-submit">Submit</button> -->
               <!-- SUBMIT BUTTON FOR SIGN UP -->
             
 
@@ -162,7 +190,7 @@
               <!-- INVALID MESSAGE ICON Will appear with invalid message-->
               <!-- <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
             </div> -->
-          </div>
+          <!-- </div> -->
         </div>
       </div>
     </div>
