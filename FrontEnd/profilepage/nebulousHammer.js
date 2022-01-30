@@ -133,14 +133,14 @@ async function createPostWithImage() {
       if(response.status === 200){//if there is an image then this one, else the other one
         const image_text = await response.text();
         postBox.innerHTML = 
-        `<div class = post>
+        `<div class = "post`+ post.post_id +`" id = "post`+ post.post_id + `">
         <div class="flex-row">
           <div class="overlap-group2">
             <div class="new-york-ny valign-text-middle">`+ date +`</div>
             <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">JostSNL21</div>
             <img class="feed-avatar-1" src="`+ user_image_text + `" alt="img/ellipse-1@2x.png" />
           </div>
-          <input type="image" class="three-dots-icon" src="img/three-dots-icon-1@2x.svg" id="deletePost${post.post_id}" onclick="deleteGroupPost(${post.post_id})"/>
+          <input type="image" class="three-dots-icon" src="img/bi-three-dots@2x.svg" id="deletePost${post.post_id}" onclick="deletePost(${post.post_id})"/>
         </div>
         <img class="feed-picture" src="`+ image_text +`" />
         <div class="icon-container">
@@ -150,20 +150,19 @@ async function createPostWithImage() {
           <img class="share-icon" src="img/share-icon@2x.svg" />
         </div>
         <div class="overlap-group-1">
-          <div class="feed-text-2 valign-text-middle poppins-medium-black-18px">`+ post.text + `</div>
-          <div class="username-2-1 valign-text-middle poppins-bold-cape-cod-20px">JostSNL21</div>
+          <div class="feed-text-2 valign-text-middle poppins-medium-black-18px">`+ post.post_text + `</div>
         </div>
       </div>`
       }else{
         postBox.innerHTML = 
-      `<div class = post>
+      `<div class = "post`+ post.post_id +`" id = "post`+ post.post_id + `">
       <div class="flex-row">
         <div class="overlap-group2">
           <div class="new-york-ny valign-text-middle">`+ date +`</div>
           <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">JostSNL21</div>
           <img class="feed-avatar-1" src="`+ user_image_text + `" alt="img/ellipse-1@2x.png" />
         </div>
-        <input type="image" class="three-dots-icon" src="img/three-dots-icon-1@2x.svg" id="deletePost${post.post_id}" onclick="deleteGroupPost(${post.post_id})"/>
+        <input type="image" class="three-dots-icon" src="img/bi-three-dots@2x.svg" id="deletePost${post.post_id}" onclick="deletePost(${post.post_id})"/>
       </div>
       <div class="icon-container">
         <input type="image" class="heart-icon" src="img/heart-icon@2x.svg" />
@@ -172,8 +171,7 @@ async function createPostWithImage() {
         <img class="share-icon" src="img/share-icon@2x.svg" />
       </div>
       <div class="overlap-group-1">
-        <div class="feed-text-2 valign-text-middle poppins-medium-black-18px">`+ post.text + `</div>
-        <div class="username-2-1 valign-text-middle poppins-bold-cape-cod-20px">JostSNL21</div>
+        <div class="feed-text-2 valign-text-middle poppins-medium-black-18px">`+ post.post_text + `</div>
       </div>
     </div>`
       }
@@ -183,3 +181,13 @@ async function createPostWithImage() {
   }
   
   getPost()
+
+  async function deletePost(post_id) {
+    let deleteResponse = await fetch("http://127.0.0.1:5000/group_post/" + post_id, {
+      method: "DELETE",
+      mode: "cors"
+    }).then(response => {return response.json()});
+    if (deleteResponse.status === 200) {
+      document.getElementById("post" + post_id).remove();
+    }
+  }
