@@ -19,6 +19,15 @@
   width: 499px;
 }
 
+/* Logo */
+.login .logo {
+  position: absolute;
+  top: 1rem;
+  left: 2rem;
+  width: 10rem;
+  height: 3.5rem;
+}
+
 .login .overlap-group3 {
   height: 97px;
   margin-left: 22.85px;
@@ -222,7 +231,7 @@
   font-size: var(--font-size-m);
   font-weight: 700;
   letter-spacing: -0.27px;
-  margin-right: 51.0px;
+  margin-right: 51px;
   margin-top: 16px;
   min-height: 25px;
   text-align: center;
