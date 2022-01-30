@@ -223,15 +223,23 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   top: 12.5rem;
 }
 
-/* .sign-up .password-rectangle {
-  align-self: flex-end;
-  background-color: #ffeaea;
-  border: 1px solid #ad010b;
-  border-radius: 5px;
-  height: 53px;
-  margin-right: 2px;
-  width: 460px;
-} */
+.sign-up .dob {
+  position: absolute;
+  top: 12.5rem;
+  left: 19.4rem;
+}
+
+.sign-up .userName {
+  position: absolute;
+  left: 16px;
+  top: 18.5rem;
+}
+
+.sign-up .passWord {
+  position: absolute;
+  top: 18.5rem;
+  left: 18.6rem;
+}
 
 /* Error Input Styling...label styling on line 56 */
 .errorDivColor {
@@ -454,6 +462,9 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   width: 417px;
   display: flex;
   justify-content: flex-start;
+  position: absolute;
+  top: 23rem;
+  left: 6rem;
 }
 
 .sign-up .span0 {
@@ -490,11 +501,14 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   font-size: var(--font-size-m);
   font-weight: 500;
   height: 43px;
-  width: 374px;
+  width: 38.5vw;
   margin: 1.5rem 4.5rem 0 0;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  position: absolute;
+  top: 25rem;
+  left: 1.4rem;
 }
 
 /* *********** "Form" (End) *********** */
