@@ -74,11 +74,10 @@
   font-size: var(--font-size-xl);
   font-weight: 700;
   letter-spacing: -0.54px;
-  margin-left: 11px;
-  margin-top: 0.7rem;
   min-height: 24px;
   text-align: center;
   width: 472px;
+  margin: 2.7rem 0 2rem 0;
 }
 
 .sign-up .form {
@@ -158,12 +157,16 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   width: 468px;
 }
 
-.labelLastName {
-  margin: 0 0 0 1.7rem;
+.labelLastName,
+.labelFirstName,
+.labelEmail {
+  margin: 0 0 0rem 0rem;
+  position: absolute;
+  top: -1.5rem;
+  left: 8px;
 }
 
-.sign-up .inputs,
-.lastName {
+.sign-up .inputs {
   background-color: var(--white);
   border-radius: 5px;
   height: 2.5rem;
@@ -178,12 +181,13 @@ input[type="date"]:invalid::-webkit-datetime-edit {
 .sign-up .firstName {
   position: absolute;
   left: 16px;
-  top: 4rem;
+  top: 7.5rem;
 }
 
 .sign-up .lastName {
-  top: 1.5rem;
-  left: 1.6rem;
+  position: absolute;
+  top: 0.5rem;
+  left: 18.6rem;
 }
 
 .sign-up .name {
@@ -211,6 +215,12 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   min-height: 29px;
   text-align: center;
   width: 165px;
+}
+
+.sign-up .emailDiv {
+  position: absolute;
+  left: 16px;
+  top: 12.5rem;
 }
 
 /* .sign-up .password-rectangle {
