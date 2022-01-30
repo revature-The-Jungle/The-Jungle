@@ -50,7 +50,7 @@
   top: 1rem;
   right: 1rem;
   width: 10rem;
-  height: 4rem;
+  height: 3.5rem;
 }
 
 .sign-up .title {
@@ -77,14 +77,14 @@
   min-height: 24px;
   text-align: center;
   width: 472px;
-  margin: 2.7rem 0 2rem 0;
+  margin: 2.7rem 0 2rem 4.5rem;
 }
 
 .sign-up .form {
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: 1.5rem;
+  margin-top: 3.5rem;
   min-height: 846px;
   width: 518px;
   position: relative;
@@ -464,7 +464,7 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   justify-content: flex-start;
   position: absolute;
   top: 23rem;
-  left: 6rem;
+  left: 7.5rem;
 }
 
 .sign-up .span0 {
