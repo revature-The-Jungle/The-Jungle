@@ -5,6 +5,7 @@ from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeASt
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.too_many_characters import TooManyCharacters
 from custom_exceptions.user_id_must_be_an_integer import UserIdMustBeAnInteger
+from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.abstract_classes.user_profile_dao_abs import UserProfileDAO
 from data_access_layer.implementation_classes.user_profile_dao import UserProfileDAOImp
 from entities.user import User
@@ -37,7 +38,8 @@ def test_update_user_profile_service_success():
 
 def test_update_user_profile_service_failure_too_many_chars():
     updated_user_fail_about_me: User = User(1, "test_first_name", "test_last_name", "test@test.com", "test_username",
-                                            "test_passcode", "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901",
+                                            "test_passcode",
+                                            "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901",
                                             "2022-01-22", "Test image")
     try:
         user_profile_service.update_user_profile_service(updated_user_fail_about_me)
@@ -48,7 +50,7 @@ def test_update_user_profile_service_failure_too_many_chars():
 
 def test_update_user_profile_service_failure_birth_date_is_null():
     updated_user_fail_birth_date: User = User(1, "test_first_name", "test_last_name", "test@test.com", "test_username",
-                                      "test_passcode", "About me test", None, "Test image")
+                                              "test_passcode", "About me test", None, "Test image")
     try:
         user_profile_service.update_user_profile_service(updated_user_fail_birth_date)
         assert False
@@ -104,4 +106,31 @@ def test_update_user_image_format_service_failure_():
 
 
 def test_update_password_service_failure():
+    """Stretch goal"""
     pass
+
+
+def test_get_user_followers_success():
+    user_profile_dao.get_user_followers = MagicMock(return_value="{'username': 1}")
+    assert user_profile_service.get_user_followers_service(2)
+
+
+def test_get_user_followers_failure_not_int():
+    try:
+        user_profile_service.get_user_followers_service(1.0)
+        assert False
+    except UserIdMustBeAnInteger as e:
+        assert str(e) == "The user id must be an integer."
+
+
+def test_get_user_following_success():
+    user_profile_dao.get_users_following_user = MagicMock(return_value="{'username' : 1}")
+    assert user_profile_service.get_users_following_user_service(2)
+
+
+def test_get_user_following_failure_not_int():
+    try:
+        user_profile_service.get_users_following_user_service(1.0)
+        assert False
+    except UserIdMustBeAnInteger as e:
+        assert str(e) == "The user id must be an integer."
