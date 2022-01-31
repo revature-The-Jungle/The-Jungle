@@ -581,3 +581,18 @@
   margin: auto;
   
 }
+.individual-group-page .group-in-list {
+  height: 40px;
+  min-width: 221px;
+  max-width: 9rem;
+  align-items: center;
+  display: flex;
+  margin: 10px 0px 35px 15px;
+}
+
+.individual-group-page .friend {
+  height: 57px;
+  object-fit: cover;
+  width: 57px;
+  border-radius: 50px;
+}
