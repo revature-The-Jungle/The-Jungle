@@ -46,6 +46,37 @@ async function createGroupPost() {
       <button id="deletePost${post.post_id}" onclick="deletePost(${post.post_id})">Delete</button>
       </div>
         `;
+    thePost = `
+    <div class="flex-row">
+                <div class="overlap-group">
+                  <div class="new-york-ny valign-text-middle poppins-bold-pink-swan-14px">New York, NY</div>
+                  <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">JostSNL21</div>
+                  <img class="feed-avatar" src="img/feed-avatar-1@2x.png" />
+                </div>
+                <img class="three-dots-icon" src="img/three-dots-icon-1@2x.svg"/>
+              </div>
+              <img class="feed-picture" src="img/feed-picture@2x.svg" />
+              <div class="icon-container">
+                <img class="heart-icon" src="img/heart-icon@2x.svg" />
+                <img
+                  class="chat-bubble-icon"
+                  src="img/chat-bubble-icon@2x.svg"
+                />
+                <img class="share-icon" src="img/share-icon@2x.svg" />
+              </div>
+              <div class="overlap-group2">
+                <div
+                  class="feed-text-2 valign-text-middle poppins-medium-black-18px"
+                >
+                  At the beach with bae
+                </div>
+                <div
+                  class="username-2 valign-text-middle poppins-bold-cape-cod-20px"
+                >
+                  JostSNL21
+        </div>
+      </div>`
+    document.getElementById("postInfo").innerHTML = thePost
   } else {
     document.getElementById("postInfo").innerHTML = `Post could not be sent`
   }
@@ -63,19 +94,77 @@ async function getPost() {
   }
 }
 
-function populateData(responseBody) {
+async function populateData(responseBody) {
   const allpost = document.getElementById("allpost");
   for (let post of responseBody) {
     let postBox = document.createElement('div');
-    postBox.innerHTML = `
-    <div class="overlap-group1" id="newPost${post.post_id}">
-    <p> ` + post.post_id + `</p>
-    <p> ` + post.user_id + `</p>
-    <p> ` + post.post_text + `</p> 
-    <p> Likes: ` + post.likes + `</p>
-    <p> ` + post.date_time_of_creation + `</p>
-    <button id="deletePost${post.post_id}" onclick="deleteGroupPost(${post.post_id})">Delete</button>
+    // postBox.innerHTML = `
+    // <div class="overlap-group1" id="newPost${post.post_id}">
+    // <p> ` + post.post_id + `</p>
+    // <p> ` + post.user_id + `</p>
+    // <p> ` + post.post_text + `</p> 
+    // <p> Likes: ` + post.likes + `</p>
+    // <p> ` + post.date_time_of_creation + `</p>
+    // <button id="deletePost${post.post_id}" onclick="deleteGroupPost(${post.post_id})">Delete</button>
+    // </div>`
+    
+    //add the poster image
+    let url = "http://127.0.0.1:5000/user/image/" + post.user_id;
+    let response = await fetch(url);
+    let user_image_text;
+  if(response.status === 200){
+      user_image_text = await response.text();}
+
+    //get the post image
+    url = "http://127.0.0.1:5000/post/image/" + post.post_id;
+    console.log(url);
+    response = await fetch(url);
+    console.log(response);
+    let date_time = new Date(post.date_time_of_creation)
+    let date = date_time.toDateString();
+
+    if(response.status === 200){
+      const image_text = await response.text();
+      postBox.innerHTML = 
+    `<div class="flex-row">
+      <div class="overlap-group">
+      <div class="new-york-ny valign-text-middle poppins-bold-pink-swan-14px"> `+ date +` </div>
+        <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">JostSNL21</div>
+          <img class="feed-avatar" src="`+ user_image_text + `" alt="img/feed-avatar-1@2x.png" />
+        </div>
+      <input type="image" class="three-dots-icon" src="img/three-dots-icon-1@2x.svg" id="deletePost${post.post_id}" onclick="deleteGroupPost(${post.post_id})"/>
+      </div>
+      <img class="feed-picture" src="`+ image_text +`"/>
+      <div class="icon-container">
+        <input type="image" class="heart-icon" src="img/heart-icon@2x.svg" />
+        <p>` + post.likes + `</p>
+        <input type="image" class="chat-bubble-icon" src="img/chat-bubble-icon@2x.svg"/>
+        <img class="share-icon" src="img/share-icon@2x.svg" />
+      </div>
+      <div class="overlap-group2">
+        <div class="feed-text-2 valign-text-middle poppins-medium-black-18px">`+ post.post_text +`</div>
     </div>`
+    }else{
+      postBox.innerHTML = 
+    `<div class="flex-row">
+      <div class="overlap-group">
+      <div class="new-york-ny valign-text-middle poppins-bold-pink-swan-14px"> `+ date +` </div>
+        <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">JostSNL21</div>
+          <img class="feed-avatar" id="UserImage`+ post.post_id +`" src="img/feed-avatar-1@2x.png" />
+        </div>
+      <input type="image" class="three-dots-icon" src="img/three-dots-icon-1@2x.svg" id="deletePost${post.post_id}" onclick="deleteGroupPost(${post.post_id})"/>
+      </div>
+      <div class="icon-container">
+        <input type="image" class="heart-icon" src="img/heart-icon@2x.svg" />
+        <p>` + post.likes + `</p>
+        <input type="image" class="chat-bubble-icon" src="img/chat-bubble-icon@2x.svg"/>
+        <img class="share-icon" src="img/share-icon@2x.svg" />
+      </div>
+      <div class="overlap-group2">
+        <div class="feed-text-2 valign-text-middle poppins-medium-black-18px">`+ post.post_text +`</div>
+    </div>`
+    }
+
     allpost.appendChild(postBox)
   }
 }
