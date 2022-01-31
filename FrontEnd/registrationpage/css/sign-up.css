@@ -5,25 +5,28 @@
   background-color: var(--white);
   display: flex;
   overflow: hidden;
-  width: 1440px;
+  width: 100vw;
 }
 
-.sign-up .overlap-group9 {
+.sign-up .leftSection {
   align-items: flex-end;
-  background-image: url(../img/shape@1x.svg);
+  background-image: url(../img/signUpShape.png);
   background-size: 100% 100%;
   display: flex;
-  height: 1158px;
-  min-width: 760px;
-  padding: 311px 12.6px;
+  height: 100vh;
+  width: 50vw;
+  position: relative;
 }
 
 .sign-up .image {
-  height: 509px;
-  width: 684px;
+  height: 62vh;
+  width: 68vh;
+  position: absolute;
+  left: 4rem;
+  bottom: 8rem;
 }
 
-.sign-up .flex-col {
+.sign-up .rightSection {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -36,66 +39,109 @@
 .sign-up .overlap-group8 {
   align-self: flex-end;
   height: 97px;
-  margin-right: 2.0px;
+  margin-right: 2px;
   position: relative;
   width: 289px;
 }
 
-.sign-up .jungle3-1 {
-  height: 97px;
-  left: 0;
-  object-fit: cover;
+/* *********** Logo (start) *********** */
+.sign-up .logo {
   position: absolute;
-  top: 0;
-  width: 96px;
+  top: 1rem;
+  right: 2rem;
+  width: 10rem;
+  height: 3.5rem;
 }
 
 .sign-up .title {
-  left: 96px;
+  left: 50px;
   letter-spacing: -0.72px;
   position: absolute;
   text-align: center;
-  top: 17px;
+  top: 7px;
   width: 193px;
+  font-size: var(--font-size-xxl);
 }
+
+/* *********** Logo (end) *********** */
+
+/* *********** "Form" (begin) *********** */
 
 .sign-up .create-account {
   align-self: center;
   color: var(--cape-cod);
   font-family: var(--font-family-poppins);
-  font-size: var(--font-size-xxl);
+  font-size: var(--font-size-xl);
   font-weight: 700;
   letter-spacing: -0.54px;
-  margin-left: 11.0px;
-  margin-top: 33px;
-  min-height: 54px;
+  min-height: 24px;
   text-align: center;
   width: 472px;
+  margin: 2.7rem 0 2rem 4.5rem;
 }
 
 .sign-up .form {
-  align-items: flex-end;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: 33px;
+  margin-top: 3.5rem;
   min-height: 846px;
   width: 518px;
+  position: relative;
 }
 
 .sign-up .first-name {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-right: -2.0px;
-  min-height: 88px;
-  width: 487px;
+  margin-right: -2px;
+  width: 34vw;
+  height: 10vh;
 }
 
 .sign-up .first-name-1 {
   letter-spacing: -0.27px;
-  min-height: 29px;
-  text-align: center;
+  min-height: 20px;
   width: 165px;
+  margin: 0 0 0 1.5rem;
+}
+
+/* Label */
+.labelSize,
+.asterisk {
+  font-size: var(--font-size-s);
+  color: var(--cape-cod);
+  font-family: var(--font-family-poppins);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* Asterisks */
+.asterisk {
+  color: var(--red);
+  font-family: var(--font-family-poppins);
+}
+
+/* Placeholder */
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #d8d8d8;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #d8d8d8;
+}
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #d8d8d8;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #d8d8d8;
+}
+
+input[type="date"]:invalid::-webkit-datetime-edit {
+  color: #d8d8d8;
 }
 
 .sign-up .span {
@@ -105,20 +151,43 @@
 .sign-up .overlap-group7 {
   align-self: flex-end;
   height: 53px;
-  margin-right: 4.0px;
+  margin-right: 4px;
   margin-top: 6px;
   position: relative;
   width: 468px;
 }
 
-.sign-up .rectangle-1 {
+.labelLastName,
+.labelFirstName,
+.labelEmail {
+  margin: 0 0 0rem 0rem;
+  position: absolute;
+  top: -1.5rem;
+  left: 8px;
+}
+
+.sign-up .inputs {
   background-color: var(--white);
-  border-radius: 10px;
-  height: 53px;
+  border-radius: 5px;
+  height: 2.5rem;
   left: 8px;
   position: absolute;
   top: 0;
-  width: 460px;
+  width: 18vw;
+  padding-left: 10px;
+  font-family: var(--font-family-poppins);
+}
+
+.sign-up .firstName {
+  position: absolute;
+  left: 16px;
+  top: 7.5rem;
+}
+
+.sign-up .lastName {
+  position: absolute;
+  top: 0.5rem;
+  left: 18.6rem;
 }
 
 .sign-up .name {
@@ -136,8 +205,9 @@
   flex-direction: column;
   margin-right: 7.05px;
   margin-top: 14px;
-  min-height: 82px;
   width: 486px;
+  position: relative;
+  height: 10vh;
 }
 
 .sign-up .last-name-1 {
@@ -147,23 +217,63 @@
   width: 165px;
 }
 
-.sign-up .password-rectangle {
+.sign-up .emailDiv {
+  position: absolute;
+  left: 16px;
+  top: 12.5rem;
+}
+
+.sign-up .dob {
+  position: absolute;
+  top: 12.5rem;
+  left: 19.4rem;
+}
+
+.sign-up .userName {
+  position: absolute;
+  left: 16px;
+  top: 18.5rem;
+}
+
+.sign-up .passWord {
+  position: absolute;
+  top: 18.5rem;
+  left: 18.6rem;
+}
+
+/* Error Input Styling...label styling on line 56 */
+.errorDivColor {
   align-self: flex-end;
   background-color: #ffeaea;
   border: 1px solid #ad010b;
-  border-radius: 10px;
+  border-radius: 5px;
   height: 53px;
-  margin-right: 2.0px;
-  width: 460px;
+  margin-right: 2px;
+  width: 26vw;
 }
 
-.sign-up .overlap-group6 {
+.sign-up .invalidDiv {
   align-self: flex-start;
   height: 27px;
-  margin-left: 25px;
-  margin-top: 14px;
+  margin-left: -17px;
+  margin-top: 41px;
   position: relative;
   width: 336px;
+}
+
+#invalid-icon {
+  display: none;
+}
+
+.sign-up .invalidLabel {
+  color: #c92432;
+}
+
+.sign-up .invalid {
+  border-color: #c92432;
+  color: #c92432;
+  background-color: #fffafa;
+  display: none;
 }
 
 .sign-up .info-icon {
@@ -177,10 +287,8 @@
 .sign-up .please-enter-a-valid-entry {
   left: 0;
   letter-spacing: -0.27px;
-  position: absolute;
-  text-align: center;
-  top: 0;
   width: 336px;
+  margin: 6px 0 0 3.2rem;
 }
 
 .sign-up .email {
@@ -189,21 +297,20 @@
   display: flex;
   flex-direction: column;
   margin-top: 14px;
-  min-height: 90px;
-  width: 508px;
+  width: 501px;
+  height: 10vh;
 }
 
 .sign-up .email-1 {
   letter-spacing: -0.27px;
-  min-height: 29px;
-  text-align: center;
   width: 165px;
+  margin: 0 0 0 0.7em;
 }
 
 .sign-up .overlap-group5 {
   align-self: flex-end;
   height: 53px;
-  margin-right: 4.0px;
+  margin-right: 4px;
   margin-top: 8px;
   position: relative;
   width: 468px;
@@ -224,21 +331,21 @@
   flex-direction: column;
   margin-right: 6.23px;
   margin-top: 14px;
-  min-height: 87px;
-  width: 482px;
+  width: 487px;
+  height: 10vh;
 }
 
 .sign-up .date-of-birth-1 {
   letter-spacing: -0.27px;
-  min-height: 29px;
+  min-height: 20px;
   text-align: center;
-  width: 165px;
+  width: 159px;
 }
 
 .sign-up .overlap-group4 {
   align-self: flex-end;
   height: 53px;
-  margin-right: 4.0px;
+  margin-right: 4px;
   margin-top: 5px;
   position: relative;
   width: 468px;
@@ -259,21 +366,21 @@
   flex-direction: column;
   margin-right: 3.88px;
   margin-top: 14px;
-  min-height: 91px;
-  width: 493px;
+  width: 483px;
+  height: 10vh;
 }
 
 .sign-up .user-name {
   letter-spacing: -0.27px;
-  min-height: 29px;
+  min-height: 20px;
   text-align: center;
-  width: 165px;
+  width: 138px;
 }
 
 .sign-up .overlap-group3 {
   align-self: flex-end;
   height: 53px;
-  margin-right: 4.0px;
+  margin-right: 4px;
   margin-top: 9px;
   position: relative;
   width: 468px;
@@ -295,21 +402,21 @@
   flex-direction: column;
   margin-left: 9.77px;
   margin-top: 16px;
-  min-height: 86px;
-  width: 496px;
+  width: 469px;
+  height: 10vh;
 }
 
 .sign-up .password-1 {
   letter-spacing: -0.27px;
-  min-height: 29px;
+  min-height: 22px;
   text-align: center;
-  width: 165px;
+  width: 101px;
 }
 
 .sign-up .overlap-group2 {
   align-self: flex-end;
   height: 53px;
-  margin-right: 4.0px;
+  margin-right: 4px;
   margin-top: 4px;
   position: relative;
   width: 468px;
@@ -329,22 +436,22 @@
   display: flex;
   flex-direction: column;
   margin-right: 3.88px;
-  margin-top: 20px;
-  min-height: 82px;
-  width: 498px;
+  margin-top: 12px;
+  width: 484px;
+  height: 10vh;
 }
 
 .sign-up .password-2 {
   letter-spacing: -0.27px;
   min-height: 29px;
   text-align: center;
-  width: 165px;
+  width: 188px;
 }
 
 .sign-up .overlap-group1 {
   align-self: flex-end;
   height: 53px;
-  margin-right: 4.0px;
+  margin-right: 4px;
   position: relative;
   width: 468px;
 }
@@ -361,26 +468,32 @@
 .sign-up .dont-have-an-account {
   align-self: flex-start;
   letter-spacing: -0.27px;
-  margin-left: 19px;
+  margin-left: 35px;
   margin-top: 14px;
   min-height: 25px;
   text-align: center;
   width: 417px;
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  top: 23rem;
+  left: 7.5rem;
 }
 
 .sign-up .span0 {
   color: var(--nobel);
   font-family: var(--font-family-poppins);
-  font-size: var(--font-size-m);
-  font-weight: 700;
-  letter-spacing: -0.05px;
+  font-size: var(--font-size-s);
+  font-weight: 500;
+  letter-spacing: -0.05;
+  padding-right: 10px;
 }
 
 .sign-up .span1 {
   color: #0164fa;
   font-family: var(--font-family-poppins);
-  font-size: var(--font-size-m);
-  font-weight: 700;
+  font-size: var(--font-size-s);
+  font-weight: 500;
   letter-spacing: -0.05px;
   text-decoration: underline;
 }
@@ -393,26 +506,22 @@
   width: 460px;
 }
 
-.sign-up .rectangle-3 {
-  background-color: #f4996a;
-  border-radius: 10px;
-  height: 53px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 460px;
-}
-
 .sign-up .submit {
+  background-color: #f4996a;
+  border-radius: 5px;
   color: var(--white);
   font-family: var(--font-family-poppins);
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-  height: 53px;
-  left: 0;
-  letter-spacing: -0.36px;
+  font-size: var(--font-size-m);
+  font-weight: 500;
+  height: 43px;
+  width: 38.5vw;
+  margin: 1.5rem 4.5rem 0 0;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
   position: absolute;
-  text-align: center;
-  top: 1px;
-  width: 459px;
+  top: 25rem;
+  left: 1.4rem;
 }
+
+/* *********** "Form" (End) *********** */
