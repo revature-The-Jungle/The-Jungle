@@ -1,3 +1,5 @@
+from typing import List
+
 from custom_exceptions.connection_error import ConnectionErrorr
 from data_access_layer.abstract_classes.postfeed_dao_abs import PostFeedDao
 from entities.post import Post
@@ -6,7 +8,7 @@ from util.database_connection import connection
 
 class PostFeedDaoImp(PostFeedDao):
 
-    def get_all_posts(self) -> list[Post]:
+    def get_all_posts(self) -> List[Post]:
         try:
             sql = "select * from post_table"
             cursor = connection.cursor()
@@ -29,5 +31,5 @@ class PostFeedDaoImp(PostFeedDao):
         except ConnectionErrorr:
             return False
 
-    def get_all_posts_with_group_id(self, groupid: int) -> list[Post]:
+    def get_all_posts_with_group_id(self, groupid: int) -> List[Post]:
         pass

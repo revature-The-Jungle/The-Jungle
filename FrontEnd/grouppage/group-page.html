@@ -64,6 +64,7 @@
             <div class="middle-section"></div>
             <div class="overlap-group3">
               <div class="flex-row-2">
+                <!-------------------------------- Create Group ------------------------------->
                 <div
                   class="create-new-group valign-text-middle poppins-bold-astronaut-24px"
                 >
@@ -80,56 +81,67 @@
                   <span class="span poppins-bold-cape-cod-18px"
                     >Group Name </span
                   ><span class="span poppins-bold-red-18px">*</span>
+                  <p id="groupNameThreeChar">Group name must be at least three characters long!</p>
+                  <p id="groupNameFortyChar">Group Name cannot exceed 40 characters!</p>
+                  <p id="duplicateGroupNameMessage"></p>
+                  <p id="groupNameNull"
+                  class="please-enter-a-valid-description valign-text-middle poppins-bold-bright-red-18px"
+                >
+                  Please enter a group name
+                </p>
                 </div>
+                
                 <div class="overlap-group2">
-                  <div class="rectangle-1 border-1px-mischka"></div>
-                  <div class="team-iron-men poppins-bold-silver-18px">
-                    Team Iron men
-                  </div>
+                  <input id="groupName" type="text" class="rectangle-1 border-1px-mischka"></input>
                 </div>
+                
               </div>
+              
               <div class="description">
-                <div
-                  class="description-rectangle border-1px-bright-red-2"
-                ></div>
-                <div class="description-1 poppins-bold-bright-red-18px">
-                  Description *
+                <input id="groupAbout" type="text"
+                class="description-rectangle border-1px"
+                ></input>
+                <div class="group-name-1 poppins-bold-white-18px">
+                  <span class="span poppins-bold-cape-cod-18px">
+                    Description
+                  </span><span class="span poppins-bold-red-18px">*</span>
                 </div>
               </div>
               <div class="overlap-group1">
                 <img class="info-icon" src="img/info-icon@2x.svg" />
-                <div
+                <p id="groupAboutNull"
                   class="please-enter-a-valid-description valign-text-middle poppins-bold-bright-red-18px"
                 >
-                  Please enter&nbsp;&nbsp;a valid description
-                </div>
+                  Please enter a valid description
+                </p>
+                <p id="groupAbout500Char">Group description cannot exceed 500 characters!</p>
               </div>
               <div class="overlap-group">
-                <div class="add-group">Add Group</div>
+                <button id="submitCreateGroup" type="button" class="add-group">Add Group</button>
               </div>
+              <p id="messageGroupCreated">Group created successfully!</p>
             </div>
+            <!------------------------------------------------------------------------------------>
             <div class="overlap-group4">
-              
+              <div class="group-rectangle"></div>
               <div
                 class="romanoff-is-alive valign-text-middle poppins-bold-astronaut-22px"
               >
-               
+                Romanoff Is Alive
               </div>
-              <!--The code below is where i set my code and the js that populates the all groups section-->
-              <div class="all-groups-container">
-                <table id="groupTable">
-                  <thead id="groupHeader">
-                      <tr>
-                                                  
-                      </tr>
-                  </thead>
-                  <tbody id ="groupBody">
-                    
-                  </tbody>
-                </table>
-                <script src="../grouppage/allgroups.js"></script>
+              <img class="black-widow-pic" src="img/blackwidow-pic@2x.svg" />
+              <div
+                class="spidey-verse valign-text-middle poppins-bold-astronaut-22px"
+              >
+                SpideyVerse
               </div>
-            <!----------------------------------------------------------------------------------------------->
+              <img class="spidey-verse-pic" src="img/spideyverse-pic@2x.svg" />
+              <div
+                class="mando-mercs valign-text-middle poppins-bold-astronaut-22px"
+              >
+                Mando Mercs
+              </div>
+              <img class="mando-pic" src="img/mando-pic@2x.svg" />
               <img
                 class="line-under-groups"
                 src="img/line-under-search@2x.svg"
@@ -143,7 +155,6 @@
             </div>
             <img class="line-right" src="img/line-right@1x.svg" />
             <div class="overlap-group5">
-              
               <div class="group-container-1">
                 <div
                   class="my-groups valign-text-middle poppins-bold-astronaut-24px"
@@ -157,31 +168,34 @@
                 src="img/line-under-my-groups@1x.svg"
               />
               <div class="flex-row-3">
-
-               <div class="user-group-container">
-                  <!--My group html and js link for user's group-->
-                  <table id="userGroupTable">
-                    <thead id="userGroupHeader">
-                        <tr>                
-                            <th>
-                                
-                            </th>
-                          
-                        </tr>
-                    </thead>
-                    <tbody id= "userGroupBody"></tbody>
-                  </table>
-                <!--When I jave both js scripts on they only populate on side-->
-                <script src="../grouppage/usergroups.js"></script> 
-              </div>
-
+                <div class="pic-container">
+                  <img class="mando-pic-1" src="img/mando-pic-1@2x.svg" />
+                  <img
+                    class="spidey-verse-pic-1"
+                    src="img/spideyverse-pic-1@2x.svg"
+                  />
+                  <img
+                    class="black-widow-pic-1"
+                    src="img/blackwidow-pic-1@2x.svg"
+                  />
+                </div>
+                <div class="flex-col-2 poppins-bold-astronaut-22px">
+                  <div class="mando-mercs-1 valign-text-middle">
+                    Mando Mercs
+                  </div>
+                  <div class="spidey-verse-1 valign-text-middle">
+                    SpideyVerse
+                  </div>
+                  <div class="romanoff-is-alive-1 valign-text-middle">
+                    Romanoff Is Alive
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-         
         </div>
       </div>
     </div>
-    
+    <script src="group.js"></script>
   </body>
 </html>

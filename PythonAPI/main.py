@@ -388,6 +388,11 @@ def create_comment():
 @app.get("/creator/<group_id>")
 def get_creator_api(group_id: str):
     result = group_service2.service_get_creator(int(group_id))
+    # dict = {
+    #     "firstName": result.index(0),
+    #     "lastName": result.index(1),
+    #     "username": result.index(2)
+    # }
     return jsonify(result), 200
 
 
@@ -450,6 +455,36 @@ def delete_group_post(post_id: int):
         return "Post with ID {} was deleted successfully".format(post_id)
     else:
         return "Something went wrong: Post with ID {} was not deleted".format(post_id)
+
+
+@app.get("/user/followers/<user_id>")
+def get_user_followers(user_id: int):
+    try:
+        followers = user_profile_service.get_user_followers_service(user_id)
+        return jsonify(followers), 200
+    except UserNotFound as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+    except UserIdMustBeAnInteger as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+
+
+@app.get("/user/following/<user_id>")
+def get_user_following(user_id: int):
+    try:
+        followers = user_profile_service.get_users_following_user_service(user_id)
+        return jsonify(followers), 200
+    except UserNotFound as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+    except UserIdMustBeAnInteger as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
 
 
 app.run()

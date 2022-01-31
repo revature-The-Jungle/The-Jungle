@@ -89,7 +89,10 @@
   width: 133px;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> Cayala/python/group_junction/sp2
 .group-page .line-1 {
   height: 41px;
   margin-left: 24px;
@@ -149,18 +152,6 @@
   position: absolute;
   top: 6px;
   width: 24px;
-}
-
-.group-page .user-group-container {
-  bottom: 70px;
-  left: 19px;
-  position: relative;
-}
-
-.group-page .all-groups-container {
-  top: 105px;
-  left: 19px;
-  position: relative;
 }
 
 .group-page .line-under-search {
@@ -370,7 +361,11 @@
 }
 
 .group-page .description-rectangle {
+<<<<<<< HEAD
   background-color: var(--fair-pink);
+=======
+  /* background-color: var(--fair-pink); */
+>>>>>>> Cayala/python/group_junction/sp2
   border-radius: 10px;
   height: 57px;
   left: 27px;
@@ -396,7 +391,18 @@
   width: 386px;
 }
 
+<<<<<<< HEAD
 .group-page .info-icon {
+=======
+#messageGroupCreated, #duplicateGroupNameMessage, #groupNameThreeChar, #groupNameFortyChar, #groupAbout500Char {
+  display: none;
+}
+
+
+/* ------------------------------------Input Error Icon------------------------------------*/
+.group-page .info-icon {
+  display: none;
+>>>>>>> Cayala/python/group_junction/sp2
   height: 22px;
   left: 9px;
   position: absolute;
@@ -404,7 +410,13 @@
   width: 20px;
 }
 
+<<<<<<< HEAD
 .group-page .please-enter-a-valid-description {
+=======
+/* --------------------------------------About Group Null Input----------------------------- */
+.group-page .please-enter-a-valid-description {
+  display: none;
+>>>>>>> Cayala/python/group_junction/sp2
   height: 40px;
   left: 0;
   letter-spacing: -0.27px;
