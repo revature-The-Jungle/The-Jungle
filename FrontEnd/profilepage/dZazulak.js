@@ -139,6 +139,10 @@ function populateGroupsForUsers(groupBody){
     }
 }
 
+function goToGroupPage(groupId){
+    localStorage.setItem("groupId") = groupId;
+}
+
 async function getFollowerImage(followerBody){
     for(follower in followerBody){
         let url = "http://127.0.0.1:5000/user/image/" + userId;
@@ -151,12 +155,6 @@ async function getFollowerImage(followerBody){
         
     }
 }
-}
-
-function goToGroupPage(groupId){
-    let groupLink = getElementById("groupLink-" + groupId);
-    // groupLink.setAttribute("href", "")
-    localStorage.setItem("groupId") = groupId;
 }
 
 getUserFollowers();
