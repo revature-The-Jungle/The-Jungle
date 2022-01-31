@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List
 
 from entities.comment import Comment
+from entities.returned_comment import ReturnedComment
 
 
 class CommentDAO(ABC):
@@ -13,7 +14,7 @@ class CommentDAO(ABC):
 
     # get all comments by post id
     @abstractmethod
-    def get_comment_by_post_id(self, post_id: int) -> List[Comment]:
+    def get_comment_by_post_id(self, post_id: int) -> List[ReturnedComment]:
         pass
 
     # delete comment

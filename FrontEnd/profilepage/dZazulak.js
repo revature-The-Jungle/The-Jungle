@@ -72,8 +72,9 @@ async function getUserFollowers(){
 
     if(response.status === 200){
         let body = await response.json();
-        console.log(body);
+        // console.log(body);
         populateUserFollowers(body);
+        getFollowerImage(body);
     }
     else{
         alert("Error with followers");
@@ -82,7 +83,6 @@ async function getUserFollowers(){
 
 function populateUserFollowers(followerBody){
     for(let follower in followerBody){
-
         // Created div to hold the image and username div and set class name
         let followerDiv = document.createElement("div");
         followerDiv.setAttribute("class", "follower-in-list");
@@ -90,11 +90,14 @@ function populateUserFollowers(followerBody){
         // Create the image tag and set class name
         let followerImage = document.createElement("img");
         followerImage.setAttribute("class", "friend");
+        followerImage.setAttribute("id", `${follower}-image`);
+        followerImage.setAttribute("alt", "No Image");
+        followerImage.setAttribute("src", "img/default-profile-picture.jpg");
 
         // Created the username div and set the class name and username
         let followerUsernameDiv = document.createElement("div");
         followerUsernameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
-        followerUsernameDiv.innerHTML = follower;
+        followerUsernameDiv.innerHTML = `<a class="name valign-text-middle poppins-bold-astronaut-22px" href="profile-page.html">${follower}</a>`;
 
         // Append the created elements to the page
         followerSectionDiv.appendChild(followerDiv);
@@ -104,6 +107,20 @@ function populateUserFollowers(followerBody){
     }
 }
 
+async function getFollowerImage(followerBody){
+    for(follower in followerBody){
+        let image_Element = document.getElementById(`${follower}-image`);
+        let url = `http://127.0.0.1:5000/user/image/${followerBody[follower]}`;
+        console.log(url);
+        let response = await fetch(url);
+        if(response.status === 200){
+            const image_text = await response.text();
+            image_Element.src = image_text;
+        }
+
+}
+}
+
 async function getGroupsForUser(){
     let url = "http://127.0.0.1:5000/group/user/10"
 
@@ -111,7 +128,7 @@ async function getGroupsForUser(){
 
     if(response.status === 200){
         let body = await response.json();
-        console.log(body);
+        // console.log(body);
         populateGroupsForUsers(body);
     }
     else{
@@ -126,11 +143,12 @@ function populateGroupsForUsers(groupBody){
 
         let groupImage = document.createElement("img");
         groupImage.setAttribute("class", "friend");
+        groupImage.setAttribute("alt", "No Image");
+        groupImage.setAttribute("src", "img/default-profile-picture.jpg");
 
         let groupNameDiv = document.createElement("div");
         groupNameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
-        groupNameDiv.innerHTML = groupBody[group].groupName;
-
+        groupNameDiv.innerHTML = `<a id="groupLink-${groupBody[group].groupId}" class="name valign-text-middle poppins-bold-astronaut-22px" onclick=goToGroupPage(${groupBody[group].groupId}) href="../individualgrouppage/individual-group-page.html">${groupBody[group].groupName}</a>`;
         groupSectionDiv.appendChild(groupsDiv);
         groupsDiv.appendChild(groupImage);
         groupsDiv.appendChild(groupNameDiv);
@@ -138,5 +156,20 @@ function populateGroupsForUsers(groupBody){
 
     }
 }
+
+async function getGroupImage(groupBody){
+    for(group in groupBody){
+        let imageElement = document.getElementById(`${groupBody[group].groupName}-image`);
+        let url = ""
+    }
+}
+
+function goToGroupPage(groupId){
+    let groupLink = getElementById("groupLink-" + groupId);
+    // groupLink.setAttribute("href", "")
+    localStorage.setItem("groupId") = groupId;
+    localStorage.getItem("groupId");
+}
+
 getUserFollowers();
 getGroupsForUser();
