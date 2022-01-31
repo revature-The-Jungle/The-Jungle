@@ -304,6 +304,19 @@ def leave_group(user_id: str, group_id: str):
         return jsonify(str(e)), 400
 
 
+@app.get("/user/post/<user_id>")
+def get_all_user_posts(user_id):
+    try:
+        post_as_post = post_feed_service.get_all_posts_by_user_id_service(user_id)
+        posts_as_dictionary = []
+        for post in post_as_post:
+            dictionary_posts = post.make_dictionary()
+            posts_as_dictionary.append(dictionary_posts)
+        return jsonify(posts_as_dictionary)
+    except ConnectionErrorr as e:
+        return str(e), 400
+
+
 @app.get("/postfeed")
 def get_all_posts():
     try:
@@ -399,12 +412,12 @@ def create_group_post():
         post_data = request.get_json()
         new_post = GroupPost(
             0,
-            int(post_data["userId"]),
-            int(post_data["groupId"]),
-            post_data["postText"],
-            post_data["imageFormat"],
+            int(post_data["user_id"]),
+            int(post_data["group_id"]),
+            post_data["post_text"],
+            post_data["image_data"],
             int(post_data["likes"]),
-            post_data["dateTimeOfCreation"]
+            post_data["date_time_of_creation"]
         )
         post_to_return = group_post_service.service_create_post(new_post)
         post_as_dictionary = post_to_return.make_dictionary()

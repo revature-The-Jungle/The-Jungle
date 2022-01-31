@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import List
 
 from entities.comment import Comment
 
@@ -12,7 +13,7 @@ class CommentService(ABC):
 
     # get all comments by post id
     @abstractmethod
-    def service_get_comment_by_post_id(self, post_id: int) -> list[Comment]:
+    def service_get_comment_by_post_id(self, post_id: int) -> List[Comment]:
         pass
 
     # delete comment

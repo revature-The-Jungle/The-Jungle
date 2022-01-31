@@ -11,7 +11,7 @@ class GroupPostgreService(GroupService):
         self.group_view_dao = group_view_dao
 
     def service_create_group(self, group: Group):
-        if len(group.group_name.strip()) == 0 or len(group.group_about.strip()) == 0 or len(group.image_format.strip()) == 0:
+        if len(group.group_name.strip()) == 0:
             raise NullValues("You must fill in all inputs!")
         if len(group.group_name.strip()) < 3:
             raise InputTooShort("Group name should be at least three characters long!")
