@@ -10,6 +10,7 @@
     />
     <meta name="og:type" content="website" />
     <meta name="twitter:card" content="photo" />
+    <title>Home</title>
     <link rel="stylesheet" type="text/css" href="css/profile-page.css" />
     <link rel="stylesheet" type="text/css" href="css/styleguide.css" />
     <link rel="stylesheet" type="text/css" href="css/globals.css" />
@@ -71,20 +72,25 @@
             </div>
           </div>
           <img class="line-right" src="img/line-right@1x.svg" />
+
+          <!-- Search Div -->
           <div class="search">
-            <div class="search-container">
-              <div
-                class="search-for-friends valign-text-middle poppins-medium-pink-swan-18px"
-              >
-                Search for friends
-              </div>
-              <img class="search-icon" src="img/search-icon@2x.svg" />
-            </div>
-            <img
-              class="line-under-search"
-              src="img/line-under-search-1@1x.svg"
+            <input
+              type="text"
+              placeholder="Search for Friends"
+              class="search-inputbar"
+              id="searchInputBox"
             />
+            <button class="search-button" id="searchButton">Search</button>
+            <ul
+              id="searchList"
+              class="dropdown-menu w-100 list-group active"
+              aria-labelledby="searchButton"
+              aria-current="true"
+              style="display: none"
+            ></ul>
           </div>
+
           <div class="left-section"></div>
           <img class="line-left" src="img/line-left@1x.svg" />
           <div class="nav">
@@ -279,5 +285,6 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"
   ></script>
+  <script src="SearchByUser.js"></script>
   <script src="dZazulak.js"></script>
 </html>
