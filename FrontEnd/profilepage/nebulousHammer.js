@@ -1,4 +1,4 @@
-let userId = 104; // temporary 
+let userId = 9000; // temporary 
 let postId = 273; // temporary
 
 // this is just a proof of concept and does not contain styling elements of the finished code
