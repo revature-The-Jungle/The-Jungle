@@ -130,7 +130,8 @@
 }
 
 .login .span1 {
-  color: #f70e0e;
+  /* color: #f70e0e; */
+  color: #434343;
   letter-spacing: -0.05px;
 }
 
@@ -198,7 +199,7 @@
 }
 
 .login .password-1 {
-  color: #ad010c;
+  color: #434343;
   font-family: var(--font-family-poppins);
   font-size: var(--font-size-m);
   font-weight: 700;
@@ -210,8 +211,8 @@
 
 .login .password-rectangle {
   align-self: flex-end;
-  background-color: #ffeaea;
-  border: 1px solid #ad010b;
+  background-color: white;
+  border: 1px solid #ced4da;
   border-radius: 10px;
   height: 53px;
   margin-right: 2px;
@@ -347,3 +348,32 @@
   margin-top: 0px;
   border-radius: 10px;
 } */
+
+#signup-invalid-message {
+  color: red;
+}
+
+#submitLogin {
+  background-color: #f4996a;
+  color: white;
+  font-weight: bold;
+}
+
+.overlap-group6 {
+  width: 30rem;
+  margin-top: 1rem;
+}
+
+.overlap-group6 > .info-icon {
+  margin-right: 1rem;
+}
+
+.button4 {
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+#errorMessageArea {
+  text-align: right;
+  color: red;
+}
