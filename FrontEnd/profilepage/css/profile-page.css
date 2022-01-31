@@ -256,16 +256,15 @@
   width: 1px;
 }
 
-.dropdown-menu {
-  /* align-items: flex-start; */
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* left: 378px; */
-  min-height: 3rem;
-  /* position: absolute; */
-  top: 38px;
-  /* width: 592px; */
-  /* display: none; */
+.profile-page .search {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  left: 378px;
+  min-height: 96px;
+  position: absolute;
+  top: 58px;
+  width: 592px;
 }
 
 .profile-page .search-container {
@@ -801,41 +800,6 @@
   left: 17px;
 }
 
-<<<<<<< HEAD
-=======
-/* Search Bar */
-.profile-page .search {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: row;
-  left: 378px;
-  min-height: 96px;
-  position: absolute;
-  top: 58px;
-  width: 592px;
-}
-
-#searchInputBox {
-  border-style: hidden;
-  border-width: 0px;
-  outline: none;
-  width: 500px;
-}
-
-/* Experimenting styling search button and bar */
-.search-inputbar {
-  width: 90%;
-  padding: 0;
-}
-/* .profile-page .icon-container {
-    align-items: center;
-    display: flex;
-    margin-right: 1px;
-    margin-top: 16px;
-    min-width: 511px;
-} */
-
->>>>>>> sprint_2
 .likedComment {
   width: 20vw;
   margin: 0;

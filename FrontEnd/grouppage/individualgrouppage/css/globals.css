@@ -1,26 +1,16 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 
-<<<<<<< HEAD:FrontEnd/grouppage/individualgrouppage/css/globals.css
 @import url("https://fonts.googleapis.com/css?family=Poppins:700,500,600");
 @font-face {
   font-family: "Now-Bold";
   font-style: normal;
   font-weight: 700;
   src: url("../fonts/Now-Bold.otf") format("opentype");
-=======
-@import url("https://fonts.googleapis.com/css?family=Poppins:700,500");
-
-* {
-  box-sizing: border-box;
->>>>>>> sprint_2:FrontEnd/loginpage/css/globals.css
 }
 
-body {
-  margin: 0;
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  background: #ffffff;
+.screen a {
+  display: contents;
+  text-decoration: none;
 }
 
 .container-center-horizontal {
@@ -41,4 +31,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+* {
+  box-sizing: border-box;
 }
