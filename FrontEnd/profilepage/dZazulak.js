@@ -95,7 +95,7 @@ function populateUserFollowers(followerBody){
         // Created the username div and set the class name and username
         let followerUsernameDiv = document.createElement("div");
         followerUsernameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
-        followerUsernameDiv.innerHTML = follower;
+        followerUsernameDiv.innerHTML = `<a class="name valign-text-middle poppins-bold-astronaut-22px" href="profile-page.html">${follower}</a>`;
 
         // Append the created elements to the page
         followerSectionDiv.appendChild(followerDiv);
@@ -130,8 +130,7 @@ function populateGroupsForUsers(groupBody){
 
         let groupNameDiv = document.createElement("div");
         groupNameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
-        groupNameDiv.innerHTML = groupBody[group].groupName;
-
+        groupNameDiv.innerHTML = `<a id="groupLink-" + ${groupBody[group].groupId} class="name valign-text-middle poppins-bold-astronaut-22px" onclick=goToGroupPage(${groupBody[group].groupId}) href="../individualgrouppage/individual-group-page.html">${groupBody[group].groupName}</a>`;
         groupSectionDiv.appendChild(groupsDiv);
         groupsDiv.appendChild(groupImage);
         groupsDiv.appendChild(groupNameDiv);
@@ -152,6 +151,13 @@ async function getFollowerImage(followerBody){
         
     }
 }
-  }
+}
+
+function goToGroupPage(groupId){
+    let groupLink = getElementById("groupLink-" + groupId);
+    // groupLink.setAttribute("href", "")
+    localStorage.setItem("groupId") = groupId;
+}
+
 getUserFollowers();
 getGroupsForUser();
