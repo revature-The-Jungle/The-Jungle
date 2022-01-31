@@ -2,7 +2,7 @@ package dao;
 
 import dev.com.thejungle.dao.implementations.ChatDAO;
 import dev.com.thejungle.entity.ChatMessage;
-import org.junit.Assert;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -30,9 +30,17 @@ public class ChatDAOTests {
         ChatMessage chatMessage = new ChatMessage(99999, 99999, "Nine Thousand");
         ChatMessage testCreateMessage = chatDAO.createMessage(chatMessage);
         Assert.assertNull(testCreateMessage); //The user/data was entering incorrect information into the system, hence giving an error.
-
     }
-
+    /**
+     * createMessage with Content longer than 300 characters
+     * Fail
+     */
+    @Test
+    public void createMessageLong(){
+        ChatMessage chatMessage = new ChatMessage(10000, 10000, "N".repeat(301));
+        ChatMessage testCreateMessage = chatDAO.createMessage(chatMessage);
+        Assert.assertNull(testCreateMessage); //The user/data was entering incorrect information into the system, hence giving an error.
+    }
     /**
      * getMessageHistory with no groupId
      * Success

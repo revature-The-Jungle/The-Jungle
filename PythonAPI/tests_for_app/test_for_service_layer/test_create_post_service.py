@@ -5,11 +5,11 @@ from custom_exceptions.image_must_be_a_string import ImageMustBeAString
 from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
 from custom_exceptions.post_text_must_be_a_string import PostTextMustBeAString
 from custom_exceptions.user_id_must_be_an_integer import UserIdMustBeAnInteger
-from data_access_layer.abstract_classes.create_post_dao_abs import CreatePostDAO
-from data_access_layer.implementation_classes.create_post_dao import CreatePostDAOImp
+from data_access_layer.abstract_classes.create_post_dao import CreatePostDAO
+from data_access_layer.implementation_classes.create_post_dao_imp import CreatePostDAOImp
 from entities.post import Post
-from service_layer.abstract_classes.create_post_service_abs import CreatePostService
-from service_layer.implementation_classes.create_post_service import CreatePostServiceImp
+from service_layer.abstract_classes.create_post_service import CreatePostService
+from service_layer.implementation_classes.create_post_service_imp import CreatePostServiceImp
 
 create_post_dao: CreatePostDAO = CreatePostDAOImp()
 create_post_service: CreatePostService = CreatePostServiceImp(create_post_dao)
@@ -72,18 +72,4 @@ def test_create_post_image_service_failure_not_str():
         assert False
     except ImageMustBeAString as e:
         assert str(e) == "The image must be a string format."
-
-
-def test_get_post_image_service_success():
-    create_post_dao.get_post_image = MagicMock(return_value="thisisareturnvalue")
-    assert create_post_service.get_post_image_service(12345)
-
-
-def test_get_post_image_service_failure_post_id_no_int():
-    create_post_dao.get_post_image = MagicMock(return_value="thisisareturnvalue")
-    try:
-        create_post_service.get_post_image_service(b"12345")
-        assert False
-    except PostIdMustBeAnInteger as e:
-        assert str(e) == "The post id must be an integer."
 

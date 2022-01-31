@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 from entities.group import Group
 
 
@@ -9,8 +10,4 @@ class GroupService(ABC):
 
     @abstractmethod
     def service_join_group(self, group_id: int, user_id: int):
-        pass
-
-    @abstractmethod
-    def service_get_creator(self,group_id:int):
         pass

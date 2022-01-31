@@ -29,7 +29,7 @@
   height: 255px;
   left: 381px;
   position: absolute;
-  top: 850px;
+  top: 822px;
   width: 590px;
 }
 
@@ -76,7 +76,7 @@
 .profile-page .username-2 {
   height: 24px;
   left: 89px;
-  letter-spacing: -0.30px;
+  letter-spacing: -0.3px;
   position: absolute;
   text-align: center;
   top: 27px;
@@ -94,36 +94,22 @@
 
 .profile-page .overlap-group1 {
   align-items: center;
-  /* background-color: var(--white); */
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  left: 387px;
-  min-height: 140px;
-  padding: 20px 4px;
-  position: absolute;
-  top: 150px;
-  width: 590px;
-}
-
-.profile-page .overlap-group1-1 {
-  align-items: center;
   background-color: var(--white);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  left: 0px;
-  min-height: 140px;
+  left: 377px;
+  min-height: 555px;
   padding: 20px 4px;
   position: absolute;
-  top: 150px;
+  top: 204px;
   width: 590px;
 }
 
 .profile-page .flex-row {
   align-items: center;
   display: flex;
-  margin-right: 21.0px;
+  margin-right: 21px;
   min-width: 495px;
 }
 
@@ -150,7 +136,7 @@
 .profile-page .username-1 {
   height: 24px;
   left: 53px;
-  letter-spacing: -0.30px;
+  letter-spacing: -0.3px;
   position: absolute;
   text-align: center;
   top: 9px;
@@ -164,12 +150,11 @@
   position: absolute;
   top: 0;
   width: 65px;
-  border-radius: 50px;
 }
 
 .profile-page .three-dots-icon-1 {
   height: 20px;
-  margin-bottom: 11.0px;
+  margin-bottom: 11px;
   margin-left: 269px;
   width: 20px;
 }
@@ -177,19 +162,14 @@
 .profile-page .feed-picture {
   height: 294px;
   margin-right: 5px;
-  width: 531px;
-  border-radius: 10px;
   margin-top: 16px;
-  max-width: 531px;
-  background-image: url(../img/waveShape.png);
-  background-size: 100% 100%;
-
+  width: 531px;
 }
 
 .profile-page .icon-container {
   align-items: center;
   display: flex;
-  margin-right: 1.0px;
+  margin-right: 1px;
   margin-top: 16px;
   min-width: 511px;
 }
@@ -201,7 +181,7 @@
 
 .profile-page .chat-bubble-icon {
   height: 24px;
-  margin-bottom: 2.0px;
+  margin-bottom: 2px;
   margin-left: 24px;
   width: 24px;
 }
@@ -209,21 +189,21 @@
 .profile-page .share-icon {
   height: 24px;
   margin-left: 24px;
-  margin-top: 2.0px;
+  margin-top: 2px;
   width: 24px;
 }
 
 .profile-page .bookmark-icon {
   height: 20px;
   margin-left: 365px;
-  margin-top: 4.0px;
+  margin-top: 4px;
   width: 20px;
 }
 
 .profile-page .overlap-group-1 {
   align-self: flex-start;
   height: 36px;
-  margin-top: 30px;
+  margin-top: 50px;
   position: relative;
   width: 413px;
 }
@@ -241,7 +221,7 @@
 .profile-page .username-2-1 {
   height: 24px;
   left: 0;
-  letter-spacing: -0.30px;
+  letter-spacing: -0.3px;
   position: absolute;
   text-align: center;
   top: 6px;
@@ -256,15 +236,16 @@
   width: 1px;
 }
 
-.profile-page .search {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  left: 378px;
-  min-height: 96px;
-  position: absolute;
-  top: 58px;
-  width: 592px;
+.dropdown-menu {
+  /* align-items: flex-start; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* left: 378px; */
+  min-height: 3rem;
+  /* position: absolute; */
+  top: 38px;
+  /* width: 592px; */
+  /* display: none; */
 }
 
 .profile-page .search-container {
@@ -400,16 +381,15 @@
 
 .profile-page .user-avatar {
   height: 151px;
-  margin-right: 6.0px;
+  margin-right: 6px;
   object-fit: cover;
   width: 151px;
-  border-radius: 80px;
 }
 
 .profile-page .user-name {
   height: 44px;
   letter-spacing: -0.27px;
-  margin-right: 7.0px;
+  margin-right: 7px;
   margin-top: 13px;
   text-align: center;
   width: 192px;
@@ -418,7 +398,7 @@
 .profile-page .flex-row-1 {
   align-items: flex-start;
   display: flex;
-  margin-right: 6.0px;
+  margin-right: 6px;
   margin-top: 10px;
   min-width: 307px;
 }
@@ -458,7 +438,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-left: 3.0px;
+  margin-left: 3px;
   margin-top: 39px;
   min-height: 91px;
   width: 250px;
@@ -469,7 +449,7 @@
   border: 2px solid #f47635;
   border-radius: 10px;
   height: 42px;
-  margin-right: 10.0px;
+  margin-right: 10px;
   position: relative;
   width: 216px;
 }
@@ -489,8 +469,8 @@
 }
 
 .profile-page .edit-icon {
-    left: 52px;
-    position: absolute;
+  left: 52px;
+  position: absolute;
 }
 
 .profile-page .line-under-search-1 {
@@ -531,18 +511,6 @@
   position: absolute;
   top: 563px;
   width: 361px;
-  overflow: scroll;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.profile-page .overlap-group8::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.profile-page .overlap-group8 {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
 }
 
 .profile-page .group-rectangle {
@@ -621,11 +589,9 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .profile-page .overlap-group9 {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
-
-
 
 .profile-page .chat-rectange {
   background-color: var(--white);
@@ -651,7 +617,6 @@
   height: 57px;
   object-fit: cover;
   width: 57px;
-  border-radius: 50px;
 }
 
 .profile-page .name {
@@ -676,7 +641,7 @@
   height: 31px;
   letter-spacing: -0.33px;
   margin-left: 11px;
-  margin-top: 8.0px;
+  margin-top: 8px;
   text-align: center;
   width: 203px;
 }
@@ -761,7 +726,7 @@
   text-align: center;
 }
 
-.profile-page .edit-button{
+.profile-page .edit-button {
   color: var(--atomic-orange);
   background-color: white;
   border-color: var(--atomic-orange);
@@ -771,34 +736,58 @@
   padding: 0.4rem 0.2rem 0.4rem 1rem;
 }
 
-.profile-page .save-profile-button{
-  color: white;
-  background-color: var(--atomic-orange);
-  border-color: var(--atomic-orange);
-  border-radius: 10px;
-  font-family: var(--font-family-poppins);
-}
-
-.profile-page #updateProfileEditProfileBtn{
+.profile-page #updateProfileEditProfileBtn {
   width: 100%;
 }
 
-.profile-page .follower-in-list{
+.profile-page .follower-in-list {
   height: 40px;
-  min-width: 270px;
-  max-width: 20rem;
+  min-width: 221px;
+  max-width: 9rem;
   align-items: center;
   display: flex;
   margin: 10px 0px 35px 15px;
 }
 
-.profile-page .followers-div{
+.profile-page .followers-div {
   width: 326px;
   height: 280px;
   position: absolute;
   top: 95px;
   left: 17px;
 }
+
+/* Search Bar */
+.profile-page .search {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  left: 378px;
+  min-height: 96px;
+  position: absolute;
+  top: 58px;
+  width: 592px;
+}
+
+#searchInputBox {
+  border-style: hidden;
+  border-width: 0px;
+  outline: none;
+  width: 500px;
+}
+
+/* Experimenting styling search button and bar */
+.search-inputbar {
+  width: 90%;
+  padding: 0;
+}
+/* .profile-page .icon-container {
+    align-items: center;
+    display: flex;
+    margin-right: 1px;
+    margin-top: 16px;
+    min-width: 511px;
+} */
 
 .likedComment {
   width: 20vw;

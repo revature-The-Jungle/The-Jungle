@@ -1,4 +1,4 @@
-:root { 
+:root {
   --astronaut: #223172;
   --biscay: #20316ee8;
   --black: #000000;
@@ -10,10 +10,8 @@
   --red: #f70e0e;
   --silver: #c0bfbf;
   --white: #ffffff;
-  --atomic-orange: #F47736;
+  --atomic-orange: #f47736;
 
-
- 
   --font-size-l: 20px;
   --font-size-m: 18px;
   --font-size-s: 14px;
@@ -21,7 +19,7 @@
   --font-size-xxl: 24px;
   --font-size-xxxl: 36px;
   --font-size-xxxxl: 48px;
- 
+
   --font-family-now-bold: "Now-Bold", Helvetica;
   --font-family-poppins: "Poppins", Helvetica;
 }
