@@ -388,6 +388,11 @@ def create_comment():
 @app.get("/creator/<group_id>")
 def get_creator_api(group_id: str):
     result = group_service2.service_get_creator(int(group_id))
+    # dict = {
+    #     "firstName": result.index(0),
+    #     "lastName": result.index(1),
+    #     "username": result.index(2)
+    # }
     return jsonify(result), 200
 
 
