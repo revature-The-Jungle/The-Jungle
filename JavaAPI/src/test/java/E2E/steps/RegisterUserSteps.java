@@ -1,5 +1,6 @@
 package E2E.steps;
 
+import E2E.runner.TestRunner;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,8 +10,7 @@ public class RegisterUserSteps {
 
     @Given("the user is on the sign up page")
     public void the_user_is_on_the_sign_up_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        TestRunner.driver.get("file:///C:/Users/kckar/Desktop/The-Jungle/FrontEnd/registrationpage/sign-up.html");
     }
 
     @When("the user enters First name into the new account form")
