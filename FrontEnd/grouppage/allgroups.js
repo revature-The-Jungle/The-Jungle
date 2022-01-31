@@ -8,6 +8,7 @@ async function getAllGroupData(){
     
     if (response.status === 200){
         let body = await response.json();
+        console.log(body);
         populateData(body);  
     }else {
         alert("Problem loading group data");
@@ -19,8 +20,8 @@ function populateData(responseBody){
 
     for (let group of responseBody){
         let tableRow = document.createElement("tr");
-        tableRow.innerHTML = `<td>${group.group_id}</td><td>${group.user_id}</td><td>${group.group_name}</td><td>${group.group_about}</td><td>${group.image_format}</td>`;
-        tableBody.appendChild(tableRow)
+        tableRow.innerHTML = `<td>${group.groupName}</td>`;
+        tableBody.appendChild(tableRow);
     }
 }
 getAllGroupData()
