@@ -27,10 +27,7 @@ async function login() {
   if (response.status === 200) {
     let body = await response.json();
     //  Storing information for later
-    localStorage.setItem("userId", body.userId);
-    console.log(body);
-    console.log(body.userId);
-    console.log("Success");
+    localStorage.setItem("userInfo", JSON.stringify(body));
     window.location.href = "../profilepage/profile-page.html"; //  Redirect to Here????
   } else {
     div.textContent = "Incorrect Username or Password";

@@ -217,3 +217,6 @@ async function registerUser(event) {
     invalidMessage[6].textContent = error;
   }
 }
+
+// let userData = registeredUserBody;
+// localStorage.setItem("userIdSignup", JSON.stringify(userData));

@@ -139,4 +139,4 @@ git clone https://github.com/revature-The-Jungle/The-Jungle.git
 
 ## License
 
-This project uses the following license: [<license_name>](<link>).
+This project uses the following license: [<license_name>](<link>)
