@@ -1,5 +1,5 @@
 const signupSubmitButton = document.getElementById("signup-submit");
-// signupSubmitButton.disabled = true;
+signupSubmitButton.disabled = true;
 
 const signupFirstName = document.getElementById("signup-firstname");
 const signupLastName = document.getElementById("signup-lastname");
@@ -31,10 +31,10 @@ signupFirstName.addEventListener("focusin", validateFirstName());
 function validateFirstName() {
   signupFirstName.addEventListener("focusout", function () {
     if (signupFirstName.value == "") {
-      invalidIcon[0].style.display = "";
+      invalidIcon[0].style.display = "block";
       invalidMessage[0].textContent = "First name is missing.";
     } else if (specialChar1.test(signupFirstName.value)) {
-      invalidIcon[0].style.display = "";
+      invalidIcon[0].style.display = "block";
       invalidMessage[0].textContent =
         "Cannot contain spaces or special characters.";
     } else {
@@ -56,10 +56,10 @@ signupLastName.addEventListener("focusin", validateLastName());
 function validateLastName() {
   signupLastName.addEventListener("focusout", function () {
     if (signupLastName.value == "") {
-      invalidIcon[1].style.display = "";
+      invalidIcon[1].style.display = "block";
       invalidMessage[1].textContent = "Last name is missing.";
     } else if (specialChar1.test(signupLastName.value)) {
-      invalidIcon[1].style.display = "";
+      invalidIcon[1].style.display = "block";
       invalidMessage[1].textContent =
         "Cannot contain spaces or special characters.";
     } else {
@@ -81,14 +81,14 @@ signupEmail.addEventListener("focusin", validateEmail());
 function validateEmail() {
   signupEmail.addEventListener("focusout", function () {
     if (signupEmail.value == "") {
-      invalidIcon[2].style.display = "";
+      invalidIcon[2].style.display = "block";
       invalidMessage[2].textContent = "Email is missing.";
     } else if (specialChar2.test(signupEmail.value)) {
-      invalidIcon[2].style.display = "";
+      invalidIcon[2].style.display = "block";
       invalidMessage[2].textContent =
         'Cannot contain spaces or special characters: `^*()+=[]{}"<>~|;:';
     } else if (!emailChar.test(signupEmail.value)) {
-      invalidIcon[2].style.display = "";
+      invalidIcon[2].style.display = "block";
       invalidMessage[2].textContent = "This must be an email.";
     } else {
       invalidIcon[2].style.display = "none";
@@ -109,7 +109,7 @@ signupBirthdate.addEventListener("focusin", validateBirthdate());
 function validateBirthdate() {
   signupBirthdate.addEventListener("focusout", function () {
     if (signupBirthdate.value == "") {
-      invalidIcon[3].style.display = "";
+      invalidIcon[3].style.display = "block";
       invalidMessage[3].textContent = "Birthdate is missing.";
     } else {
       invalidIcon[3].style.display = "none";
@@ -131,10 +131,10 @@ signupUsername.addEventListener("focusin", validateUsername());
 function validateUsername() {
   signupUsername.addEventListener("focusout", function () {
     if (signupUsername.value == "") {
-      invalidIcon[4].style.display = "";
+      invalidIcon[4].style.display = "block";
       invalidMessage[4].textContent = "Username is missing.";
     } else if (specialChar2.test(signupUsername.value)) {
-      invalidIcon[4].style.display = "";
+      invalidIcon[4].style.display = "block";
       invalidMessage[4].textContent =
         'Cannot contain spaces or special characters: `^*()+=[]{}"<>~|;:';
     } else {
@@ -156,10 +156,10 @@ signupPassword.addEventListener("focusin", validatePassword());
 function validatePassword() {
   signupPassword.addEventListener("focusout", function () {
     if (signupPassword.value == "") {
-      invalidIcon[5].style.display = "";
+      invalidIcon[5].style.display = "block";
       invalidMessage[5].textContent = "Password is missing.";
     } else if (specialChar2.test(signupPassword.value)) {
-      invalidIcon[5].style.display = "";
+      invalidIcon[5].style.display = "block";
       invalidMessage[5].textContent =
         'Cannot contain spaces or special characters: `^*()+=[]{}"<>~|;:';
     } else {
@@ -178,7 +178,7 @@ function validatePassword() {
 function validateRepeatPassword(password) {
   signupPasswordRepeat.addEventListener("focusout", function () {
     if (signupPasswordRepeat.value != password) {
-      invalidIcon[6].style.display = "";
+      invalidIcon[6].style.display = "block";
       invalidMessage[6].textContent = "Passwords do not match.";
     } else {
       invalidIcon[6].style.display = "none";

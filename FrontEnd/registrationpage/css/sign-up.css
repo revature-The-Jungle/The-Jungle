@@ -261,12 +261,7 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   width: 336px;
 }
 
-#invalidFirstName,
-#invalidLastName,
-#invalidEmail,
-#invalidDOB,
-#invalidUserName,
-#invalidPassword {
+#invalid-icon {
   display: none;
 }
 
@@ -278,6 +273,7 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   border-color: #c92432;
   color: #c92432;
   background-color: #fffafa;
+  display: none;
 }
 
 .sign-up .info-icon {
