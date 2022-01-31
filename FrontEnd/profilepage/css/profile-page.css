@@ -794,40 +794,21 @@
 
 .profile-page .followers-div{
   width: 326px;
-  background-color: var(--white);
-  height: auto;
+  height: 280px;
   position: absolute;
   top: 95px;
-  border-radius: 20px;
   left: 17px;
 }
 
-.profile-page .group-in-list{
-  height: 40px;
-  min-width: 221px;
-  max-width: 9rem;
-  align-items: center;
-  display: flex;
-  margin: 10px 0px 35px 15px;
-}
-
-.profile-page .groups-div{
-  background-color: var(--white);
-  width: 326px;
-  height: auto;
+.likedComment {
+  width: 20vw;
+  margin: 0;
   position: absolute;
-  top: 95px;
-  border-radius: 20px;
-  left: 20px;
-}
-
-/* for treating the image as a file upload button */
-.image-upload>input {
-  display: none;
-}
-
-
-/* for adding spacing between posts */
-.profile-page .post{
-  margin-top:25px;
+  bottom: 4rem;
+  left: 2rem;
+  color: var(--black);
+  font-family: var(--font-family-poppins);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
 }
