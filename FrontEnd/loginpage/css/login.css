@@ -4,19 +4,19 @@
   align-items: flex-start;
   background-color: var(--white);
   display: flex;
-  height: 1024px;
-  overflow: hidden;
-  width: 1440px;
+  height: 100%;
+  overflow: scroll;
+  width: 100%;
 }
 
-.login .flex-col {
+.login .leftSection {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
   margin-left: 34px;
   margin-top: 37px;
-  min-height: 698px;
-  width: 499px;
+  width: 60vw;
+  height: 100%;
 }
 
 /* Logo */
@@ -272,21 +272,21 @@
   width: 149px;
 }
 
-.login .overlap-group4 {
-  height: 1030px;
-  margin-left: 164px;
-  margin-top: -1px;
-  position: relative;
-  width: 744px;
+/* Right Section */
+.login .rightSection {
+  background-image: url(../img/waveShape.png);
+  width: 40vw;
+  height: 100vh;
+  background-size: 100% 100%;
 }
 
-.login .wave-shape {
+/* .login .wave-shape {
   height: 1030px;
   left: 54px;
   position: absolute;
   top: 0;
   width: 690px;
-}
+} */
 
 .login .no-background-1 {
   height: 614px;
