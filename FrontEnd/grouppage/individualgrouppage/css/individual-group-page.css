@@ -576,3 +576,8 @@
   height: 20em; 
   width: 25em;
 }
+.nav #message{
+  position: fixed;
+  margin: auto;
+  
+}
