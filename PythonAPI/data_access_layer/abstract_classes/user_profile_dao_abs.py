@@ -31,12 +31,12 @@ class UserProfileDAO(ABC):
         pass
 
     @abstractmethod
-    def get_user_followers(self, user_id: int) -> dict[str:int]:
+    def get_user_followers(self, user_id: int):
         """Stretch"""
         pass
 
     @abstractmethod
-    def get_users_following_user(self, user_id: int) -> dict[str:int]:
+    def get_users_following_user(self, user_id: int):
         """Stretch"""
         pass
 

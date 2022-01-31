@@ -31,12 +31,12 @@ class UserProfileService(ABC):
         pass
 
     @abstractmethod
-    def get_user_followers_service(self, user_id: int) -> dict[str:int]:
+    def get_user_followers_service(self, user_id: int):
         """Stretch"""
         pass
 
     @abstractmethod
-    def get_users_following_user_service(self, user_id: int) -> dict[str:int]:
+    def get_users_following_user_service(self, user_id: int):
         """Stretch"""
         pass
 
