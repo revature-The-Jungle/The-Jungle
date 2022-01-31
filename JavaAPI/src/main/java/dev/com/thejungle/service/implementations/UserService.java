@@ -1,61 +1,92 @@
 package dev.com.thejungle.service.implementations;
 
-import dev.com.thejungle.customexception.DuplicateUsername;
-import dev.com.thejungle.customexception.UnallowedSpaces;
-import dev.com.thejungle.customexception.UserNotFound;
-import dev.com.thejungle.customexception.UsernameOrPasscodeException;
-import dev.com.thejungle.dao.interfaces.UserDAOInt;
+import dev.com.thejungle.customexception.*;
+import dev.com.thejungle.dao.implementations.UserDAO;
 import dev.com.thejungle.entity.User;
 import dev.com.thejungle.service.interfaces.UserServiceInt;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class UserService implements UserServiceInt {
 
-    UserDAOInt userDAOInt;
+    private final UserDAO userDAO;
 
-    public UserService (UserDAOInt userDAOInt) {
-        this.userDAOInt = userDAOInt;
+    public UserService (UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
-
 
     @Override
     public User createNewUserService(User user) {
-        try {
-            if (user.getUsername().matches(".*\\s+.*")) {
-                throw new UnallowedSpaces("No spaces allowed in username or password");
-            } else if (user.getPasscode().matches(".*\\s+.*")) {
-                throw new UnallowedSpaces("No spaces allowed in username or password");
-            } else {
-                return this.userDAOInt.createNewUser(user);
-            }
-        } catch (DuplicateUsername d) {
-            throw new DuplicateUsername("This username is already taken");
+        if (user.getUsername().matches(".*\\s+.*")) {
+            throw new UnallowedSpaces("No spaces allowed in username or password");
+        } else if (user.getPasscode().matches(".*\\s+.*")) {
+            throw new UnallowedSpaces("No spaces allowed in username or password");
+        } else if (user.getUsername().isEmpty() || user.getFirstName().isEmpty() || user.getLastName().isEmpty() ||
+                user.getPasscode().isEmpty() || user.getEmail().isEmpty() || user.getUserBirthdate() == 0) {
+            throw new BlankInputs("Please fill in the blanks");
+        } else {
+            return this.userDAO.createNewUser(user);
         }
     }
 
     @Override
-    public User searchForUserService(String username) {
-        try {
-            return this.userDAOInt.searchForUser(username);
-        } catch (UserNotFound e) {
-            throw new UserNotFound("User not found");
+    public ArrayList<User> searchForUserService(String username) {
+        if (username.isEmpty()) {
+            throw new InvalidInputException("Invalid Input: Empty Username");
+        } else if (username.length() > 50) {
+            throw new InvalidInputException("Invalid Input: UserName Exceeds 50 Characters");
         }
+        return this.userDAO.searchForUser(username);
     }
 
     @Override
-    public User loginService(String username, String passcode){
-        User newUser = this.userDAOInt.searchForUser(username);
-        if (!Objects.equals(newUser.getUsername(), username) || !Objects.equals(newUser.getPasscode(), passcode))
-            throw new UsernameOrPasscodeException("Username or Passcode are incorrect");
-        return newUser;
+    public User getUserByIdService(int userId) {
+        if (userId <= 0) {
+            throw new InvalidInputException("Invalid Input: UserId Must Be A Non 0 Positive");
+        }
+        return this.userDAO.getUserById(userId);
+    }
+
+    @Override
+    public User loginService(String username, String passcode) {
+        if ((username.length() > 50) || (passcode.length() > 50))
+            throw new TooManyCharacters("You are exceeding your character limit");
+        if ((username.length() == 0) || (passcode.length() == 0))
+            throw new NoValuePasscode("You must enter username and password");
+        return this.userDAO.requestLogin(username, passcode);
     }
 
 
     @Override
     public List<User> getAllUsersService() {
-        return this.userDAOInt.getAllUsers();
+        return this.userDAO.getAllUsers();
     }
 
+    @Override
+    public HashMap<Integer, String> getGroupsNames(int userId) {
+        if (userId > 0) {
+            return this.userDAO.getGroupsNames(userId);
+        } else {
+            throw new InvalidInputException("User Id needs to be positive");
+        }
+    }
+
+    @Override
+    public ArrayList<Integer> getGroups(int userId) {
+        try {
+            if (userId > 0) {
+                if (userId < 1000000) {
+                    return this.userDAO.getGroups(userId);
+                } else {
+                    throw new InvalidInputException("User Id needs to be positive and in range");
+                }
+            } else {
+                throw new InvalidInputException("User Id needs to be positive and in range");
+            }
+        } catch (UserNotFound e) {
+            throw new UserNotFound("User not found");
+        }
+    }
 }
 
