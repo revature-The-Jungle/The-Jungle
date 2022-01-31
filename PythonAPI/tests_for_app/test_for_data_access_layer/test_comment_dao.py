@@ -67,13 +67,14 @@ def create_fake_comment(create_fake_post):
 # Happy Path Test 1
 def test_create_comment_success_1(create_fake_post, create_fake_group):
     created_comment = comment_dao.create_comment(100000000, 100000000, "hello world 1", 100000000, 100000001)
-    print(created_comment)
+    print(created_comment.make_dictionary())
     assert created_comment.comment_id != 0
 
 
 # Happy Path Test 1
 def test_create_comment_success_2(create_fake_post, create_fake_group):
     created_comment = comment_dao.create_comment(100000001, 100000001, "hello world 2", 100000000, 10000000)
+    print(created_comment.make_dictionary())
     assert created_comment.comment_id != 0
 
 
@@ -116,12 +117,15 @@ def test_delete_comment_by_id_fail_comment_not_found():
 # Happy Path Test 1
 def test_to_get_all_comments_by_post_id_list_success_1(create_fake_comment):
     returned_comments = comment_dao.get_comment_by_post_id(100000000)
+    for comment in returned_comments:
+        print(comment.make_dictionary())
     assert len(returned_comments) == 2
 
 
 # Happy Path Test 2
 def test_to_get_all_comments_by_post_id_list_success_2(create_fake_comment):
     returned_comments = comment_dao.get_comment_by_post_id(100000001)
+    print(returned_comments)
     assert len(returned_comments) == 1
 
 
