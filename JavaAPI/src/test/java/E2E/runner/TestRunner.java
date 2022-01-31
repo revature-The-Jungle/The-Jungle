@@ -19,11 +19,6 @@ public class TestRunner {
     public static WebDriverWait explicitWait;
     public static RegLoginSearchPOM rlsPom;
 
-    //    public static WebDriver webDriver;
-//    public static POM pom;
-//    public static userSignUpLoginPOM signUpPOM;
-//    public static WebDriverWait explicitWait;
-
     @BeforeClass
     public static void setup() {
         File file = new File("src/test/resources/chromedriver.exe");
@@ -33,27 +28,6 @@ public class TestRunner {
         rlsPom = new RegLoginSearchPOM(driver);
 
     }
-
-
-//    @BeforeClass
-//    public static void setup(){
-//        File file = new File("src/main/resources/msedgedriver.exe");
-//        System.setProperty("webdriver.edge.driver", file.getAbsolutePath());
-//        webDriver = new EdgeDriver();
-//        pom = new POM(webDriver);
-//        signUpPOM = new userSignUpLoginPOM(webDriver);
-//        System.out.println("setup complete!");
-//        //SETUP IMPLICIT WAIT
-//        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-//        explicitWait = new WebDriverWait(webDriver,Duration.ofSeconds(10));
-//    }
-//
-//    @AfterClass
-//    public static void teardown(){
-//        //end the driver
-//        webDriver.quit();
-//        System.out.println("teardown complete!");
-//    }
 
 
     @AfterClass

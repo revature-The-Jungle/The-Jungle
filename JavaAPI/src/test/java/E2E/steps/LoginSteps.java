@@ -1,5 +1,6 @@
 package E2E.steps;
 
+import E2E.runner.TestRunner;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -8,14 +9,13 @@ public class LoginSteps {
 
     @Given("the user is on the log-in page")
     public void the_user_is_on_the_log_in_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        TestRunner.driver.get("http://127.0.0.1:5500/login.html");
     }
     @When("the user enters correct username")
     public void the_user_enters_correct_username() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+//        TestRunner.rlsPom
     }
+//    .sendKeys("test");
     @When("the  user enters correct password")
     public void the_user_enters_correct_password() {
         // Write code here that turns the phrase above into concrete actions
