@@ -27,7 +27,7 @@ public class TestRunner {
         System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
         driver = new ChromeDriver();
         rlsPom = new RegLoginSearchPOM(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         System.out.println("Set up complete!");
     }

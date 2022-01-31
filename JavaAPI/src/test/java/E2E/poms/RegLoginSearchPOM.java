@@ -41,6 +41,6 @@ public class RegLoginSearchPOM {
     public WebElement signUpSubmitButton;
 
     @FindBy(xpath = "/html/body/div/div/div[2]/div/div[9]/p")
-    public WebElement duplicateEmailMessage;
+    public WebElement errorMessage;
 
 }

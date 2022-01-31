@@ -26,9 +26,12 @@ Feature: Create Account
     Then a message for duplicate email error populates
 
 
-#  Scenario: As the System, I want to reject bad new account creations from a blank username.
-#    Given the user is on the sign up page
-#    When the user inputs a correct email into the new account form
-#    When the user clears the username input
-#    When the user clicks on the bad submit button in the new account form
-#    Then a message for blank inputs error populates
+  Scenario: As the System, I want to reject bad new account creations from a blank username.
+    Given the user has now refreshed the sign up page
+    When the user enters a bad test First name into the new account form
+    When the user enters a bad test Last name into the new account form
+    When the user enters a bad test Date of Birth into the new account form
+    When the user enters a bad test email into the new account form
+    When the user enters a bad test password into the new account form
+    When the user clicks on the test submit button in the new account form
+    Then a message for blank inputs error populates
