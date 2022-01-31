@@ -1,7 +1,5 @@
-import pytest
 from pytest import fixture
 
-from custom_exceptions.group_member_junction_exceptions import WrongType
 from custom_exceptions.group_name_already_taken import GroupNameAlreadyTaken
 from custom_exceptions.group_not_found import GroupNotFound
 from custom_exceptions.user_not_found import UserNotFound
@@ -142,19 +140,15 @@ def test_join_group_fail_non_existent_user_id():
         print(str(e))
         assert str(e) == 'The user could not be found.'
 
-
-def test_bad_id():
-    with pytest.raises(TypeError) as e:
-        result = group_dao.get_creator(1)
-        assert "This Id does not exist" in str(e.value)
-
-
-def test_string_as_id():
-    with pytest.raises(WrongType) as e:
-        result = group_dao.get_creator("nan")
-        assert "please enter a number" in str(e.value)
-
-def test_get_creator():
-    result = group_dao.get_creator(10)
-    print(result)
-    assert result
+# def test_bad_Id():
+#     try:
+#         result = group_dao.get_creator(1)
+#         assert False;
+#     except as e:
+#         assert "This Id does not exist" in str(e.value)
+#
+#
+# def test_string_as_id():
+#     with pytest.raises(WrongType) as e:
+#         result = group_dao.get_creator("nan")
+#         assert "please enter a number" in str(e.value)
