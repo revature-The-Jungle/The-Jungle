@@ -15,7 +15,7 @@
   flex-direction: column;
   margin-left: 34px;
   margin-top: 37px;
-  width: 60vw;
+  width: 55vw;
   height: 100%;
 }
 
@@ -92,8 +92,8 @@
 }
 
 .login .form {
-  align-items: flex-end;
-  align-self: flex-end;
+  align-items: center;
+  align-self: flex-start;
   display: flex;
   flex-direction: column;
   margin-right: 2px;
@@ -255,10 +255,10 @@
   border-radius: 10px;
   display: flex;
   height: 53px;
-  margin-right: 2px;
-  margin-top: 23px;
+
   min-width: 391px;
-  padding: 0 121px;
+  padding: 0px 121px;
+  margin: 23px 0 0 16px;
 }
 
 .login .submit {
@@ -275,26 +275,18 @@
 /* Right Section */
 .login .rightSection {
   background-image: url(../img/waveShape.png);
-  width: 40vw;
+  width: 45vw;
   height: 100vh;
   background-size: 100% 100%;
 }
 
-/* .login .wave-shape {
-  height: 1030px;
-  left: 54px;
-  position: absolute;
-  top: 0;
-  width: 690px;
-} */
-
-.login .no-background-1 {
-  height: 614px;
-  left: 0;
+.login .cellPng {
+  height: 63vh;
+  right: 0;
   object-fit: cover;
   position: absolute;
   top: 163px;
-  width: 733px;
+  width: 40vw;
 }
 
 /* #submitLogin {
