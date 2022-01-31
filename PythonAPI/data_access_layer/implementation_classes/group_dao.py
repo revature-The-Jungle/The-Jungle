@@ -1,3 +1,4 @@
+from custom_exceptions.group_member_junction_exceptions import WrongType
 from custom_exceptions.group_name_already_taken import GroupNameAlreadyTaken
 from custom_exceptions.group_not_found import GroupNotFound
 from custom_exceptions.user_not_found import UserNotFound
@@ -12,11 +13,11 @@ class GroupDAOImp(GroupDAO):
             raise WrongType("please enter a number")
         else:
             try:
-                sql = "select username from user_table inner join group_table on " \
+                sql = "select first_name, last_name, username from user_table inner join group_table on " \
                       "group_table.user_id = user_table.user_id where group_id = %s"
                 cursor = connection.cursor()
                 cursor.execute(sql, [group_id])
-                creator_record = cursor.fetchone()[0]
+                creator_record = cursor.fetchmany()
                 return creator_record
             except TypeError:
                 raise TypeError("This Id does not exist")

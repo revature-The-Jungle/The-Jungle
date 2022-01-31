@@ -89,6 +89,10 @@
   width: 133px;
 }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> Cayala/python/group_junction/sp2
 .group-page .line-1 {
   height: 41px;
   margin-left: 24px;
@@ -650,4 +654,13 @@
   margin-top: 61px;
   text-align: center;
   width: 375px;
+}
+.group-page .group-in-list {
+  bottom: 200px;
+  height: 40px;
+  min-width: 221px;
+  max-width: 9rem;
+  align-items: center;
+  display: flex;
+  margin: 10px 0px 35px 15px;
 }

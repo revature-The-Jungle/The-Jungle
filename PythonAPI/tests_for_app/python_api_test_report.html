@@ -467,7 +467,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>python_api_test_report.html</h1>
-    <p>Report generated on 27-Jan-2022 at 09:04:03 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <p>Report generated on 31-Jan-2022 at 13:01:05 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
@@ -483,8 +483,8 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <td>Python</td>
         <td>3.10.0</td></tr></table>
     <h2>Summary</h2>
-    <p>118 tests ran in 25.67 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">112 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">6 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <p>14 tests ran in 11.25 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">14 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -495,80 +495,26 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
           <th class="sortable links" col="links">Links</th></tr>
         <tr hidden="true" id="not-found-message">
           <th colspan="4">No results found. Try to check the filters</th></tr></thead>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_bad_Id</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">def test_bad_Id():<br/>&gt;       with pytest.raises(TypeError) as e:<br/><span class="error">E       NameError: name &#x27;pytest&#x27; is not defined</span><br/><br/>test_for_data_access_layer\test_group_dao.py:145: NameError<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_string_as_id</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">def test_string_as_id():<br/>&gt;       with pytest.raises(WrongType) as e:<br/><span class="error">E       NameError: name &#x27;pytest&#x27; is not defined</span><br/><br/>test_for_data_access_layer\test_group_dao.py:151: NameError<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_list_contains_correct_info</td>
-          <td class="col-duration">0.04</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">def test_list_contains_correct_info():<br/>        result = group_member_junction_dao.get_all_users_in_a_group(15)<br/>        print(result)<br/>        mem = result[1]<br/>&gt;       assert mem.first_name == &quot;Test&quot;<br/><span class="error">E       AssertionError: assert &#x27;test create post&#x27; == &#x27;Test&#x27;</span><br/><span class="error">E         - Test</span><br/><span class="error">E         + test create post</span><br/><br/>test_for_data_access_layer\test_group_member_junction_dao.py:47: AssertionError<br/> ------------------------------Captured stdout call------------------------------ <br/>[First name Test Last Name Tester User ID 13 Group Id 15, First name test create post Last Name test User ID 9000 Group Id 15]
-<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-name">test_for_data_access_layer/test_like_post_dao.py::test_like_post_success</td>
-          <td class="col-duration">0.10</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">def test_like_post_success():<br/>&gt;       liked_post=like_post_dao.like_post(1)<br/><br/>test_for_data_access_layer\test_like_post_dao.py:9: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.like_post_dao.LikePostDaoImp object at 0x00000176513DD870&gt;<br/>post_id = 1<br/><br/>    def like_post(self,post_id:int):<br/>            sql = &quot;update post_table set likes = likes + 1 where post_id=%s returning likes&quot;<br/>            cursor = connection.cursor()<br/>            cursor.execute(sql,[post_id])<br/>            connection.commit()<br/>&gt;           generated_likes_number = cursor.fetchone()[0]<br/><span class="error">E           TypeError: &#x27;NoneType&#x27; object is not subscriptable</span><br/><br/>..\data_access_layer\implementation_classes\like_post_dao.py:12: TypeError<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-name">test_for_data_access_layer/test_likes_dao.py::test_like_post_success1</td>
-          <td class="col-duration">0.14</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">def test_like_post_success1():<br/>&gt;       assert like_post_dao.like_post(1) &gt; 2<br/><br/>test_for_data_access_layer\test_likes_dao.py:9: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.like_post_dao.LikePostDaoImp object at 0x00000176513DC7F0&gt;<br/>post_id = 1<br/><br/>    def like_post(self,post_id:int):<br/>            sql = &quot;update post_table set likes = likes + 1 where post_id=%s returning likes&quot;<br/>            cursor = connection.cursor()<br/>            cursor.execute(sql,[post_id])<br/>            connection.commit()<br/>&gt;           generated_likes_number = cursor.fetchone()[0]<br/><span class="error">E           TypeError: &#x27;NoneType&#x27; object is not subscriptable</span><br/><br/>..\data_access_layer\implementation_classes\like_post_dao.py:12: TypeError<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-name">test_for_data_access_layer/test_likes_dao.py::test_like_post_success2</td>
-          <td class="col-duration">0.13</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">def test_like_post_success2():<br/>&gt;       assert like_post_dao.like_post(4) &gt; 3<br/><br/>test_for_data_access_layer\test_likes_dao.py:14: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;data_access_layer.implementation_classes.like_post_dao.LikePostDaoImp object at 0x00000176513DC7F0&gt;<br/>post_id = 4<br/><br/>    def like_post(self,post_id:int):<br/>            sql = &quot;update post_table set likes = likes + 1 where post_id=%s returning likes&quot;<br/>            cursor = connection.cursor()<br/>            cursor.execute(sql,[post_id])<br/>            connection.commit()<br/>&gt;           generated_likes_number = cursor.fetchone()[0]<br/><span class="error">E           TypeError: &#x27;NoneType&#x27; object is not subscriptable</span><br/><br/>..\data_access_layer\implementation_classes\like_post_dao.py:12: TypeError<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_comment_dao.py::test_create_comment_success_1</td>
-          <td class="col-duration">0.78</td>
+          <td class="col-duration">0.80</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>&lt;entities.comment.Comment object at 0x00000176514B7040&gt;
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>{&#x27;comment_id&#x27;: 63, &#x27;post_id&#x27;: 100000000, &#x27;user_id&#x27;: 100000000, &#x27;group_id&#x27;: 100000000, &#x27;reply_user&#x27;: &#x27;100000001&#x27;, &#x27;comment_text&#x27;: &#x27;hello world 1&#x27;, &#x27;likes&#x27;: 0, &#x27;date_time_of_creation&#x27;: datetime.datetime(2022, 1, 31, 19, 0, 56, 808233)}
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_comment_dao.py::test_create_comment_success_2</td>
-          <td class="col-duration">0.77</td>
+          <td class="col-duration">0.79</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>{&#x27;comment_id&#x27;: 64, &#x27;post_id&#x27;: 100000001, &#x27;user_id&#x27;: 100000001, &#x27;group_id&#x27;: 100000000, &#x27;reply_user&#x27;: &#x27;10000000&#x27;, &#x27;comment_text&#x27;: &#x27;hello world 2&#x27;, &#x27;likes&#x27;: 0, &#x27;date_time_of_creation&#x27;: datetime.datetime(2022, 1, 31, 19, 0, 57, 601218)}
+<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -582,7 +528,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_comment_dao.py::test_delete_comment_success</td>
-          <td class="col-duration">0.72</td>
+          <td class="col-duration">0.70</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -592,7 +538,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_comment_dao.py::test_delete_comment_success_2</td>
-          <td class="col-duration">0.74</td>
+          <td class="col-duration">0.79</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -611,25 +557,28 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_comment_dao.py::test_to_get_all_comments_by_post_id_list_success_1</td>
-          <td class="col-duration">0.59</td>
+          <td class="col-duration">1.18</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>{&#x27;comment_id&#x27;: 100000001, &#x27;post_id&#x27;: 100000000, &#x27;user_id&#x27;: 100000000, &#x27;group_id&#x27;: None, &#x27;reply_user&#x27;: &#x27;100000001&#x27;, &#x27;comment_text&#x27;: &#x27;Keaton&#x27;, &#x27;likes&#x27;: None, &#x27;date_time_of_creation&#x27;: datetime.datetime(2022, 1, 31, 19, 0, 59, 862953), &#x27;user_name&#x27;: &#x27;username1000000&#x27;}
+{&#x27;comment_id&#x27;: 100000000, &#x27;post_id&#x27;: 100000000, &#x27;user_id&#x27;: 100000000, &#x27;group_id&#x27;: None, &#x27;reply_user&#x27;: &#x27;100000001&#x27;, &#x27;comment_text&#x27;: &#x27;Keaton&#x27;, &#x27;likes&#x27;: None, &#x27;date_time_of_creation&#x27;: datetime.datetime(2022, 1, 31, 19, 0, 59, 862802), &#x27;user_name&#x27;: &#x27;username1000000&#x27;}
+<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_comment_dao.py::test_to_get_all_comments_by_post_id_list_success_2</td>
-          <td class="col-duration">0.73</td>
+          <td class="col-duration">2.26</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>[&lt;entities.returned_comment.ReturnedComment object at 0x0000018148F80D60&gt;]
+<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_comment_dao.py::test_to_get_all_comments_by_post_id_list_fail_no_post</td>
-          <td class="col-duration">0.13</td>
+          <td class="col-duration">0.15</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -638,17 +587,17 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_success</td>
-          <td class="col-duration">0.55</td>
+          <td class="col-duration">0.99</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>{&#x27;post_id&#x27;: 265, &#x27;user_id&#x27;: 100000000, &#x27;group_id&#x27;: None, &#x27;post_text&#x27;: &#x27;success&#x27;, &#x27;image_data&#x27;: None, &#x27;likes&#x27;: 0, &#x27;date_time_of_creation&#x27;: datetime.datetime(2022, 1, 27, 15, 3, 46, 37722)}
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>{&#x27;post_id&#x27;: 363, &#x27;user_id&#x27;: 100000000, &#x27;group_id&#x27;: None, &#x27;post_text&#x27;: &#x27;success&#x27;, &#x27;image_data&#x27;: None, &#x27;likes&#x27;: 0, &#x27;date_time_of_creation&#x27;: datetime.datetime(2022, 1, 31, 19, 1, 3, 809091)}
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_success_2</td>
-          <td class="col-duration">0.61</td>
+          <td class="col-duration">0.58</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -657,7 +606,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_failure</td>
-          <td class="col-duration">0.09</td>
+          <td class="col-duration">0.08</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -675,897 +624,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_image_success_2</td>
-          <td class="col-duration">0.87</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_create_post_image_failure_no_post</td>
-          <td class="col-duration">0.08</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_get_post_image_success_1</td>
-          <td class="col-duration">0.69</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_get_post_image_success_2</td>
-          <td class="col-duration">0.75</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_create_post_dao.py::test_get_post_image_failure</td>
-          <td class="col-duration">0.08</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_create_group_success</td>
-          <td class="col-duration">0.60</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>groupId 113, userId 100000000, groupName Smashing Pumpkins, groupAboutThis group is for all Smashing Pumpkins fans!, imageFormat image format
-<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_create_group_success_2</td>
-          <td class="col-duration">0.65</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>groupId 114, userId 100000001, groupName ZZe Top, groupAboutThis group is for all ZZ Top fans!, imageFormat image format
-<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_create_group_failure_no_user_found</td>
-          <td class="col-duration">0.13</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>The user could not be found.
-<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_create_group_failure_group_name_already_taken</td>
-          <td class="col-duration">0.47</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>That group name has already been taken.
-<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_join_group_success</td>
-          <td class="col-duration">0.64</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_join_group_success_2</td>
-          <td class="col-duration">0.62</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_join_group_fail_non_existent_group_id</td>
-          <td class="col-duration">0.40</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>The group could not be found.
-<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_dao.py::test_join_group_fail_non_existent_user_id</td>
-          <td class="col-duration">0.09</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>The user could not be found.
-<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_get_all_users_in_a_group</td>
-          <td class="col-duration">0.04</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_to_many</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_leave_group</td>
-          <td class="col-duration">0.55</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_leave_group2</td>
-          <td class="col-duration">0.60</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_failed_leave_group</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_member_junction_dao.py::test_wrong_user</td>
-          <td class="col-duration">0.08</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_create_post_success</td>
-          <td class="col-duration">0.11</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_create_another_post_success</td>
-          <td class="col-duration">0.14</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_create_post_fail_too_many_arguments</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_create_post_fail_long_string</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_post_by_id</td>
-          <td class="col-duration">0.10</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_another_post_by_id</td>
-          <td class="col-duration">0.06</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_post_by_id_fail</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_all_posts</td>
-          <td class="col-duration">0.04</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_all_posts_by_group_id</td>
-          <td class="col-duration">0.04</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_get_all_posts_by_group_id_fails</td>
-          <td class="col-duration">0.05</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_delete_post_by_id</td>
-          <td class="col-duration">0.09</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_post_dao.py::test_delete_post_by_id_fail_post_not_found</td>
-          <td class="col-duration">0.14</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_view_dao.py::test_get_group_success</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_view_dao.py::test_info_in_group_valid</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_view_dao.py::test_unknown_group_id</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_view_dao.py::test_negative_group_id</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_view_dao.py::test_get_all_group_success</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_view_dao.py::test_group_contain_valid_info</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>[&lt;entities.group.Group object at 0x0000017651430880&gt;, &lt;entities.group.Group object at 0x00000176514329E0&gt;]
-<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_view_dao.py::test_invalid_info_for_group</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>[&lt;entities.group.Group object at 0x0000017651430880&gt;, &lt;entities.group.Group object at 0x00000176514329E0&gt;]
-<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_view_postgres.py::test_check_group_info_valid_by_id</td>
-          <td class="col-duration">0.09</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_view_postgres.py::test_view_group_by_group_id</td>
-          <td class="col-duration">0.04</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_view_postgres.py::test_get_group_by_user_id</td>
-          <td class="col-duration">0.05</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_group_view_postgres.py::test_get_all_group</td>
-          <td class="col-duration">0.04</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_postfeed_dao.py::test_get_all_posts_1</td>
-          <td class="col-duration">0.10</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_postfeed_dao.py::test_get_all_posts_2</td>
-          <td class="col-duration">0.06</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_postfeed_dao.py::test_delete_a_post</td>
-          <td class="col-duration">0.09</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_get_user_profile_success</td>
-          <td class="col-duration">0.33</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_get_user_profile_success_2</td>
-          <td class="col-duration">0.34</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_profile_about_me_success</td>
-          <td class="col-duration">0.49</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_profile_birth_date_success</td>
-          <td class="col-duration">0.59</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_profile_failure_no_user</td>
-          <td class="col-duration">0.10</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_profile_failure_sql_injection</td>
-          <td class="col-duration">0.45</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_get_user_image_success</td>
-          <td class="col-duration">0.92</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_get_user_image_success_2</td>
-          <td class="col-duration">0.70</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_get_user_image_failure_no_image</td>
-          <td class="col-duration">0.08</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_image_success_1</td>
-          <td class="col-duration">0.90</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_image_success_2</td>
-          <td class="col-duration">0.87</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_user_image_failure_no_user</td>
-          <td class="col-duration">0.09</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_image_format_success_1</td>
-          <td class="col-duration">0.72</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_image_format_success_2</td>
           <td class="col-duration">0.74</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_image_format_failure_no_user</td>
-          <td class="col-duration">0.10</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_data_access_layer/test_user_profile_dao.py::test_update_password</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_create_post_service_success</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_create_post_service_failure_user_no_int</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_create_post_service_failure_text_not_string</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_create_post_service_failure_image_format_not_string</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_create_post_image_service_success</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_create_post_image_service_failure_not_int</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_create_post_image_service_failure_not_str</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_get_post_image_service_success</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_create_post_service.py::test_get_post_image_service_failure_post_id_no_int</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_post_service.py::test_mock_create_post_success</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_post_service.py::test_mock_create_empty_string</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_post_service.py::test_mock_create_long_string</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_post_service.py::test_mock_create_post_negative_user_id</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_post_service.py::test_mock_create_wrong_type</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_post_service.py::test_mock_get_post_success</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_post_service.py::test_mock_get_all_posts_success</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_post_service.py::test_mock_get_posts_by_group_id_success</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_post_service.py::test_mock_delete_post_success</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_service.py::test_create_group_service_fail_null_values</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_service.py::test_create_group_service_fail_white_spaces</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_service.py::test_create_group_service_fail_too_long_input_group_name</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_service.py::test_create_group_service_fail_too_long_input_group_about</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_service.py::test_create_group_service_fail_too_long_input_image_format</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_service.py::test_create_group_service_fail_too_short_input_group_name</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_group_service.py::test_create_group_service_fail_duplicate_group_name</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_get_user_profile_service</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_get_user_profile_failure_not_int</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_profile_service_success</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_profile_service_failure_too_many_chars</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_profile_service_failure_birth_date_is_null</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_get_user_image_service_success</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_get_user_image_service_failure_not_int</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_image_service_success</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_image_service_failure_not_int</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_image_service_failure_not_string</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_image_format_service_success</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_user_image_format_service_failure_</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">test_for_service_layer/test_user_profile_service.py::test_update_password_service_failure</td>
-          <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">

@@ -61,3 +61,29 @@ class UserProfileServiceImp(UserProfileService):
     def update_password_service(self, user_id: int, password: str) -> User:
         """Stretch"""
         pass
+
+    def get_user_followers_service(self, user_id: int) -> dict[str:int]:
+        """Stretch"""
+        # Check to make sure the user_id is an integer
+        if not str(user_id).isnumeric():
+            raise UserIdMustBeAnInteger('The user id must be an integer.')
+        return self.user_profile_dao.get_user_followers(user_id)
+
+    def get_users_following_user_service(self, user_id: int) -> dict[str:int]:
+        """Stretch"""
+        # Check to make sure the user_id is an integer
+        if not str(user_id).isnumeric():
+            raise UserIdMustBeAnInteger('The user id must be an integer.')
+        return self.user_profile_dao.get_users_following_user(user_id)
+
+    def follow_user_service(self, user_follower_id: int, user_being_followed_id: int) -> bool:
+        # Check to make sure the user_follower_id and user_being_followed_id is an integer
+        if not (str(user_follower_id).isnumeric() and str(user_being_followed_id).isnumeric()):
+            raise UserIdMustBeAnInteger('The user id must be an integer.')
+        return self.user_profile_dao.follow_user(user_follower_id, user_being_followed_id)
+
+    def unfollow_user_service(self, user_follower_id: int, user_being_followed_id: int) -> bool:
+        # Check to make sure the user_follower_id and user_being_followed_id is an integer
+        if not (str(user_follower_id).isnumeric() and str(user_being_followed_id).isnumeric()):
+            raise UserIdMustBeAnInteger('The user id must be an integer.')
+        return self.user_profile_dao.unfollow_user(user_follower_id, user_being_followed_id)
