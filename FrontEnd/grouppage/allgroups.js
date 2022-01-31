@@ -1,5 +1,5 @@
 
-const groupSectionDiv = document.getElementById("groups-div");
+const allGroupSectionDiv = document.getElementById("groups-div");
 
 
 
@@ -13,30 +13,35 @@ async function getAllGroupsForUser(){
     if(response.status === 200){
         let body = await response.json();
         console.log(body);
-        populateGroupsForUsers(body);
+        populateAllGroupsForUsers(body);
     }
     else{
         alert("Error with groups");
     }
 }
 
-function populateGroupsForUsers(groupBody){
-    for (let group in groupBody){
-        let groupsDiv = document.createElement("div");
-        groupsDiv.setAttribute("class", "group-in-list");
+function populateAllGroupsForUsers(allGroupBody){
+    for (let groups in allGroupBody){
+        let allGroupsDiv = document.createElement("div");
+        allGroupsDiv.setAttribute("class", "group-in-list");
 
-        let groupImage = document.createElement("img");
-        groupImage.setAttribute("class", "friend");
+        let groupImage1 = document.createElement("img");
+        groupImage1.setAttribute("class", "friend");
 
-        let groupNameDiv = document.createElement("div");
-        groupNameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
-        groupNameDiv.innerHTML = groupBody[group].groupName;
-
-        groupSectionDiv.appendChild(groupsDiv);
-        groupsDiv.appendChild(groupImage);
-        groupsDiv.appendChild(groupNameDiv);
+        let allGroupNameDiv = document.createElement("div");
+        allGroupNameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
+        allGroupNameDiv.innerHTML = `<a onclick="goToGroupPage(${allGroupBody[groups].groupId})" id="groupLink-${allGroupBody[groups].groupId}" class="name valign-text-middle poppins-bold-astronaut-22px" href="../grouppage/individualgrouppage/individual-group-page.html">${allGroupBody[groups].groupName}</a>`;
 
 
+        allGroupSectionDiv.appendChild(allGroupsDiv);
+        allGroupsDiv.appendChild(groupImage1);
+        allGroupsDiv.appendChild(allGroupNameDiv);
+
+
+    }
+    function goToGroupPage(groupId){
+        localStorage.setItem("groupId", groupId);
+        localStorage.getItem("groupId");
     }
 }
 
