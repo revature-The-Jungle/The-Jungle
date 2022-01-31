@@ -92,6 +92,10 @@
   width: 65px;
 }
 
+.profile-page .feed-avatar-1 {
+border-radius: 100px;
+}
+
 .profile-page .overlap-group1 {
   align-items: center;
   /* background-color: var(--white); */
