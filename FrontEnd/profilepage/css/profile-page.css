@@ -164,6 +164,7 @@
   position: absolute;
   top: 0;
   width: 65px;
+  border-radius: 50px;
 }
 
 .profile-page .three-dots-icon-1 {
@@ -175,9 +176,14 @@
 
 .profile-page .feed-picture {
   height: 294px;
-  margin-right: 5.0px;
+  margin-right: 5px;
+  width: 531px;
+  border-radius: 10px;
   margin-top: 16px;
   max-width: 531px;
+  background-image: url(../img/waveShape.png);
+  background-size: 100% 100%;
+
 }
 
 .profile-page .icon-container {
@@ -397,6 +403,7 @@
   margin-right: 6.0px;
   object-fit: cover;
   width: 151px;
+  border-radius: 80px;
 }
 
 .profile-page .user-name {
@@ -644,6 +651,7 @@
   height: 57px;
   object-fit: cover;
   width: 57px;
+  border-radius: 50px;
 }
 
 .profile-page .name {
@@ -786,9 +794,11 @@
 
 .profile-page .followers-div{
   width: 326px;
-  height: 280px;
+  background-color: var(--white);
+  height: auto;
   position: absolute;
   top: 95px;
+  border-radius: 20px;
   left: 17px;
 }
 
@@ -802,10 +812,12 @@
 }
 
 .profile-page .groups-div{
+  background-color: var(--white);
   width: 326px;
-  height: 280px;
+  height: auto;
   position: absolute;
   top: 95px;
+  border-radius: 20px;
   left: 20px;
 }
 
