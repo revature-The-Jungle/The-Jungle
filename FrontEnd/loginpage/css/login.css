@@ -226,10 +226,6 @@
   width: 386px;
 }
 
-/* #usernameError,
-#passwordError {
-  display: none;
-} */
 #invalid-icon {
   position: relative;
 }
@@ -277,7 +273,7 @@
   margin-top: 16px;
   min-height: 25px;
   text-align: center;
-  width: 298px;
+  width: 25vw;
 }
 
 .login .span0-1 {
@@ -289,6 +285,12 @@
   color: #0164fa;
   letter-spacing: -0.05px;
   text-decoration: underline;
+}
+
+.signUpLink {
+  display: inline;
+  text-decoration: none;
+  margin-left: 5px;
 }
 
 .login .overlap-group {

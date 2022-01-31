@@ -14,11 +14,6 @@ body {
   background: #ffffff;
 }
 
-.screen a {
-  display: block;
-  text-decoration: none;
-}
-
 .container-center-horizontal {
   display: flex;
   flex-direction: row;
