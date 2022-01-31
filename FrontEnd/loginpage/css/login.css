@@ -269,8 +269,7 @@
   font-size: var(--font-size-m);
   font-weight: 700;
   letter-spacing: -0.27px;
-  margin-right: 51px;
-  margin-top: 16px;
+  margin: 1rem;
   min-height: 25px;
   text-align: center;
   width: 25vw;
@@ -293,16 +292,20 @@
   margin-left: 5px;
 }
 
-.login .overlap-group {
-  align-items: center;
+.login .submitButton {
   background-color: #f4996a;
-  border-radius: 10px;
   display: flex;
+  align-items: center;
+  justify-content: center;
   height: 53px;
-
+  border-radius: 10px;
   min-width: 391px;
   padding: 0px 121px;
   margin: 23px 0 0 16px;
+  color: var(--white);
+  font-family: var(--font-family-poppins);
+  font-size: var(--font-size-m);
+  font-weight: 700;
 }
 
 .login .submit {
