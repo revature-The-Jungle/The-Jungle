@@ -239,23 +239,25 @@
 .profile-page .search {
   align-items: flex-start;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   left: 378px;
   min-height: 96px;
   position: absolute;
   top: 58px;
   width: 592px;
 }
-/* .searchDropDown {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  left: 378px;
-  min-height: 96px;
-  position: absolute;
-  top: 58px;
-  width: 592px;
-} */
+
+.dropdown-menu{
+  /* align-items: flex-start; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* left: 378px; */
+  min-height: 3rem;
+  /* position: absolute; */
+  top: 38px;
+  /* width: 592px; */
+  /* display: none; */
+}
 
 .profile-page .search-container {
   background-color: var(--white);
@@ -773,3 +775,8 @@
   width:500px;
 }
 
+/* Experimenting styling search button and bar */
+.search-inputbar {
+  width: 90%;
+  padding: 0;
+}

@@ -197,10 +197,12 @@
 
 .login .info-icon {
   height: 20px;
-  left: 40px;
-  position: absolute;
+  /* left: 40px; */
+  /* position: absolute; */
+  position: relative;
   top: 0;
   width: 20px;
+  float: left;
 }
 
 .login .please-enter-valid-password {
@@ -307,7 +309,26 @@
 
 #submitLogin {
   background-color: #f4996a;
-  border: none;
   color: white;
   font-weight: bold;
 }
+
+.overlap-group6 {
+  width: 30rem;
+  margin-top: 1rem;
+}
+
+.overlap-group6 > .info-icon{
+  margin-right: 1rem;
+}
+
+.button4 {
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+#errorMessageArea {
+  text-align: right;
+  color: red;
+}
+

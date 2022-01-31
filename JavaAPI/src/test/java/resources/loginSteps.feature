@@ -9,7 +9,7 @@ Feature: User Login
 
   Scenario: As a user I want to log out from my account
     Given  user in  on the home-page
-    When user clicks on the log-out buttun
+    When user clicks on the log-out button
     Then user will be redirected to the landing page
 
   Scenario: As system I want to validate log-in credentials

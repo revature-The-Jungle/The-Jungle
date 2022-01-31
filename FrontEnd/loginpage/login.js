@@ -47,7 +47,7 @@ let jsonLoginObject = {
 };
 
 //  ----------------------------  Validation for inputs ----------------------------
-usernames.addEventListener("focusin", loginUsername());
+usernames.addEventListener("focusin", loginUsername);
 function loginUsername(){
     usernames.addEventListener("focusout", function() {
         if (usernames.value == "") {
@@ -56,7 +56,7 @@ function loginUsername(){
         }
         else if (specialChar2.test(usernames.value)){
             invalidIcon[0].style.display = "";
-            invalidMessage[0].textContent = 'Cannot contain spaces or special characters: `^*()+=[]{}"<>~|;:';
+            invalidMessage[0].textContent = 'Cannot contain spaces or: `^*()+=[]{}"<>~|;:';
         } else {
             validateCounter += 1;
             invalidIcon[0].style.display = "none";
@@ -67,7 +67,7 @@ function loginUsername(){
     });
 }
 
-passcodes.addEventListener("focusin", loginPasscode());
+passcodes.addEventListener("focusin", loginPasscode);
 function loginPasscode(){
     passcodes.addEventListener("focusout", function() {
         if (passcodes.value == "") {
@@ -76,7 +76,7 @@ function loginPasscode(){
         }
         else if (specialChar2.test(passcodes.value)){
             invalidIcon[1].style.display = "";
-            invalidMessage[1].textContent = 'Cannot contain spaces or special characters: `^*()+=[]{}"<>~|;:';
+            invalidMessage[1].textContent = 'Cannot contain spaces or: `^*()+=[]{}"<>~|;:';
         } else {
             validateCounter += 1;
             invalidIcon[1].style.display = "none";
