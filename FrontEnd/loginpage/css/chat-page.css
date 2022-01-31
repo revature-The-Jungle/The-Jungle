@@ -17,7 +17,7 @@
   width: 307px;
 }
 
-.chat-page .overlap-group11 {
+.chat-page .jungle-container {
   height: 97px;
   margin-right: 0.15px;
   position: relative;
@@ -33,10 +33,10 @@
   width: 96px;
 }
 
-.chat-page .title {
+.chat-page .jungle {
   color: #20316ee8;
   font-family: var(--font-family-now-bold);
-  font-size: var(--font-size-xxl);
+  font-size: var(--font-size-xxxl);
   font-weight: 700;
   left: 96px;
   letter-spacing: -0.72px;
@@ -200,8 +200,6 @@
   align-items: flex-end;
   background-image: url(../img/chat-rectangle@1x.svg);
   background-size: 100% 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   margin-right: 2px;
@@ -209,8 +207,6 @@
   min-height: 824px;
   padding: 24px 12px;
   width: 600px;
-  height: calc(50vh - 40px);
-  position: relative;
 }
 
 .chat-page .received-message-1 {
@@ -271,23 +267,6 @@
   display: flex;
   margin-top: 33px;
   min-width: 420px;
-}
-
-.chat-page .overlap-group8{
-  height: 391px;
-  left: 1028px;
-  position: absolute;
-  top: 563px;
-  width: 361px;
-}
-
-.chat-page .overlap-group9::-webkit-scrollbar{
-  display: none;
-}
-
-.chat-page .overlap-group9{
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 .chat-page .overlap-group4 {
@@ -365,16 +344,8 @@
   align-items: flex-start;
   display: flex;
   margin-right: 6px;
-  margin-top: 0px;
+  margin-top: 85px;
   min-width: 552px;
-}
-
-.chat-page .input-box{
-  border: none;
-  border-color: transparent;
-  outline: none;
-  height: 45px;
-  min-width: 430px;
 }
 
 .chat-page .overlap-group {
@@ -435,12 +406,7 @@
   position: relative;
   width: 358px;
 }
-.overflowprop {
- height: 300px;
- max-height: 300px;
- width:300px;
- overflow-y: auto;
-}
+
 .chat-page .x-rectangle {
   background-color: var(--white);
   border-radius: 15px;
@@ -501,7 +467,7 @@
   left: 53px;
   min-width: 243px;
   position: absolute;
-  top: 116px;
+  top: 119px;
 }
 
 .chat-page .briel-larson {
@@ -550,11 +516,13 @@
 }
 
 .chat-page .name-2 {
-
-  left: 40px;
+  height: 31px;
+  left: 114px;
   letter-spacing: -0.33px;
   position: absolute;
-  top: 80px;
+  text-align: center;
+  top: 119px;
+  width: 179px;
 }
 
 .chat-page .ellipse-1-1 {
@@ -580,22 +548,6 @@
   position: absolute;
   top: 15px;
   width: 40px;
-}
-.chat-page .chat-in-list{
-  height: 40px;
-  min-width: 221px;
-  max-width: 9rem;
-  align-items: center;
-  display: flex;
-  margin: 10px 0px 35px 15px;
-}
-
-.chat-page .chatGroupName{
-  width: 338px;
-  height: 345px;
-  position: absolute;
-  top: 95px;
-  left: 17px;
 }
 
 .chat-page .people-in-chat {

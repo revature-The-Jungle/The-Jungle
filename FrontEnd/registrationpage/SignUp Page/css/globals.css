@@ -1,6 +1,6 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 
-@import url("https://fonts.googleapis.com/css?family=Poppins:700,500");
+@import url("https://fonts.googleapis.com/css?family=Poppins:700");
 @font-face {
   font-family: "Now-Bold";
   font-style: normal;
@@ -22,7 +22,7 @@
 }
 
 .container-center-horizontal > * {
-  flex-shrink: 1;
+  flex-shrink: 0;
   pointer-events: auto;
 }
 

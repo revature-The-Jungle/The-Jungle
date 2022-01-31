@@ -69,6 +69,11 @@ public class ChatController {
             ChatMessage returnedChat = chatService.serviceCreateMessageObject(chatMessage);
             broadcastMessage(returnedChat.getChatId(),returnedChat.getUserId(),returnedChat.getChatContent(),userName,returnedChat.getChatDate(),groupId);
         });
+        ws.onBinaryMessage(ctx -> {
+            int groupId = Integer.parseInt(ctx.pathParam("id"));
+            ctx.data();
+            sendImg(ctx.data(), groupId);
+        });
     };
 
     /**
@@ -112,6 +117,18 @@ public class ChatController {
             broadcastString.put("userList",userList);
             session.send(gson.toJson(broadcastString));
 
+        });
+    }
+
+    /**
+     * sends to front-end a byte[] of Img with its Base64 string
+     * @param imgSent image
+     * @param groupId id of group
+     */
+    public void sendImg(byte[] imgSent, int groupId){
+        userUsernameMap.keySet().stream().filter(ctx -> (ctx.session.isOpen() && (Integer) userUsernameMap.get(ctx).get("groupId") == groupId)).forEach(session->{
+            System.out.println(session);
+            session.send(imgSent);
         });
     }
 }

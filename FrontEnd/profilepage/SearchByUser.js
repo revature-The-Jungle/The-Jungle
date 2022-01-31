@@ -25,9 +25,8 @@ const searchByUsername = async() => {
         for (let user of body.searchResult) {
             searchListResults.style.display="block";
             document.getElementById("searchList").innerHTML += `<li class="list-group-item"><a onclick=referToProfile(${user.userId})>${user.username}</a></li>`;
-            if (searchListResults == null) {
-                searchListResults.textContent = "No Resuls";
-            }
+            
+            
         }
         // searchListResults.addEventListener("focusout", searchListResults.style.display="none");
     }
