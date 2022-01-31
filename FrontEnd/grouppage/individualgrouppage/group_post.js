@@ -35,9 +35,9 @@ async function createGroupPost() {
   if (response.status == 201) {
 
     console.log(responseBody);
-    document.getElementById("postInfo").innerHTML = `Post sent`
+    // document.getElementById("postInfo").innerHTML = `Post sent`
     document.getElementById("postInfo").innerHTML = `
-      <div class="overlap-group1" id="headingNew">
+      <div class="overlap-group1" id="headingNew${post.post_id}">
       <p> ` + post_id + `</p>
       <p> ` + user_id + `</p>
       <p> ` + post_text + `</p> 
@@ -66,15 +66,28 @@ async function getPost() {
 function populateData(responseBody) {
   const allpost = document.getElementById("allpost");
   for (let post of responseBody) {
+    let Date = post.date_time_of_creation.slice(0, -7);
     let postBox = document.createElement('div');
     postBox.innerHTML = `
+    <p style=" float:right;font-size: 1em;color:grey;"> ` + Date + `</p>
     <div class="overlap-group1" id="newPost${post.post_id}">
-    <p> ` + post.post_id + `</p>
-    <p> ` + post.user_id + `</p>
-    <p> ` + post.post_text + `</p> 
-    <p> Likes: ` + post.likes + `</p>
-    <p> ` + post.date_time_of_creation + `</p>
-    <button id="deletePost${post.post_id}" onclick="deleteGroupPost(${post.post_id})">Delete</button>
+    
+    <span style="font-weight: bold; margin-right: 18em; margin-top: 1em; font-size: 1.2em;"><p> ` + post.user_id + `</p></span>
+    <img class="avatar" src="img/feed-avatar-1@2x.png" style="height:5em;width:5em; margin-right: 32em; margin-top: -2.8em;">
+    <span style="margin-top: 1em; font-size: 1.4em;"><p> ` + post.post_text + `</p></span>
+    <p> <button type="button" class="btn btn-sm btn-labeled btn-primary"> <span class="btn-label"><i class="fa fa-thumbs-up"></i></span> Like: ` + post.likes + `</i></button>
+    <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <i class="fa fa-comment"></i>
+      Comment
+    </button>
+    </p>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+    </div>
+  </div>
+    
+    <button id="deletePost${post.post_id}" onclick="deleteGroupPost(${post.post_id})" class="btn btn-sm btn-danger" style="margin-top: 10em;"><i class="fa fa-trash"></i> Delete</button>
     </div>`
     allpost.appendChild(postBox)
   }
