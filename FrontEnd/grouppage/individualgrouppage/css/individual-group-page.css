@@ -577,8 +577,9 @@
   width: 25em;
 }
 .nav #message{
-  position: fixed;
-  margin: auto;
+  position: absolute;
+  margin-top: 250px;
+  font-family: var(--font-family-poppins)
   
 }
 .individual-group-page .group-in-list {
@@ -596,3 +597,16 @@
   width: 57px;
   border-radius: 50px;
 }
+
+#groupJoined, #groupNotJoined {
+  display: none;
+}
+
+.joinGroupButton {
+  background-color: orange;
+  color: white;
+  font-family: var(--font-family-poppins);
+  margin: 1.7rem 0 0 0;
+  padding: 0.4rem 2rem;
+}
+
