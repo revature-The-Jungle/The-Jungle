@@ -42,4 +42,4 @@ To-do list:
 
 ## License
 
-This project uses the following license: [<license_name>](<link>).
+This project uses the following license: [<license_name>](<link>)
