@@ -1,5 +1,5 @@
 
-let userId = 9000;
+// let userId = 9000;
 
 async function getUserImage(){
   let url = "http://127.0.0.1:5000/user/image/" + userId;
@@ -13,7 +13,7 @@ async function getUserImage(){
       // const image_Element = document.createElement('img');
       // image_Element.src = image_text;
       // document.getElementById("userImage").appendChild(image_Element);
-      let image_Element = document.getElementById("userImage");
+      let image_Element = document.getElementById("userImageFile");
       image_Element.src = image_text;
       
   }
@@ -21,7 +21,7 @@ async function getUserImage(){
 getUserImage()
 
 async function createUserWithImage() {
-    let file    = document.getElementById('imageFile').files[0];
+    let file    = document.getElementById('userImageFileInput').files[0];
     let reader  = new FileReader();
     let base64gif;
   
@@ -45,7 +45,8 @@ async function createUserWithImage() {
               body: String(base64gif)
           });
           const imageText = await response.text();
-          console.log(imageText)
+          let image_Element = document.getElementById("userImageFile");
+          image_Element.src = imageText;
       
       }
       else{

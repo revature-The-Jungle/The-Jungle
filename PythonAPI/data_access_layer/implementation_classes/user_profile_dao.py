@@ -1,3 +1,4 @@
+from custom_exceptions.follower_not_found import FollowerNotFound
 from custom_exceptions.user_image_not_found import UserImageNotFound
 from custom_exceptions.user_not_found import UserNotFound
 from data_access_layer.abstract_classes.user_profile_dao_abs import UserProfileDAO
@@ -153,4 +154,39 @@ class UserProfileDAOImp(UserProfileDAO):
         for follower in following_records:
             following_dict.update({follower[0]: follower[1]})
         return following_dict
+
+    def follow_user(self, user_follower_id: int, user_being_followed_id: int) -> bool:
+
+        sql = "select * from user_table where user_id = %(user_id)s"
+        cursor = connection.cursor()
+        cursor.execute(sql, {"user_id": user_follower_id})
+        if not cursor.fetchone():
+            raise UserNotFound(user_not_found_string)
+
+        sql = "select * from user_table where user_id = %(user_id)s"
+        cursor = connection.cursor()
+        cursor.execute(sql, {"user_id": user_being_followed_id})
+        if not cursor.fetchone():
+            raise UserNotFound(user_not_found_string)
+
+        sql = "insert into user_follow_junction_table values(%(user_follower_id)s, %(user_being_followed_id)s, false)"
+        cursor = connection.cursor()
+        cursor.execute(sql, {"user_follower_id": user_follower_id, "user_being_followed_id": user_being_followed_id})
+        connection.commit()
+        return True
+
+    def unfollow_user(self, user_follower_id: int, user_being_followed_id: int) -> bool:
+        sql = "select * from user_follow_junction_table where user_follower_id = %(user_follower_id)s" \
+              " and user_id = %(user_being_followed_id)s"
+        cursor = connection.cursor()
+        cursor.execute(sql, {'user_follower_id': user_follower_id, "user_being_followed_id": user_being_followed_id})
+        if not cursor.fetchone():
+            raise FollowerNotFound("The follower was not found.")
+
+        sql = "delete from user_follow_junction_table where user_follower_id = %(user_follower_id)s" \
+              " and user_id = %(user_being_followed_id)s"
+        cursor = connection.cursor()
+        cursor.execute(sql, {"user_follower_id": user_follower_id, "user_being_followed_id": user_being_followed_id})
+        connection.commit()
+        return True
 

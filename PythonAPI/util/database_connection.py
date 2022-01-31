@@ -1,5 +1,6 @@
-from psycopg import connect, OperationalError
 import os
+
+from psycopg import connect, OperationalError
 
 
 def create_connection():

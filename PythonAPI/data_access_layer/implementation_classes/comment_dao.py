@@ -1,3 +1,5 @@
+from typing import List
+
 from custom_exceptions.comment_not_found import CommentNotFound
 from custom_exceptions.post_not_found import PostNotFound
 from data_access_layer.abstract_classes.comment_dao_abs import CommentDAO
@@ -28,7 +30,7 @@ class CommentDAOImp(CommentDAO):
         comment_record = cursor.fetchone()
         return Comment(*comment_record)
 
-    def get_comment_by_post_id(self, post_id: int) -> list[Comment]:
+    def get_comment_by_post_id(self, post_id: int) -> List[Comment]:
         # Check to see if the post id is in the database, raise an error otherwise.
         sql = f"select * from post_table where post_id = %(post_id)s;"
         cursor = connection.cursor()
