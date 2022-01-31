@@ -6,31 +6,42 @@ async function getUserInGroups() {
     if(response.status === 200){
         let body = await response.json()
         console.log(body)
-        createList(body)
+         createList(body)
 
     }
     
 }
 
 function createList(response) {
-     let memList = document.getElementById("members")
-    for(member of response){
-        memList.insertAdjacentHTML("afterend",`<div>${member.first_name}</div>`)
-        
-        
-
-
+        let groupSectionDiv = document.getElementById("member-3")
+        console.log(response)
+        for (let group of response){
+            let groupsDiv = document.createElement("div");
+            groupsDiv.setAttribute("class", "group-in-list");
+    
+            let groupImage = document.createElement("img");
+            groupImage.setAttribute("class", "friend");
+    
+            let groupNameDiv = document.createElement("div");
+            groupNameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
+            groupNameDiv.textContent = group.first_name;
+    
+            groupSectionDiv.appendChild(groupsDiv);
+            groupsDiv.appendChild(groupImage);
+            groupsDiv.appendChild(groupNameDiv);
+    
+    
+        }
     }
-}
 
 async function deleteRequest() {
-    userId = 13
-    groupId = 15
+    userId = 9000
+    groupId = 9000
     url = `http://127.0.0.1:5000/group/leave/${userId}/${groupId}`
     let response = await fetch(url, { method: "DELETE", headers: { "Content-Type": "application/json" }});
     if(response.status === 200){
-        let message = document.getElementById("message")
-        message.textContent = "You have left the group"
+        location.replace("../group-page.html")
+        
     }if(response.status === 400){
         let message = document.getElementById("message")
         message.textContent = response.statusText

@@ -134,3 +134,45 @@ def test_get_user_following_failure_not_int():
         assert False
     except UserIdMustBeAnInteger as e:
         assert str(e) == "The user id must be an integer."
+
+
+def test_user_follow_success():
+    user_profile_dao.follow_user = MagicMock(return_value=True)
+    assert user_profile_service.follow_user_service(1, 2)
+
+
+def test_user_follow_failure_not_int_chars():
+    try:
+        user_profile_service.follow_user_service("abc", "abc")
+        assert False
+    except UserIdMustBeAnInteger as e:
+        assert str(e) == "The user id must be an integer."
+
+
+def test_user_follow_failure_not_int_float():
+    try:
+        user_profile_service.follow_user_service(1.0, 1.0)
+        assert False
+    except UserIdMustBeAnInteger as e:
+        assert str(e) == "The user id must be an integer."
+
+
+def test_user_unfollow_success():
+    user_profile_dao.unfollow_user = MagicMock(return_value=True)
+    assert user_profile_service.unfollow_user_service(1, 2)
+
+
+def test_user_unfollow_failure_not_int_chars():
+    try:
+        user_profile_service.unfollow_user_service("abc", "abc")
+        assert False
+    except UserIdMustBeAnInteger as e:
+        assert str(e) == "The user id must be an integer."
+
+
+def test_user_unfollow_failure_not_int_float():
+    try:
+        user_profile_service.unfollow_user_service(1.0, 1.0)
+        assert False
+    except UserIdMustBeAnInteger as e:
+        assert str(e) == "The user id must be an integer."

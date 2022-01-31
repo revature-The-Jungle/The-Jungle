@@ -1,9 +1,9 @@
 /** -----------------------------------------------------Join Group------------------------------------------------------------ */
 async function joinGroup() {
-    const groupId = localStorage.getItem("groupId").value;
-    const userId = localStorage.getItem("userId").value;
-    // const groupId = 7;
-    // const userId = 9000;
+    // const groupId = localStorage.getItem("groupId").value;
+    // const userId = localStorage.getItem("userId").value;
+    const groupId = 7;
+     const userId = 9000;
 
     let response = await fetch(url + `group/join/${groupId}/${userId}`, {method: "POST", mode: "cors",
         headers: {"Content-Type": "application/json"}});

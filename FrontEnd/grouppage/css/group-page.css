@@ -89,10 +89,6 @@
   width: 133px;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> Cayala/python/group_junction/sp2
 .group-page .line-1 {
   height: 41px;
   margin-left: 24px;
@@ -406,12 +402,12 @@
 .group-page .please-enter-a-valid-description {
   display: none;
   height: 40px;
-  left: 0;
-  letter-spacing: -0.27px;
-  position: absolute;
-  text-align: center;
-  top: 0;
-  width: 386px;
+    left: 162px;
+    letter-spacing: -0.27px;
+    position: absolute;
+    text-align: center;
+    top: -19px;
+    width: 386px;
 }
 
 .group-page .overlap-group {

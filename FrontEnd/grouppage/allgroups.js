@@ -28,6 +28,7 @@ function populateAllGroupsForUsers(allGroupBody){
         let groupImage1 = document.createElement("img");
         groupImage1.setAttribute("class", "friend");
 
+
         let allGroupNameDiv = document.createElement("div");
         allGroupNameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
         allGroupNameDiv.innerHTML = `<a onclick="goToGroupPage(${allGroupBody[groups].groupId})" id="groupLink-${allGroupBody[groups].groupId}" class="name valign-text-middle poppins-bold-astronaut-22px" href="../grouppage/individualgrouppage/individual-group-page.html">${allGroupBody[groups].groupName}</a>`;
