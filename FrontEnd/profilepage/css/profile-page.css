@@ -393,10 +393,11 @@
 }
 
 .profile-page .user-avatar {
-  height: 151px;
+  height: 161px;
   margin-right: 6.0px;
   object-fit: cover;
-  width: 151px;
+  width: 161px;
+  border-radius: 100px;
 }
 
 .profile-page .user-name {
