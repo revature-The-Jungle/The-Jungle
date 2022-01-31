@@ -97,7 +97,7 @@ async function getPost() {
 async function populateData(responseBody) {
   const allpost = document.getElementById("allpost");
   for (let post of responseBody) {
-    let Date = post.date_time_of_creation.slice(0, -7);
+    // let Date = post.date_time_of_creation.slice(0, -7);
     let postBox = document.createElement('div');
     postBox.innerHTML = `
     <p style=" float:right;font-size: 1em;color:grey;"> ` + Date + `</p>

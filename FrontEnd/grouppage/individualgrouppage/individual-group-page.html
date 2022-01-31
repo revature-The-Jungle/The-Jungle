@@ -42,12 +42,21 @@
             >
               Mando Mercs
             </div>
-            <div class="creator valign-text-middle">Scarlett Johansson</div>
-            <div
+            <div id="groupCreator" class="creator valign-text-middle">Scarlett Johansson</div>
+            <div id="creatorUserName"
               class="creator-username valign-text-middle poppins-medium-dove-gray-18px"
             >
               @Scar_Jo12
             </div>
+            <button
+            id="submitJoinGroup"
+            type="button"
+            class="btn joinGroupButton"
+          >
+            Join Group
+          </button>
+          <p id="groupJoined">Group joined.</p>
+          <p id="groupNotJoined">There was an error joining this group.</p>
             <img
               class="line-under-about-group"
               src="img/line-under-about-group@2x.svg"
@@ -65,6 +74,10 @@
             <div class="logout-container">
               <div class="logout valign-text-middle">Logout</div>
               <img class="x-icon" src="img/logout-icon@2x.svg" />
+            </div>
+            <div id = "message">
+              <button style="background-color: orange;" onclick="deleteRequest();">Leave Group</button>
+
             </div>
           </div>
         </div>
@@ -218,5 +231,6 @@
       </div>
     </div>
     <script src="group_post.js"></script>
+    <script src="/individualgrouppage/individual-group.js"></script>
   </body>
 </html>

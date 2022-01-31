@@ -24,13 +24,13 @@ function createList(response) {
 }
 
 async function deleteRequest() {
-    userId = 13
-    groupId = 15
+    userId = 9000
+    groupId = 9000
     url = `http://127.0.0.1:5000/group/leave/${userId}/${groupId}`
     let response = await fetch(url, { method: "DELETE", headers: { "Content-Type": "application/json" }});
     if(response.status === 200){
-        let message = document.getElementById("message")
-        message.textContent = "You have left the group"
+        location.replace("../group-page.html")
+        
     }if(response.status === 400){
         let message = document.getElementById("message")
         message.textContent = response.statusText
