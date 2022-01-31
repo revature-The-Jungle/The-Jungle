@@ -15,8 +15,7 @@ public class RegisterUserSteps {
 
     @When("the user enters First name into the new account form")
     public void the_user_enters_first_name_into_the_new_account_form() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        TestRunner.rlsPom.signUpFirstName.sendKeys("E2ETest");
     }
 
     @When("the user enters Last name into the new account form")
@@ -37,8 +36,20 @@ public class RegisterUserSteps {
         throw new io.cucumber.java.PendingException();
     }
 
-    @When("the user enters a username into the new account form")
-    public void the_user_enters_a_username_into_the_new_account_form() {
+    @When("the user enters an username with a space into the new account form")
+    public void the_user_enters_an_username_with_a_space_into_the_new_account_form() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @When("an error message populates")
+    public void an_error_message_populates() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @When("the user enters a correct username into the new account form")
+    public void the_user_enters_a_correct_username_into_the_new_account_form() {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
@@ -49,11 +60,6 @@ public class RegisterUserSteps {
         throw new io.cucumber.java.PendingException();
     }
 
-    @When("the user enters the password again into the new account form")
-    public void the_user_enters_the_password_again_into_the_new_account_form() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
 
     @When("the user clicks on the submit button in the new account form")
     public void the_user_clicks_on_the_submit_button_in_the_new_account_form() {

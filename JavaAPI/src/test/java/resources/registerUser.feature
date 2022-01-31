@@ -6,8 +6,9 @@ Feature: Create Account
     When the user enters Last name into the new account form
     When the user enters Date of Birth into the new account form
     When the user enters email into the new account form
-    When the user enters a username into the new account form
+    When the user enters an username with a space into the new account form
+    And an error message populates
+    When the user enters a correct username into the new account form
     When the user enters a password into the new account form
-    When the user enters the password again into the new account form
     When the user clicks on the submit button in the new account form
     Then the user will be redirected to their profile page
