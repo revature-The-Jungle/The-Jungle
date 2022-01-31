@@ -15,6 +15,7 @@ public class RegLoginSearchPOM {
         PageFactory.initElements(webDriver, this);
     }
 
+    // REGISTRATION WEB ELEMENTS
     @FindBy(id="signup-firstname")
     public WebElement signUpFirstName;
 
@@ -29,5 +30,17 @@ public class RegLoginSearchPOM {
 
     @FindBy(id="signup-username")
     public WebElement signUpUsername;
+
+    @FindBy(id="signup-password")
+    public WebElement signUpPassword;
+
+    @FindBy(xpath="/html/body/div/div/div[2]/div/div[6]/div/p")
+    public WebElement usernameErrorMessage;
+
+    @FindBy(id="signup-submit")
+    public WebElement signUpSubmitButton;
+
+    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[9]/p")
+    public WebElement duplicateEmailMessage;
 
 }

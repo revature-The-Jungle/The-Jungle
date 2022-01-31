@@ -178,7 +178,7 @@ function validatePassword() {
 
 
 // ROUTE TO REGISTER/CREATE USER
-signupSubmitButton.addEventListener("submit", registerUser);
+signupSubmitButton.addEventListener("click", registerUser);
 async function registerUser(event) {
   event.preventDefault();
   event.stopPropagation();
