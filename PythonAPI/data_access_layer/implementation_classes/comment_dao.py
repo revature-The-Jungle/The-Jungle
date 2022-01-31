@@ -1,7 +1,10 @@
+from typing import List
+
 from custom_exceptions.comment_not_found import CommentNotFound
 from custom_exceptions.post_not_found import PostNotFound
 from data_access_layer.abstract_classes.comment_dao_abs import CommentDAO
 from entities.comment import Comment
+from entities.returned_comment import ReturnedComment
 from util.database_connection import connection
 
 
@@ -28,7 +31,7 @@ class CommentDAOImp(CommentDAO):
         comment_record = cursor.fetchone()
         return Comment(*comment_record)
 
-    def get_comment_by_post_id(self, post_id: int) -> list[Comment]:
+    def get_comment_by_post_id(self, post_id: int) -> List[ReturnedComment]:
         # Check to see if the post id is in the database, raise an error otherwise.
         sql = f"select * from post_table where post_id = %(post_id)s;"
         cursor = connection.cursor()
@@ -36,13 +39,15 @@ class CommentDAOImp(CommentDAO):
         if not cursor.fetchone():
             raise PostNotFound('The post could not be found.')
 
-        sql = "select * from comment_table where post_id = %s"
+        sql = "select ct.comment_id, ct.post_id, ct.user_id , ct.group_id, ct.username, ct.comment_text, ct.likes, " \
+              "ct.date_time_of_creation, ut.username from comment_table as ct inner join user_table as ut " \
+              "on ct.user_id = ut.user_id where post_id = %s;"
         cursor = connection.cursor()
         cursor.execute(sql, [post_id])
         comment_record = cursor.fetchall()
         comment_list = []
         for comments in comment_record:
-            comment_list.append(Comment(*comments))
+            comment_list.append(ReturnedComment(*comments))
         return comment_list
 
     def delete_comment(self, comment_id: int) -> bool:

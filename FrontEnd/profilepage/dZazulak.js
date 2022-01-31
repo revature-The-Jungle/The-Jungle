@@ -2,6 +2,7 @@ const userBirthDate = document.getElementById("userBirthdateInput");
 const userAboutMe = document.getElementById("userAboutMeInput");
 const modalMessageDiv = document.getElementById("profileModalMsg");
 const followerSectionDiv = document.getElementById("followers-div");
+const groupSectionDiv = document.getElementById("groups-div");
 
 /*
     Grabs the user profile information from the update profile modal and sends it through the layers
@@ -71,8 +72,9 @@ async function getUserFollowers(){
 
     if(response.status === 200){
         let body = await response.json();
-        console.log(body);
+        // console.log(body);
         populateUserFollowers(body);
+        getFollowerImage(body);
     }
     else{
         alert("Error with followers");
@@ -80,16 +82,24 @@ async function getUserFollowers(){
 }
 
 function populateUserFollowers(followerBody){
-    let x = 1;
     for(let follower in followerBody){
+        // Created div to hold the image and username div and set class name
         let followerDiv = document.createElement("div");
-        let followerImage = document.createElement("img");
-        let followerUsernameDiv = document.createElement("div");
         followerDiv.setAttribute("class", "follower-in-list");
+
+        // Create the image tag and set class name
+        let followerImage = document.createElement("img");
         followerImage.setAttribute("class", "friend");
-        x++;
+        followerImage.setAttribute("id", `${follower}-image`);
+        followerImage.setAttribute("alt", "No Image");
+        followerImage.setAttribute("src", "img/default-profile-picture.jpg");
+
+        // Created the username div and set the class name and username
+        let followerUsernameDiv = document.createElement("div");
         followerUsernameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
-        followerUsernameDiv.innerHTML = follower;
+        followerUsernameDiv.innerHTML = `<a class="name valign-text-middle poppins-bold-astronaut-22px" href="profile-page.html">${follower}</a>`;
+
+        // Append the created elements to the page
         followerSectionDiv.appendChild(followerDiv);
         followerDiv.appendChild(followerImage);
         followerDiv.appendChild(followerUsernameDiv);
@@ -97,4 +107,69 @@ function populateUserFollowers(followerBody){
     }
 }
 
+async function getFollowerImage(followerBody){
+    for(follower in followerBody){
+        let image_Element = document.getElementById(`${follower}-image`);
+        let url = `http://127.0.0.1:5000/user/image/${followerBody[follower]}`;
+        console.log(url);
+        let response = await fetch(url);
+        if(response.status === 200){
+            const image_text = await response.text();
+            image_Element.src = image_text;
+        }
+
+}
+}
+
+async function getGroupsForUser(){
+    let url = "http://127.0.0.1:5000/group/user/10"
+
+    let response = await fetch(url);
+
+    if(response.status === 200){
+        let body = await response.json();
+        // console.log(body);
+        populateGroupsForUsers(body);
+    }
+    else{
+        alert("Error with groups");
+    }
+}
+
+function populateGroupsForUsers(groupBody){
+    for (let group in groupBody){
+        let groupsDiv = document.createElement("div");
+        groupsDiv.setAttribute("class", "group-in-list");
+
+        let groupImage = document.createElement("img");
+        groupImage.setAttribute("class", "friend");
+        groupImage.setAttribute("alt", "No Image");
+        groupImage.setAttribute("src", "img/default-profile-picture.jpg");
+
+        let groupNameDiv = document.createElement("div");
+        groupNameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
+        groupNameDiv.innerHTML = `<a id="groupLink-${groupBody[group].groupId}" class="name valign-text-middle poppins-bold-astronaut-22px" onclick=goToGroupPage(${groupBody[group].groupId}) href="../individualgrouppage/individual-group-page.html">${groupBody[group].groupName}</a>`;
+        groupSectionDiv.appendChild(groupsDiv);
+        groupsDiv.appendChild(groupImage);
+        groupsDiv.appendChild(groupNameDiv);
+
+
+    }
+}
+
+async function getGroupImage(groupBody){
+    for(group in groupBody){
+        let imageElement = document.getElementById(`${groupBody[group].groupName}-image`);
+        let url = ""
+    }
+}
+
+function goToGroupPage(groupId){
+    let groupLink = getElementById("groupLink-" + groupId);
+    // groupLink.setAttribute("href", "")
+    localStorage.setItem("groupId") = groupId;
+    localStorage.getItem("groupId");
+}
+
 getUserFollowers();
+getGroupsForUser();

@@ -36,15 +36,15 @@ def fake_join_group(create_fake_user):
 
 
 def test_get_all_users_in_a_group():
-    result = group_member_junction_dao.get_all_users_in_a_group(15)
+    result = group_member_junction_dao.get_all_users_in_a_group(9000)
     assert len(result) >= 2
 
 
-def test_list_contains_correct_info():
-    result = group_member_junction_dao.get_all_users_in_a_group(15)
-    print(result)
-    mem = result[1]
-    assert mem.first_name == "Test"
+# def test_list_contains_correct_info():
+#     result = group_member_junction_dao.get_all_users_in_a_group(9000)
+#     print(result)
+#     mem = result[1]
+#     assert mem.first_name == "Test"
 
 
 def test_to_many():

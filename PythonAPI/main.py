@@ -5,6 +5,7 @@ from flask_cors import CORS
 
 from custom_exceptions.birth_date_is_null import BirthDateIsNull
 from custom_exceptions.connection_error import ConnectionErrorr
+from custom_exceptions.follower_not_found import FollowerNotFound
 from custom_exceptions.group_exceptions import NullValues, InputTooShort, InputTooLong, GroupNameTaken
 from custom_exceptions.group_member_junction_exceptions import WrongId
 from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
@@ -304,6 +305,19 @@ def leave_group(user_id: str, group_id: str):
         return jsonify(str(e)), 400
 
 
+@app.get("/user/post/<user_id>")
+def get_all_user_posts(user_id):
+    try:
+        post_as_post = post_feed_service.get_all_posts_by_user_id_service(user_id)
+        posts_as_dictionary = []
+        for post in post_as_post:
+            dictionary_posts = post.make_dictionary()
+            posts_as_dictionary.append(dictionary_posts)
+        return jsonify(posts_as_dictionary)
+    except ConnectionErrorr as e:
+        return str(e), 400
+
+
 @app.get("/postfeed")
 def get_all_posts():
     try:
@@ -399,12 +413,12 @@ def create_group_post():
         post_data = request.get_json()
         new_post = GroupPost(
             0,
-            int(post_data["userId"]),
-            int(post_data["groupId"]),
-            post_data["postText"],
-            post_data["imageFormat"],
+            int(post_data["user_id"]),
+            int(post_data["group_id"]),
+            post_data["post_text"],
+            post_data["image_data"],
             int(post_data["likes"]),
-            post_data["dateTimeOfCreation"]
+            post_data["date_time_of_creation"]
         )
         post_to_return = group_post_service.service_create_post(new_post)
         post_as_dictionary = post_to_return.make_dictionary()
@@ -477,6 +491,48 @@ def get_user_following(user_id: int):
         exception_json = jsonify(exception_dictionary)
         return exception_json, 400
     except UserIdMustBeAnInteger as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+
+
+@app.post("/user/<user_follower_id>/followed/<user_being_followed_id>")
+def follow_user(user_follower_id: int, user_being_followed_id: int):
+    try:
+        user_profile_service.follow_user_service(user_follower_id, user_being_followed_id)
+        follow_dictionary = {"message": str(user_follower_id) + " has followed " + str(user_being_followed_id)}
+        follow_json = jsonify(follow_dictionary)
+        return follow_json, 200
+    except UserIdMustBeAnInteger as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+    except FollowerNotFound as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+    except UserNotFound as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+
+
+@app.post("/user/<user_follower_id>/unfollowed/<user_being_followed_id>")
+def unfollow_user(user_follower_id: int, user_being_followed_id: int):
+    try:
+        user_profile_service.unfollow_user_service(user_follower_id, user_being_followed_id)
+        unfollow_dictionary = {"message": str(user_follower_id) + " has unfollowed " + str(user_being_followed_id)}
+        unfollow_json = jsonify(unfollow_dictionary)
+        return unfollow_json, 200
+    except UserIdMustBeAnInteger as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+    except FollowerNotFound as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+    except UserNotFound as e:
         exception_dictionary = {"message": str(e)}
         exception_json = jsonify(exception_dictionary)
         return exception_json, 400
