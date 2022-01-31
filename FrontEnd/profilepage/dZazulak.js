@@ -74,6 +74,7 @@ async function getUserFollowers(){
         let body = await response.json();
         console.log(body);
         populateUserFollowers(body);
+        getFollowerImage(body);
     }
     else{
         alert("Error with followers");
@@ -82,7 +83,6 @@ async function getUserFollowers(){
 
 function populateUserFollowers(followerBody){
     for(let follower in followerBody){
-
         // Created div to hold the image and username div and set class name
         let followerDiv = document.createElement("div");
         followerDiv.setAttribute("class", "follower-in-list");
@@ -90,6 +90,7 @@ function populateUserFollowers(followerBody){
         // Create the image tag and set class name
         let followerImage = document.createElement("img");
         followerImage.setAttribute("class", "friend");
+        followerImage.setAttribute("id", "follower-image");
 
         // Created the username div and set the class name and username
         let followerUsernameDiv = document.createElement("div");
@@ -138,5 +139,19 @@ function populateGroupsForUsers(groupBody){
 
     }
 }
+
+async function getFollowerImage(followerBody){
+    for(follower in followerBody){
+        let url = "http://127.0.0.1:5000/user/image/" + userId;
+        let response = await fetch(url);
+        console.log(response);
+        if(response.status === 200){
+            const image_text = await response.text();
+            let image_Element = document.getElementById("follower-image");
+            image_Element.src = image_text;
+        
+    }
+}
+  }
 getUserFollowers();
 getGroupsForUser();
