@@ -388,6 +388,11 @@ def create_comment():
 @app.get("/creator/<group_id>")
 def get_creator_api(group_id: str):
     result = group_service2.service_get_creator(int(group_id))
+    # dict = {
+    #     "firstName": result.index(0),
+    #     "lastName": result.index(1),
+    #     "username": result.index(2)
+    # }
     return jsonify(result), 200
 
 
@@ -399,12 +404,12 @@ def create_group_post():
         post_data = request.get_json()
         new_post = GroupPost(
             0,
-            int(post_data["userId"]),
-            int(post_data["groupId"]),
-            post_data["postText"],
-            post_data["imageFormat"],
+            int(post_data["user_id"]),
+            int(post_data["group_id"]),
+            post_data["post_text"],
+            post_data["image_data"],
             int(post_data["likes"]),
-            post_data["dateTimeOfCreation"]
+            post_data["date_time_of_creation"]
         )
         post_to_return = group_post_service.service_create_post(new_post)
         post_as_dictionary = post_to_return.make_dictionary()
@@ -450,6 +455,36 @@ def delete_group_post(post_id: int):
         return "Post with ID {} was deleted successfully".format(post_id)
     else:
         return "Something went wrong: Post with ID {} was not deleted".format(post_id)
+
+
+@app.get("/user/followers/<user_id>")
+def get_user_followers(user_id: int):
+    try:
+        followers = user_profile_service.get_user_followers_service(user_id)
+        return jsonify(followers), 200
+    except UserNotFound as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+    except UserIdMustBeAnInteger as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+
+
+@app.get("/user/following/<user_id>")
+def get_user_following(user_id: int):
+    try:
+        followers = user_profile_service.get_users_following_user_service(user_id)
+        return jsonify(followers), 200
+    except UserNotFound as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
+    except UserIdMustBeAnInteger as e:
+        exception_dictionary = {"message": str(e)}
+        exception_json = jsonify(exception_dictionary)
+        return exception_json, 400
 
 
 app.run()

@@ -1,5 +1,17 @@
 /* screen - individual-group-page */
 
+.joinGroupButton {
+  background-color: var(--atomic-tangerine);
+  color: white;
+  font-family: var(--font-family-poppins);
+  margin: 1.7rem 0 0 0;
+  padding: 0.4rem 2rem;
+}
+
+#groupJoined, #groupNotJoined {
+  display: none;
+}
+
 .individual-group-page {
   align-items: flex-start;
   background-color: var(--white);
