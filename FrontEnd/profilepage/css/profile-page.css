@@ -92,13 +92,9 @@
   width: 65px;
 }
 
-.profile-page .feed-avatar-1 {
-border-radius: 100px;
-}
-
 .profile-page .overlap-group1 {
   align-items: center;
-  background-color: var(--white);
+  /* background-color: var(--white); */
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -117,20 +113,12 @@ border-radius: 100px;
   display: flex;
   flex-direction: column;
   left: 0px;
-  min-height: 700px;
+  min-height: 140px;
   padding: 20px 4px;
   position: absolute;
   top: 150px;
   width: 590px;
-  bottom:600px;
-  overflow-y: scroll;
 }
-
-/* for hiding the scroll bar in chrome */
-.profile-page .overlap-group1-1::-webkit-scrollbar{
-  display: none;
-}
-
 
 .profile-page .flex-row {
   align-items: center;
@@ -176,6 +164,7 @@ border-radius: 100px;
   position: absolute;
   top: 0;
   width: 65px;
+  border-radius: 50px;
 }
 
 .profile-page .three-dots-icon-1 {
@@ -187,9 +176,14 @@ border-radius: 100px;
 
 .profile-page .feed-picture {
   height: 294px;
-  margin-right: 5.0px;
+  margin-right: 5px;
+  width: 531px;
+  border-radius: 10px;
   margin-top: 16px;
   max-width: 531px;
+  background-image: url(../img/waveShape.png);
+  background-size: 100% 100%;
+
 }
 
 .profile-page .icon-container {
@@ -405,11 +399,11 @@ border-radius: 100px;
 }
 
 .profile-page .user-avatar {
-  height: 161px;
+  height: 151px;
   margin-right: 6.0px;
   object-fit: cover;
-  width: 161px;
-  border-radius: 100px;
+  width: 151px;
+  border-radius: 80px;
 }
 
 .profile-page .user-name {
@@ -657,6 +651,7 @@ border-radius: 100px;
   height: 57px;
   object-fit: cover;
   width: 57px;
+  border-radius: 50px;
 }
 
 .profile-page .name {
@@ -799,9 +794,11 @@ border-radius: 100px;
 
 .profile-page .followers-div{
   width: 326px;
-  height: 280px;
+  background-color: var(--white);
+  height: auto;
   position: absolute;
   top: 95px;
+  border-radius: 20px;
   left: 17px;
 }
 
@@ -815,10 +812,12 @@ border-radius: 100px;
 }
 
 .profile-page .groups-div{
+  background-color: var(--white);
   width: 326px;
-  height: 280px;
+  height: auto;
   position: absolute;
   top: 95px;
+  border-radius: 20px;
   left: 20px;
 }
 
@@ -826,6 +825,7 @@ border-radius: 100px;
 .image-upload>input {
   display: none;
 }
+
 
 /* for adding spacing between posts */
 .profile-page .post{
