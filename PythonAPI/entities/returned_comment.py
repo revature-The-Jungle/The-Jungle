@@ -1,4 +1,4 @@
-class Comment:
+class ReturnedComment:
     def __init__(self,
                  comment_id: int = None,  # primary key
                  post_id: int = None,  # foreign key
@@ -29,6 +29,7 @@ class Comment:
             "reply_user": self.reply_user,
             "comment_text": self.comment_text,
             "likes": self.likes,
-            "date_time_of_creation": self.date_time_of_creation
+            "date_time_of_creation": self.date_time_of_creation,
+            "user_name": self.user_name
         }
         return dictionary
