@@ -14,9 +14,9 @@ async function getGroups(){
 
 }
 let ws;
-function createChatConnection(){
+function createChatConnection(groupId){
 console.log(groupdId)
-ws = new WebSocket("ws://" + "localhost" + ":" + "8080" + "/chat/" + 16 + "/" + "irfanold");
+ws = new WebSocket("ws://" + "localhost" + ":" + "8080" + "/chat/" + groupId + "/" + localStorage.getItem("userInfo").username);
 
 ws.onmessage = msg => updateChat(msg,ws);
 ws.onclose = () => updateChat("WebSocket connection closed");
@@ -132,3 +132,40 @@ window.addEventListener('load', function() {
         }
     });
   });
+
+const userId = sessionStorage.getItem("userId");
+const chatGroupDiv = document.getElementById("chatGroupName");
+
+//Displaying the Group Names by grabbing the userId's to display the names on the top right...
+async function getAllGroupByUserId(){
+    let url = "http://localhost:8080/user/groupNames/" + 13;
+    let response = await fetch(url);
+
+    if(response.status === 200){
+        let body = await response.json();
+        console.log(body);
+        populateGroupNameByUserId(body);
+    }
+    else{
+        alert("There was a problem trying to display the group data: apologies!");
+    }
+}
+
+//This is to populate the Group Names from grabbing the UserId's...
+function populateGroupNameByUserId(groupName){
+    for(let user in groupName){
+        let chatDivGroupNames = document.createElement("div");
+        chatDivGroupNames.setAttribute("class", "chat-in-list");
+
+        let chatDivImage = document.createElement("img");
+        chatDivImage.setAttribute("class", "friend");
+
+        let chatDiv = document.createElement("div");
+        chatDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
+        chatDiv.innerText = groupName[user];
+        chatGroupDiv.appendChild(chatDivGroupNames);
+        chatDivGroupNames.appendChild(chatDivImage);
+        chatDivGroupNames.appendChild(chatDiv);
+        }
+    }
+getAllGroupByUserId();

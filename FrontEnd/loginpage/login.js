@@ -61,7 +61,6 @@ function loginUsername() {
       invalidIcon[0].style.display = "none";
       invalidMessage[0].textContent = "";
       jsonLoginObject.username = usernames.value;
-      console.log(jsonLoginObject.username);
     }
   });
 }
@@ -83,7 +82,6 @@ function loginPasscode() {
       invalidIcon[1].style.display = "none";
       invalidMessage[1].textContent = "";
       jsonLoginObject.passcode = passcodes.value;
-      console.log(jsonLoginObject.passcode);
       if (validateCounter > 1) {
         submitLogin.disabled = false;
       }

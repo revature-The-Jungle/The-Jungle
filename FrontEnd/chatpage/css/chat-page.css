@@ -25,12 +25,12 @@
 }
 
 .chat-page .jungle3-1 {
-  height: 97px;
+  height: 5.5rem;
   left: 0;
   object-fit: cover;
   position: absolute;
   top: 0;
-  width: 96px;
+  width: 17rem;
 }
 
 .chat-page .title {
@@ -63,20 +63,37 @@
 }
 
 .chat-page .chat-container {
-  height: 50px;
-  margin-left: 4px;
+  height: 43px;
+  margin-left: 2.76px;
   position: relative;
-  width: 216px;
+  width: 185px;
+
 }
 
 .chat-page .chat {
-  height: 39px;
-  left: 0;
+  height: 33px;
+  left: 1px;
   letter-spacing: -0.36px;
   position: absolute;
   text-align: center;
   top: 1px;
-  width: 216px;
+  width: 184px;
+  display: flex;
+
+}
+.linkGroups,
+.linkChat {
+  height: 3rem;
+  text-align: center;
+  color: #223172;
+}
+
+.linkGroups {
+  padding: 0.5rem 0 0 1rem;
+}
+
+.linkChat {
+  padding: 0.5rem 0;
 }
 
 .chat-page .x-icon {
