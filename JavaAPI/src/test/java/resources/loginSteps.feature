@@ -4,7 +4,7 @@ Feature: User Login
     Given the user is on the log-in page
     When the user enters correct username
     When the  user enters correct password
-    When the  user clicks on log-in buttun
+    When the  user clicks on log-in button
     Then the user will be redirected to the homepage
 
   Scenario: As a user I want to log out from my account
@@ -16,5 +16,5 @@ Feature: User Login
     Given user is on the log-in page
     When the user enters wrong username
     When the  user enters wrong password
-    When the user clicks on the log-in buttun
+    When the user clicks on the log-in button
     Then error message will be displayed
