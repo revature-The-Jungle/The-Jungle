@@ -119,7 +119,7 @@ async function getPost() {
   </div>
 
     <button id="deletePost${post.post_id}" onclick="deleteGroupPost(${post.post_id})" class="btn btn-sm btn-danger" style="margin-top: 10em;"><i class="fa fa-trash"></i> Delete</button>
-    // postBox.innerHTML = `
+    </div>`
     // <div class="overlap-group1" id="newPost${post.post_id}">
     // <p> ` + post.post_id + `</p>
     // <p> ` + post.user_id + `</p>
