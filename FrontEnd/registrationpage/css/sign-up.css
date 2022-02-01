@@ -67,6 +67,7 @@
 
 /* *********** "Form" (begin) *********** */
 
+
 .sign-up .create-account {
   align-self: center;
   color: var(--cape-cod);
@@ -77,18 +78,20 @@
   min-height: 24px;
   text-align: center;
   width: 472px;
-  margin: 2.7rem 0 2rem 4.5rem;
+  margin: 0.7rem 0 2rem 4.5rem;
 }
+
 
 .sign-up .form {
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: 3.5rem;
+  margin-top: 6.5rem;
   min-height: 846px;
   width: 518px;
   position: relative;
 }
+
 
 .sign-up .first-name {
   align-items: flex-start;
@@ -157,6 +160,13 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   width: 468px;
 }
 
+.sign-up .firstName {
+  position: absolute;
+  left: 16px;
+  top: 5.5rem;
+}
+
+
 .labelLastName,
 .labelFirstName,
 .labelEmail {
@@ -176,12 +186,6 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   width: 18vw;
   padding-left: 10px;
   font-family: var(--font-family-poppins);
-}
-
-.sign-up .firstName {
-  position: absolute;
-  left: 16px;
-  top: 7.5rem;
 }
 
 .sign-up .lastName {
@@ -220,14 +224,16 @@ input[type="date"]:invalid::-webkit-datetime-edit {
 .sign-up .emailDiv {
   position: absolute;
   left: 16px;
-  top: 12.5rem;
+  top: 11.5rem;
 }
+
 
 .sign-up .dob {
   position: absolute;
-  top: 12.5rem;
+  top: 11.5rem;
   left: 19.4rem;
 }
+
 
 .sign-up .userName {
   position: absolute;
@@ -465,11 +471,12 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   width: 148px;
 }
 
+
 .sign-up .dont-have-an-account {
   align-self: flex-start;
   letter-spacing: -0.27px;
   margin-left: 35px;
-  margin-top: 14px;
+  margin-top: 32px;
   min-height: 25px;
   text-align: center;
   width: 417px;
@@ -479,6 +486,7 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   top: 23rem;
   left: 7.5rem;
 }
+
 
 .sign-up .span0 {
   color: var(--nobel);
@@ -506,6 +514,7 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   width: 460px;
 }
 
+
 .sign-up .submit {
   background-color: #f4996a;
   border-radius: 5px;
@@ -515,13 +524,20 @@ input[type="date"]:invalid::-webkit-datetime-edit {
   font-weight: 500;
   height: 43px;
   width: 38.5vw;
-  margin: 1.5rem 4.5rem 0 0;
+  margin: 3.5rem 4.5rem 0 0;
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   position: absolute;
   top: 25rem;
   left: 1.4rem;
 }
+
+#errorSubmitMessage {
+  position: absolute;
+  bottom: 19rem;
+  left: 10.5rem;
+}
+
+
 
 /* *********** "Form" (End) *********** */

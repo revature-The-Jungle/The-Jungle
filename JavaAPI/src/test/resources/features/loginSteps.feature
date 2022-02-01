@@ -16,5 +16,5 @@ Feature: User Login
     Given user is on the log-in page
     When the user enters wrong username
     When the  user enters wrong password
-    When the user clicks on the log-in button
+    When the user clicks on the log-in buttun
     Then error message will be displayed

@@ -14,7 +14,8 @@ import java.io.File;
 import java.time.Duration;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="classpath:features", glue="E2E.steps", plugin = {"pretty", "html:src/test/java/resources/reports/html-reports.html"})
+@CucumberOptions(features = "classpath:features", glue = "E2E.steps", plugin = { "pretty",
+        "html:src/test/java/resources/reports/html-reports.html" })
 public class TestRunner {
 
     public static WebDriver driver;
@@ -26,14 +27,15 @@ public class TestRunner {
         File file = new File("src/test/chromedriver");
         System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
         rlsPom = new RegLoginSearchPOM(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        System.out.println("Set up complete!");
     }
 
     @AfterClass
     public static void teardown() {
         driver.quit();
+        System.out.println("teardown complete!");
     }
 }
