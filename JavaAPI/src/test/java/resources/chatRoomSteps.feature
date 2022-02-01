@@ -1,6 +1,6 @@
 Feature: Users should be able to live chat with other users
   Scenario: User can join global chat
-    Given the user is on their dashboard/page
+    Given the user is on their dashboard page
     When the user clicks the chat room button
     Then the users should be redirected to the global chat room page
 
@@ -16,11 +16,11 @@ Feature: Users should be able to live chat with other users
     When the user clicks the send chat message button
     Then the message will appear in chat
 
-  Scenario: User join a different group chat
-    Given the user is in the chatroom
-    When the user clicks on the specific group chat in Chats
-    When the user clicks the alert button
-    Then they are redirected to their group chat of their selection
+#  Scenario: User join a different group chat
+#    Given the user is in the chatroom
+#    When the user clicks on the specific group chat in Chats
+#    When the user clicks the alert button
+#    Then they are redirected to their group chat of their selection
 
   Scenario: User can send images through chatroom
     Given the user is in the chatroom
