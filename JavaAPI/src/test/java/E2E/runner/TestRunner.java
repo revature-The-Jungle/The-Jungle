@@ -1,7 +1,7 @@
 package E2E.runner;
 
-import E2E.poms.chat.ChatPage;
 import E2E.poms.RegLoginSearchPOM;
+import E2E.poms.chat.ChatPage;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.AfterClass;
@@ -15,8 +15,8 @@ import java.io.File;
 import java.time.Duration;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:features/chatRoomSteps.feature", glue = "E2E.steps", plugin = { "pretty",
-        "html:src/test/java/resources/reports/html-reports.html" })
+@CucumberOptions(features = "classpath:features", glue = "E2E.steps", plugin = {"pretty",
+        "html:src/test/java/resources/reports/html-reports.html"})
 public class TestRunner {
 
     public static WebDriver driver;
