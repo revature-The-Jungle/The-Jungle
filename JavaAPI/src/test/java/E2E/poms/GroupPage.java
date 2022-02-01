@@ -19,4 +19,16 @@ public class GroupPage {
 
     @FindBy(id = "groupJoined")
     public WebElement groupJoined;
+
+    @FindBy(id = "postInput")
+    public WebElement getGroupPostInput;
+
+    @FindBy(id = "sendGroupPostButton")
+    public WebElement getSendGroupPostButton;
+
+    @FindBy(id = "postInfo")
+    public WebElement getPostInfoNotification;
+
+    @FindBy(id = "deletePost9005")
+    public WebElement getDeleteGroupPostButton;
 }

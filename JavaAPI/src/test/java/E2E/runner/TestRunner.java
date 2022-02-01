@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import E2E.poms.UserHomePage;
 import E2E.poms.GroupPage;
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features="classpath:features", glue="E2E.steps", plugin = {"pretty", "html:src/test/java/resources/reports/html-reports.html"})
@@ -27,7 +28,8 @@ public class TestRunner {
         System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        explicitWait = new WebDriverWait(driver, 5);
         // POMs
         userHomePage = new UserHomePage(driver);
         groupPage = new GroupPage(driver);
