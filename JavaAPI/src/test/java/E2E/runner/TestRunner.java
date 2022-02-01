@@ -9,7 +9,9 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.io.File;
+import java.time.Duration;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features="classpath:features", glue="E2E.steps", plugin = {"pretty", "html:src/test/java/resources/reports/html-reports.html"})
@@ -21,14 +23,14 @@ public class TestRunner {
 
     @BeforeClass
     public static void setup() {
-        File file = new File("src/test/resources/chromedriver.exe");
+        File file = new File("src/test/chromedriver");
         System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         rlsPom = new RegLoginSearchPOM(driver);
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
-
 
     @AfterClass
     public static void teardown() {

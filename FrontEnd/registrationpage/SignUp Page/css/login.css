@@ -156,7 +156,7 @@
 .login .password-rectangle {
   align-self: flex-end;
   background-color: #ffeaea;
-  border: 1px solid #ad010b;
+  border: 1px solid #a5a5a5;
   border-radius: 10px;
   height: 53px;
   margin-right: 2px;
@@ -262,3 +262,5 @@
   top: 163px;
   width: 733px;
 }
+
+

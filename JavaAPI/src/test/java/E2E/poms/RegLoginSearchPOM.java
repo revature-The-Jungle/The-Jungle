@@ -17,18 +17,38 @@ public class RegLoginSearchPOM {
 
     //  ------------------- LOGIN --------------------------------
 
+    @FindBy(id="usernameInput")
+    public WebElement usernameInput;
+
+    @FindBy(id="passcodeInput")
+    public WebElement passwordInput;
+
+    @FindBy(id="submitLogin")
+    public WebElement loginButton;
+
     //  ------------------- LOGOUT --------------------------------
 
-    //  ------------------- SEARCH --------------------------------
+    @FindBy(id="logoutButtonPressed")
+    public WebElement logoutButton;
 
-    @FindBy(id="")
-    public WebElement login;
+    // -------------------- SYSTEM ---------------------------------
 
-    @FindBy(id="")
-    public WebElement profilePage;
+    @FindBy(id="errorMessageGoesHere")
+    public WebElement errorMessage;
 
-//    @FindBy(id="")
-//    public WebElement profilePage;
+    //  ------------------- SEARCH ----------------------------------
+
+    @FindBy(id="searchInputBox")  //  SEARCH USERNAME ID
+    public WebElement usernameSearch;
+
+    @FindBy(id="searchButton") //  Submit Button for search
+    public WebElement submitButton;
+
+    @FindBy(id="searchList") //  Search Results
+    public WebElement getSearchResults;
+
+
+
 
 
 }
