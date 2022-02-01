@@ -62,4 +62,28 @@ async function createUserWithImage() {
   }
 
 
+  async function getUserInfoOnProfile(){
+    let url = "http://127.0.0.1:5000/user/" + userId;
+    let response = await fetch(url);
+    console.log(url);
 
+    if(response.status === 200){
+        let body = await response.json();
+        console.log(body);
+        populateUserInfoOnProfile(body);
+    }
+    else{
+        alert("Error Trying To Obtain Database Information!");
+    }
+}
+
+function populateUserInfoOnProfile(User){
+    let text = User.user_birth_date.split(" ");
+    let array = text[1] + " " + text[2] + " " + text[3];
+    headerUsername.innerText = `${User.username}`;
+    headerBirthday.innerText = `${array}`;
+    headerEmail.innerText = `${User.email}`;
+ 
+}
+
+getUserInfoOnProfile();
