@@ -3,7 +3,7 @@ const searchField = document.getElementById("searchInputBox");
 const searchListResults = document.getElementById("searchList");
 function referToProfile(userId) {
     localStorage.setItem("targetId", userId);
-    location.href="profile-page.html"; 
+    location.href="profile-page.html";
 }
 const searchUserButton = document.getElementById("searchButton");
 
@@ -14,7 +14,8 @@ const searchByUsername = async() => {
         method: "GET", 
         mode: "cors" 
     });
-    
+    console.log(response);
+    console.log(username);
     document.getElementById("searchList").innerHTML = "";
     if (response.status === 200) {
         const body = await response.json();
@@ -27,6 +28,7 @@ const searchByUsername = async() => {
                 document.getElementById("searchList").innerHTML += `<li class="list-group-item"><a onclick=referToProfile(${user.userId})>${user.username}</a></li>`;
             }
         }
-    } 
+    }
 }
 searchUserButton.addEventListener("click", searchByUsername);
+
