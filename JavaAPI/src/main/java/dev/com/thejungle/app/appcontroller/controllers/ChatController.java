@@ -71,9 +71,11 @@ public class ChatController {
         });
         ws.onBinaryMessage(ctx -> {
             int groupId = Integer.parseInt(ctx.pathParam("id"));
+            String userName = ctx.pathParam("userName");
             ctx.data();
-            sendImg(ctx.data(), groupId);
+            sendImg(ctx.data(), groupId, userName);
         });
+
     };
 
     /**
@@ -125,10 +127,14 @@ public class ChatController {
      * @param imgSent image
      * @param groupId id of group
      */
-    public void sendImg(byte[] imgSent, int groupId){
+    public void sendImg(byte[] imgSent, int groupId, String userName){
         userUsernameMap.keySet().stream().filter(ctx -> (ctx.session.isOpen() && (Integer) userUsernameMap.get(ctx).get("groupId") == groupId)).forEach(session->{
             System.out.println(session);
-            session.send(imgSent);
+            Map<String, Object> broadcastString = new HashMap<>();
+            broadcastString.put("imgContent", imgSent);
+            broadcastString.put("userName", userName);
+            session.send(broadcastString);
         });
     }
+
 }
