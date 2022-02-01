@@ -340,7 +340,7 @@
 }
 
 #signup-invalid-message {
-  color: red;
+  color: #ad010c;
 }
 
 #submitLogin {
@@ -368,12 +368,12 @@
   color: #c92432;
 }
 
-.span1 {
-  color:#c92432;
+.login .span1 {
+  color: #ad010c;
   letter-spacing: -0.05px;
 }
 
-#errorMessageGoesHere{
+/* #errorMessageGoesHere{
   color: #ad010c;
   font-family: var(--font-family-poppins);
   font-size: var(--font-size-m); 
@@ -382,20 +382,12 @@
   text-align: center;
   width: 386px;
   margin: 10px 0 0 5px;
-}
-
-.span1 {
-  color:#c92432;
-  letter-spacing: -0.05px;
-}
+} */
 
 #errorMessageGoesHere{
   color: #ad010c;
   font-family: var(--font-family-poppins);
   font-size: var(--font-size-m); 
   font-weight: 700;
-  letter-spacing: -0.27px;
-  text-align: center;
-  width: 386px;
-  margin: 10px 0 0 5px;
+  margin: 1rem 0;
 }
