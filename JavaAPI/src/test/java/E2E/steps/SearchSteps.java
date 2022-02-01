@@ -12,7 +12,7 @@ public class SearchSteps {
 
     @Given("the user is on the homepage")
     public void the_user_is_on_the_homepage() {
-        TestRunner.driver.get("file:///Users/adamjanusewski/Desktop/The-Jungle/FrontEnd/profilepage/profile-page.html");
+        TestRunner.driver.get("http://127.0.0.1:5500/FrontEnd/profilepage/profile-page.html");
     }
     @When("user inputs username into the search input field")
     public void user_inputs_username_into_the_search_input_field() throws InterruptedException {

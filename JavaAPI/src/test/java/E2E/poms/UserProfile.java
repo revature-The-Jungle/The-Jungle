@@ -24,4 +24,8 @@ public class UserProfile {
     public WebElement saveChangesModalButton;
     @FindBy(id="modalProfileSuccessMessage")
     public WebElement profileSuccessMessage;
+    @FindBy(id="modalProfileErrorMessage")
+    public WebElement profileErrorMessage;
+
+
 }
