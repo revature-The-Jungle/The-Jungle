@@ -5,6 +5,12 @@ import io.cucumber.java.en.When;
 
 public class CreatePostSteps {
 
+    @When("the user clicks on the create post modal button")
+    public void the_user_clicks_on_the_create_post_modal_button() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
 
     @When("the user upload his photo")
     public void the_user_upload_his_photo() {
