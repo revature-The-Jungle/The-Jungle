@@ -1,23 +1,20 @@
 let userId = JSON.parse(localStorage.getItem("userInfo")).userId;
 
-// this is just a proof of concept and does not contain styling elements of the finished code
-//assuming you are getting all the posts at once, this method will have to be called individually in a for loop for each post
-//rough method to get the post image from database, needs to be updated to get the image format
-//please refactor and modify as needed
-async function getPostImage(){// the postId and imageFormat will probably have to be passed as parameters
-  let url = "http://127.0.0.1:5000/post/image/" + postId;//post_id parameter
-  console.log(url);
-  let response = await fetch(url);
-  console.log(response);
 
-  if(response.status === 200){
+// async function getPostImage(){// the postId and imageFormat will probably have to be passed as parameters
+//   let url = "http://127.0.0.1:5000/post/image/" + postId;//post_id parameter
+//   console.log(url);
+//   let response = await fetch(url);
+//   console.log(response);
 
-      const image_text = await response.text();
-      const image_Element = document.createElement('img');
-      image_Element.src = image_text;//image_parameter
-      document.getElementById("postImage").appendChild(image_Element);// also the element id will have to be dynamically created for each post so that the image is placed on the correct post
-  }
-}
+//   if(response.status === 200){
+
+//       const image_text = await response.text();
+//       const image_Element = document.createElement('img');
+//       image_Element.src = image_text;//image_parameter
+//       document.getElementById("postImage").appendChild(image_Element);
+//   }
+// }
 
 
 
@@ -72,7 +69,7 @@ async function createPostWithImage() {
       
       }
       else{
-        alert("File Error")//need to replace this alert method later
+        document.getElementById("postErrorMessage").innerHTML = "Error creating the post."
       }
     }, false);
     
