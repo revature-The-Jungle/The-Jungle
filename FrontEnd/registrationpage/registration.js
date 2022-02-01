@@ -163,8 +163,6 @@ function validatePassword() {
   });
 }
 
-
-
 // ROUTE TO REGISTER/CREATE USER
 signupSubmitButton.addEventListener("click", registerUser);
 async function registerUser(event) {
