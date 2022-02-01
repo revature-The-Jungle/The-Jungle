@@ -1,5 +1,4 @@
-let userId = 104; // temporary 
-let postId = 273; // temporary
+let userId = JSON.parse(localStorage.getItem("userInfo")).userId;
 
 // this is just a proof of concept and does not contain styling elements of the finished code
 //assuming you are getting all the posts at once, this method will have to be called individually in a for loop for each post
@@ -26,14 +25,14 @@ async function getPostImage(){// the postId and imageFormat will probably have t
 // A basic create post without images for users.
 async function createPost(){
     let postText = document.getElementById("postText");
-    console.log(postText.value)
     let postJson = JSON.stringify({"user_id":userId, "post_text": postText.value, "image_format": "false"});
     let url = "http://127.0.0.1:5000/post"
     let thePost = await fetch(url, {
         method:"POST",
         headers:{'Content-Type': 'application/json'}, 
         body:postJson}).then(response => {return response.json()});
-    console.log(thePost);
+    
+    add_post_first(thePost)
 }
 
 
@@ -69,7 +68,7 @@ async function createPostWithImage() {
               body: String(base64gif)
           });
           const imageText = await response.text();
-          console.log(imageText)
+        add_post_first(thePost)
       
       }
       else{
@@ -99,20 +98,12 @@ async function createPostWithImage() {
       populateData(body);
     }
   }
+  getPost()
   
   async function populateData(responseBody) {
     const allpost = document.getElementById("post column");
     for (let post of responseBody) {
       let postBox = document.createElement('div');
-      // postBox.innerHTML = `
-      // <div class="overlap-group1" id="newPost${post.post_id}">
-      // <p> ` + post.post_id + `</p>
-      // <p> ` + post.user_id + `</p>
-      // <p> ` + post.post_text + `</p> 
-      // <p> Likes: ` + post.likes + `</p>
-      // <p> ` + post.date_time_of_creation + `</p>
-      // <button id="deletePost${post.post_id}" onclick="deleteGroupPost(${post.post_id})">Delete</button>
-      // </div>`
       
       //add the poster image
       let url = "http://127.0.0.1:5000/user/image/" + post.user_id;
@@ -179,8 +170,6 @@ async function createPostWithImage() {
       allpost.appendChild(postBox)
     }
   }
-  
-  getPost()
 
   async function deletePost(post_id) {
     let deleteResponse = await fetch("http://127.0.0.1:5000/group_post/" + post_id, {
@@ -191,3 +180,86 @@ async function createPostWithImage() {
       document.getElementById("post" + post_id).remove();
     }
   }
+
+
+
+  const logout = () => {
+    // delete fake token from local storage
+    localStorage.removeItem("pseudoToken");
+    // delete fake token from local storage
+  
+    // redirect user back to home page
+    // location.href = "home.html";
+
+    // redirect user back to the login
+    localStorage.removeItem("userInfo");
+  };
+  
+
+  async function add_post_first(post){
+    let postBox = document.createElement('div');
+      
+      //add the poster image
+      let url = "http://127.0.0.1:5000/user/image/" + post.user_id;
+      let response = await fetch(url);
+      let user_image_text;
+      if(response.status === 200){
+          user_image_text = await response.text();
+        }
+  
+      //get the post image
+      url = "http://127.0.0.1:5000/post/image/" + post.post_id;
+      console.log(url);
+      response = await fetch(url);
+      console.log(response);
+      let date_time = new Date(post.date_time_of_creation)
+      let date = date_time.toDateString();
+  
+      if(response.status === 200){//if there is an image then this one, else the other one
+        const image_text = await response.text();
+        postBox.innerHTML = 
+        `<div class = "post`+ post.post_id +`" id = "post`+ post.post_id + `">
+        <div class="flex-row">
+          <div class="overlap-group2">
+            <div class="new-york-ny valign-text-middle">`+ date +`</div>
+            <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">JostSNL21</div>
+            <img class="feed-avatar-1" src="`+ user_image_text + `" alt="img/ellipse-1@2x.png" />
+          </div>
+          <input type="image" class="three-dots-icon-1" src="img/bi-three-dots@2x.svg" id="deletePost${post.post_id}" onclick="deletePost(${post.post_id})"/>
+        </div>
+        <img class="feed-picture" src="`+ image_text +`" />
+        <div class="icon-container">
+          <input type="image" class="heart-icon" src="img/heart-icon@2x.svg" />
+          <p>` + post.likes + `</p>
+          <input type="image" class="chat-bubble-icon" src="img/chat-bubble-icon@2x.svg"/>
+          <img class="share-icon" src="img/share-icon@2x.svg" />
+        </div>
+        <div class="overlap-group-1">
+          <div class="feed-text-2 valign-text-middle poppins-medium-black-18px">`+ post.post_text + `</div>
+        </div>
+      </div>`
+      }else{
+        postBox.innerHTML = 
+      `<div class = "post`+ post.post_id +`" id = "post`+ post.post_id + `">
+      <div class="flex-row">
+        <div class="overlap-group2">
+          <div class="new-york-ny valign-text-middle">`+ date +`</div>
+          <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">JostSNL21</div>
+          <img class="feed-avatar-1" src="`+ user_image_text + `" alt="img/ellipse-1@2x.png" />
+        </div>
+        <input type="image" class="three-dots-icon-1" src="img/bi-three-dots@2x.svg" id="deletePost${post.post_id}" onclick="deletePost(${post.post_id})"/>
+      </div>
+      <div class="icon-container">
+        <input type="image" class="heart-icon" src="img/heart-icon@2x.svg" />
+        <p>` + post.likes + `</p>
+        <input type="image" class="chat-bubble-icon" src="img/chat-bubble-icon@2x.svg"/>
+        <img class="share-icon" src="img/share-icon@2x.svg" />
+      </div>
+      <div class="overlap-group-1">
+        <div class="feed-text-2 valign-text-middle poppins-medium-black-18px">`+ post.post_text + `</div>
+      </div>
+    </div>`
+      }
+      const allpost = document.getElementById("post column");
+      allpost.prepend(postBox)
+  };
