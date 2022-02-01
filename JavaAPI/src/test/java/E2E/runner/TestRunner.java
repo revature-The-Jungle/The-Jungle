@@ -11,7 +11,8 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import E2E.poms.UserHomePage;
+import E2E.poms.GroupPage;
 import java.io.File;
 import java.time.Duration;
 
@@ -26,6 +27,9 @@ public class TestRunner {
     public static ChatPage chatPage;
     public static RegLoginSearchPOM rlsPom;
     public static GroupJunctionPOM groupJunctionPOM;
+    public static UserHomePage userHomePage;
+    public static GroupPage groupPage;
+
 
     @BeforeClass
     public static void setup() {
@@ -36,11 +40,10 @@ public class TestRunner {
 
         // POMs
         chatPage = new ChatPage(driver);
+        groupPage = new GroupPage(driver);
+        userHomePage = new UserHomePage(driver);
         rlsPom = new RegLoginSearchPOM(driver);
         groupJunctionPOM = new GroupJunctionPOM(driver);
-
-
-
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         System.out.println("Set up complete!");
