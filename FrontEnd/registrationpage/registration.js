@@ -7,7 +7,6 @@ const signupEmail = document.getElementById("signup-email");
 const signupBirthdate = document.getElementById("signup-bdate");
 const signupUsername = document.getElementById("signup-username");
 const signupPassword = document.getElementById("signup-password");
-const signupPasswordRepeat = document.getElementById("signup-repeat-password");
 const invalidIcon = document.querySelectorAll("[id='invalid-icon']");
 let invalidMessage = document.querySelectorAll("[id='signup-invalid-message']");
 let validateCounter = 0;
@@ -42,7 +41,7 @@ function validateFirstName() {
       invalidMessage[0].textContent = "";
       jsonUserObject.firstName = signupFirstName.value;
       validateCounter = validateCounter + 1;
-      console.log(validateCounter);
+      // console.log(validateCounter);
       // console.log(jsonUserObject.firstName);
       if (validateCounter > 5) {
         signupSubmitButton.disabled = false;
@@ -67,7 +66,7 @@ function validateLastName() {
       invalidMessage[1].textContent = "";
       jsonUserObject.lastName = signupLastName.value;
       validateCounter = validateCounter + 1;
-      console.log(validateCounter);
+      // console.log(validateCounter);
       // console.log(jsonUserObject.lastName);
       if (validateCounter > 5) {
         signupSubmitButton.disabled = false;
@@ -86,7 +85,7 @@ function validateEmail() {
     } else if (specialChar2.test(signupEmail.value)) {
       invalidIcon[2].style.display = "block";
       invalidMessage[2].textContent =
-        'Cannot contain spaces or special characters: `^*()+=[]{}"<>~|;:';
+        'Cannot contain spaces or `^*()+=[]{}"<>~|;:';
     } else if (!emailChar.test(signupEmail.value)) {
       invalidIcon[2].style.display = "block";
       invalidMessage[2].textContent = "This must be an email.";
@@ -95,7 +94,7 @@ function validateEmail() {
       invalidMessage[2].textContent = "";
       jsonUserObject.email = signupEmail.value;
       validateCounter = validateCounter + 1;
-      console.log(validateCounter);
+      // console.log(validateCounter);
       // console.log(jsonUserObject.email);
       if (validateCounter > 5) {
         signupSubmitButton.disabled = false;
@@ -117,7 +116,7 @@ function validateBirthdate() {
       let userBDay = new Date(signupBirthdate.value).getTime();
       jsonUserObject.userBirthdate = userBDay;
       validateCounter = validateCounter + 1;
-      console.log(validateCounter);
+      // console.log(validateCounter);
       // console.log(jsonUserObject.userBirthdate);
       if (validateCounter > 5) {
         signupSubmitButton.disabled = false;
@@ -136,13 +135,13 @@ function validateUsername() {
     } else if (specialChar2.test(signupUsername.value)) {
       invalidIcon[4].style.display = "block";
       invalidMessage[4].textContent =
-        'Cannot contain spaces or special characters: `^*()+=[]{}"<>~|;:';
+        'Cannot contain spaces or `^*()+=[]{}"<>~|;:';
     } else {
       invalidIcon[4].style.display = "none";
       invalidMessage[4].textContent = "";
       jsonUserObject.username = signupUsername.value;
       validateCounter = validateCounter + 1;
-      console.log(validateCounter);
+      // console.log(validateCounter);
       // console.log(jsonUserObject.username);
       if (validateCounter > 5) {
         signupSubmitButton.disabled = false;
@@ -151,7 +150,7 @@ function validateUsername() {
   });
 }
 
-// Validate first password input.
+// Validate password input.
 signupPassword.addEventListener("focusin", validatePassword());
 function validatePassword() {
   signupPassword.addEventListener("focusout", function () {
@@ -161,32 +160,14 @@ function validatePassword() {
     } else if (specialChar2.test(signupPassword.value)) {
       invalidIcon[5].style.display = "block";
       invalidMessage[5].textContent =
-        'Cannot contain spaces or special characters: `^*()+=[]{}"<>~|;:';
+        'Cannot contain spaces or `^*()+=[]{}"<>~|;:';
     } else {
       invalidIcon[5].style.display = "none";
       invalidMessage[5].textContent = "";
-      let validatedPass = signupPassword.value;
-      signupPasswordRepeat.addEventListener(
-        "focusin",
-        validateRepeatPassword(validatedPass)
-      );
-    }
-  });
-}
-
-// Validate both passwords match.
-function validateRepeatPassword(password) {
-  signupPasswordRepeat.addEventListener("focusout", function () {
-    if (signupPasswordRepeat.value != password) {
-      invalidIcon[6].style.display = "block";
-      invalidMessage[6].textContent = "Passwords do not match.";
-    } else {
-      invalidIcon[6].style.display = "none";
-      invalidMessage[6].textContent = "";
-      jsonUserObject.passcode = password;
+      jsonUserObject.passcode = signupPassword.value;
       validateCounter = validateCounter + 1;
       // console.log(jsonUserObject.passcode);
-      console.log(validateCounter);
+      // console.log(validateCounter);
       if (validateCounter > 5) {
         signupSubmitButton.disabled = false;
       }
@@ -194,8 +175,10 @@ function validateRepeatPassword(password) {
   });
 }
 
+
+
 // ROUTE TO REGISTER/CREATE USER
-signupSubmitButton.addEventListener("submit", registerUser);
+signupSubmitButton.addEventListener("click", registerUser);
 async function registerUser(event) {
   event.preventDefault();
   event.stopPropagation();
@@ -225,13 +208,13 @@ async function registerUser(event) {
   let registeredUserBody = await response.json();
 
   if (response.status === 201) {
-    let userIdStored = registeredUserBody;
-    window.localStorage.setItem("userInfo", userIdStored);
+    let userData = registeredUserBody;
+    localStorage.setItem("userIdSignup", JSON.stringify(userData));
     window.location.href = "../profilepage/profile-page.html";
   } else {
     let error = registeredUserBody.errorMessage;
-    invalidIcon[7].style.display = "none";
-    invalidMessage[7].textContent = error;
+    invalidIcon[6].style.display = "";
+    invalidMessage[6].textContent = error;
   }
 }
 
