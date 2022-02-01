@@ -10,10 +10,8 @@ async function createGroupPost() {
   let post_text = document.getElementById("postInput").value;
   let data = {
     "post_id": "0",
-    // "user_id": Number(localStorage.getItem("user_id")),
-    // "group_id": Number(localStorage.getItem("group_id")),
-    "user_id": 9000,
-    "group_id": 9000,
+    "user_id": Number(localStorage.getItem("user_id")),
+    "group_id": Number(localStorage.getItem("group_id")),
     "post_text": post_text,
     "image_data": "",
     "likes": 0,
@@ -84,7 +82,7 @@ async function createGroupPost() {
 
 //--------------------------------------------------- LOAD GROUP POST FUNCTION-------------------------------------------------------
 async function getPost() {
-  let response = await fetch(url + "/group_post/group/9000", { //+ group_id
+  let response = await fetch(url + "/group_post/group/" + group_id, {
     method: "GET",
     mode: "cors",
   });
