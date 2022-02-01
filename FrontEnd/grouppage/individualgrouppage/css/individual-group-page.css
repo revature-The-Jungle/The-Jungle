@@ -284,7 +284,7 @@
 
 .individual-group-page .line-under-groups {
   height: 1px;
-  left: 17px;
+  left: 117px;
   position: absolute;
   top: 59px;
   width: 232px;
@@ -292,9 +292,9 @@
 
 .individual-group-page .group-icon {
   height: 30px;
-  left: 208px;
+  left: 150px;
   position: absolute;
-  top: 18px;
+  top: 16px;
   width: 30px;
 }
 
@@ -304,7 +304,7 @@
   font-size: var(--font-size-m);
   font-weight: 700;
   height: 31px;
-  left: 0;
+  left: 170px;
   letter-spacing: -0.27px;
   position: absolute;
   text-align: center;
@@ -368,7 +368,7 @@
 
 .individual-group-page .feed-button {
   height: 30px;
-  margin-left: 309px;
+  margin-left: 329px;
   width: 30px;
 }
 
@@ -575,6 +575,8 @@
 #postInput {
   height: 20em; 
   width: 25em;
+  margin-left: 1em;
+  
 }
 .nav #message{
   position: absolute;
@@ -610,3 +612,7 @@
   padding: 0.4rem 2rem;
 }
 
+#sendGroupPostButton {
+  margin-left: 2em;
+  margin-top: 1em;
+}

@@ -5,9 +5,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static E2E.runner.TestRunner.driver;
+
 public class GroupPostSteps {
+    Actions action = new Actions(driver);
     // ------------------------------------- CREATE A GROUP POST-----------------------------------------
     @Given("the group member is on the group page")
     public void the_group_member_is_on_the_group_page() {
@@ -29,12 +33,13 @@ public class GroupPostSteps {
     //  ------------------------------------- DELETE A GROUP POST-----------------------------------------
     @When("the user clicks delete post button")
     public void the_user_clicks_delete_post_button() {
-        TestRunner.explicitWait.until(ExpectedConditions.elementToBeClickable(TestRunner.groupPage.getDeleteGroupPostButton));
+        action.moveToElement(TestRunner.groupPage.getDeleteGroupPostButton);
         TestRunner.groupPage.getDeleteGroupPostButton.click();
     }
     @Then("the post will be deleted")
     public void the_post_will_be_deleted() {
-        TestRunner.explicitWait.until(ExpectedConditions.invisibilityOf(TestRunner.groupPage.getDeleteGroupPostButton));
+        TestRunner.driver.get("http://127.0.0.1:5500/FrontEnd/grouppage/individualgrouppage/individual-group-page.html");
+        Assert.assertNotNull(TestRunner.groupPage.getDeleteGroupPostButton);
     }
 
 }
