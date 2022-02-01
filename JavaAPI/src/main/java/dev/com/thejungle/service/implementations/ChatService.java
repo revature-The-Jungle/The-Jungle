@@ -25,7 +25,7 @@ public class ChatService implements ChatServiceInt {
     public ChatMessage serviceCreateMessageObject(ChatMessage chatMessage){
         if(chatMessage.getUserId() <= 0){
             throw new InvalidInputException("Invalid User ID");
-        } else if (chatMessage.getGroupId() <= 0) {
+        } else if (chatMessage.getGroupId() < 0) {
             throw new InvalidInputException("Invalid Group ID");
         } else if (chatMessage.getChatContent().isEmpty()) {
             throw new InvalidInputException("Invalid Chat Content");

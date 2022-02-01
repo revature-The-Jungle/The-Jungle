@@ -17,6 +17,22 @@ public class ChatDAO implements ChatDAOInt {
     @Override
     public ChatMessage createMessage(ChatMessage chatMessage) {
         try (Connection connection = ConnectionDB.createConnection()) {
+            if(chatMessage.getGroupId() == 0) {
+                String sql = "insert into chat_log_table values(default, default, ?, null, ?) returning chat_id, chat_date";
+                PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, chatMessage.getUserId());
+                preparedStatement.setString(2, chatMessage.getChatContent());
+                ResultSet resultSet = preparedStatement.executeQuery();
+                resultSet.next();
+                return new ChatMessage(
+                        resultSet.getInt("chat_id"),
+                        resultSet.getString("chat_date"),
+                        chatMessage.getUserId(),
+                        chatMessage.getUserName(),
+                        chatMessage.getGroupId(),
+                        chatMessage.getChatContent()
+                );
+            } else {
             String sql = "insert into chat_log_table values(default, default, ?, ?, ?) returning chat_id, chat_date";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, chatMessage.getUserId());
@@ -31,7 +47,7 @@ public class ChatDAO implements ChatDAOInt {
                     chatMessage.getUserName(),
                     chatMessage.getGroupId(),
                     chatMessage.getChatContent()
-            );
+            );}
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -82,7 +98,7 @@ public class ChatDAO implements ChatDAOInt {
         try (Connection connection = ConnectionDB.createConnection()) {
             String sql = "select chat_id, chat_date, clt.user_id, ut.username, group_id, chat_content from chat_log_table clt " +
                     "inner join user_table ut on ut.user_id = clt.user_id " +
-                    "where clt.chat_date >= now() - interval '5 minutes' and group_id = null " +
+                    "where clt.chat_date >= now() - interval '5 minutes' and group_id is null " +
                     "order by chat_id asc";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
