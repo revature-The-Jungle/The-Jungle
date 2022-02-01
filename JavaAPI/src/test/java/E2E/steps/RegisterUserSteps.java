@@ -1,0 +1,71 @@
+//package E2E.steps;
+//
+//import io.cucumber.java.en.Given;
+//import io.cucumber.java.en.Then;
+//import io.cucumber.java.en.When;
+//
+//public class RegisterUserSteps {
+//
+//
+//    @Given("the user is on the sign up page")
+//    public void the_user_is_on_the_sign_up_page() {
+//        // Write code here that turns the phrase above into concrete actions
+//        throw new io.cucumber.java.PendingException();
+//    }
+//
+//    @When("the user enters First name into the new account form")
+//    public void the_user_enters_first_name_into_the_new_account_form() {
+//        // Write code here that turns the phrase above into concrete actions
+//        throw new io.cucumber.java.PendingException();
+//    }
+//
+//    @When("the user enters Last name into the new account form")
+//    public void the_user_enters_last_name_into_the_new_account_form() {
+//        // Write code here that turns the phrase above into concrete actions
+//        throw new io.cucumber.java.PendingException();
+//    }
+//
+//    @When("the user enters Date of Birth into the new account form")
+//    public void the_user_enters_date_of_birth_into_the_new_account_form() {
+//        // Write code here that turns the phrase above into concrete actions
+//        throw new io.cucumber.java.PendingException();
+//    }
+//
+//    @When("the user enters email into the new account form")
+//    public void the_user_enters_email_into_the_new_account_form() {
+//        // Write code here that turns the phrase above into concrete actions
+//        throw new io.cucumber.java.PendingException();
+//    }
+//
+//    @When("the user enters a username into the new account form")
+//    public void the_user_enters_a_username_into_the_new_account_form() {
+//        // Write code here that turns the phrase above into concrete actions
+//        throw new io.cucumber.java.PendingException();
+//    }
+//
+//    @When("the user enters a password into the new account form")
+//    public void the_user_enters_a_password_into_the_new_account_form() {
+//        // Write code here that turns the phrase above into concrete actions
+//        throw new io.cucumber.java.PendingException();
+//    }
+//
+//    @When("the user enters the password again into the new account form")
+//    public void the_user_enters_the_password_again_into_the_new_account_form() {
+//        // Write code here that turns the phrase above into concrete actions
+//        throw new io.cucumber.java.PendingException();
+//    }
+//
+//    @When("the user clicks on the submit button in the new account form")
+//    public void the_user_clicks_on_the_submit_button_in_the_new_account_form() {
+//        // Write code here that turns the phrase above into concrete actions
+//        throw new io.cucumber.java.PendingException();
+//    }
+//
+//    @Then("the user will be redirected to their profile page")
+//    public void the_user_will_be_redirected_to_their_profile_page() {
+//        // Write code here that turns the phrase above into concrete actions
+//        throw new io.cucumber.java.PendingException();
+//    }
+//
+//
+//}

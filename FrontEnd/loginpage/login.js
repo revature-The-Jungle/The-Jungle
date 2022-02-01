@@ -31,10 +31,6 @@ async function login() {
     window.location.href = "../profilepage/profile-page.html"; //  Redirect to Here????
   } else {
     div.textContent = "Incorrect Username or Password";
-    // displayErrorMessage("Incorrect Username or Password", "errorMessageGoesHere", loginStatus);
-    // div.textContent = "";
-    // username.value="";
-    // passcode.value="";
   }
 }
 
