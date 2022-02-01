@@ -34,7 +34,7 @@ public class RegisterUserSteps {
 
     @When("the user enters email into the new account form")
     public void the_user_enters_email_into_the_new_account_form() {
-        TestRunner.rlsPom.signUpEmail.sendKeys("E2E@test.comaoivnavoan22222");
+        TestRunner.rlsPom.signUpEmail.sendKeys("E2E@test.comaoivnavoan2222234");
     }
 
     @When("the user enters an username with a space into the new account form")
@@ -61,7 +61,7 @@ public class RegisterUserSteps {
     @When("the user replaces a correct username into the new account form")
     public void the_user_replaces_a_correct_username_into_the_new_account_form() {
         TestRunner.rlsPom.signUpUsername.clear();
-        TestRunner.rlsPom.signUpUsername.sendKeys("goodusernamewavoin22222");
+        TestRunner.rlsPom.signUpUsername.sendKeys("goodusernamewavoin2222234");
         TestRunner.rlsPom.signUpPassword.click();
     }
 
