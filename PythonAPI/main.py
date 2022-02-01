@@ -49,7 +49,6 @@ logging.basicConfig(filename="records.log", level=logging.DEBUG,
 app: Flask = Flask(__name__)
 CORS(app)
 
-d
 @app.get("/")  # basic check for app running
 def on():
     return "python is running"
