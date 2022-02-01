@@ -2,6 +2,6 @@ from data_access_layer.implementation_classes.like_post_dao import LikePostDaoIm
 
 like_post_dao = LikePostDaoImp()
 
-# def test_like_post_success():
-#     liked_post=like_post_dao.like_post(1)
-#     assert liked_post.likes>=14;
+
+def test_like_post_success():
+    assert like_post_dao.like_post(9002)

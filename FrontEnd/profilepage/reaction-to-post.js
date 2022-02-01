@@ -7,7 +7,7 @@ likeButton.onclick = async function(e){
     let response = await fetch(`http://127.0.0.1:5000/postfeed`, {
         method : "POST",
         body : JSON.stringify({
-        postId: 2 //need to be changed when integrated!
+        postId: e //need to be changed when integrated!
            
         })
         

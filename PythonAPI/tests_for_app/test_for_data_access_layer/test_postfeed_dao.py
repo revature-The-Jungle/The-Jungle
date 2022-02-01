@@ -18,8 +18,3 @@ def test_delete_a_post():
     assert boolean == True
 
 
-def test_delete_a_post():
-    boolean = PostfeedDao.delete_a_post(4)
-    assert boolean == True
-
-

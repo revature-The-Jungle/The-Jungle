@@ -18,46 +18,12 @@
       <div class="profile-page screen">
         <div class="overlap-group10 poppins-bold-astronaut-22px">
           <div class="middle-section"></div>
-          </div>
           <div class="overlap-group1">
             <div class="flex-row">
 
-              <!-- create post modal form -->
-              <button id="updateProfileEditProfileBtn" type="button" class="btn edit-button" data-bs-toggle="modal" data-bs-target="#createPostModal">
-                <img src="img/Edit_Icon.png" alt="edit-icon" class="edit-icon"/> Create A New Post
-              </button>
-
-              <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="updateUserProfileModalTitle">Create A Post</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                        onclick="resetProfileModalData()">
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <form class="row" id="createPostForm">
-                        <div class="mb-3">
-                          <textarea id="postText" class="form-control"></textarea>
-                        </div>
-                        <div class="mb-3">
-                          <input class="form-control" type="file" id="imageFile" class="btn edit-button">
-                        </div>
-                        <button type="button" class="btn edit-button" onclick="createPostWithImage()">Create</button>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <div id="profileModalMsg">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- end create post modal form -->
-
               <!-- the post column -->
               <div class= "overlap-group1-1">
+                <p id = "postErrorMessage"></p>
                 <div class = "col" id = "post column" >
 
                 </div>
@@ -91,7 +57,55 @@
           <img class="line-right" src="img/line-right@1x.svg" />
 
           <!-- Search Div -->
+          <!-- Search Div -->
           <div class="search">
+            <input
+              type="text"
+              placeholder="Search for Friends"
+              class="search-inputbar"
+              id="searchInputBox"
+            ><img class="searchIcon" src="./img/searchIcon.png" alt="search icon"/></input>
+            <button class="btn search-button" id="searchButton"><img src="./img/sendIcon.png" alt="send icon"></button>
+            <button class="btn createPostBtn"><img src="./img/createPostButton.png" alt="create post icon" data-bs-toggle="modal" data-bs-target="#createPostModal"></button>
+            <ul
+              id="searchList"
+              class="dropdown-menu w-100 list-group active"
+              aria-labelledby="searchButton"
+              aria-current="true"
+              style="display: none"
+            ></ul>
+          </div>
+
+          <!-- create post modal form -->
+          <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="updateUserProfileModalTitle">Create A Post</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    onclick="resetProfileModalData()">
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form class="row" id="createPostForm">
+                    <div class="mb-3">
+                      <textarea id="postText" class="form-control"></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <input class="form-control" type="file" id="imageFile" class="btn edit-button">
+                    </div>
+                    <button type="button" class="btn edit-button" onclick="createPostWithImage()" data-bs-dismiss="modal">Create</button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <div id="profileModalMsg">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end create post modal form -->
+          <!-- <div class="search">
             <input
               type="text"
               placeholder="Search for Friends"
@@ -106,7 +120,7 @@
               aria-current="true"
               style="display: none"
             ></ul>
-          </div>
+          </div> -->
 
           <div class="left-section"></div>
           <img class="line-left" src="img/line-left@1x.svg" />
@@ -125,6 +139,7 @@
             </div>
           </div> -->
           <div class="nav poppins-semi-bold-astronaut-24px">
+            
             <!-- Chat Link -->
             <div class="chat-container">
               <a
@@ -151,8 +166,9 @@
 
             <!-- Logout Button...need code -->
             <div class="logout-container">
-              <div class="logout valign-text-middle">Logout</div>
-              <img class="x-icon" src="img/logout-icon@2x.svg" />
+              <a onclick = "logout()" href="../loginpage/login.html" class="logout valign-text-middle">
+                <span class="linkLogout">Logout</span>
+                <img class="x-icon" src="img/logout-icon@2x.svg" /></a>
             </div>
           </div>
           
@@ -218,17 +234,20 @@
             </div>
           </div>
           <div class="overlap-group7">
+            <!-- the home button -->
             <a href="../profilepage/profile-page.html"><img class="jungle3-1" src="img/jungle3-1@2x.png" /> </a>
+            <!-- end the home button -->
           </div>
           <!-- Groups start here -->
           <div class="overlap-group8">
-            <div class="group-rectangle"></div>
+            <div class="group-rectangle">
             <div id="groups-div" class="groups-div">
 
             </div>
             <img class="group-icon" src="img/group-icon-1@2x.svg" />
             <div class="groups-1 valign-text-middle poppins-bold-astronaut-24px">Groups</div>
           </div>
+        </div>
           <!-- Groups end here -->
           <!-- Followers start here -->
           <div id="overlap-group9" class="overlap-group9">
@@ -241,6 +260,7 @@
             <img class="line" src="img/line@2x.svg" />
           </div>
           <!-- Followers end here -->
+        </div>
         </div>
       </div>
     </div>
