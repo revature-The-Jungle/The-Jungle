@@ -41,8 +41,6 @@ function validateFirstName() {
       invalidMessage[0].textContent = "";
       jsonUserObject.firstName = signupFirstName.value;
       validateCounter = validateCounter + 1;
-      // console.log(validateCounter);
-      // console.log(jsonUserObject.firstName);
       if (validateCounter > 5) {
         signupSubmitButton.disabled = false;
       }
@@ -66,8 +64,6 @@ function validateLastName() {
       invalidMessage[1].textContent = "";
       jsonUserObject.lastName = signupLastName.value;
       validateCounter = validateCounter + 1;
-      // console.log(validateCounter);
-      // console.log(jsonUserObject.lastName);
       if (validateCounter > 5) {
         signupSubmitButton.disabled = false;
       }
@@ -94,8 +90,6 @@ function validateEmail() {
       invalidMessage[2].textContent = "";
       jsonUserObject.email = signupEmail.value;
       validateCounter = validateCounter + 1;
-      // console.log(validateCounter);
-      // console.log(jsonUserObject.email);
       if (validateCounter > 5) {
         signupSubmitButton.disabled = false;
       }
@@ -116,8 +110,6 @@ function validateBirthdate() {
       let userBDay = new Date(signupBirthdate.value).getTime();
       jsonUserObject.userBirthdate = userBDay;
       validateCounter = validateCounter + 1;
-      // console.log(validateCounter);
-      // console.log(jsonUserObject.userBirthdate);
       if (validateCounter > 5) {
         signupSubmitButton.disabled = false;
       }
@@ -141,8 +133,6 @@ function validateUsername() {
       invalidMessage[4].textContent = "";
       jsonUserObject.username = signupUsername.value;
       validateCounter = validateCounter + 1;
-      // console.log(validateCounter);
-      // console.log(jsonUserObject.username);
       if (validateCounter > 5) {
         signupSubmitButton.disabled = false;
       }
@@ -166,8 +156,6 @@ function validatePassword() {
       invalidMessage[5].textContent = "";
       jsonUserObject.passcode = signupPassword.value;
       validateCounter = validateCounter + 1;
-      // console.log(jsonUserObject.passcode);
-      // console.log(validateCounter);
       if (validateCounter > 5) {
         signupSubmitButton.disabled = false;
       }
@@ -216,7 +204,4 @@ async function registerUser(event) {
     invalidIcon[6].style.display = "";
     invalidMessage[6].textContent = error;
   }
-}
-
-// let userData = registeredUserBody;
-// localStorage.setItem("userIdSignup", JSON.stringify(userData));
+};
