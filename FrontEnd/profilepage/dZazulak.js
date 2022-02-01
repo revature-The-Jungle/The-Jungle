@@ -239,7 +239,7 @@ function populateGroupsForUsers(groupBody){
 
         let groupNameDiv = document.createElement("div");
         groupNameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
-        groupNameDiv.innerHTML = `<a id="groupLink-${groupBody[group].groupId}" class="name valign-text-middle poppins-bold-astronaut-22px" onclick=goToGroupPage(${groupBody[group].groupId}) href="../individualgrouppage/individual-group-page.html">${groupBody[group].groupName}</a>`;
+        groupNameDiv.innerHTML = `<a id="groupLink-${groupBody[group].groupId}" class="name valign-text-middle poppins-bold-astronaut-22px" onclick=goToGroupPage(${groupBody[group].groupId})>${groupBody[group].groupName}</a>`;
         groupSectionDiv.appendChild(groupsDiv);
         groupsDiv.appendChild(groupImage);
         groupsDiv.appendChild(groupNameDiv);
@@ -248,17 +248,11 @@ function populateGroupsForUsers(groupBody){
     }
 }
 
-async function getGroupImage(groupBody){
-    for(group in groupBody){
-        let imageElement = document.getElementById(`${groupBody[group].groupName}-image`);
-        let url = ""
-    }
-}
 
 function goToGroupPage(groupId){
-    let groupLink = getElementById("groupLink-" + groupId);
+    // let groupLink = getElementById("groupLink-" + groupId);
     // groupLink.setAttribute("href", "")
-    localStorage.setItem("groupId") = groupId;
+    localStorage.setItem("groupId",groupId);
     localStorage.getItem("groupId");
 }
 

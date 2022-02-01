@@ -1,12 +1,21 @@
 package E2E.steps;
 
 import E2E.runner.TestRunner;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.io.File;
+
 public class EditProfileSteps {
+
+    @Given("the user is on the home page for temporary profile")
+    public void the_user_is_on_the_home_page_for_temporary_profile() {
+        TestRunner.driver.get("C:\\Users\\chris\\project3_repo\\The-Jungle\\FrontEnd\\profilepage\\profile-page.html");
+        TestRunner.explicitWait.until(ExpectedConditions.titleIs("Home"));
+    }
 
     @When("the user clicks on the edit profile button")
     public void the_user_clicks_on_the_edit_profile_button() {
