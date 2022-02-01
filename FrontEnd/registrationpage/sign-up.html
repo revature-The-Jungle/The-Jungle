@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <title>Sign Up</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/png" href="favicon.ico" />
     <title>Sign Up</title>
@@ -16,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="css/globals.css" />
   </head>
   <body style="margin: 0; background: #ffffff">
+
     <div class="container-center-horizontal">
       <div class="sign-up screen">
         <div class="leftSection">
@@ -40,7 +42,6 @@
                 id="signup-firstname"
                 required
                 maxlength="20"
-                placeholder="Luke"
               />
 
               <!-- input error message -->
@@ -69,7 +70,6 @@
                 id="signup-lastname"
                 required
                 maxlength="20"
-                placeholder="Skywalker"
               />
 
               <!-- input error message -->
@@ -99,9 +99,9 @@
                 id="signup-email"
                 required
                 maxlength="50"
-                placeholder="luke.skywalker@jedi.net"
               />
 
+              <!-- input error message -->
               <div class="invalidDiv" id="invalidEmail">
                 <img
                   class="info-icon"
@@ -129,7 +129,7 @@
                 id="signup-bdate"
               />
 
-              <!-- dob error message -->
+              <!-- input error message -->
               <div class="invalidDiv" id="invalidDOB">
                 <img
                   class="info-icon"
@@ -157,7 +157,6 @@
                 id="signup-username"
                 required
                 maxlength="50"
-                placeholder="MasterJedi12"
               />
 
               <!-- username error message -->
@@ -187,7 +186,6 @@
                 id="signup-password"
                 required
                 maxlength="50"
-                placeholder="pass1234^&*"
               />
 
               <!-- password error message -->
@@ -215,151 +213,21 @@
             <button class="btn submit valign-text-middle" id="signup-submit">
               Sign Up
             </button>
+              <!-- BACK END ERROR MESSAGE -->
+            <div class="invalidDiv" id="invalidPassword">
+              <img
+                class="info-icon"
+                src="img/info-icon@2x.svg"
+                id="invalid-icon"
+              />
+
+              <p
+                class="please-enter-a-valid-entry poppins-bold-bright-red-18px"
+                id="signup-invalid-message"
+              ></p>
+            </div>
+            
           </div>
-
-          <!-- <div class="create-account">Create Account</div> -->
-          <!-- <div class="form">
-
-            <div class="first-name">
-              <div class="first-name-1 poppins-bold-white-18px">
-                <span class="labelSize">First Name <span class="asterisk">*</span></span>
-              </div>
-
-              
-              <div class="overlap-group7">
-                <input type="text" class="rectangle-1 border-1px-mischka" id="signup-firstname" required maxlength="20" placeholder="Luke">
-              </div>
-
-          
-              <div class="overlap-group6">
-                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon"> 
-                
-               <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p>
-              </div>
-            </div>
-            <div class="last-name">
-              <span class="labelSize labelLastName">Last Name <span class="asterisk">*</span></span>
-              <input type="text" class="rectangle-1 lastName border-1px-mischka" id="signup-lastname" required maxlength="20" placeholder="Skywalker"> 
-              
-            </div>
-
-            
-            <div class="overlap-group6">
-              <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon"> 
-              
-              <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
-            </div>
-
-            <div class="email">
-              <div class="email-1">
-                <span class="labelSize labelLastName">Email </span
-                ><span class="span poppins-bold-red-18px">*</span>
-              </div>
-              <div class="overlap-group5">
-                <input type="email" class="inputs border-1px-mischka" id="signup-email" required maxlength="50" placeholder="luke.skywalker@jedi.net">
-                
-              </div>
-
-              
-              <div class="overlap-group6">
-                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
-               
-                <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p>
-              </div>
-            </div>
-
-            <div class="date-of-birth">
-              <div class="date-of-birth-1 poppins-bold-white-18px">
-                <span class="labelSize">Date of Birth </span
-                ><span class="span poppins-bold-red-18px">*</span>
-              </div>
-
-              
-              <div class="overlap-group4">
-                <input type="date" class="inputs border-1px-mischka" id="signup-bdate" required>
-                
-              </div>
-
-              
-              <div class="overlap-group6">
-                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
-               
-                <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
-              </div>
-            </div>
-
-            <div class="username">
-              <div class="user-name poppins-bold-white-18px">
-                <span class="labelSize">UserName </span
-                ><span class="span poppins-bold-red-18px">*</span>
-              </div>
-
-              
-              <div class="overlap-group3">
-                <input type="text" class="inputs border-1px-mischka" id="signup-username" required maxlength="50" placeholder="MasterJedi12"> 
-              </div>
-
-              
-              <div class="overlap-group6">
-                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
-                
-                <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
-              </div>
-            </div>
-
-            <div class="password">
-              <div class="password-1 poppins-bold-white-18px">
-                <span class="labelSize">Password </span
-                ><span class="span poppins-bold-red-18px">*</span>
-              </div>
-
-       
-              <div class="overlap-group2">
-                <input type="password" class="inputs border-1px-mischka" id="signup-password" required maxlength="50" placeholder="pass1234^&*">
-              </div>
-
-              
-              <div class="overlap-group6">
-                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
-                
-                <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
-              </div>
-            </div>
-
-            <div class="repeat-password">
-              <div class="password-2 poppins-bold-white-18px">
-                <span class="labelSize">Repeat Password</span
-                ><span class="span poppins-bold-red-18px">*</span>
-              </div>
-
-              
-              <div class="overlap-group1">
-                <input type="password" class="rectangle-1 border-1px-mischka" id="signup-repeat-password" required maxlength="50" placeholder="pass1234^&*"> 
-              </div>
-
-             
-              <div class="overlap-group6">
-                <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon">
-                
-                <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
-              </div>
-            </div> -->
-
-          <!-- <div class="dont-have-an-account poppins-bold-white-18px">
-              <span class="span0">Already have an account?</span><span class="span1"><a href="../loginpage/login.html">Log in</span>
-            </div>
-            
-             
-              <button class="btn submit valign-text-middle" id="signup-submit">Submit</button> -->
-          <!-- SUBMIT BUTTON FOR SIGN UP -->
-
-          <!-- INVALID MESSAGE CONTAINER -->
-          <!-- <div class="overlap-group6">
-              <img class="info-icon" src="img/info-icon@2x.svg" style="display: none;" id="invalid-icon"> -->
-          <!-- INVALID MESSAGE ICON Will appear with invalid message-->
-          <!-- <p class="please-enter-a-valid-entry poppins-bold-bright-red-18px" id="signup-invalid-message"></p> 
-            </div> -->
-          <!-- </div> -->
         </div>
       </div>
     </div>
