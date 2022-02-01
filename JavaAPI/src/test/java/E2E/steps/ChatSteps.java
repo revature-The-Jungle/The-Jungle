@@ -3,7 +3,7 @@ package E2E.steps;
 public class ChatSteps {
     @io.cucumber.java.en.Given("the user is on their dashboard page")
     public void theUserIsOnTheirDashboardPage() {
-        
+
     }
 
     @io.cucumber.java.en.When("the user clicks the chat room button")

@@ -27,13 +27,14 @@ public class TestRunner {
 
     @BeforeClass
     public static void setup() {
-        File file = new File("src/test/chromedriver");
+        File file = new File("src/test/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
         driver = new ChromeDriver();
         rlsPom = new RegLoginSearchPOM(driver);
         userHomePage = new UserHomePage(driver);
         groupPage = new GroupPage(driver);
 
+        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         System.out.println("Set up complete!");

@@ -4,18 +4,20 @@ import E2E.runner.TestRunner;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+
 
 public class CreateGroupSteps {
     // Create Group
-    @Given("the user is on their dashboard page")
-    public void the_user_is_on_their_dashboard_page() {
-        TestRunner.driver.get("http://127.0.0.1:500/group-page.html");
+    @Given("the user is on the group page")
+    public void the_user_is_on_the_group_page() {
+        TestRunner.driver.get("File:///Users/dlanderos/Desktop/Project 3/The-Jungle/FrontEnd/grouppage/group-page.html");
     }
 
     @When("the user enters the group name")
     public void the_user_enters_the_group_name() {
-        TestRunner.userHomePage.groupName.sendKeys("Killswitch Engage Fan Club");
+        TestRunner.userHomePage.groupName.sendKeys("Killswitch Engage19 Fan Club");
     }
 
     @When("the user enters the group description")
@@ -30,6 +32,7 @@ public class CreateGroupSteps {
 
     @Then("a created group success message will appear")
     public void a_created_group_success_message_will_appear() {
+        TestRunner.explicitWait.until(ExpectedConditions.textToBePresentInElement(TestRunner.userHomePage.messageGroupCreated, "Group created successfully!"));
         Assert.assertEquals(TestRunner.userHomePage.messageGroupCreated.getText(), "Group created successfully!");
     }
 
@@ -94,6 +97,7 @@ public class CreateGroupSteps {
 
     @Then("a group name already taken message will appear")
     public void a_group_name_already_taken_message_will_appear() {
+        TestRunner.explicitWait.until(ExpectedConditions.textToBePresentInElement(TestRunner.userHomePage.duplicateGroupNameMessage, "The group name you entered is already taken! Please try another group name."));
         Assert.assertEquals(TestRunner.userHomePage.duplicateGroupNameMessage.getText(), "The group name you entered is already taken! Please try another group name.");
 }
 }
