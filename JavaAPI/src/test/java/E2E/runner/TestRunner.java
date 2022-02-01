@@ -1,5 +1,6 @@
 package E2E.runner;
 
+import E2E.poms.UserProfile;
 import E2E.poms.chat.ChatPage;
 import E2E.poms.RegLoginSearchPOM;
 import io.cucumber.junit.Cucumber;
