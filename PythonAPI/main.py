@@ -46,10 +46,10 @@ logging.basicConfig(filename="records.log", level=logging.DEBUG,
                     format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
 
 # Setup flask
-app: Flask = Flask(__name__)
+app = Flask(__name__)
 CORS(app)
 
-
+d
 @app.get("/")  # basic check for app running
 def on():
     return "python is running"
