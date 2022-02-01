@@ -38,6 +38,8 @@ async function createPost(){
 async function createPostWithImage() {
     let file    = document.getElementById('imageFile').files[0];
     let reader  = new FileReader();
+    const postText = document.getElementById("postText").value;
+    console.log(postText.value);
     let base64gif;
   
     reader.addEventListener("load", async function () {
@@ -46,8 +48,7 @@ async function createPostWithImage() {
 
 
       if (base64gif.length < 1_000_000 && base64gif.startsWith("data:image/")){
-        let postText = document.getElementById("postText");
-        let postJson = JSON.stringify({"user_id":userId, "post_text": postText.value, "image_format": "true"});
+        let postJson = JSON.stringify({"user_id":userId, "post_text": postText, "image_format": "true"});
         let url = "http://127.0.0.1:5000/post"
         
         //Inserts the post into the post table
@@ -57,7 +58,6 @@ async function createPostWithImage() {
             body:postJson}).then(response => {return response.json()});
 
         //Inserts the image into the post_image_table
-        console.log(thePost["post_id"]);
         let response = await fetch(
             "http://127.0.0.1:5000/post/image/" + thePost["post_id"], {
               method: "POST",
