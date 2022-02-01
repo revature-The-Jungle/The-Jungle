@@ -42,7 +42,7 @@ Feature: Users can collaborate within a group
   Scenario: As the system, I want to reject a group name that is too long
     Given the user is on their dashboard page
     When the user enters a group name that is too long
-    When the user enters a group description
+    When the user enters the group description
     When the user clicks the create button
     Then a group name too long message will appear
 

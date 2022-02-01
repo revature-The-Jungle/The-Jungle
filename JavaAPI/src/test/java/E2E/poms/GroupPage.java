@@ -19,4 +19,13 @@ public class GroupPage {
 
     @FindBy(id = "groupJoined")
     public WebElement groupJoined;
+
+    @FindBy(id= "groupLink-9000")
+    public WebElement groupLink;
+
+    @FindBy(id = "groupLink-32")
+    public WebElement myGroupLink;
+
+    @FindBy(xpath = "/html/body/div/div/div[1]/div[3]/div[2]/a/img")
+    public WebElement groupLogoLink;
 }
