@@ -60,7 +60,8 @@ public class ChatController {
             Gson gson = new Gson();
             Map<Object,String> messageJson = gson.fromJson(ctx.message(), Map.class);
             System.out.println(messageJson);
-            int userId = Integer.parseInt( messageJson.get("userId"));
+            Double userIdDouble =  Double.parseDouble(messageJson.get("userId"));
+            int userId = userIdDouble.intValue();
             int groupId = (Integer) userUsernameMap.get(ctx).get("groupId");
 
             String chatContent = messageJson.get("chatContent");
