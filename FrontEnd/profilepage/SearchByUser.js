@@ -28,17 +28,6 @@ const searchByUsername = async() => {
             
             
         }
-        // searchListResults.addEventListener("focusout", searchListResults.style.display="none");
     }
 }
 searchUserButton.addEventListener("click", searchByUsername);
-// document.getElementById("magnifyGlass").addEventListener("click", searchByUsername);
-
-// Make a div where searches will go (with id)
-//  put a ul inside of div, holding the results
-    // position it to match input box
-    // display none
-// Make event listener for input
-    // change to submit 
-    //  when the event listener gets triggered, it opens the div box
-    // inside 
