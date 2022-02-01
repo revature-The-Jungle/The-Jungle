@@ -576,3 +576,37 @@
   height: 20em; 
   width: 25em;
 }
+.nav #message{
+  position: absolute;
+  margin-top: 250px;
+  font-family: var(--font-family-poppins)
+  
+}
+.individual-group-page .group-in-list {
+  height: 40px;
+  min-width: 221px;
+  max-width: 9rem;
+  align-items: center;
+  display: flex;
+  margin: 10px 0px 35px 15px;
+}
+
+.individual-group-page .friend {
+  height: 57px;
+  object-fit: cover;
+  width: 57px;
+  border-radius: 50px;
+}
+
+#groupJoined, #groupNotJoined {
+  display: none;
+}
+
+.joinGroupButton {
+  background-color: orange;
+  color: white;
+  font-family: var(--font-family-poppins);
+  margin: 1.7rem 0 0 0;
+  padding: 0.4rem 2rem;
+}
+
