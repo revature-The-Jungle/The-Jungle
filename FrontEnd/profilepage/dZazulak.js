@@ -3,6 +3,37 @@ const userAboutMe = document.getElementById("userAboutMeInput");
 const modalMessageDiv = document.getElementById("ModalMsgProfile");
 const followerSectionDiv = document.getElementById("followers-div");
 const groupSectionDiv = document.getElementById("groups-div");
+const profileUsername = document.getElementById("profileUsername");
+const profileDOB = document.getElementById("profileDOB");
+const profileEmail = document.getElementById("profileEmail");
+let aboutMe = localStorage.getItem("AboutMe");
+userAboutMe.setAttribute("value", aboutMe);
+
+
+
+async function getUserByUserId(){
+    let url = "http://127.0.0.1:5000/user/" + 9000;
+    let response = await fetch(url);
+
+    if(response.status === 200){
+        let body = await response.json();
+        console.log(body);
+        populateUserProfileByUserId(body);
+    }
+    else{
+        alert("There seems to be some sort of issue going on with the database: Apologies!");
+    }
+}
+
+function populateUserProfileByUserId(user){
+
+    let text = user.user_birth_date.split(" ");
+    let array = text[1] + " " + text[2] + " " + text[3];
+    profileUsername.innerText = `${user.username}`;
+    profileDOB.innerText = `${array}`;
+    profileEmail.innerText = `${user.email}`;
+    localStorage.setItem("AboutMe", user.user_about);
+}
 
 /*
     Grabs the user profile information from the update profile modal and sends it through the layers
@@ -175,3 +206,4 @@ function goToGroupPage(groupId){
 
 getUserFollowers();
 getGroupsForUser();
+getUserByUserId();
