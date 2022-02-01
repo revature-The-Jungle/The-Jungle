@@ -24,7 +24,7 @@ public class ChatServiceTests {
      */
     @Test(expectedExceptions = InvalidInputException.class, expectedExceptionsMessageRegExp = "Invalid Group ID")
     public void serviceCreateMessageFailInvalidGroupId(){
-        ChatMessage chatMessage = new ChatMessage(9000, 0, "hi");
+        ChatMessage chatMessage = new ChatMessage(9000, -1, "hi");
         chatService.serviceCreateMessageObject(chatMessage);
     }
     /**
