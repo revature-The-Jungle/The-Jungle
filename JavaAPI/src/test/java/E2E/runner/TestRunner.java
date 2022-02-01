@@ -8,6 +8,8 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import E2E.poms.UserHomePage;
+import E2E.poms.GroupPage;
 import java.io.File;
 
 @RunWith(Cucumber.class)
@@ -15,8 +17,9 @@ import java.io.File;
 public class TestRunner {
     public static WebDriver driver;
     public static WebDriverWait explicitWait;
+    public static UserHomePage userHomePage;
+    public static GroupPage groupPage;
 
-    // POMs
 
     @BeforeClass
     public static void setup() {
@@ -26,8 +29,8 @@ public class TestRunner {
         driver.manage().window().maximize();
 
         // POMs
-
-        driver.manage().window().maximize();
+        userHomePage = new UserHomePage(driver);
+        groupPage = new GroupPage(driver);
 
     }
 
