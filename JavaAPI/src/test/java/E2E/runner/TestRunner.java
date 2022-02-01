@@ -1,5 +1,8 @@
 package E2E.runner;
 
+import E2E.poms.GroupJunctionPOM;
+import E2E.poms.RegLoginSearchPOM;
+import E2E.poms.chat.ChatPage;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.AfterClass;
@@ -22,6 +25,7 @@ public class TestRunner {
     // POMs
     public static ChatPage chatPage;
     public static RegLoginSearchPOM rlsPom;
+    public static GroupJunctionPOM groupJunctionPOM;
 
     @BeforeClass
     public static void setup() {
@@ -41,9 +45,6 @@ public class TestRunner {
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         System.out.println("Set up complete!");
         driver.manage().window().maximize();
-        //SET UP WAITS
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
     }
 
