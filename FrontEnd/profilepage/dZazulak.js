@@ -34,7 +34,16 @@ function populateUserProfileByUserId(user){
     profileUsername.innerText = `${user.username}`;
     profileDOB.innerText = `${array}`;
     profileEmail.innerText = `${user.email}`;
+
+    /*
+        Sets the aboutMe to the value by using getUserById, then setting it to the localStorage to use for the textarea
+    */
     localStorage.setItem("AboutMe", user.user_about);
+
+    /*
+        Switch statement to format the Month to a format that the date input will like as the value
+        Sets the attribute of the value afterwards using the getUserById
+    */
     let month = "";
     switch(text[2]){
         case "Jan":
@@ -83,7 +92,7 @@ function populateUserProfileByUserId(user){
     Grabs the user profile information from the update profile modal and sends it through the layers
 */
 async function updateUserProfileData(){
-    // Will need to update this to use the current user's ID
+
     let url = "http://127.0.0.1:5000/user/profile/update/" + userId;
     
     let updateUserProfileJSON = JSON.stringify({"firstName": "Shouldn't change",
@@ -144,6 +153,9 @@ function successMessageForProfileModal(){
     modalMessageDiv.append(profileSuccessMessage);
 }
 
+/* 
+    Grabs all the users followers from the database
+*/
 async function getUserFollowers(){
     let url = "http://127.0.0.1:5000/user/followers/" + JSON.parse(localStorage.getItem("userInfo")).userId;
 
