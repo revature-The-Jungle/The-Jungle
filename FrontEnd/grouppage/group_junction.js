@@ -37,7 +37,7 @@ function createList(response) {
 
 async function deleteRequest() {
     userId = 9000
-    groupId = 9000
+    groupId = localStorage.getItem("groupId")
     url = `http://127.0.0.1:5000/group/leave/${userId}/${groupId}`
     let response = await fetch(url, { method: "DELETE", headers: { "Content-Type": "application/json" }});
     if(response.status === 200){
@@ -51,7 +51,7 @@ async function deleteRequest() {
 }
 
 async function creatorOf() {
-    groupId = 10
+    groupId = localStorage.getItem("groupId")
     url = `http://127.0.0.1:5000/creator/${groupId}`
     let response = await fetch(url)
     if(response.status === 200){
@@ -87,8 +87,6 @@ async function getGroup() {
 }
 
 function buttonCheck(response) {
-    console.log(response)
-    localStorage.setItem('userId', 9000)
     userId = localStorage.getItem('userId')
     groupId = localStorage.getItem('groupId')
     if (response == undefined ) {
