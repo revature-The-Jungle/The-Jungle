@@ -15,7 +15,7 @@ import java.io.File;
 import java.time.Duration;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:features", glue = "E2E.steps", plugin = { "pretty",
+@CucumberOptions(features = "classpath:features/chatRoomSteps.feature", glue = "E2E.steps", plugin = { "pretty",
         "html:src/test/java/resources/reports/html-reports.html" })
 public class TestRunner {
 
