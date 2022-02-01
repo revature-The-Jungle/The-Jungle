@@ -37,7 +37,7 @@
           </div>
           <div class="about-me">
             <img class="mando-merc-2" src="img/mando-merc-2@2x.png" />
-            <div
+            <div id="groupName"
               class="group-name valign-text-middle poppins-bold-cape-cod-18px"
             >
               Mando Mercs
@@ -51,11 +51,11 @@
             <button
             id="submitJoinGroup"
             type="button"
-            class="btn joinGroupButton"
+            class="joinGroupButton"
           >
             Join Group
           </button>
-          <p id="groupJoined">Group joined.</p>
+          <p id="groupJoined" class="text-success">Group joined.</p>
           <p id="groupNotJoined">There was an error joining this group.</p>
             <img
               class="line-under-about-group"
@@ -65,7 +65,10 @@
           <div class="nav poppins-semi-bold-astronaut-24px">
             <div class="chat-container">
               <div class="chat valign-text-middle">Chat</div>
+              <!--Need to add group url below for transfer to new page-->
+              <a href= "">
               <img class="x-icon" src="img/chat-icon@2x.svg" />
+              </a>
             </div>
             <div class="group-container">
               <div class="groups valign-text-middle">Groups</div>
@@ -76,7 +79,8 @@
               <img class="x-icon" src="img/logout-icon@2x.svg" />
             </div>
             <div id = "message">
-              <button style="background-color: orange;" onclick="deleteRequest();">Leave Group</button>
+              <button id="tbd" style="background-color: orange;" onclick="deleteRequest();">Leave Group</button>
+
             </div>
           </div>
         </div>
@@ -85,27 +89,8 @@
           <div class="middle-section"></div>
           <div class="overlap-group3">
             <div class="group-rectangle"></div>
-            <div class="member-3">
-              <img class="member" src="img/member-3@2x.png" />
-              <div class="name valign-text-middle poppins-bold-astronaut-20px">
-                Karen Gillan
-              </div>
-            </div>
-            <div class="member-2">
-              <img class="member" src="img/member-2@2x.png" />
-              <div
-                class="name-1 valign-text-middle poppins-bold-astronaut-20px"
-              >
-                Elizabeth Olson
-              </div>
-            </div>
-            <div class="member-1">
-              <img class="member-1-1" src="img/member-1@2x.png" />
-              <div
-                class="briel-larson valign-text-middle poppins-bold-astronaut-20px"
-              >
-                Briel Larson
-              </div>
+            <div id ="member-3" class="member-3">
+              
             </div>
             <img class="line-under-groups" src="img/line-under-groups@2x.svg" />
             <img class="group-icon" src="img/group-icon-1@2x.svg" />
@@ -230,6 +215,6 @@
       </div>
     </div>
     <script src="group_post.js"></script>
-    <script src="/individualgrouppage/individual-group.js"></script>
+    <script src="../individual-group.js"></script>
   </body>
 </html>

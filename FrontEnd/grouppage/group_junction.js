@@ -1,27 +1,39 @@
 async function getUserInGroups() {
-    groupId = 15
+    groupId = localStorage.getItem("groupId")
     url = `http://127.0.0.1:5000/GroupJunction/UserList/${groupId}`
     let response = await fetch(url)
 
     if(response.status === 200){
         let body = await response.json()
         console.log(body)
-        createList(body)
+         createList(body)
+         buttonCheck(body)
 
     }
     
 }
 
 function createList(response) {
-     let memList = document.getElementById("members")
-    for(member of response){
-        memList.insertAdjacentHTML("afterend",`<div>${member.first_name}</div>`)
-        
-        
-
-
+        let groupSectionDiv = document.getElementById("member-3")
+        console.log(response)
+        for (let group of response){
+            let groupsDiv = document.createElement("div");
+            groupsDiv.setAttribute("class", "group-in-list");
+    
+            let groupImage = document.createElement("img");
+            groupImage.setAttribute("class", "friend");
+    
+            let groupNameDiv = document.createElement("div");
+            groupNameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
+            groupNameDiv.textContent = group.first_name;
+    
+            groupSectionDiv.appendChild(groupsDiv);
+            groupsDiv.appendChild(groupImage);
+            groupsDiv.appendChild(groupNameDiv);
+    
+    
+        }
     }
-}
 
 async function deleteRequest() {
     userId = 9000
@@ -56,5 +68,49 @@ async function creatorOf() {
     
     
 }
+
+async function getGroup() {
+    groupId = window.localStorage.getItem("groupId")
+
+    let url = `http://127.0.0.1:5000/group/${groupId}`
+
+    let response = await fetch(url)
+
+    if(response.status === 200){
+        let body = await response.json()
+        console.log(body)
+        groupdef = document.getElementById("groupName")
+        groupdef.innerHTML = body.groupName
+
+    }
+    
+}
+
+function buttonCheck(response) {
+    console.log(response)
+    localStorage.setItem('userId', 9000)
+    userId = localStorage.getItem('userId')
+    groupId = localStorage.getItem('groupId')
+    if (response == undefined ) {
+        let button = document.getElementById('tbd')
+        button.style.display = "none"
+    }else{
+        for (const users of response) {
+            console.log(response)
+            if (userId == users.user_id) {
+                let button = document.getElementById("tbd")
+                button.style.display = "block"
+            } else {
+                let button = document.getElementById('tbd')
+                button.style.display = "none"
+            }
+            
+        }
+    }
+       
+    
+}
 getUserInGroups()
 creatorOf()
+getGroup();
+buttonCheck();
