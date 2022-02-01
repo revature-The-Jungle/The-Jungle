@@ -46,7 +46,7 @@ logging.basicConfig(filename="records.log", level=logging.DEBUG,
                     format="[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d")
 
 # Setup flask
-app = Flask(__name__)
+app: Flask = Flask(__name__)
 CORS(app)
 
 d
