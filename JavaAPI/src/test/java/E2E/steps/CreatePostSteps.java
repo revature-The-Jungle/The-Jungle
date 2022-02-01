@@ -6,6 +6,7 @@ import io.cucumber.java.en.When;
 public class CreatePostSteps {
     @When("the user clicks on the create post modal button")
     public void the_user_clicks_on_the_create_post_modal_button() {
+        //get the create post modal form by id which is
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
