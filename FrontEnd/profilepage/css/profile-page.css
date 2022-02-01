@@ -419,7 +419,7 @@
 
 .profile-page .user-avatar {
   height: 151px;
-  margin-right: 6.0px;
+  margin-right: 6px;
   object-fit: cover;
   width: 151px;
   border-radius: 80px;
@@ -428,7 +428,7 @@
 .profile-page .user-name {
   height: 44px;
   letter-spacing: -0.27px;
-  margin-right: 7.0px;
+  margin-right: 7px;
   margin-top: 13px;
   text-align: center;
   width: 192px;
@@ -437,7 +437,7 @@
 .profile-page .flex-row-1 {
   align-items: flex-start;
   display: flex;
-  margin-right: 6.0px;
+  margin-right: 6px;
   margin-top: 10px;
   min-width: 307px;
 }
@@ -477,7 +477,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-left: 3.0px;
+  margin-left: 3px;
   margin-top: 39px;
   min-height: 91px;
   width: 250px;
@@ -488,7 +488,7 @@
   border: 2px solid #f47635;
   border-radius: 10px;
   height: 42px;
-  margin-right: 10.0px;
+  margin-right: 10px;
   position: relative;
   width: 216px;
 }
@@ -508,8 +508,8 @@
 }
 
 .profile-page .edit-icon {
-    left: 52px;
-    position: absolute;
+  left: 52px;
+  position: absolute;
 }
 
 .profile-page .line-under-search-1 {
@@ -644,8 +644,6 @@
   scrollbar-width: none;  /* Firefox */
 }
 
-
-
 .profile-page .chat-rectange {
   background-color: var(--white);
   border-radius: 20px;
@@ -695,7 +693,7 @@
   height: 31px;
   letter-spacing: -0.33px;
   margin-left: 11px;
-  margin-top: 8.0px;
+  margin-top: 8px;
   text-align: center;
   width: 203px;
 }
@@ -780,7 +778,7 @@
   text-align: center;
 }
 
-.profile-page .edit-button{
+.profile-page .edit-button {
   color: var(--atomic-orange);
   background-color: white;
   border-color: var(--atomic-orange);
@@ -818,6 +816,7 @@
   top: 95px;
   left: 17px;
 }
+
 
 /* Search Bar */
 .profile-page .search {
@@ -862,4 +861,5 @@
   font-size: var(--font-size-m);
   font-style: normal;
   font-weight: 500;
+
 }

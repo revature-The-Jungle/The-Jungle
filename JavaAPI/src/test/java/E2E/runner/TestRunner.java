@@ -1,6 +1,5 @@
 package E2E.runner;
 
-import E2E.poms.GroupJunctionPOM;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.AfterClass;
@@ -9,17 +8,20 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.io.File;
 import java.time.Duration;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features="classpath:features/Group_Junction.Feature", glue="E2E.steps", plugin = {"pretty", "html:src/test/java/resources/reports/html-reports.html"})
 public class TestRunner {
+
     public static WebDriver driver;
     public static WebDriverWait explicitWait;
 
     // POMs
-    public static GroupJunctionPOM groupJunctionPOM;
+    public static ChatPage chatPage;
+    public static RegLoginSearchPOM rlsPom;
 
     @BeforeClass
     public static void setup() {
@@ -29,10 +31,15 @@ public class TestRunner {
         driver.manage().window().maximize();
 
         // POMs
+        chatPage = new ChatPage(driver);
+        rlsPom = new RegLoginSearchPOM(driver);
         groupJunctionPOM = new GroupJunctionPOM(driver);
 
 
 
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        System.out.println("Set up complete!");
         driver.manage().window().maximize();
         //SET UP WAITS
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -43,5 +50,8 @@ public class TestRunner {
     @AfterClass
     public static void teardown() {
         driver.quit();
+        System.out.println("teardown complete!");
+
     }
+
 }
