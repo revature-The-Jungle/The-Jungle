@@ -6,19 +6,20 @@ const groupSectionDiv = document.getElementById("groups-div");
 const profileUsername = document.getElementById("profileUsername");
 const profileDOB = document.getElementById("profileDOB");
 const profileEmail = document.getElementById("profileEmail");
-let aboutMe = localStorage.getItem("AboutMe");
-userAboutMe.setAttribute("value", aboutMe);
+
 
 
 
 async function getUserByUserId(){
-    let url = "http://127.0.0.1:5000/user/" + 9000;
+    let url = "http://127.0.0.1:5000/user/" + JSON.parse(localStorage.getItem("userInfo")).userId;
     let response = await fetch(url);
 
     if(response.status === 200){
         let body = await response.json();
         console.log(body);
         populateUserProfileByUserId(body);
+        let initialAboutMe = localStorage.getItem("AboutMe");
+        userAboutMe.innerText = initialAboutMe;
     }
     else{
         alert("There seems to be some sort of issue going on with the database: Apologies!");
@@ -29,10 +30,53 @@ function populateUserProfileByUserId(user){
 
     let text = user.user_birth_date.split(" ");
     let array = text[1] + " " + text[2] + " " + text[3];
+    let BirthDateValue = "";
     profileUsername.innerText = `${user.username}`;
     profileDOB.innerText = `${array}`;
     profileEmail.innerText = `${user.email}`;
     localStorage.setItem("AboutMe", user.user_about);
+    let month = "";
+    switch(text[2]){
+        case "Jan":
+            month = "01";
+            break;
+        case "Feb":
+            month = "02";
+            break;
+        case "Mar":
+            month = "03";
+            break;
+        case "Apr":
+            month = "04";
+            break;
+        case "May":
+            month = "05";
+            break;
+        case "Jun":
+            month = "06";
+            break;
+        case "Jul":
+            month = "07";
+            break;
+        case "Aug":
+            month = "08";
+            break;
+        case "Sep":
+            month = "09";
+            break;
+        case "Oct":
+            month = "10";
+            break;
+        case "Nov":
+            month = "11";
+            break;
+        case "Dec":
+            month = "12";
+            break;
+
+    }
+    BirthDateValue = text[3] + "-" + month + "-" + text[1];
+    userBirthDate.setAttribute("value", BirthDateValue);
 }
 
 /*
@@ -41,15 +85,15 @@ function populateUserProfileByUserId(user){
 async function updateUserProfileData(){
     // Will need to update this to use the current user's ID
     let url = "http://127.0.0.1:5000/user/profile/update/" + userId;
-
+    
     let updateUserProfileJSON = JSON.stringify({"firstName": "Shouldn't change",
-    "lastName": "Shouldn't change",
-    "email": "Shouldn't change",
-    "username": "Shouldn't change",
-    "passcode": "Shouldn't change",
-    "userAbout": userAboutMe.value,
-    "userBirthDate": userBirthDate.value,
-    "userImageFormat": "Shouldn't change"});
+        "lastName": "Shouldn't change",
+        "email": "Shouldn't change",
+        "username": "Shouldn't change",
+        "passcode": "Shouldn't change",
+        "userAbout": userAboutMe.value,
+        "userBirthDate": userBirthDate.value,
+        "userImageFormat": "Shouldn't change"});
 
     let response = await fetch(url, {
         method: "PATCH",
@@ -59,6 +103,8 @@ async function updateUserProfileData(){
         if(response.status === 200){
             let body = await response.json();
             successMessageForProfileModal();
+            getUserByUserId()
+            localStorage.setItem("AboutMe", body.user_about);
             console.log(body);
         }
         else{
