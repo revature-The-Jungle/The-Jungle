@@ -347,7 +347,7 @@ def add_likes_to_post():
     try:
         data = request.get_json()
         postid = data["postId"]
-        return jsonify(like_post_service.service_like_post(postid))
+        return jsonify(like_post_service.service_like_post(int(postid)))
     except TypeError:
         return ("post not found!"), 400
 

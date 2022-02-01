@@ -27,6 +27,9 @@ public class TestRunner {
     public static ChatPage chatPage;
     public static RegLoginSearchPOM rlsPom;
 
+
+    public static UserProfile userProfile;
+
     @BeforeClass
     public static void setup() {
         File file = new File("src/test/resources/chromedriver.exe");
@@ -37,6 +40,7 @@ public class TestRunner {
         // POMs
         chatPage = new ChatPage(driver);
         rlsPom = new RegLoginSearchPOM(driver);
+        userProfile = new UserProfile(driver);
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));

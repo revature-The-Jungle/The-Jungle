@@ -1,18 +1,21 @@
 // let likeButton = document.getElementById("trigger");
-console.log("JS is connected to HTML");
+// console.log("JS is connected to HTML");
 
 // likeButton.onclick = 
 async function likePost(e){
-    let fetchJson = JSON.stringify({ "postId": e })
 
-    let response = await fetch(`http://127.0.0.1:5000/postfeed`, {
-        method : "POST",
-        body : fetchJson
-    })
+    let fetchJson = JSON.stringify({"postId": e})
 
-    let responseData = await response.json()
-    console.log(responseData)
-    document.getElementById("likedComment" + e).innerText.replace(response);
+    let url = "http://127.0.0.1:5000/postfeed"
+    
+    let theResponse = await fetch(url, {
+        method:"POST",
+        headers:{'Content-Type': 'application/json'}, 
+        body:fetchJson}).then(response => {return response.json()});
+
+    console.log(theResponse)
+    let heart = document.getElementById("likedComment" + e);
+    heart.innerHTML = theResponse;
   
 }
 
