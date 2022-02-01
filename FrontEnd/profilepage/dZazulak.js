@@ -3,7 +3,6 @@ const userAboutMe = document.getElementById("userAboutMeInput");
 const modalMessageDiv = document.getElementById("ModalMsgProfile");
 const followerSectionDiv = document.getElementById("followers-div");
 const groupSectionDiv = document.getElementById("groups-div");
-let userId = JSON.parse(localStorage.getItem("userInfo")).userId;
 
 /*
     Grabs the user profile information from the update profile modal and sends it through the layers
@@ -67,7 +66,7 @@ function successMessageForProfileModal(){
 }
 
 async function getUserFollowers(){
-    let url = "http://127.0.0.1:5000/user/followers/" + userId;
+    let url = "http://127.0.0.1:5000/user/followers/" + JSON.parse(localStorage.getItem("userInfo")).userId;
 
     let response = await fetch(url);
 
