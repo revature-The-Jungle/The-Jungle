@@ -86,7 +86,7 @@ function updateChat(msg) {
             "<div class='check-the-documentation valign-text-middle poppins-medium-white-18px'>" +
             data.chatContent +
             "</div>"
-        );
+        ).setAttribute("id", data.chatId + "c");
       } else {
         id("chat").insertAdjacentHTML(
           "beforeend",
@@ -100,7 +100,7 @@ function updateChat(msg) {
             "</div>" +
             "</div>" +
             "</div>"
-        );
+        ).setAttribute("id", data.chatId + "c");
       }
     }
   } else {

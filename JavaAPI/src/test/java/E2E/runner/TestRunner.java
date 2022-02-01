@@ -1,5 +1,6 @@
 package E2E.runner;
 
+import E2E.poms.chat.ChatPage;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.AfterClass;
@@ -17,6 +18,7 @@ public class TestRunner {
     public static WebDriverWait explicitWait;
 
     // POMs
+    public static ChatPage chatPage;
 
     @BeforeClass
     public static void setup() {
@@ -26,6 +28,7 @@ public class TestRunner {
         driver.manage().window().maximize();
 
         // POMs
+        chatPage = new ChatPage(driver);
 
         driver.manage().window().maximize();
 
