@@ -17,8 +17,8 @@ public class UserDAOTests {
     @Test
     void testCreateNewUser() {
         long date = 742892400000L;
-        User newJungleUser = new User(0, "Test", "Tester", "emailavd;orin2",
-                "useravoin", "passcode", "I like social media.", date,
+        User newJungleUser = new User(0, "Test", "Tester", "avawoianv@.c0",
+                "useravoinavoin", "passcode", "I like social media.", date,
                 "imagesourcefile");
         User createdUser = userDAO.createNewUser(newJungleUser);
         Assert.assertEquals(createdUser.getFirstName(), "Test");

@@ -36,7 +36,14 @@ public class UserDAO implements UserDAOInt {
             ResultSet rs = preparedStatement.getGeneratedKeys();
             rs.next();
             user.setUserId(rs.getInt("user_id"));
-            return user;
+            return new User(
+                    rs.getInt("user_id"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getString("email"),
+                    rs.getString("username"),
+                    rs.getDate("user_birth_date").getTime()
+            );
         } catch (SQLException q) {
             if (q.getMessage().contains("username")) {
                 throw new DuplicateUsername("This username is already taken");

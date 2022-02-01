@@ -1,5 +1,7 @@
 package E2E.runner;
 
+import E2E.poms.chat.ChatPage;
+import E2E.poms.RegLoginSearchPOM;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.AfterClass;
@@ -12,15 +14,20 @@ import E2E.poms.UserHomePage;
 import E2E.poms.GroupPage;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="classpath:features", glue="E2E.steps", plugin = {"pretty", "html:src/test/java/resources/reports/html-reports.html"})
+@CucumberOptions(features = "classpath:features", glue = "E2E.steps", plugin = { "pretty",
+        "html:src/test/java/resources/reports/html-reports.html" })
 public class TestRunner {
     public static WebDriver driver;
     public static WebDriverWait explicitWait;
     public static UserHomePage userHomePage;
     public static GroupPage groupPage;
 
+    // POMs
+    public static ChatPage chatPage;
+    public static RegLoginSearchPOM rlsPom;
 
     @BeforeClass
     public static void setup() {
@@ -34,10 +41,18 @@ public class TestRunner {
         userHomePage = new UserHomePage(driver);
         groupPage = new GroupPage(driver);
 
+        chatPage = new ChatPage(driver);
+        rlsPom = new RegLoginSearchPOM(driver);
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        System.out.println("Set up complete!");
     }
 
     @AfterClass
     public static void teardown() {
         driver.quit();
+        System.out.println("teardown complete!");
+
     }
 }

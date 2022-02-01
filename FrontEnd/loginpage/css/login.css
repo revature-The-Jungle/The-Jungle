@@ -129,7 +129,7 @@
   letter-spacing: -0.05px;
 }
 
-.login .span1 {
+.login {
   /* color: #f70e0e; */
   color: #434343;
   letter-spacing: -0.05px;
@@ -247,13 +247,15 @@
   position: absolute;
   top: 3px;
   width: 24px;
-  color: #c92432;
+  /* color: #c92432; */
+  color: red;
   display: none;
   margin: 5px 0;
 }
 
 .login .please-enter-a-valid-entry {
-  color: #ad010c;
+  /* color: #ad010c; */
+  color: red;
   font-family: var(--font-family-poppins);
   font-size: var(--font-size-m);
   font-weight: 700;
@@ -337,20 +339,8 @@
   width: 40vw;
 }
 
-/* #submitLogin {
-  align-items: center;
-  background-color: #f4996a;
-  display: flex;
-  height: 53px;
-  min-width: 391px;
-  margin-right: -250px;
-  padding: 0 121px;
-  margin-top: 0px;
-  border-radius: 10px;
-} */
-
 #signup-invalid-message {
-  color: red;
+  color: #ad010c;
 }
 
 #submitLogin {
@@ -375,5 +365,29 @@
 
 #errorMessageArea {
   text-align: right;
-  color: red;
+  color: #c92432;
+}
+
+.login .span1 {
+  color: #ad010c;
+  letter-spacing: -0.05px;
+}
+
+/* #errorMessageGoesHere{
+  color: #ad010c;
+  font-family: var(--font-family-poppins);
+  font-size: var(--font-size-m); 
+  font-weight: 700;
+  letter-spacing: -0.27px;
+  text-align: center;
+  width: 386px;
+  margin: 10px 0 0 5px;
+} */
+
+#errorMessageGoesHere{
+  color: #ad010c;
+  font-family: var(--font-family-poppins);
+  font-size: var(--font-size-m); 
+  font-weight: 700;
+  margin: 1rem 0;
 }
