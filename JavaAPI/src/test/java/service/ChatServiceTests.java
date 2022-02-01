@@ -15,7 +15,7 @@ public class ChatServiceTests {
      */
     @Test(expectedExceptions = InvalidInputException.class, expectedExceptionsMessageRegExp = "Invalid User ID")
     public void serviceCreateMessageFailInvalidChatId(){
-        ChatMessage chatMessage = new ChatMessage(0, 9000, "hi");
+        ChatMessage chatMessage = new ChatMessage(-1, 9000, "hi");
         chatService.serviceCreateMessageObject(chatMessage);
     }
 

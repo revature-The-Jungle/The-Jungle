@@ -1,5 +1,6 @@
 package E2E.runner;
 
+import E2E.poms.chat.ChatPage;
 import E2E.poms.RegLoginSearchPOM;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -21,20 +22,23 @@ public class TestRunner {
 
     public static WebDriver driver;
     public static WebDriverWait explicitWait;
+
+    // POMs
+    public static ChatPage chatPage;
     public static RegLoginSearchPOM rlsPom;
     public static UserHomePage userHomePage;
     public static GroupPage groupPage;
 
     @BeforeClass
     public static void setup() {
-        File file = new File("src/test/chromedriver.exe");
+        File file = new File("src/test/resources/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
         driver = new ChromeDriver();
-        rlsPom = new RegLoginSearchPOM(driver);
-        userHomePage = new UserHomePage(driver);
-        groupPage = new GroupPage(driver);
-
         driver.manage().window().maximize();
+
+        // POMs
+        chatPage = new ChatPage(driver);
+        rlsPom = new RegLoginSearchPOM(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         System.out.println("Set up complete!");
@@ -44,5 +48,7 @@ public class TestRunner {
     public static void teardown() {
         driver.quit();
         System.out.println("teardown complete!");
+
     }
+
 }

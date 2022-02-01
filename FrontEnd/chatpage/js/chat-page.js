@@ -27,7 +27,7 @@ function createChatConnection(groupId) {
 function sendAndClear(message) {
   if (message !== "") {
     let msg = {
-      userId: sessionStorage.getItem("userId"),
+      userId: "" + storage.userId,
       userName: storage.username,
       chatContent: id("message").value,
     };
