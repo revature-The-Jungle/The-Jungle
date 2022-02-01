@@ -6,12 +6,12 @@ const groupSectionDiv = document.getElementById("groups-div");
 const profileUsername = document.getElementById("profileUsername");
 const profileDOB = document.getElementById("profileDOB");
 const profileEmail = document.getElementById("profileEmail");
-
+visitedUserId = localStorage.getItem("visitUserIdPage");
 
 
 
 async function getUserByUserId(){
-    let url = "http://127.0.0.1:5000/user/" + JSON.parse(localStorage.getItem("userInfo")).userId;
+    let url = "http://127.0.0.1:5000/user/" + visitedUserId;
     let response = await fetch(url);
 
     if(response.status === 200){
@@ -19,7 +19,8 @@ async function getUserByUserId(){
         console.log(body);
         populateUserProfileByUserId(body);
         let initialAboutMe = localStorage.getItem("AboutMe");
-        userAboutMe.innerText = initialAboutMe;
+        // userAboutMe.innerText = initialAboutMe;
+        populateAboutMeForVisitedUser();
     }
     else{
         alert("There seems to be some sort of issue going on with the database: Apologies!");
@@ -85,7 +86,16 @@ function populateUserProfileByUserId(user){
 
     }
     BirthDateValue = text[3] + "-" + month + "-" + text[1];
-    userBirthDate.setAttribute("value", BirthDateValue);
+    // userBirthDate.setAttribute("value", BirthDateValue);
+}
+
+function populateAboutMeForVisitedUser(){
+    visitUserAboutMe = document.getElementById("visitedUserPageAboutMe");
+    visitUserAboutMePTag = document.createElement("p");
+    visitUserAboutMe.innerHTML = '';
+    visitUserAboutMePTag.innerText = localStorage.getItem("AboutMe");
+    visitUserAboutMe.appendChild(visitUserAboutMePTag);
+    
 }
 
 /*
@@ -157,7 +167,7 @@ function successMessageForProfileModal(){
     Grabs all the users followers from the database
 */
 async function getUserFollowers(){
-    let url = "http://127.0.0.1:5000/user/followers/" + JSON.parse(localStorage.getItem("userInfo")).userId;
+    let url = "http://127.0.0.1:5000/user/followers/" + visitedUserId;
 
     let response = await fetch(url);
 
@@ -188,7 +198,7 @@ function populateUserFollowers(followerBody){
         // Created the username div and set the class name and username
         let followerUsernameDiv = document.createElement("div");
         followerUsernameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
-        followerUsernameDiv.innerHTML = `<a class="name valign-text-middle poppins-bold-astronaut-22px" href="profile-page.html">${follower}</a>`;
+        followerUsernameDiv.innerHTML = `<a onclick="localStorage.setItem('visitUserIdPage', ${followerBody[follower]})" class="name valign-text-middle poppins-bold-astronaut-22px" href="../visitprofilepage/visit-profile-page.html">${follower}</a>`;
 
         // Append the created elements to the page
         followerSectionDiv.appendChild(followerDiv);
@@ -213,7 +223,7 @@ async function getFollowerImage(followerBody){
 }
 
 async function getGroupsForUser(){
-    let url = "http://127.0.0.1:5000/group/user/10"
+    let url = "http://127.0.0.1:5000/group/user/" + visitedUserId;
 
     let response = await fetch(url);
 
