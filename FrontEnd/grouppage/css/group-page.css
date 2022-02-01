@@ -27,12 +27,12 @@
 }
 
 .group-page .jungle3-1 {
-  height: 5.5rem;
+  height: 97px;
   left: 0;
   object-fit: cover;
   position: absolute;
   top: 0;
-  width: 17rem;
+  width: 96px;
 }
 
 .group-page .title {
@@ -89,10 +89,6 @@
   width: 133px;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> Cayala/python/group_junction/sp2
 .group-page .line-1 {
   height: 41px;
   margin-left: 24px;
@@ -171,37 +167,20 @@
 }
 
 .group-page .chat-container {
-  height: 43px;
-  margin-left: 2.76px;
+  height: 50px;
+  margin-left: 4px;
   position: relative;
-  width: 185px;
-
+  width: 216px;
 }
 
 .group-page .chat {
-  height: 33px;
-  left: 1px;
+  height: 39px;
+  left: 0;
   letter-spacing: -0.36px;
   position: absolute;
   text-align: center;
   top: 1px;
-  width: 184px;
-  display: flex;
-
-}
-.linkGroups,
-.linkChat {
-  height: 3rem;
-  text-align: center;
-  color: #223172;
-}
-
-.linkGroups {
-  padding: 0.5rem 0 0 1rem;
-}
-
-.linkChat {
-  padding: 0.5rem 0;
+  width: 216px;
 }
 
 .group-page .x-icon {
@@ -378,11 +357,7 @@
 }
 
 .group-page .description-rectangle {
-<<<<<<< HEAD
-  background-color: var(--fair-pink);
-=======
   /* background-color: var(--fair-pink); */
->>>>>>> Cayala/python/group_junction/sp2
   border-radius: 10px;
   height: 57px;
   left: 27px;
@@ -408,9 +383,6 @@
   width: 386px;
 }
 
-<<<<<<< HEAD
-.group-page .info-icon {
-=======
 #messageGroupCreated, #duplicateGroupNameMessage, #groupNameThreeChar, #groupNameFortyChar, #groupAbout500Char {
   display: none;
 }
@@ -419,7 +391,6 @@
 /* ------------------------------------Input Error Icon------------------------------------*/
 .group-page .info-icon {
   display: none;
->>>>>>> Cayala/python/group_junction/sp2
   height: 22px;
   left: 9px;
   position: absolute;
@@ -427,20 +398,16 @@
   width: 20px;
 }
 
-<<<<<<< HEAD
-.group-page .please-enter-a-valid-description {
-=======
 /* --------------------------------------About Group Null Input----------------------------- */
 .group-page .please-enter-a-valid-description {
   display: none;
->>>>>>> Cayala/python/group_junction/sp2
   height: 40px;
-  left: 0;
-  letter-spacing: -0.27px;
-  position: absolute;
-  text-align: center;
-  top: 0;
-  width: 386px;
+    left: 162px;
+    letter-spacing: -0.27px;
+    position: absolute;
+    text-align: center;
+    top: -19px;
+    width: 386px;
 }
 
 .group-page .overlap-group {
@@ -473,7 +440,24 @@
   position: absolute;
   top: 32px;
   width: 360px;
+  overflow: scroll;
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.group-page .overlap-group4::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.group-page .overlap-group4 {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
+
+
+
 
 .group-page .group-rectangle {
   background-color: var(--white);
@@ -585,7 +569,21 @@
   position: absolute;
   top: 32px;
   width: 597px;
+
+overflow: scroll;
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.group-page .overlap-group5::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.group-page .overlap-group5 {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 
 .group-page .group-container-1 {
   align-items: flex-start;
@@ -683,4 +681,59 @@
   margin-top: 61px;
   text-align: center;
   width: 375px;
+}
+.group-page .group-in-list {
+  bottom: 200px;
+  height: 40px;
+  min-width: 221px;
+  max-width: 9rem;
+  align-items: center;
+  display: flex;
+  margin: 10px 0px 35px 15px;
+}
+
+.group-page .friend {
+  height: 57px;
+  object-fit: cover;
+  width: 57px;
+  border-radius: 50px;
+}
+
+.group-page .groups-div{
+  background-color: var(--white);
+  width: 326px;
+  height: auto;
+  position: absolute;
+  top: 95px;
+  border-radius: 20px;
+  left: 20px;
+}
+
+.group-page .name {
+  height: 31px;
+  letter-spacing: -0.33px;
+  margin-left: 5px;
+  text-align: center;
+  width: 179px;
+}
+
+.group-page .userGroups-div{
+  background-color: var(--white);
+  width: 326px;
+  height: auto;
+  position: absolute;
+  top: 95px;
+  border-radius: 20px;
+  left: 20px;
+}
+
+.group-page .group-rectangle-two {
+  background-color: var(--white);
+  border-radius: 20px;
+  height: 450
+;
+  left: 18px;
+  position: absolute;
+  top: 0;
+  width: 342px;
 }
