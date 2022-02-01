@@ -11,7 +11,7 @@ Feature: Users should be able to live chat with other users
 
   Scenario: User can send a message
     Given the user is in the chatroom
-    When the user clicks on the chat text box
+#    When the user clicks on the chat text box
     When the user enters their chat message
     When the user clicks the send chat message button
     Then the message will appear in chat
@@ -26,19 +26,19 @@ Feature: Users should be able to live chat with other users
     Given the user is in the chatroom
     When the user clicks on the Choose File button in chatroom
     When the user selects their chat image they want to send
-    When the user clicks on the send chat message button
+    When the user clicks on the send chat message button for image
     Then the image appears in the group chat
 
   Scenario: User images that are too big does not get sent
     Given the user is in the chatroom
     When the user clicks on the Choose File button in chatroom
     When the user selects their chat image that is too big
-    When the user clicks on the send chat message button
+    When the user clicks on the send chat message button for image
     Then the user clicks the alert button saying File is too big to send
 
   Scenario: User sees their previous chat history
     Given the user is in the chatroom
-    When the user clicks on the chat text box
+#    When the user clicks on the chat text box
     When the user enters their chat message
     When the user clicks the send chat message button
     When the user clicks on the refresh button

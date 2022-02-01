@@ -28,7 +28,7 @@ public class TestRunner {
 
     @BeforeClass
     public static void setup() {
-        File file = new File("src/test/chromedriver");
+        File file = new File("src/test/resources/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -48,4 +48,5 @@ public class TestRunner {
         System.out.println("teardown complete!");
 
     }
+
 }
