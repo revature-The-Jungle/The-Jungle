@@ -132,8 +132,8 @@ async function createPostWithImage() {
         </div>
         <img class="feed-picture" src="`+ image_text +`" />
         <div class="icon-container">
-          <input type="image" class="heart-icon" src="img/heart-icon@2x.svg" />
-          <p>` + post.likes + `</p>
+        <input type="image" class="heart-icon" src="img/heart-icon@2x.svg" onclick="likePost(${post.post_id})"/>
+        <p id ="likedComment${post.post_id}">` + post.likes + `</p>
           <input type="image" class="chat-bubble-icon" src="img/chat-bubble-icon@2x.svg"/>
           <img class="share-icon" src="img/share-icon@2x.svg" />
         </div>
@@ -153,8 +153,8 @@ async function createPostWithImage() {
         <input type="image" class="three-dots-icon-1" src="img/bi-three-dots@2x.svg" id="deletePost${post.post_id}" onclick="deletePost(${post.post_id})"/>
       </div>
       <div class="icon-container">
-        <input type="image" class="heart-icon" src="img/heart-icon@2x.svg" />
-        <p>` + post.likes + `</p>
+      <input type="image" class="heart-icon" src="img/heart-icon@2x.svg" onclick="likePost(${post.post_id})"/>
+      <p id ="likedComment${post.post_id}">` + post.likes + `</p>
         <input type="image" class="chat-bubble-icon" src="img/chat-bubble-icon@2x.svg"/>
         <img class="share-icon" src="img/share-icon@2x.svg" />
       </div>
@@ -226,8 +226,8 @@ async function createPostWithImage() {
         </div>
         <img class="feed-picture" src="`+ image_text +`" />
         <div class="icon-container">
-          <input type="image" class="heart-icon" src="img/heart-icon@2x.svg" />
-          <p>` + post.likes + `</p>
+          <input type="image" class="heart-icon" src="img/heart-icon@2x.svg" onclick="likePost(${post.post_id})"/>
+          <p id ="likedComment${post.post_id}">` + post.likes + `</p>
           <input type="image" class="chat-bubble-icon" src="img/chat-bubble-icon@2x.svg"/>
           <img class="share-icon" src="img/share-icon@2x.svg" />
         </div>
@@ -247,8 +247,8 @@ async function createPostWithImage() {
         <input type="image" class="three-dots-icon-1" src="img/bi-three-dots@2x.svg" id="deletePost${post.post_id}" onclick="deletePost(${post.post_id})"/>
       </div>
       <div class="icon-container">
-        <input type="image" class="heart-icon" src="img/heart-icon@2x.svg" />
-        <p>` + post.likes + `</p>
+        <input type="image" class="heart-icon" src="img/heart-icon@2x.svg" onclick="likePost(${post.post_id})"/>
+        <p id ="likedComment${post.post_id}">` + post.likes + `</p>
         <input type="image" class="chat-bubble-icon" src="img/chat-bubble-icon@2x.svg"/>
         <img class="share-icon" src="img/share-icon@2x.svg" />
       </div>
