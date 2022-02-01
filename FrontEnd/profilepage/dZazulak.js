@@ -51,6 +51,7 @@ function errorMessageForProfileModal(){
     let profileErrorMessage = document.createElement("p");
     profileErrorMessage.innerText = 'Birthdate may not be blank';
     profileErrorMessage.style.color = 'red';
+    profileErrorMessage.setAttribute("id", "modalProfileErrorMessage");
     modalMessageDiv.append(profileErrorMessage);
 }
 
@@ -62,6 +63,7 @@ function successMessageForProfileModal(){
     let profileSuccessMessage = document.createElement("p");
     profileSuccessMessage.innerText = 'Saved';
     profileSuccessMessage.style.color = 'blue';
+    profileSuccessMessage.setAttribute("id", "modalProfileSuccessMessage");
     modalMessageDiv.append(profileSuccessMessage);
 }
 

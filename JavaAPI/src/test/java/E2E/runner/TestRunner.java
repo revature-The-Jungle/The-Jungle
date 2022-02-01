@@ -1,5 +1,6 @@
 package E2E.runner;
 
+import E2E.poms.EditProfile;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.AfterClass;
@@ -15,6 +16,7 @@ import java.io.File;
 public class TestRunner {
     public static WebDriver driver;
     public static WebDriverWait explicitWait;
+    public static EditProfile editProfile;
 
     // POMs
 
@@ -26,7 +28,7 @@ public class TestRunner {
         driver.manage().window().maximize();
 
         // POMs
-
+        editProfile = new EditProfile(driver);
         driver.manage().window().maximize();
 
     }
