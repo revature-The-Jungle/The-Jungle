@@ -819,8 +819,6 @@
   left: 17px;
 }
 
-<<<<<<< HEAD
-=======
 /* Search Bar */
 .profile-page .search {
   align-items: flex-start;
@@ -853,7 +851,6 @@
     min-width: 511px;
 } */
 
->>>>>>> sprint_2
 .likedComment {
   width: 20vw;
   margin: 0;
@@ -865,4 +862,31 @@
   font-size: var(--font-size-m);
   font-style: normal;
   font-weight: 500;
+}
+
+/* for treating the image as a file upload button */
+.image-upload>input {
+  display: none;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.profile-page .overlap-group9::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.profile-page .overlap-group9 {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.profile-page .overlap-group8::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.profile-page .overlap-group8 {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
