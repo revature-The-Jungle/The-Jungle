@@ -125,7 +125,7 @@ async function createPostWithImage() {
         <div class="flex-row">
           <div class="overlap-group2">
             <div class="new-york-ny valign-text-middle">`+ date +`</div>
-            <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">JostSNL21</div>
+            <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">${post.user_name}</div>
             <img class="feed-avatar-1" src="`+ user_image_text + `" alt="img/ellipse-1@2x.png" />
           </div>
           <input type="image" class="three-dots-icon-1" src="img/bi-three-dots@2x.svg" id="deletePost${post.post_id}" onclick="deletePost(${post.post_id})"/>
@@ -147,7 +147,7 @@ async function createPostWithImage() {
       <div class="flex-row">
         <div class="overlap-group2">
           <div class="new-york-ny valign-text-middle">`+ date +`</div>
-          <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">JostSNL21</div>
+          <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">${post.user_name}</div>
           <img class="feed-avatar-1" src="`+ user_image_text + `" alt="img/ellipse-1@2x.png" />
         </div>
         <input type="image" class="three-dots-icon-1" src="img/bi-three-dots@2x.svg" id="deletePost${post.post_id}" onclick="deletePost(${post.post_id})"/>
@@ -219,7 +219,7 @@ async function createPostWithImage() {
         <div class="flex-row">
           <div class="overlap-group2">
             <div class="new-york-ny valign-text-middle">`+ date +`</div>
-            <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">JostSNL21</div>
+            <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">${post.user_name}</div>
             <img class="feed-avatar-1" src="`+ user_image_text + `" alt="img/ellipse-1@2x.png" />
           </div>
           <input type="image" class="three-dots-icon-1" src="img/bi-three-dots@2x.svg" id="deletePost${post.post_id}" onclick="deletePost(${post.post_id})"/>
@@ -241,7 +241,7 @@ async function createPostWithImage() {
       <div class="flex-row">
         <div class="overlap-group2">
           <div class="new-york-ny valign-text-middle">`+ date +`</div>
-          <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">JostSNL21</div>
+          <div class="username-1 valign-text-middle poppins-bold-cape-cod-20px">${post.user_name}</div>
           <img class="feed-avatar-1" src="`+ user_image_text + `" alt="img/ellipse-1@2x.png" />
         </div>
         <input type="image" class="three-dots-icon-1" src="img/bi-three-dots@2x.svg" id="deletePost${post.post_id}" onclick="deletePost(${post.post_id})"/>

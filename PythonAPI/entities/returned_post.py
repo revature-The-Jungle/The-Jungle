@@ -26,7 +26,7 @@ class ReturnedPost:
             "post_text": self.post_text,
             "image_data": self.image_format,
             "likes": self.likes,
-            "date_time_of_creation": self.date_time_of_creation
+            "date_time_of_creation": self.date_time_of_creation,
             "user_name": self.user_name
         }
         return dictionary
