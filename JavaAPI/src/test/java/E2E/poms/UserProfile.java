@@ -36,4 +36,10 @@ public class UserProfile {
     public WebElement deleteButton;
     @FindBy(id="postErrorMessage")
     public WebElement postErrorMessage;
+    @FindBy(id="modalProfileErrorMessage")
+    public WebElement profileErrorMessage;
+    @FindBy(xpath="/html/body/div/div/div/div[10]/div[2]/div/div")
+    public WebElement userFollower;
+
+
 }
