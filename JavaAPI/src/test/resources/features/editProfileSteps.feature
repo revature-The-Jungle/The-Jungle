@@ -3,6 +3,7 @@ Feature: Edit Profile
     Given the user is on the homepage
     When the user clicks on the edit profile button
     When the user modifies their about me section
+    When the user selects a date
     When the user clicks on the save changes button
     Then there is a success message saying that the changes have been saved
 
