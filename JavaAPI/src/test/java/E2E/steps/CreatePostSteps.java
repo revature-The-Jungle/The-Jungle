@@ -10,26 +10,22 @@ import org.testng.Assert;
 public class CreatePostSteps {
     @When("the user clicks on the create post modal button")
     public void the_user_clicks_on_the_create_post_modal_button() {
-        //get the create post modal form by id which is
         TestRunner.userProfile.profileCreateANewPost.click();
     }
 
     @When("the user enters their post body")
     public void the_user_enters_their_post_body() {
-        // Write code here that turns the phrase above into concrete actions
         TestRunner.userProfile.postText.sendKeys("E2E Test for about me");
     }
 
     @When("the user clicks on the post button")
     public void the_user_clicks_on_the_post_button() {
-        // Write code here that turns the phrase above into concrete actions
         TestRunner.userProfile.submitNewPostButton.click();
     }
 
     @Then("the user will see the created post")
     public void the_user_will_see_the_created_post() {
-        // Write code here that turns the phrase above into concrete actions
-//        TestRunner.driver.findElement(By.xpath("/html/body/div/div/div/div[2]/div/div/div/div[1]/div/div[3]/div"));
+
         TestRunner.explicitWait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("newPostText"), "E2E Test for about me"));
         Assert.assertEquals(TestRunner.userProfile.newPostText.getText(), "E2E Test for about me");
 
@@ -40,7 +36,6 @@ public class CreatePostSteps {
 
     @Then("the user will see an error message in the post feed")
     public void the_user_will_see_an_error_message_in_the_post_feed() {
-        // Write code here that turns the phrase above into concrete actions
         TestRunner.explicitWait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("postErrorMessage"), "Error creating the post."));
         Assert.assertEquals(TestRunner.userProfile.postErrorMessage.getText(), "Error creating the post.");
     }
