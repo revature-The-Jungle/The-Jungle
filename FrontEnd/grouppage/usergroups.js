@@ -4,7 +4,7 @@ const userGroupSectionDiv = document.getElementById("userGroups-div");
 
 
 async function getGroupsForUser(){
-    let url = "http://ec2-54-161-131-37.compute-1.amazonaws.com:5000/group/user/10"
+    let url = "https://ec2-54-161-131-37.compute-1.amazonaws.com:5000/group/user/10"
 
     let response = await fetch(url);
 
