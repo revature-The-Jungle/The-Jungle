@@ -82,7 +82,8 @@ async function createGroupPost() {
 
 //--------------------------------------------------- LOAD GROUP POST FUNCTION-------------------------------------------------------
 async function getPost() {
-  let response = await fetch(url + "/group_post/group/" + group_id, {
+  let groupId = localStorage.getItem("groupId");
+  let response = await fetch(url + "/group_post/group/" + groupId, {
     method: "GET",
     mode: "cors",
   });
