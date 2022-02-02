@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -20,6 +21,8 @@ public class GroupPostSteps {
     public void the_group_member_is_on_the_group_page() {
 //        TestRunner.driver.get("http://127.0.0.1:5500/FrontEnd/grouppage/individualgrouppage/individual-group-page.html");
         cgs.the_user_is_on_the_group_page();
+        TestRunner.explicitWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"groups-div\"]/div[1]/div")));
+        TestRunner.driver.findElement(By.xpath("//*[@id=\"groups-div\"]/div[1]/div")).click();
     }
 
     @When("the group member enters their group post")

@@ -11,6 +11,8 @@ import org.testng.annotations.Test;
 
 public class JoinGroupSteps {
 
+    CreateGroupSteps cgs = new CreateGroupSteps();
+
     // Join Group
     @When("the user clicks on the group they want to join")
     public void the_user_clicks_on_the_group_they_want_to_join() {
@@ -25,9 +27,9 @@ public class JoinGroupSteps {
 
     @When("the user is on the individual group page")
     public void the_user_is_on_the_individual_group_page() {
-
-        TestRunner.explicitWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"groupLink-9000\"]")));
-        TestRunner.driver.findElement(By.xpath("//*[@id=\"groupLink-9000\"]")).click();
+        cgs.the_user_is_on_the_group_page();
+        TestRunner.explicitWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"groups-div\"]/div[1]/div")));
+        TestRunner.driver.findElement(By.xpath("//*[@id=\"groups-div\"]/div[1]/div")).click();
 //        TestRunner.driver.get("File:///Users/dlanderos/Desktop/Project 3/The-Jungle/FrontEnd/grouppage/individualgrouppage/individual-group-page.html");
     }
 

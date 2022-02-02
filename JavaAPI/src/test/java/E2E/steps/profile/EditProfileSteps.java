@@ -30,7 +30,12 @@ public class EditProfileSteps {
 
     @When("the user clicks on the save changes button")
     public void the_user_clicks_on_the_save_changes_button() {
-        TestRunner.userProfile.saveChangesModalButton.click();
+//        TestRunner.userProfile.saveChangesModalButton.click();
+        TestRunner.driver.findElement(By.id("updateProfileModalBtn")).click();
+        TestRunner.driver.findElement(By.id("updateProfileModalBtn")).click();
+
+        TestRunner.driver.findElement(By.id("updateProfileModalBtn")).click();
+
     }
 
     @Then("there is a success message saying that the changes have been saved")

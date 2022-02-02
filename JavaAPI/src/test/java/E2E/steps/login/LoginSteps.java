@@ -11,7 +11,6 @@ public class LoginSteps {
 
     @Given("the user is on the log-in page")
     public void the_user_is_on_the_log_in_page() {
-        //TestRunner.driver.get("file:///Users/adamjanusewski/Desktop/The-Jungle/FrontEnd/loginpage/login.html");
         TestRunner.driver.get("http://127.0.0.1:5500/FrontEnd/loginpage/login.html");
     }
 
@@ -64,7 +63,7 @@ public class LoginSteps {
 
     @Given("user is on the log-in page")
     public void user_is_on_the_log_in_page() {
-        TestRunner.driver.get("file:///Users/adamjanusewski/Desktop/The-Jungle/FrontEnd/loginpage/login.html");
+        the_user_is_on_the_log_in_page();
     }
 
     @When("the user enters wrong username")

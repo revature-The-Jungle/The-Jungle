@@ -28,7 +28,7 @@ public class RegLoginSearchPOM {
 
     // ------------------- LOGOUT --------------------------------
 
-    @FindBy(id = "logoutButtonPressed")
+    @FindBy(xpath = "/html/body/div/div/div/div[6]/div[3]/a/span")
     public WebElement logoutButton;
 
     // -------------------- SYSTEM ---------------------------------
@@ -44,7 +44,7 @@ public class RegLoginSearchPOM {
     @FindBy(id = "searchButton") // Submit Button for search
     public WebElement submitButton;
 
-    @FindBy(id = "searchList") // Search Results
+    @FindBy(xpath = "//*[@id=\"searchList\"]/li") // Search Results
     public WebElement getSearchResults;
 
     // REGISTRATION WEB ELEMENTS
@@ -73,6 +73,7 @@ public class RegLoginSearchPOM {
     public WebElement signUpSubmitButton;
 
     @FindBy(xpath = "/html/body/div/div/div[2]/div/div[9]/p")
+
     public WebElement regErrorMessage;
 
 }

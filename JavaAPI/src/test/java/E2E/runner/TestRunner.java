@@ -1,6 +1,6 @@
 package E2E.runner;
 
-import E2E.poms.UserProfile;
+import E2E.poms.profile.UserProfile;
 import E2E.poms.group.GroupJunctionPOM;
 import E2E.poms.loginRegisterSearch.RegLoginSearchPOM;
 import E2E.poms.chat.ChatPage;
@@ -18,8 +18,20 @@ import java.io.File;
 import java.time.Duration;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:features/group/createJoinGroupSteps.feature", glue = "E2E.steps", plugin = {"pretty",
+//@CucumberOptions(features = "classpath:features/login", glue = "E2E.steps", plugin = {"pretty",
+//        "html:src/test/java/resources/reports/html-reports.html"})
+//@CucumberOptions(features = "classpath:features/group/groupPostSteps.feature", glue = "E2E.steps", plugin = {"pretty",
+//        "html:src/test/java/resources/reports/html-reports.html"})
+//@CucumberOptions(features = "classpath:features/post", glue = "E2E.steps", plugin = {"pretty",
+//        "html:src/test/java/resources/reports/html-reports.html"})
+//@CucumberOptions(features = "classpath:features/search", glue = "E2E.steps", plugin = {"pretty",
+//        "html:src/test/java/resources/reports/html-reports.html"})
+//@CucumberOptions(features = "classpath:features/register", glue = "E2E.steps", plugin = {"pretty",
+//        "html:src/test/java/resources/reports/html-reports.html"})
+@CucumberOptions(features = "classpath:features/profile", glue = "E2E.steps", plugin = {"pretty",
         "html:src/test/java/resources/reports/html-reports.html"})
+//@CucumberOptions(features = "classpath:features", glue = "E2E.steps", plugin = {"pretty",
+//        "html:src/test/java/resources/reports/html-reports.html"})
 public class TestRunner {
     public static WebDriver driver;
     public static WebDriverWait explicitWait;

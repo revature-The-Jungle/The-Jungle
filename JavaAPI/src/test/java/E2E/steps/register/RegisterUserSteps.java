@@ -4,6 +4,7 @@ import E2E.runner.TestRunner;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
@@ -12,7 +13,8 @@ public class RegisterUserSteps {
     // CORRECT INFORMATION TEST (with small validation correction)
     @Given("the user is on the sign up page")
     public void the_user_is_on_the_sign_up_page() {
-        TestRunner.driver.get("file:///C:/Users/kckar/Desktop/The-Jungle/FrontEnd/registrationpage/sign-up.html");
+        TestRunner.driver.get("http://127.0.0.1:5500/FrontEnd/loginpage/login.html");
+        TestRunner.driver.findElement(By.xpath("/html/body/div/div/div[1]/div/div[4]/span/span/a")).click();
     }
 
     @When("the user enters First name into the new account form")
@@ -33,7 +35,7 @@ public class RegisterUserSteps {
     // Needs to be changed every time you run end to end tests
     @When("the user enters email into the new account form")
     public void the_user_enters_email_into_the_new_account_form() {
-        TestRunner.rlsPom.signUpEmail.sendKeys("E2E@test.comaoivnavoan2222234");
+        TestRunner.rlsPom.signUpEmail.sendKeys("E2E@test.com5678765");
     }
 
     @When("the user enters an username with a space into the new account form")
@@ -80,7 +82,7 @@ public class RegisterUserSteps {
     // DUPLICATE EMAIL BAD TEST
     @Given("the user is now on the sign up page with form")
     public void the_user_is_now_on_the_sign_up_page_with_form() {
-        TestRunner.driver.get("file:///C:/Users/kckar/Desktop/The-Jungle/FrontEnd/registrationpage/sign-up.html");
+        the_user_is_on_the_sign_up_page();
     }
 
     @When("the user enters bad test First name into the new account form")
@@ -124,8 +126,8 @@ public class RegisterUserSteps {
     @Then("a message for duplicate email error populates")
     public void a_message_for_duplicate_email_error_populates() {
         TestRunner.explicitWait.until(
-                ExpectedConditions.textToBePresentInElement(TestRunner.rlsPom.errorMessage, "Email is already in use"));
-        String message = TestRunner.rlsPom.errorMessage.getText();
+                ExpectedConditions.textToBePresentInElement(TestRunner.rlsPom.regErrorMessage, "Email is already in use"));
+        String message = TestRunner.rlsPom.regErrorMessage.getText();
         Assert.assertEquals(message, "Email is already in use");
     }
 
