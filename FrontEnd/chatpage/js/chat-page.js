@@ -10,7 +10,7 @@ function createChatConnection(groupId) {
     id("chat").innerHTML = "";
     ws = new WebSocket(
       "ws://" +
-        "localhost" +
+        "ec2-54-161-131-37.compute-1.amazonaws.com" +
         ":" +
         "8181" +
         "/chat/" +
@@ -155,7 +155,7 @@ chatGroupDiv.setAttribute(
 
 //Displaying the Group Names by grabbing the userId's to display the names on the top right...
 async function getAllGroupByUserId() {
-  let url = "http://localhost:8181/user/groupNames/" + storage.userId;
+  let url = "http://ec2-54-161-131-37.compute-1.amazonaws.com:8181/user/groupNames/" + storage.userId;
   let response = await fetch(url);
   if (response.status === 200) {
     let body = await response.json();

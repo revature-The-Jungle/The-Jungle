@@ -11,7 +11,7 @@ const profileEmail = document.getElementById("profileEmail");
 
 
 async function getUserByUserId(){
-    let url = "http://127.0.0.1:5000/user/" + JSON.parse(localStorage.getItem("userInfo")).userId;
+    let url = "http://ec2-54-161-131-37.compute-1.amazonaws.com:5000/user/" + JSON.parse(localStorage.getItem("userInfo")).userId;
     let response = await fetch(url);
 
     if(response.status === 200){
@@ -93,7 +93,7 @@ function populateUserProfileByUserId(user){
 */
 async function updateUserProfileData(){
 
-    let url = "http://127.0.0.1:5000/user/profile/update/" + userId;
+    let url = "http://ec2-54-161-131-37.compute-1.amazonaws.com:5000/user/profile/update/" + userId;
     
     let updateUserProfileJSON = JSON.stringify({"firstName": "Shouldn't change",
         "lastName": "Shouldn't change",

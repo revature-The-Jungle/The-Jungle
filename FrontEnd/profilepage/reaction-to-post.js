@@ -6,7 +6,7 @@ async function likePost(e){
 
     let fetchJson = JSON.stringify({"postId": e})
 
-    let url = "http://127.0.0.1:5000/postfeed"
+    let url = "http://ec2-54-161-131-37.compute-1.amazonaws.com:5000/postfeed"
     
     let theResponse = await fetch(url, {
         method:"POST",
