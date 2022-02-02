@@ -1,6 +1,7 @@
-package E2E.steps;
+package E2E.steps.chat;
 
 import E2E.runner.TestRunner;
+import E2E.steps.login.LoginSteps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

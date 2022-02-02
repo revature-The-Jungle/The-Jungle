@@ -1,4 +1,4 @@
-package E2E.poms;
+package E2E.poms.loginRegisterSearch;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -1,4 +1,4 @@
-package E2E.steps;
+package E2E.steps.group;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

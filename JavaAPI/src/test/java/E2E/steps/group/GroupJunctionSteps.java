@@ -1,4 +1,4 @@
-package E2E.steps;
+package E2E.steps.group;
 
 import E2E.runner.TestRunner;
 import io.cucumber.java.en.Given;
