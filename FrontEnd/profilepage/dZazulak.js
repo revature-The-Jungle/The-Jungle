@@ -157,7 +157,7 @@ function successMessageForProfileModal(){
     Grabs all the users followers from the database
 */
 async function getUserFollowers(){
-    let url = "https://d2i548blyk9lbu.cloudfront.net/buildv4/loginpage/login.html:5000/user/followers/" + JSON.parse(localStorage.getItem("userInfo")).userId;
+    let url = "http://ec2-54-161-131-37.compute-1.amazonaws.com:5000/user/followers/" + JSON.parse(localStorage.getItem("userInfo")).userId;
 
     let response = await fetch(url);
 
@@ -201,7 +201,7 @@ function populateUserFollowers(followerBody){
 async function getFollowerImage(followerBody){
     for(follower in followerBody){
         let image_Element = document.getElementById(`${follower}-image`);
-        let url = `http://127.0.0.1:5000/user/image/${followerBody[follower]}`;
+        let url = `http://ec2-54-161-131-37.compute-1.amazonaws.com:5000/user/image/${followerBody[follower]}`;
         console.log(url);
         let response = await fetch(url);
         if(response.status === 200){
@@ -213,7 +213,7 @@ async function getFollowerImage(followerBody){
 }
 
 async function getGroupsForUser(){
-    let url = "http://127.0.0.1:5000/group/user/" + JSON.parse(localStorage.getItem("userInfo")).userId;
+    let url = "http://ec2-54-161-131-37.compute-1.amazonaws.com:5000/group/user/" + JSON.parse(localStorage.getItem("userInfo")).userId;
 
     let response = await fetch(url);
 
