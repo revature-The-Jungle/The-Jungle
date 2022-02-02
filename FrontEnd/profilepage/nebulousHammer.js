@@ -169,7 +169,7 @@ async function createPostWithImage() {
   }
 
   async function deletePost(post_id) {
-    let deleteResponse = await fetch("https://ec2-54-161-131-37.compute-1.amazonaws.com:5000/group_post/" + post_id, {
+    let deleteResponse = await fetch("http://ec2-54-161-131-37.compute-1.amazonaws.com:5000/group_post/" + post_id, {
       method: "DELETE"
     })
     console.log(deleteResponse)
@@ -197,7 +197,7 @@ async function createPostWithImage() {
     let postBox = document.createElement('div');
       
       //add the poster image
-      let url = "https://ec2-54-161-131-37.compute-1.amazonaws.com:5000/user/image/" + post.user_id;
+      let url = "http://ec2-54-161-131-37.compute-1.amazonaws.com:5000/user/image/" + post.user_id;
       let response = await fetch(url);
       let user_image_text;
       if(response.status === 200){
@@ -205,7 +205,7 @@ async function createPostWithImage() {
         }
   
       //get the post image
-      url = "https://ec2-54-161-131-37.compute-1.amazonaws.com:5000/post/image/" + post.post_id;
+      url = "http://ec2-54-161-131-37.compute-1.amazonaws.com:5000/post/image/" + post.post_id;
       console.log(url);
       response = await fetch(url);
       console.log(response);

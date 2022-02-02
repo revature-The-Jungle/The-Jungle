@@ -1,6 +1,6 @@
 async function getUserInGroups() {
     groupId = localStorage.getItem("groupId")
-    url = `https://ec2-54-161-131-37.compute-1.amazonaws.com:5000/GroupJunction/UserList/${groupId}`
+    url = `http://ec2-54-161-131-37.compute-1.amazonaws.com:5000/GroupJunction/UserList/${groupId}`
     let response = await fetch(url)
 
     if(response.status === 200){

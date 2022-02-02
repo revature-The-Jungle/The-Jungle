@@ -1,4 +1,4 @@
-const url = "https://ec2-54-161-131-37.compute-1.amazonaws.com:8181";
+const url = "http://ec2-54-161-131-37.compute-1.amazonaws.com:8181";
 const searchField = document.getElementById("searchInputBox");
 const searchListResults = document.getElementById("searchList");
 function referToProfile(userId) {
