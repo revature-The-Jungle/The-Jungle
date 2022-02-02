@@ -1,8 +1,7 @@
 Feature: Individual group management
 
   Scenario: As a user I should be able to see who is in the group
-    Given the user is on their dashboard page
-    When User is on the group page
+    Given the user is on the group page
     When the user selects the group
     When User is redirected to the group individual page
     Then the user should see the list of users in the group

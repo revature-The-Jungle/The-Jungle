@@ -18,7 +18,7 @@ import java.io.File;
 import java.time.Duration;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:features/group/createJoinGroupSteps.feature", glue = "E2E.steps", plugin = {"pretty",
+@CucumberOptions(features = "classpath:features/group/GroupJunction.feature", glue = "E2E.steps", plugin = {"pretty",
         "html:src/test/java/resources/reports/html-reports.html"})
 public class TestRunner {
     public static WebDriver driver;

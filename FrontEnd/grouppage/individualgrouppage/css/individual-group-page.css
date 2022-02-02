@@ -193,7 +193,7 @@
 }
 
 .individual-group-page .overlap-group3 {
-  height: 677px;
+  height: 398px;
   left: 48rem;
   position: absolute;
   top: 18px;
@@ -216,7 +216,7 @@
 .individual-group-page .group-rectangle {
   background-color: var(--white);
   border-radius: 20px;
-  height: 94vh;
+  height: 530vh;
   left: 2px;
   position: absolute;
   top: 0;
@@ -603,7 +603,7 @@
   max-width: 9rem;
   align-items: center;
   display: flex;
-  margin: 10px 0px 35px 15px;
+  margin: 10px 0px 35px 60px;
 }
 
 .individual-group-page .friend {
