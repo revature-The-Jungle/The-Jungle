@@ -17,6 +17,7 @@ public class GroupPostSteps {
     public void the_group_member_is_on_the_group_page() {
         TestRunner.driver.get("http://127.0.0.1:5500/FrontEnd/grouppage/individualgrouppage/individual-group-page.html");
     }
+
     @When("the group member enters their group post")
     public void the_group_member_enters_their_group_post() {
         TestRunner.explicitWait.until(ExpectedConditions.elementToBeClickable(TestRunner.groupPage.getGroupPostInput));
@@ -26,8 +27,20 @@ public class GroupPostSteps {
     public void the_group_member_clicks_the_group_post_button() {
         TestRunner.groupPage.getSendGroupPostButton.click();
     }
+
     @Then("a success message will appear")
     public void a_success_message_will_appear() {
+        Assert.assertNotNull(TestRunner.groupPage.getPostInfoNotification);
+    }
+
+    @When("the group member enters nothing on their group post")
+    public void the_group_member_enters_nothing_on_their_group_post() {
+        TestRunner.explicitWait.until(ExpectedConditions.elementToBeClickable(TestRunner.groupPage.getGroupPostInput));
+        TestRunner.groupPage.getGroupPostInput.sendKeys("");
+    }
+
+    @Then("a fail message will appear")
+    public void a_fail_message_will_appear() {
         Assert.assertNotNull(TestRunner.groupPage.getPostInfoNotification);
     }
     //  ------------------------------------- DELETE A GROUP POST-----------------------------------------
