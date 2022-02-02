@@ -7,13 +7,12 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 public class GroupJunctionPOM {
-    private WebDriver webDriver;
+    private WebDriver driver;
 
 
-    public GroupJunctionPOM(WebDriver webDriver) {
-        this.webDriver = webDriver;
-
-        PageFactory.initElements(webDriver, this);
+    public GroupJunctionPOM(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
 

@@ -7,12 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 
 public class RegLoginSearchPOM {
 
-    private WebDriver webDriver;
+    private WebDriver driver;
 
-    public RegLoginSearchPOM(WebDriver webDriver) {
-        this.webDriver = webDriver;
-
-        PageFactory.initElements(webDriver, this);
+    public RegLoginSearchPOM(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     // ------------------- LOGIN --------------------------------
