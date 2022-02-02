@@ -1,12 +1,16 @@
 package E2E.steps.group;
 
+import E2E.steps.chat.ChatSteps;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import E2E.runner.TestRunner;
+import org.testng.annotations.Test;
 
 public class JoinGroupSteps {
+
     // Join Group
     @When("the user clicks on the group they want to join")
     public void the_user_clicks_on_the_group_they_want_to_join() {
@@ -21,7 +25,10 @@ public class JoinGroupSteps {
 
     @When("the user is on the individual group page")
     public void the_user_is_on_the_individual_group_page() {
-        TestRunner.driver.get("File:///Users/dlanderos/Desktop/Project 3/The-Jungle/FrontEnd/grouppage/individualgrouppage/individual-group-page.html");
+
+        TestRunner.explicitWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"groupLink-9000\"]")));
+        TestRunner.driver.findElement(By.xpath("//*[@id=\"groupLink-9000\"]")).click();
+//        TestRunner.driver.get("File:///Users/dlanderos/Desktop/Project 3/The-Jungle/FrontEnd/grouppage/individualgrouppage/individual-group-page.html");
     }
 
     @When("the user clicks on the join group button")

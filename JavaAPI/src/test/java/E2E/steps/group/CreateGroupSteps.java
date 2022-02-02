@@ -1,18 +1,24 @@
 package E2E.steps.group;
 
 import E2E.runner.TestRunner;
+import E2E.steps.chat.ChatSteps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 
 public class CreateGroupSteps {
+
+    ChatSteps chatSteps = new ChatSteps();
+
     // Create Group
     @Given("the user is on the group page")
     public void the_user_is_on_the_group_page() {
-        TestRunner.driver.get("File:///Users/dlanderos/Desktop/Project 3/The-Jungle/FrontEnd/grouppage/group-page.html");
+        chatSteps.theUserIsOnTheirDashboardPage();
+        TestRunner.driver.findElement(By.xpath("/html/body/div/div/div/div[6]/div[2]/a/img")).click();
     }
 
     @When("the user enters the group name")

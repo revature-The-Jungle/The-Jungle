@@ -32,7 +32,7 @@ public class ChatSteps {
 
     @When("the user clicks the chat room button")
     public void theUserClicksTheChatRoomButton() {
-        TestRunner.driver.findElement(By.xpath("/html/body/div/div/div[5]/div[1]/a/span")).click();
+        TestRunner.chatPage.globalChat.click();
     }
 
     @Then("the users should be redirected to the global chat room page")
