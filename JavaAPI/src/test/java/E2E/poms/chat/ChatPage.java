@@ -16,7 +16,7 @@ public class ChatPage {
     /**
      * @TODO get this element from profile page
      */
-    @FindBy(xpath = "/html/body/div/div/div[1]/div[2]/div[1]/a/span")
+    @FindBy(id = "toChat")
     public WebElement globalChat;
 
     @FindBy(id = "send")

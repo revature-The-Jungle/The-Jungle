@@ -10,7 +10,7 @@ from custom_exceptions.group_exceptions import NullValues, InputTooShort, InputT
 from custom_exceptions.group_member_junction_exceptions import WrongId
 from custom_exceptions.image_format_must_be_a_string import ImageFormatMustBeAString
 from custom_exceptions.image_must_be_a_string import ImageMustBeAString
-from custom_exceptions.post_exceptions import InvalidInput
+from custom_exceptions.post_exceptions import NoInputGiven
 from custom_exceptions.post_id_must_be_an_integer import PostIdMustBeAnInteger
 from custom_exceptions.post_image_not_found import PostImageNotFound
 from custom_exceptions.post_not_found import PostNotFound
@@ -429,7 +429,7 @@ def create_group_post():
         post_as_dictionary = post_to_return.make_dictionary()
         post_as_json = jsonify(post_as_dictionary)
         return post_as_json, 201
-    except InvalidInput as e:
+    except NoInputGiven as e:
         exception_dictionary = {"message": str(e)}
         exception_json = jsonify(exception_dictionary)
         return exception_json, 400

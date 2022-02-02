@@ -25,7 +25,7 @@ function createList(response) {
     
             let groupNameDiv = document.createElement("div");
             groupNameDiv.setAttribute("class", "name valign-text-middle poppins-bold-astronaut-22px");
-            groupNameDiv.textContent = group.first_name;
+            groupNameDiv.innerHTML = group.first_name;
     
             groupSectionDiv.appendChild(groupsDiv);
             groupsDiv.appendChild(groupImage);
@@ -36,9 +36,9 @@ function createList(response) {
     }
 
 async function deleteRequest() {
-    userId = 9000
+    storage = localStorage.getItem("userInfo")
     groupId = localStorage.getItem("groupId")
-    url = `http://127.0.0.1:5000/group/leave/${userId}/${groupId}`
+    url = `http://127.0.0.1:5000/group/leave/${storage.userId}/${groupId}`
     let response = await fetch(url, { method: "DELETE", headers: { "Content-Type": "application/json" }});
     if(response.status === 200){
         location.replace("../group-page.html")
@@ -87,7 +87,7 @@ async function getGroup() {
 }
 
 function buttonCheck(response) {
-    userId = localStorage.getItem('userId')
+    storage = localStorage.getItem("userInfo")
     groupId = localStorage.getItem('groupId')
     if (response == undefined ) {
         let button = document.getElementById('tbd')
@@ -95,7 +95,7 @@ function buttonCheck(response) {
     }else{
         for (const users of response) {
             console.log(response)
-            if (userId == users.user_id) {
+            if (storage.userId == users.user_id) {
                 let button = document.getElementById("tbd")
                 button.style.display = "block"
             } else {
