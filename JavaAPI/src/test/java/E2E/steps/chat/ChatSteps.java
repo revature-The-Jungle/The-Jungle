@@ -4,8 +4,10 @@ import E2E.runner.TestRunner;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
@@ -60,12 +62,6 @@ public class ChatSteps {
         Assert.assertEquals(title, "Home");
     }
 
-//    @When("the user clicks on the chat text box")
-//    public void theUserClicksOnTheChatTextBox() {
-//        TestRunner.explicitWait.until(ExpectedConditions.elementToBeClickable(TestRunner.chatPage.chatBox));
-//        TestRunner.chatPage.chatBox.click();
-//    }
-
     @When("the user enters their chat message")
     public void theUserEntersTheirChatMessage() {
         listCountBefore = TestRunner.driver.findElements(By.xpath("//*[@id=\"chat\"]/div")).size();
@@ -74,40 +70,48 @@ public class ChatSteps {
 
     @When("the user clicks the send chat message button")
     public void theUserClicksTheSendChatMessageButton() {
-
-        TestRunner.chatPage.sendButton.click();
+        TestRunner.explicitWait.until(ExpectedConditions.elementToBeClickable(TestRunner.chatPage.sendButton));
+        TestRunner.chatPage.chatBox.sendKeys("\n");
     }
 
     @Then("the message will appear in chat")
     public void theMessageWillAppearInChat() {
-        // id = "chat"
+        WebElement chatMessage = TestRunner.driver.findElement(By.xpath("//*[@id=\"chat\"]/div[" + (listCountBefore + 1) + "]"));
+        Actions actions = new Actions(TestRunner.driver);
+        actions.moveToElement(chatMessage);
+
         listCountAfter = TestRunner.driver.findElements(By.xpath("//*[@id=\"chat\"]/div")).size();
-        Assert.assertEquals(listCountAfter, listCountBefore+1);
+        Assert.assertEquals(listCountAfter, listCountBefore + 1);
     }
 
     @When("the user clicks on the Choose File button in chatroom")
     public void theUserClicksOnTheChooseFileButtonInChatroom() {
         TestRunner.explicitWait.until(ExpectedConditions.elementToBeClickable(TestRunner.chatPage.chooseFileButton));
         listCountBeforeImg = TestRunner.driver.findElements(By.xpath("//*[@id=\"chat\"]/div")).size();
-        TestRunner.chatPage.chooseFileButton.click();
     }
 
+    /**
+     * Change the path to your img
+     */
     @When("the user selects their chat image they want to send")
     public void theUserSelectsTheirChatImageTheyWantToSend() {
-        TestRunner.chatPage.chooseFileButton.sendKeys("C:\\Users\\Jonat\\Desktop\\Swing-analogy-1.jpg");
+        TestRunner.chatPage.chooseFileButton.sendKeys("C:\\Users\\Jonat\\Desktop\\smallimg.jpg");
     }
-
-//    @When("the user clicks on the send chat message button")
-//    public void theUserClicksOnTheSendChatMessageButton() {
-//
-//    }
 
     @Then("the image appears in the group chat")
     public void theImageAppearsInTheGroupChat() {
+        WebElement chatMessage = TestRunner.driver.findElement(By.xpath("//*[@id=\"chat\"]/div[" + (listCountBeforeImg) + "]"));
+        Actions actions = new Actions(TestRunner.driver);
+        actions.moveToElement(chatMessage);
+        TestRunner.explicitWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"chat\"]/div[" + (listCountBeforeImg) + "]")));
         listCountAfterImg = TestRunner.driver.findElements(By.xpath("//*[@id=\"chat\"]/div")).size();
-        Assert.assertEquals(listCountAfterImg, listCountBeforeImg+1);
+        Assert.assertEquals(listCountAfterImg, listCountBeforeImg);
     }
 
+
+    /**
+     * Change the path to your img
+     */
     @When("the user selects their chat image that is too big")
     public void theUserSelectsTheirChatImageThatIsTooBig() {
         TestRunner.chatPage.chooseFileButton.sendKeys("C:\\Users\\Jonat\\Desktop\\bigimg.jpg");
@@ -115,8 +119,9 @@ public class ChatSteps {
 
     @Then("the user clicks the alert button saying File is too big to send")
     public void theUserClicksTheAlertButtonSayingFileIsTooBigToSend() {
-        String message = TestRunner.driver.switchTo().alert().getText();
-        Assert.assertEquals(message, "File is too big to send");
+        Alert result = TestRunner.explicitWait.until(ExpectedConditions.alertIsPresent());
+        Assert.assertEquals("File is too big to send", result.getText());
+        result.accept();
     }
 
     @When("the user clicks on the refresh button")
@@ -126,11 +131,8 @@ public class ChatSteps {
 
     @Then("the user will see their previous messages")
     public void theUserWillSeeTheirPreviousMessages() {
-        Assert.assertTrue(TestRunner.driver.findElements(By.xpath("//*[@id=\"chat\"]/div")).size() > 1);
+        TestRunner.explicitWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"chat\"]/div")));
+        Assert.assertTrue(TestRunner.driver.findElements(By.xpath("//*[@id=\"chat\"]/div")).size() > 0);
     }
 
-    @When("the user clicks on the send chat message button for image")
-    public void theUserClicksOnTheSendChatMessageButtonForImage() {
-        theUserClicksTheSendChatMessageButton();
-    }
 }
