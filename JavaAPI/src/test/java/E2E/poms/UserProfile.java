@@ -24,4 +24,16 @@ public class UserProfile {
     public WebElement saveChangesModalButton;
     @FindBy(id="modalProfileSuccessMessage")
     public WebElement profileSuccessMessage;
+    @FindBy(id="profileCreateANewPost")
+    public WebElement profileCreateANewPost;
+    @FindBy(id="postText")
+    public WebElement postText;
+    @FindBy(id="submitNewPostButton")
+    public WebElement submitNewPostButton;
+    @FindBy(id= "newPostText")
+    public WebElement newPostText;
+    @FindBy(className= "three-dots-icon-1")
+    public WebElement deleteButton;
+    @FindBy(id="postErrorMessage")
+    public WebElement postErrorMessage;
 }

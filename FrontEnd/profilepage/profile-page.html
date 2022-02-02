@@ -66,7 +66,7 @@
               id="searchInputBox"
             ><img class="searchIcon" src="./img/searchIcon.png" alt="search icon"/></input>
             <button class="btn search-button" id="searchButton"><img src="./img/sendIcon.png" alt="send icon"></button>
-            <button class="btn createPostBtn"><img src="./img/createPostButton.png" alt="create post icon" data-bs-toggle="modal" data-bs-target="#createPostModal"></button>
+            <button class="btn createPostBtn"><img id = "profileCreateANewPost" src="./img/createPostButton.png" alt="create post icon" data-bs-toggle="modal" data-bs-target="#createPostModal"></button>
             <ul
               id="searchList"
               class="dropdown-menu w-100 list-group active"
@@ -94,7 +94,7 @@
                     <div class="mb-3">
                       <input class="form-control" type="file" id="imageFile" class="btn edit-button">
                     </div>
-                    <button type="button" class="btn edit-button" onclick="createPostWithImage()" data-bs-dismiss="modal">Create</button>
+                    <button type="button" id = "submitNewPostButton" class="btn edit-button" onclick="createPostWithImage()" data-bs-dismiss="modal">Create</button>
                   </form>
                 </div>
                 <div class="modal-footer">
@@ -154,14 +154,7 @@
 
             <!-- Group Link -->
             <div class="group-container">
-              <a
-                href="../grouppage/group-page.html"
-                class="chat valign-text-middle"
-                ><img class="x-icon" src="img/group-icon@2x.svg" /><span
-                  class="linkGroups"
-                  >Groups</span
-                ></a
-              >
+              <a href="../grouppage/group-page.html" class="chat valign-text-middle"><img class="x-icon" src="img/group-icon@2x.svg" /><span class="linkGroups">Groups</span></a>
             </div>
 
             <!-- Logout Button...need code -->

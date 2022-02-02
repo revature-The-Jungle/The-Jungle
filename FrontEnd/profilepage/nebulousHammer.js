@@ -73,12 +73,12 @@ async function createPostWithImage() {
       }
     }, false);
     
-    if (file) {
+    if (file && (document.getElementById("postText").value).length < 500) {
       reader.readAsDataURL(file);
-    }else if (document.getElementById("postText")){ // if there is no file put in, then the post is sent with the simpler method as long as there is text
+    }else if (document.getElementById("postText") && (document.getElementById("postText").value).length < 500){ // if there is no file put in, then the post is sent with the simpler method as long as there is text
       createPost()
     }else{
-      alert("No Post entered.")//need to replace this alert method later
+      document.getElementById("postErrorMessage").innerHTML = "Error creating the post."
     }
     
     document.getElementById("createPostForm").reset();//because I don't know how to use PHP
@@ -138,7 +138,7 @@ async function createPostWithImage() {
           <img class="share-icon" src="img/share-icon@2x.svg" />
         </div>
         <div class="overlap-group-1">
-          <div class="feed-text-2 valign-text-middle poppins-medium-black-18px">`+ post.post_text + `</div>
+          <div class="feed-text-2 valign-text-middle poppins-medium-black-18px" id = "newPostText">`+ post.post_text + `</div>
         </div>
       </div>`
       }else{
@@ -159,7 +159,7 @@ async function createPostWithImage() {
         <img class="share-icon" src="img/share-icon@2x.svg" />
       </div>
       <div class="overlap-group-1">
-        <div class="feed-text-2 valign-text-middle poppins-medium-black-18px">`+ post.post_text + `</div>
+        <div class="feed-text-2 valign-text-middle poppins-medium-black-18px" id = "newPostText">`+ post.post_text + `</div>
       </div>
     </div>`
       }
@@ -232,7 +232,7 @@ async function createPostWithImage() {
           <img class="share-icon" src="img/share-icon@2x.svg" />
         </div>
         <div class="overlap-group-1">
-          <div class="feed-text-2 valign-text-middle poppins-medium-black-18px">`+ post.post_text + `</div>
+          <div class="feed-text-2 valign-text-middle poppins-medium-black-18px" id = "newPostText">`+ post.post_text + `</div>
         </div>
       </div>`
       }else{
@@ -253,7 +253,7 @@ async function createPostWithImage() {
         <img class="share-icon" src="img/share-icon@2x.svg" />
       </div>
       <div class="overlap-group-1">
-        <div class="feed-text-2 valign-text-middle poppins-medium-black-18px">`+ post.post_text + `</div>
+        <div class="feed-text-2 valign-text-middle poppins-medium-black-18px" id = "newPostText">`+ post.post_text + `</div>
       </div>
     </div>`
       }
