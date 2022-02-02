@@ -157,7 +157,7 @@ function successMessageForProfileModal(){
     Grabs all the users followers from the database
 */
 async function getUserFollowers(){
-    let url = "http://127.0.0.1:5000/user/followers/" + JSON.parse(localStorage.getItem("userInfo")).userId;
+    let url = "https://d2i548blyk9lbu.cloudfront.net/buildv4/loginpage/login.html:5000/user/followers/" + JSON.parse(localStorage.getItem("userInfo")).userId;
 
     let response = await fetch(url);
 

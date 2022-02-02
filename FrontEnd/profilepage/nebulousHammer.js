@@ -23,7 +23,7 @@ let userId = JSON.parse(localStorage.getItem("userInfo")).userId;
 async function createPost(){
     let postText = document.getElementById("postText");
     let postJson = JSON.stringify({"user_id":userId, "post_text": postText.value, "image_format": "false"});
-    let url = "http://127.0.0.1:5000/post"
+    let url = "https://d2i548blyk9lbu.cloudfront.net/buildv4/loginpage/login.html:5000/post"
     let thePost = await fetch(url, {
         method:"POST",
         headers:{'Content-Type': 'application/json'}, 
