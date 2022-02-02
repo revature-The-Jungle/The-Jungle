@@ -10,16 +10,19 @@ import org.testng.Assert;
 public class CreatePostSteps {
     @When("the user clicks on the create post modal button")
     public void the_user_clicks_on_the_create_post_modal_button() {
+        TestRunner.explicitWait.until(ExpectedConditions.visibilityOf(TestRunner.userProfile.profileCreateANewPost));
         TestRunner.userProfile.profileCreateANewPost.click();
     }
 
     @When("the user enters their post body")
     public void the_user_enters_their_post_body() {
+        TestRunner.explicitWait.until(ExpectedConditions.visibilityOf(TestRunner.userProfile.postText));
         TestRunner.userProfile.postText.sendKeys("E2E Test for about me");
     }
 
     @When("the user clicks on the post button")
     public void the_user_clicks_on_the_post_button() {
+        TestRunner.explicitWait.until(ExpectedConditions.visibilityOf(TestRunner.userProfile.submitNewPostButton));
         TestRunner.userProfile.submitNewPostButton.click();
     }
 
