@@ -174,7 +174,7 @@ async function registerUser(event) {
   let userUsername = jsonUserObject.username;
   let userPasscode = jsonUserObject.passcode;
   let userBirthdate = jsonUserObject.userBirthdate;
-  const registerRoute = "http://localhost:8080/user/registration";
+  const registerRoute = "http://localhost:8181/user/registration";
   let response = await fetch(registerRoute, {
     headers: { "Content-Type": "application/json" },
     method: ["POST"],

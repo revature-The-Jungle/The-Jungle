@@ -12,7 +12,7 @@ function createChatConnection(groupId) {
       "ws://" +
         "localhost" +
         ":" +
-        "8080" +
+        "8181" +
         "/chat/" +
         groupId +
         "/" +
@@ -155,7 +155,7 @@ chatGroupDiv.setAttribute(
 
 //Displaying the Group Names by grabbing the userId's to display the names on the top right...
 async function getAllGroupByUserId() {
-  let url = "http://localhost:8080/user/groupNames/" + storage.userId;
+  let url = "http://localhost:8181/user/groupNames/" + storage.userId;
   let response = await fetch(url);
   if (response.status === 200) {
     let body = await response.json();
