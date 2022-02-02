@@ -7,15 +7,14 @@ async function getUserInGroups() {
         let body = await response.json()
         console.log(body)
          createList(body)
-         buttonCheck(body)
-
+        buttonCheck(body)
+         
     }
     
 }
 
 function createList(response) {
         let groupSectionDiv = document.getElementById("member-3")
-        console.log(response)
         for (let group of response){
             let groupsDiv = document.createElement("div");
             groupsDiv.setAttribute("class", "group-in-list");
@@ -36,18 +35,17 @@ function createList(response) {
     }
 
 async function deleteRequest() {
-    storage = localStorage.getItem("userInfo")
+    userId = JSON.parse(localStorage.getItem("userInfo")).userId;
     groupId = localStorage.getItem("groupId")
-    url = `http://127.0.0.1:5000/group/leave/${storage.userId}/${groupId}`
+    url = `http://127.0.0.1:5000/group/leave/${userId}/${groupId}`
     let response = await fetch(url, { method: "DELETE", headers: { "Content-Type": "application/json" }});
     if(response.status === 200){
-        location.replace("../group-page.html")
+        location.href = "../group-page.html";
         
     }if(response.status === 400){
         let message = document.getElementById("message")
         message.textContent = response.statusText
     }
-    
 }
 
 async function creatorOf() {
@@ -56,7 +54,6 @@ async function creatorOf() {
     let response = await fetch(url)
     if(response.status === 200){
         let body = await response.json()
-        console.log(body)
         let newSect = document.getElementById("groupCreator")
         newSect.innerHTML = ` <div id="groupCreator" class="creator valign-text-middle">${body[0][0]},${body[0][1]}</div>`
         let username = document.getElementById("creatorUserName")
@@ -78,7 +75,6 @@ async function getGroup() {
 
     if(response.status === 200){
         let body = await response.json()
-        console.log(body)
         groupdef = document.getElementById("groupName")
         groupdef.innerHTML = body.groupName
 
@@ -86,29 +82,27 @@ async function getGroup() {
     
 }
 
-function buttonCheck(response) {
-    storage = localStorage.getItem("userInfo")
-    groupId = localStorage.getItem('groupId')
-    if (response == undefined ) {
-        let button = document.getElementById('tbd')
-        button.style.display = "none"
-    }else{
-        for (const users of response) {
-            console.log(response)
-            if (storage.userId == users.user_id) {
+function buttonCheck(response){
+    console.log(response)
+    let storage = JSON.parse(localStorage.getItem("userInfo"));
+    groupId = window.localStorage.getItem('groupId')
+    console.log(storage.userId)
+    
+    for (const users of response) {
+            
+        if (storage.userId == users.user_id) {
                 let button = document.getElementById("tbd")
                 button.style.display = "block"
-            } else {
-                let button = document.getElementById('tbd')
-                button.style.display = "none"
-            }
-            
+        } else {
+            let button = document.getElementById('tbd')
+            button.style.display = "none"
         }
+            
     }
+}
        
     
-}
+
 getUserInGroups()
 creatorOf()
 getGroup();
-buttonCheck();

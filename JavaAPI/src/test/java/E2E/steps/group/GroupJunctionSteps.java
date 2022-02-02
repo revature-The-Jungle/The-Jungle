@@ -25,7 +25,7 @@ public class GroupJunctionSteps {
 
     @When("the user clicks the leave button")
     public void theUserClicksTheLeaveButton() {
-        actions.moveToElement(TestRunner.groupJunctionPOM.leaveButton).click();
+        TestRunner.driver.findElement(By.id("tbd")).click();
     }
 
     @Then("the user will be redirected to the group homepage")

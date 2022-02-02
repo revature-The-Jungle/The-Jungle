@@ -20,16 +20,16 @@ import java.time.Duration;
 @RunWith(Cucumber.class)
 //@CucumberOptions(features = "classpath:features/login", glue = "E2E.steps", plugin = {"pretty",
 //        "html:src/test/java/resources/reports/html-reports.html"})
-//@CucumberOptions(features = "classpath:features/group/groupPostSteps.feature", glue = "E2E.steps", plugin = {"pretty",
-//        "html:src/test/java/resources/reports/html-reports.html"})
+@CucumberOptions(features = "classpath:features/group/GroupJunction.feature", glue = "E2E.steps", plugin = {"pretty",
+        "html:src/test/java/resources/reports/html-reports.html"})
 //@CucumberOptions(features = "classpath:features/post", glue = "E2E.steps", plugin = {"pretty",
 //        "html:src/test/java/resources/reports/html-reports.html"})
 //@CucumberOptions(features = "classpath:features/search", glue = "E2E.steps", plugin = {"pretty",
 //        "html:src/test/java/resources/reports/html-reports.html"})
 //@CucumberOptions(features = "classpath:features/register", glue = "E2E.steps", plugin = {"pretty",
 //        "html:src/test/java/resources/reports/html-reports.html"})
-@CucumberOptions(features = "classpath:features/profile", glue = "E2E.steps", plugin = {"pretty",
-        "html:src/test/java/resources/reports/html-reports.html"})
+//@CucumberOptions(features = "classpath:features/profile", glue = "E2E.steps", plugin = {"pretty",
+//        "html:src/test/java/resources/reports/html-reports.html"})
 //@CucumberOptions(features = "classpath:features", glue = "E2E.steps", plugin = {"pretty",
 //        "html:src/test/java/resources/reports/html-reports.html"})
 public class TestRunner {
