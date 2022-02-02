@@ -118,8 +118,8 @@ Create 3 new freestyle protects. For JavaAPI, PythonAPI and FrontEnd.
 Create the enviroment variables in Jenkins.
 
 Configure webhooks in github.
-
-
+```
+```
 For JavaAPI:
 
 Add the path to the pom file
@@ -131,7 +131,8 @@ Click git project and connect Jenkins to the git repo.
 Execute the shell command in the build section:
 
 java -jar JavaAPI/target/The-Jungle-1.0-SNAPSHOT.jar 
-
+```
+```
 For PythonAPI:
 
 Set up git repo connection.
@@ -142,7 +143,8 @@ execute the shell command
 
 pytest <routes to the test files>
 python3 PythonAPI/main.py
-
+```
+```
 For FrontEnd:
 
 Configure the git repo
