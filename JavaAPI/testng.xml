@@ -4,7 +4,7 @@
     <test name="The the jungle Tests">
         <classes>
             <class name="dao.ChatDAOTests"/>
-            <class name="dao.UserDAOTests"/>
+<!--            <class name="dao.UserDAOTests"/>-->
             <class name="service.ChatServiceTests"/>
             <class name="service.UserServiceTests"/>
         </classes>
