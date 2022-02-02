@@ -1,6 +1,7 @@
 package E2E.runner;
 
-import E2E.poms.RegLoginSearchPOM;
+import E2E.poms.group.GroupJunctionPOM;
+import E2E.poms.loginRegisterSearch.RegLoginSearchPOM;
 import E2E.poms.chat.ChatPage;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -10,7 +11,8 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import E2E.poms.homepage.UserHomePage;
+import E2E.poms.group.GroupPage;
 import java.io.File;
 import java.time.Duration;
 
@@ -18,13 +20,15 @@ import java.time.Duration;
 @CucumberOptions(features = "classpath:features", glue = "E2E.steps", plugin = {"pretty",
         "html:src/test/java/resources/reports/html-reports.html"})
 public class TestRunner {
-
     public static WebDriver driver;
     public static WebDriverWait explicitWait;
 
     // POMs
     public static ChatPage chatPage;
     public static RegLoginSearchPOM rlsPom;
+    public static UserHomePage userHomePage;
+    public static GroupJunctionPOM groupJunctionPOM;
+    public static GroupPage groupPage;
 
     @BeforeClass
     public static void setup() {
@@ -36,10 +40,16 @@ public class TestRunner {
         // POMs
         chatPage = new ChatPage(driver);
         rlsPom = new RegLoginSearchPOM(driver);
+        userHomePage = new UserHomePage(driver);
+        groupPage = new GroupPage(driver);
+        groupJunctionPOM = new GroupJunctionPOM(driver);
+
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         System.out.println("Set up complete!");
+        driver.manage().window().maximize();
+
     }
 
     @AfterClass
@@ -48,5 +58,4 @@ public class TestRunner {
         System.out.println("teardown complete!");
 
     }
-
 }
