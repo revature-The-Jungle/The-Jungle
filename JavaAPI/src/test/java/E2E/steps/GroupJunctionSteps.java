@@ -57,7 +57,7 @@ public class GroupJunctionSteps {
 
     @When("User selects group page icon")
     public void userSelectsGroupPageIcon() {
-        TestRunner.driver.findElement(By.xpath("/html/body/div/div/div[5]/div[2]/a/span")).click();
+        TestRunner.explicitWait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div/div/div[1]/div[3]/div[2]/div"))).click();
     }
 
     @Given("the user is on the login page")
@@ -92,6 +92,6 @@ public class GroupJunctionSteps {
 
     @When("user scrolls to group icon")
     public void userScrollsToGroupIcon() {
-        actions.moveToElement(TestRunner.driver.findElement(By.xpath("/html/body/div/div/div[5]/div[2]/a/span")));
+        actions.moveToElement(TestRunner.driver.findElement(By.xpath("/html/body/div/div/div[5]/div[2]")));
     }
 }
