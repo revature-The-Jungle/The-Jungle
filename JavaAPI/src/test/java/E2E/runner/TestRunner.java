@@ -18,8 +18,8 @@ import java.time.Duration;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features="classpath:features/GroupJunction.feature", glue="E2E.steps", plugin = {"pretty", "html:src/test/java/resources/reports/html-reports.html"})
-public class TestRunner {
 
+public class TestRunner {
     public static WebDriver driver;
     public static WebDriverWait explicitWait;
 
@@ -30,7 +30,6 @@ public class TestRunner {
     public static UserHomePage userHomePage;
     public static GroupPage groupPage;
 
-
     @BeforeClass
     public static void setup() {
         File file = new File("src/test/resources/chromedriver.exe");
@@ -39,6 +38,9 @@ public class TestRunner {
         driver.manage().window().maximize();
 
         // POMs
+
+        userHomePage = new UserHomePage(driver);
+        groupPage = new GroupPage(driver);
         chatPage = new ChatPage(driver);
         groupPage = new GroupPage(driver);
         userHomePage = new UserHomePage(driver);
@@ -57,5 +59,4 @@ public class TestRunner {
         System.out.println("teardown complete!");
 
     }
-
 }

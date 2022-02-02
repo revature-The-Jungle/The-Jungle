@@ -34,4 +34,17 @@ public class GroupPage {
 
     @FindBy(xpath = "/html/body/div/div/div[2]/div/div[4]/div[1]/div[3]/div[1]/div")
     public WebElement myGroupsLink;
+
+    @FindBy(id = "postInput")
+    public WebElement getGroupPostInput;
+
+    @FindBy(id = "sendGroupPostButton")
+    public WebElement getSendGroupPostButton;
+
+    @FindBy(id = "postInfo")
+    public WebElement getPostInfoNotification;
+
+    @FindBy(xpath = "/html/body/div/div/div[2]/div[3]/p/div[1]/div/button")
+    public WebElement getDeleteGroupPostButton;
+
 }
