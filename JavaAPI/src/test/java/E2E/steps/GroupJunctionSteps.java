@@ -15,7 +15,7 @@ public class GroupJunctionSteps {
     @Then("the user should see the list of users in the group")
     public void theUserShouldSeeTheListOfUsersInTheGroup() {
        TestRunner.explicitWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#member-3 > div:nth-child(1) > div")));
-       Assert.assertTrue(TestRunner.groupJunctionPOM.userInGroupList.isDisplayed());
+       Assert.assertTrue(TestRunner.driver.findElement(By.cssSelector("#member-3 > div:nth-child(1) > div")).isDisplayed());
     }
 
     @Then("user can see who created the group")
@@ -41,7 +41,7 @@ public class GroupJunctionSteps {
 
     @Given("User is on the group page")
     public void userIsOnTheGroupPage() {
-        TestRunner.driver.get("file:///C:/Users/chris/OneDrive/Desktop/Revature/The-Jungle/FrontEnd/grouppage/group-page.html");
+        TestRunner.driver.get("http://127.0.0.1:5500/FrontEnd/grouppage/group-page.html");
     }
 
     @When("the user selects the group")
@@ -57,7 +57,6 @@ public class GroupJunctionSteps {
 
     @When("User selects group page icon")
     public void userSelectsGroupPageIcon() {
-        actions.moveToElement(TestRunner.driver.findElement(By.cssSelector("body > div > div > div.nav.poppins-semi-bold-astronaut-24px > div.group-container")));
         TestRunner.driver.findElement(By.xpath("/html/body/div/div/div[5]/div[2]/a/span")).click();
     }
 
@@ -89,5 +88,10 @@ public class GroupJunctionSteps {
     @When("the user clicks the login button again")
     public void theUserClicksTheLoginButtonAgain() {
         TestRunner.driver.findElement(By.id("submitLogin"));
+    }
+
+    @When("user scrolls to group icon")
+    public void userScrollsToGroupIcon() {
+        actions.moveToElement(TestRunner.driver.findElement(By.xpath("/html/body/div/div/div[5]/div[2]/a/span")));
     }
 }
