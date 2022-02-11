@@ -60,9 +60,9 @@
    * Users are able to view posts
 * Post Feature
    * Users are able to make a post
-* Comment Feature
+* Comment Feature - UNFINISHED
    * Users are able to comment on a post
-* Reaction Feature
+* Reaction Feature - UNFINISHED
    * Users are able to react to a post
 * Group Feature
    * Users are able to create groups
@@ -103,7 +103,11 @@
 ## Getting Started
    
 ```
+// Currently as of Feb / 3 / 2022, the main branch contain several bugs that were fixed in hkim-ma branch.
+
 git clone https://github.com/revature-The-Jungle/The-Jungle.git
+git fetch
+git checkout hkim-ma
 ```
 
 ```
